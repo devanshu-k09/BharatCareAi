@@ -1,346 +1,174 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>My Past Questions - BharatCare AI</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(229, 231, 235, 0.5);
-        }
-        body {
-            background-color: #f7f9fb;
-            color: #191c1e;
-        }
-        .custom-shadow {
-            box-shadow: 0px 1px 3px rgba(0,0,0,0.05), 0px 10px 15px rgba(0,0,0,0.03);
-        }
-    </style>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "on-primary-container": "#90a8ff",
-                        "secondary": "#0051d5",
-                        "surface-tint": "#4059aa",
-                        "on-surface": "#191c1e",
-                        "tertiary-container": "#6e2c00",
-                        "on-primary": "#ffffff",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-bright": "#f7f9fb",
-                        "surface-container-low": "#f2f4f6",
-                        "on-error-container": "#93000a",
-                        "primary-fixed-dim": "#b6c4ff",
-                        "on-secondary-container": "#fefcff",
-                        "primary": "#00236f",
-                        "on-error": "#ffffff",
-                        "surface-container-high": "#e6e8ea",
-                        "tertiary-fixed": "#ffdbcb",
-                        "outline-variant": "#c5c5d3",
-                        "on-primary-fixed": "#00164e",
-                        "surface-container-highest": "#e0e3e5",
-                        "on-tertiary-fixed-variant": "#773205",
-                        "surface-container": "#eceef0",
-                        "surface-variant": "#e0e3e5",
-                        "on-secondary-fixed": "#00174b",
-                        "surface-dim": "#d8dadc",
-                        "on-background": "#191c1e",
-                        "primary-container": "#1e3a8a",
-                        "on-tertiary": "#ffffff",
-                        "inverse-surface": "#2d3133",
-                        "error": "#ba1a1a",
-                        "primary-fixed": "#dce1ff",
-                        "on-primary-fixed-variant": "#264191",
-                        "on-surface-variant": "#444651",
-                        "on-tertiary-fixed": "#341100",
-                        "tertiary": "#4b1c00",
-                        "tertiary-fixed-dim": "#ffb691",
-                        "background": "#f7f9fb",
-                        "inverse-on-surface": "#eff1f3",
-                        "inverse-primary": "#b6c4ff",
-                        "secondary-container": "#316bf3",
-                        "outline": "#757682",
-                        "secondary-fixed": "#dbe1ff",
-                        "on-secondary": "#ffffff",
-                        "surface": "#f7f9fb",
-                        "on-tertiary-container": "#f39461",
-                        "error-container": "#ffdad6",
-                        "secondary-fixed-dim": "#b4c5ff",
-                        "on-secondary-fixed-variant": "#003ea8"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "xs": "4px",
-                        "xl": "32px",
-                        "3xl": "64px",
-                        "container-max": "1280px",
-                        "2xl": "48px",
-                        "base": "4px",
-                        "gutter": "24px",
-                        "lg": "24px",
-                        "sm": "8px",
-                        "md": "16px"
-                    },
-                    "fontFamily": {
-                        "label-sm": ["Inter"],
-                        "display-lg": ["Manrope"],
-                        "body-sm": ["Inter"],
-                        "headline-md": ["Manrope"],
-                        "headline-lg": ["Manrope"],
-                        "body-md": ["Inter"],
-                        "label-md": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "headline-lg-mobile": ["Manrope"]
-                    },
-                    "fontSize": {
-                        "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "600"}],
-                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
-                    }
-                },
-            },
-        }
-    </script>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>My Past Questions | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-background font-body-md text-on-surface">
-<!-- SideNavBar (Authority Source: JSON) -->
-<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant flex flex-col py-xl px-md gap-sm z-50">
-<div class="flex flex-col gap-xs mb-xl">
-<div class="flex items-center gap-sm">
-<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">account_balance</span>
-</div>
-<div>
-<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed leading-none">BharatCare AI</h1>
-<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Citizen Help Platform</p>
-</div>
-</div>
-</div>
-<nav class="flex-1 flex flex-col gap-xs">
-<!-- Sidebar Items mapping -->
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high rounded-lg group" href="dashboard.html">
-<span class="material-symbols-outlined text-outline group-hover:text-primary">dashboard</span>
-<span class="font-label-md text-label-md">Dashboard</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high rounded-lg group" href="ai-chat.html">
-<span class="material-symbols-outlined text-outline group-hover:text-primary">smart_toy</span>
-<span class="font-label-md text-label-md">AI Assistant</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high rounded-lg group" href="complaint.html">
-<span class="material-symbols-outlined text-outline group-hover:text-primary">description</span>
-<span class="font-label-md text-label-md">Complaint Generator</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high rounded-lg group" href="categories.html">
-<span class="material-symbols-outlined text-outline group-hover:text-primary">gavel</span>
-<span class="font-label-md text-label-md">Explore My Rights</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high rounded-lg group" href="authorities.html">
-<span class="material-symbols-outlined text-outline group-hover:text-primary">account_balance</span>
-<span class="font-label-md text-label-md">Government Help</span>
-</a>
-<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-lg px-md py-sm" href="history.html">
-<span class="material-symbols-outlined">history</span>
-<span class="font-label-md text-label-md">My Past Questions</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high rounded-lg group" href="profile.html">
-<span class="material-symbols-outlined text-outline group-hover:text-primary">person</span>
-<span class="font-label-md text-label-md">Profile</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high rounded-lg group mt-auto" href="settings.html">
-<span class="material-symbols-outlined text-outline group-hover:text-primary">settings</span>
-<span class="font-label-md text-label-md">Settings</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high rounded-lg group" href="login.html" onclick="localStorage.clear()">
-<span class="material-symbols-outlined text-outline group-hover:text-error">logout</span>
-<span class="font-label-md text-label-md">Logout</span>
-</a>
-</nav>
-<button onclick="window.location.href='ai-chat.html'" class="mt-xl bg-primary text-on-primary font-label-md text-label-md py-sm rounded-lg hover:shadow-lg transition-all active:scale-95">New Question</button>
-</aside>
-<!-- Main Content Area -->
-<main class="ml-64 min-h-screen flex flex-col">
-<!-- TopNavBar (Authority Source: JSON) -->
-<header class="flex justify-between items-center w-full px-lg h-16 sticky top-0 z-40 bg-surface-container-lowest dark:bg-inverse-surface shadow-sm">
-<div class="flex items-center flex-1 max-w-xl">
-<div class="relative w-full">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full font-body-sm text-body-sm focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all" placeholder="Search previous conversations..." type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-md">
-<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
-<span class="material-symbols-outlined">language</span>
-</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant relative">
-<span class="material-symbols-outlined">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
-</button>
-<div class="h-8 w-px bg-outline-variant mx-sm"></div>
-<div class="flex items-center gap-sm">
-<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A professional headshot of a middle-aged male legal professional in a sharp navy blue suit, with a clean office background. The style is bright and high-end, utilizing soft natural lighting to create a trustworthy and approachable executive appearance. The color palette emphasizes clean whites and deep primary blues, matching the corporate SaaS aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9_kynAIPrv-g4_CGjYDi3fdHfq3B-R4eXrKwan82CIBGICvgRufJgvziuCb96RQUVcGBxus_rdg7V266NPqMOZBdqxcElLemw2xeQp5_mpbChjB0IjrhZkrtcXqm5FBcRqu15oO76FLJO9UYW-6n2Z7FLohDMa2pyJdBfVc5iPgpSXBcXpOhfo63r02ZnRswUg5LZSUGEtvORrYjNKZ_Mr2Gb2OFvizC7tb0CN-6jdFSkqH8GXA3WNQ"/>
-<span class="font-label-md text-label-md hidden lg:block">Adv. Rohan Sharma</span>
-</div>
-</div>
-</header>
-<!-- Canvas Area -->
-<section class="p-xl max-w-5xl mx-auto w-full">
-<!-- Page Header -->
-<div class="mb-xl flex justify-between items-end">
-<div>
-<h2 class="font-headline-lg text-headline-lg text-primary mb-xs">My Past Questions</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Review and manage the questions you've asked the AI assistant.</p>
-</div>
-<div class="flex gap-sm">
-<button class="flex items-center gap-xs font-label-md text-label-md text-on-surface-variant border border-outline-variant px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-[20px]">filter_list</span>
-                        Filter
-                    </button>
-<button class="flex items-center gap-xs font-label-md text-label-md text-on-surface-variant border border-outline-variant px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-[20px]">sort</span>
-                        Sort
-                    </button>
-</div>
-</div>
-<div id="history-container" class="grid grid-cols-1 gap-md"></div>
-<!-- Pagination -->
-<div class="mt-3xl flex items-center justify-between border-t border-outline-variant pt-lg">
-<p class="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 4 of 24 cases</p>
-<div class="flex items-center gap-xs">
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low disabled:opacity-30 disabled:cursor-not-allowed" disabled="">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-label-md text-label-md">1</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low font-label-md text-label-md">2</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low font-label-md text-label-md">3</button>
-<span class="px-sm text-on-surface-variant">...</span>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low font-label-md text-label-md">6</button>
-<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</div>
-</div>
-</section>
-<!-- Background Atmospheric Element (Subtle) -->
-<div class="fixed bottom-0 right-0 w-[500px] h-[500px] opacity-10 pointer-events-none -z-10 overflow-hidden">
-
-</div>
-</main>
-<script>
-        // Micro-interactions for buttons
-        document.querySelectorAll('button').forEach(btn => {
-            btn.addEventListener('mousedown', () => {
-                btn.style.transform = 'scale(0.96)';
-            });
-            btn.addEventListener('mouseup', () => {
-                btn.style.transform = 'scale(1)';
-            });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'scale(1)';
-            });
-        });
-
-        // Search highlight simulation
-        const searchInput = document.querySelector('input[type="text"]');
-        searchInput.addEventListener('focus', () => {
-            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
-        });
-        searchInput.addEventListener('blur', () => {
-            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
-        });
-    </script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            window.location.href = 'login.html';
-            return;
-        }
+<body>
+    <div class="app-layout">
         
-        try {
-            const user = JSON.parse(localStorage.getItem('user'));
-            if (user && user.name) {
-                const nameElements = document.querySelectorAll('.user-name-display');
-                nameElements.forEach(el => el.textContent = user.name);
-            }
-        } catch(e) {}
-    });
-</script>
-
-<script>
-  async function loadHistory() {
-    const token = localStorage.getItem('token');
-    try {
-      const res = await fetch('http://localhost:5000/api/ai/chats', {
-        headers: { 'Authorization': 'Bearer ' + token }
-      });
-      const chats = await res.json();
-      
-      const res2 = await fetch('http://localhost:5000/api/complaints', {
-        headers: { 'Authorization': 'Bearer ' + token }
-      });
-      const complaints = await res2.json();
-      
-      const allHistory = [...chats.map(c => ({...c, type: 'chat'})), ...complaints.map(c => ({...c, type: 'complaint'}))]
-        .sort((a,b) => new Date(b.createdAt || b.updatedAt) - new Date(a.createdAt || a.updatedAt));
-
-      const container = document.getElementById('history-container');
-      if (allHistory.length === 0) {
-        container.innerHTML = '<p class="text-on-surface-variant p-lg">No past questions found.</p>';
-        return;
-      }
-      container.innerHTML = allHistory.map(item => `
-        <div class="glass-card custom-shadow rounded-xl p-lg flex items-center justify-between group hover:border-primary/30 transition-all duration-300">
-            <div class="flex items-start gap-lg">
-                <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
-                    <span class="material-symbols-outlined">${item.type === 'chat' ? 'forum' : 'description'}</span>
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">gavel</span>
                 </div>
                 <div>
-                    <h3 class="font-headline-md text-body-lg font-bold">${item.title || item.type + ' Draft'}</h3>
-                    <div class="flex items-center gap-md text-on-surface-variant font-body-sm text-body-sm mt-1">
-                        <span class="flex items-center gap-xs">
-                            <span class="material-symbols-outlined text-[16px]">calendar_today</span>
-                            ${new Date(item.createdAt || item.updatedAt).toLocaleDateString()}
-                        </span>
-                    </div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
                 </div>
             </div>
-            <div class="flex items-center gap-md">
-                <button onclick="window.location.href='${item.type === 'chat' ? 'ai-chat.html?id=' + item._id : 'complaint.html?id=' + item._id}'" class="bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-lg hover:shadow-md active:scale-95 transition-all">
-                    View
-                </button>
+
+            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href='ai-chat.html'">
+                <span class="material-symbols-outlined">add</span> New Question
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link active">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="profile.html" class="nav-link">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
             </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center flex-grow" style="max-width: 400px;">
+                    <div class="input-group" style="width: 100%;">
+                        <div class="input-icon"><span class="material-symbols-outlined">search</span></div>
+                        <input type="text" class="form-control" placeholder="Search previous conversations...">
+                    </div>
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
+                    </button>
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content">
+                <div class="d-flex justify-between align-center mb-xl">
+                    <div>
+                        <h2 class="text-primary mb-xs">My Past Questions</h2>
+                        <p class="text-muted m-0">Review and manage the questions you've asked the AI assistant.</p>
+                    </div>
+                    <div class="d-flex gap-sm">
+                        <button class="btn btn-secondary">
+                            <span class="material-symbols-outlined">filter_list</span> Filter
+                        </button>
+                        <button class="btn btn-secondary">
+                            <span class="material-symbols-outlined">sort</span> Sort
+                        </button>
+                    </div>
+                </div>
+
+                <div id="history-container" class="flex-column gap-md">
+                    <p class="text-muted p-lg text-center">Loading past questions...</p>
+                </div>
+            </main>
         </div>
-      `).join('');
-    } catch(err) { console.error(err); }
-  }
-  loadHistory();
-</script>
-</body></html>
+    </div>
 
+    <!-- Mobile Navigation -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="history.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">history</span><span style="font-size: 0.625rem;">Cases</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
 
+    <style>
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .page-content { padding-bottom: 80px; }
+        }
+    </style>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) window.location.href = 'login.html';
+        });
 
+        async function loadHistory() {
+            const token = localStorage.getItem('token');
+            try {
+                const resChats = await fetch('http://localhost:5000/api/ai/chats', { headers: { 'Authorization': 'Bearer ' + token } });
+                const resComplaints = await fetch('http://localhost:5000/api/complaints', { headers: { 'Authorization': 'Bearer ' + token } });
+                
+                let chats = [], complaints = [];
+                if(resChats.ok) chats = await resChats.json();
+                if(resComplaints.ok) complaints = await resComplaints.json();
+                
+                const allHistory = [...chats.map(c => ({...c, type: 'chat'})), ...complaints.map(c => ({...c, type: 'complaint'}))]
+                    .sort((a,b) => new Date(b.createdAt || b.updatedAt) - new Date(a.createdAt || a.updatedAt));
 
+                const container = document.getElementById('history-container');
+                if (allHistory.length === 0) {
+                    container.innerHTML = '<div class="card card-body text-center text-muted">No past questions found.</div>';
+                    return;
+                }
+                
+                container.innerHTML = allHistory.map(item => `
+                    <div class="card p-md d-flex justify-between align-center" style="transition: transform 0.2s, box-shadow 0.2s;">
+                        <div class="d-flex align-center gap-lg">
+                            <div class="d-flex align-center justify-center rounded-lg" style="width: 48px; height: 48px; background: ${item.type === 'chat' ? 'rgba(30,58,138,0.1)' : 'var(--surface-high)'}; color: ${item.type === 'chat' ? 'var(--primary)' : 'var(--text-muted)'};">
+                                <span class="material-symbols-outlined">${item.type === 'chat' ? 'forum' : 'description'}</span>
+                            </div>
+                            <div>
+                                <h4 class="m-0 text-primary" style="font-size: 1.125rem;">${item.title || item.type + ' Draft'}</h4>
+                                <div class="d-flex align-center gap-xs text-muted mt-xs" style="font-size: 0.875rem;">
+                                    <span class="material-symbols-outlined" style="font-size: 1rem;">calendar_today</span>
+                                    ${new Date(item.createdAt || item.updatedAt).toLocaleDateString()}
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="window.location.href='${item.type === 'chat' ? 'ai-chat.html?id=' + item._id : 'complaint.html?id=' + item._id}'">
+                            View
+                        </button>
+                    </div>
+                `).join('');
+            } catch(err) { 
+                console.error(err);
+                document.getElementById('history-container').innerHTML = '<div class="card card-body text-center text-error">Failed to load history.</div>';
+            }
+        }
+        loadHistory();
+    </script>
+</body>
+</html>

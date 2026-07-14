@@ -8,6 +8,7 @@ import authRoutes from './routes/authRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
 import complaintRoutes from './routes/complaintRoutes.js';
 import dataRoutes from './routes/dataRoutes.js';
+import legalAssistantRoutes from './routes/legalAssistantRoutes.js';
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/data', dataRoutes);
+app.use('/api/legal-assistant', legalAssistantRoutes);
 
 // Global error handler
 app.use((err, req, res, next) => {

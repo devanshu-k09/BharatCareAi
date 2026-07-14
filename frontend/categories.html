@@ -1,455 +1,177 @@
-﻿<!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>BharatCare AI - Legal Categories</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "on-primary-container": "#90a8ff",
-                        "secondary": "#0051d5",
-                        "surface-tint": "#4059aa",
-                        "on-surface": "#191c1e",
-                        "tertiary-container": "#6e2c00",
-                        "on-primary": "#ffffff",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-bright": "#f7f9fb",
-                        "surface-container-low": "#f2f4f6",
-                        "on-error-container": "#93000a",
-                        "primary-fixed-dim": "#b6c4ff",
-                        "on-secondary-container": "#fefcff",
-                        "primary": "#00236f",
-                        "on-error": "#ffffff",
-                        "surface-container-high": "#e6e8ea",
-                        "tertiary-fixed": "#ffdbcb",
-                        "outline-variant": "#c5c5d3",
-                        "on-primary-fixed": "#00164e",
-                        "surface-container-highest": "#e0e3e5",
-                        "on-tertiary-fixed-variant": "#773205",
-                        "surface-container": "#eceef0",
-                        "surface-variant": "#e0e3e5",
-                        "on-secondary-fixed": "#00174b",
-                        "surface-dim": "#d8dadc",
-                        "on-background": "#191c1e",
-                        "primary-container": "#1e3a8a",
-                        "on-tertiary": "#ffffff",
-                        "inverse-surface": "#2d3133",
-                        "error": "#ba1a1a",
-                        "primary-fixed": "#dce1ff",
-                        "on-primary-fixed-variant": "#264191",
-                        "on-surface-variant": "#444651",
-                        "on-tertiary-fixed": "#341100",
-                        "tertiary": "#4b1c00",
-                        "tertiary-fixed-dim": "#ffb691",
-                        "background": "#f7f9fb",
-                        "inverse-on-surface": "#eff1f3",
-                        "inverse-primary": "#b6c4ff",
-                        "secondary-container": "#316bf3",
-                        "outline": "#757682",
-                        "secondary-fixed": "#dbe1ff",
-                        "on-secondary": "#ffffff",
-                        "surface": "#f7f9fb",
-                        "on-tertiary-container": "#f39461",
-                        "error-container": "#ffdad6",
-                        "secondary-fixed-dim": "#b4c5ff",
-                        "on-secondary-fixed-variant": "#003ea8"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "xs": "4px",
-                        "xl": "32px",
-                        "3xl": "64px",
-                        "container-max": "1280px",
-                        "2xl": "48px",
-                        "base": "4px",
-                        "gutter": "24px",
-                        "lg": "24px",
-                        "sm": "8px",
-                        "md": "16px"
-                    },
-                    "fontFamily": {
-                        "label-sm": ["Inter"],
-                        "display-lg": ["Manrope"],
-                        "body-sm": ["Inter"],
-                        "headline-md": ["Manrope"],
-                        "headline-lg": ["Manrope"],
-                        "body-md": ["Inter"],
-                        "label-md": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "headline-lg-mobile": ["Manrope"]
-                    },
-                    "fontSize": {
-                        "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "600"}],
-                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
-                    }
-                },
-            },
-        }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .card-elevation {
-            box-shadow: 0px 1px 3px rgba(0,0,0,0.05), 0px 10px 15px rgba(0,0,0,0.03);
-        }
-        .category-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.07), 0px 15px 25px rgba(0,0,0,0.05);
-        }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Explore Categories | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .category-card { transition: all var(--transition-base); }
+        .category-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary-light); }
     </style>
 </head>
-<body class="bg-background text-on-background min-h-screen">
-<!-- SideNavBar (Shared Component) -->
-<aside class="hidden md:flex flex-col h-full py-xl px-md gap-sm bg-surface-container-lowest border-r border-outline-variant h-screen w-64 fixed left-0 top-0 z-40">
-<div class="mb-xl flex flex-col gap-xs">
-<div class="flex items-center gap-sm">
-<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">balance</span>
-</div>
-<div>
-<h1 class="font-headline-md text-headline-md font-bold text-primary">BharatCare AI</h1>
-<p class="font-label-md text-label-md text-on-surface-variant">Citizen Help Platform</p>
-</div>
-</div>
-</div>
-<nav class="flex flex-col gap-sm">
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high" href="dashboard.html">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-<span class="font-label-md text-label-md">Dashboard</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high" href="ai-chat.html">
-<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
-<span class="font-label-md text-label-md">AI Assistant</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high" href="complaint.html">
-<span class="material-symbols-outlined" data-icon="description">description</span>
-<span class="font-label-md text-label-md">Complaint Generator</span>
-</a>
-<!-- ACTIVE ITEM: Legal Categories -->
-<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-lg px-md py-sm transition-all duration-200 ease-in-out scale-95 active:scale-90" href="categories.html">
-<span class="material-symbols-outlined" data-icon="gavel" style="font-variation-settings: 'FILL' 1;">gavel</span>
-<span class="font-label-md text-label-md">Explore My Rights</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high" href="authorities.html">
-<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
-<span class="font-label-md text-label-md">Government Help</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out hover:bg-surface-container-high" href="history.html">
-<span class="material-symbols-outlined" data-icon="history">history</span>
-<span class="font-label-md text-label-md">My Past Questions</span>
-</a>
-</nav>
-<div class="mt-auto pt-xl border-t border-outline-variant flex flex-col gap-sm">
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out" href="profile.html">
-<span class="material-symbols-outlined" data-icon="person">person</span>
-<span class="font-label-md text-label-md">Profile</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm transition-all duration-200 ease-in-out" href="settings.html">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-<span class="font-label-md text-label-md">Settings</span>
-</a>
-<button onclick="localStorage.clear(); window.location.href='login.html'" class="flex items-center gap-md text-error px-md py-sm transition-all duration-200 ease-in-out hover:bg-error-container hover:bg-opacity-10 rounded-lg"><span class="material-symbols-outlined">logout</span><span class="font-label-md text-label-md">Logout</span></button>
-</div>
-</aside>
-<!-- Main Content Area -->
-<main class="md:ml-64 flex flex-col min-h-screen">
-<!-- TopNavBar (Shared Component) -->
-<header class="flex justify-between items-center w-full px-lg h-16 sticky top-0 z-50 bg-surface-container-lowest shadow-sm">
-<div class="flex items-center gap-md w-full max-w-xl">
-<div class="relative w-full">
-<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="w-full bg-surface-container-low border-none rounded-full py-sm pl-12 pr-md focus:ring-2 focus:ring-primary font-body-md text-body-md" placeholder="Search legal categories or laws..." type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-md ml-lg">
-<button class="material-symbols-outlined p-sm rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors" data-icon="language">language</button>
-<button class="material-symbols-outlined p-sm rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors" data-icon="notifications">notifications</button>
-<div class="h-8 w-8 rounded-full bg-outline-variant overflow-hidden border border-outline">
-<img class="w-full h-full object-cover" data-alt="A professional headshot of a user for a legal AI dashboard. The image is clean and well-lit with a neutral background, conveying a high-end corporate SaaS feel. The lighting is soft and professional, highlighting the individual with a sense of approachable authority." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd0Z0TMgfddLsVqDA7vnJEGxxzwEOmY716ReimsYPKQNJOCyjlwenKo3QxCCaLWpEzW-5fw_dHgoIUQcRnbDRJ8Wb9vSVglfGlWa9Ipdxoh5F7bZbZZCVBQnwgVwC70ruJb3uKOqEDuREG89FRyjpOX0e0hUC7bkEZst0_5MDqttfBZlm10nkv3QBeB9JCbrQ6wjgARndM7b77AHF1Zrdqj8ELM6eVPpPH3klBJyvpf4H7ihrFaWyqdg"/>
-</div>
-</div>
-</header>
-<!-- Content Canvas -->
-<section class="p-lg md:p-3xl max-w-7xl mx-auto w-full">
-<div class="mb-xl">
-<h2 class="font-headline-lg text-headline-lg text-primary mb-xs">Explore My Rights</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Browse specialized legal fields to get expert AI assistance and documentation.</p>
-</div>
-<!-- Filters Bar -->
-<div class="flex flex-wrap items-center gap-md mb-2xl bg-surface-container-lowest p-md rounded-xl card-elevation border border-outline-variant">
-<span class="font-label-md text-label-md text-on-surface-variant mr-xs">Quick Filters:</span>
-<button class="px-md py-xs rounded-full bg-primary text-on-primary font-label-sm text-label-sm">All</button>
-<button class="px-md py-xs rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-colors">Popular</button>
-<button class="px-md py-xs rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-colors">Personal Law</button>
-<button class="px-md py-xs rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-colors">Corporate</button>
-<div class="ml-auto flex items-center gap-sm">
-<button class="flex items-center gap-xs font-label-md text-label-md text-on-surface-variant border border-outline-variant px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-body-md" data-icon="filter_list">filter_list</span>
-                        Sort by: A-Z
-                    </button>
-</div>
-</div>
-<!-- Bento Grid of Cards -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
-<!-- Consumer Rights -->
-<div class="category-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-elevation transition-all duration-300 group">
-<div class="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
-<span class="material-symbols-outlined text-primary group-hover:text-on-primary transition-colors" data-icon="shopping_cart">shopping_cart</span>
-</div>
-<div class="mb-xs">
-<span class="font-label-sm text-label-sm bg-blue-100 text-blue-900 px-sm py-xs rounded-full">Consumer Affairs</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary mb-sm">Consumer Rights</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-xl flex-grow">Protect yourself against unfair trade practices, defective products, and deficient services in the marketplace.</p>
-<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg hover:bg-primary-container transition-colors shadow-sm">
-                        Learn More
-                        <span class="material-symbols-outlined text-body-md">arrow_forward</span>
-</button>
-</div>
-<!-- Cyber Crime -->
-<div class="category-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-elevation transition-all duration-300 group">
-<div class="w-12 h-12 rounded-lg bg-red-50 flex items-center justify-center mb-md group-hover:bg-red-600 transition-colors duration-300">
-<span class="material-symbols-outlined text-red-600 group-hover:text-white transition-colors" data-icon="lock">lock</span>
-</div>
-<div class="mb-xs">
-<span class="font-label-sm text-label-sm bg-red-100 text-red-900 px-sm py-xs rounded-full">Security</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary mb-sm">Cyber Crime</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-xl flex-grow">Legal guidance on identity theft, online fraud, data breaches, and digital harassment cases.</p>
-<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg hover:bg-primary-container transition-colors shadow-sm">
-                        Learn More
-                        <span class="material-symbols-outlined text-body-md">arrow_forward</span>
-</button>
-</div>
-<!-- Labour Law -->
-<div class="category-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-elevation transition-all duration-300 group">
-<div class="w-12 h-12 rounded-lg bg-orange-50 flex items-center justify-center mb-md group-hover:bg-orange-600 transition-colors duration-300">
-<span class="material-symbols-outlined text-orange-600 group-hover:text-white transition-colors" data-icon="work">work</span>
-</div>
-<div class="mb-xs">
-<span class="font-label-sm text-label-sm bg-orange-100 text-orange-900 px-sm py-xs rounded-full">Employment</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary mb-sm">Labour Law</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-xl flex-grow">Understand worker rights, employment contracts, workplace safety, and dispute resolution mechanisms.</p>
-<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg hover:bg-primary-container transition-colors shadow-sm">
-                        Learn More
-                        <span class="material-symbols-outlined text-body-md">arrow_forward</span>
-</button>
-</div>
-<!-- Tenant Rights -->
-<div class="category-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-elevation transition-all duration-300 group">
-<div class="w-12 h-12 rounded-lg bg-green-50 flex items-center justify-center mb-md group-hover:bg-green-600 transition-colors duration-300">
-<span class="material-symbols-outlined text-green-600 group-hover:text-white transition-colors" data-icon="home">home</span>
-</div>
-<div class="mb-xs">
-<span class="font-label-sm text-label-sm bg-green-100 text-green-900 px-sm py-xs rounded-full">Housing</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary mb-sm">Tenant Rights</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-xl flex-grow">Rights regarding security deposits, eviction notices, maintenance, and lease agreements.</p>
-<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg hover:bg-primary-container transition-colors shadow-sm">
-                        Learn More
-                        <span class="material-symbols-outlined text-body-md">arrow_forward</span>
-</button>
-</div>
-<!-- Women's Rights -->
-<div class="category-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-elevation transition-all duration-300 group">
-<div class="w-12 h-12 rounded-lg bg-purple-50 flex items-center justify-center mb-md group-hover:bg-purple-600 transition-colors duration-300">
-<span class="material-symbols-outlined text-purple-600 group-hover:text-white transition-colors" data-icon="female">female</span>
-</div>
-<div class="mb-xs">
-<span class="font-label-sm text-label-sm bg-purple-100 text-purple-900 px-sm py-xs rounded-full">Constitutional</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary mb-sm">Women's Rights</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-xl flex-grow">Legal protections regarding workplace equality, domestic safety, property inheritance, and social security.</p>
-<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg hover:bg-primary-container transition-colors shadow-sm">
-                        Learn More
-                        <span class="material-symbols-outlined text-body-md">arrow_forward</span>
-</button>
-</div>
-<!-- Property Law -->
-<div class="category-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-elevation transition-all duration-300 group">
-<div class="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center mb-md group-hover:bg-teal-600 transition-colors duration-300">
-<span class="material-symbols-outlined text-teal-600 group-hover:text-white transition-colors" data-icon="domain">domain</span>
-</div>
-<div class="mb-xs">
-<span class="font-label-sm text-label-sm bg-teal-100 text-teal-900 px-sm py-xs rounded-full">Real Estate</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary mb-sm">Property Law</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-xl flex-grow">Resources for land acquisition, title registration, inheritance disputes, and commercial property leases.</p>
-<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg hover:bg-primary-container transition-colors shadow-sm">
-                        Learn More
-                        <span class="material-symbols-outlined text-body-md">arrow_forward</span>
-</button>
-</div>
-<!-- Banking Fraud -->
-<div class="category-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-elevation transition-all duration-300 group md:col-span-2 lg:col-span-1">
-<div class="w-12 h-12 rounded-lg bg-yellow-50 flex items-center justify-center mb-md group-hover:bg-yellow-600 transition-colors duration-300">
-<span class="material-symbols-outlined text-yellow-600 group-hover:text-white transition-colors" data-icon="account_balance_wallet">account_balance_wallet</span>
-</div>
-<div class="mb-xs">
-<span class="font-label-sm text-label-sm bg-yellow-100 text-yellow-900 px-sm py-xs rounded-full">Finance</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-primary mb-sm">Banking Fraud</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-xl flex-grow">Assistance with unauthorized transactions, loan fraud, credit card scams, and digital banking disputes.</p>
-<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg hover:bg-primary-container transition-colors shadow-sm">
-                        Learn More
-                        <span class="material-symbols-outlined text-body-md">arrow_forward</span>
-</button>
-</div>
-<!-- Request Category CTA Card -->
-<div class="flex flex-col bg-primary-container text-on-primary rounded-xl p-lg card-elevation justify-center items-center text-center border border-primary relative overflow-hidden group">
-
-<div class="relative z-10">
-<div class="w-16 h-16 rounded-full bg-on-primary text-primary flex items-center justify-center mx-auto mb-md shadow-lg">
-<span class="material-symbols-outlined text-headline-md" data-icon="add">add</span>
-</div>
-<h3 class="font-headline-md text-headline-md mb-xs">Missing Something?</h3>
-<p class="font-body-md text-body-md text-on-primary-container mb-xl">Suggest a legal category you'd like our AI to specialize in next.</p>
-<button class="bg-surface-container-lowest text-primary font-label-md text-label-md px-xl py-md rounded-lg hover:bg-on-primary transition-all duration-200">
-                            Suggest Now
-                        </button>
-</div>
-</div>
-</div>
-</section>
-<!-- Footer -->
-<footer class="mt-auto py-xl px-lg border-t border-outline-variant bg-surface-container-low">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-md">
-<div class="flex items-center gap-sm opacity-60">
-<span class="material-symbols-outlined" data-icon="copyright">copyright</span>
-<span class="font-label-md text-label-md">2024 BharatCare AI. Empowering Citizen Rights through Intelligence.</span>
-</div>
-<div class="flex gap-xl">
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary" href="#">Legal Disclaimer</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary" href="#">Privacy Policy</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary" href="#">Contact Support</a>
-</div>
-</div>
-</footer>
-</main>
-<!-- Mobile Bottom Navigation Shell -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface-container-lowest shadow-lg flex justify-around items-center px-md border-t border-outline-variant z-50">
-<a class="flex flex-col items-center justify-center gap-xs text-on-surface-variant" href="dashboard.html">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-<span class="font-label-sm text-[10px]">Home</span>
-</a>
-<a class="flex flex-col items-center justify-center gap-xs text-primary" href="#">
-<span class="material-symbols-outlined" data-icon="gavel" style="font-variation-settings: 'FILL' 1;">gavel</span>
-<span class="font-label-sm text-[10px]">Categories</span>
-</a>
-<div class="relative -top-4">
-<button class="w-14 h-14 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center">
-<span class="material-symbols-outlined text-headline-md" data-icon="add">add</span>
-</button>
-</div>
-<a class="flex flex-col items-center justify-center gap-xs text-on-surface-variant" href="history.html">
-<span class="material-symbols-outlined" data-icon="history">history</span>
-<span class="font-label-sm text-[10px]">My Past Questions</span>
-</a>
-<a class="flex flex-col items-center justify-center gap-xs text-on-surface-variant" href="profile.html">
-<span class="material-symbols-outlined" data-icon="person">person</span>
-<span class="font-label-sm text-[10px]">Profile</span>
-</a>
-</nav>
-<script>
-        // Simple search interactivity
-        const searchInput = document.querySelector('input[type="text"]');
-        const cards = document.querySelectorAll('.category-card');
-
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            cards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const desc = card.querySelector('p').textContent.toLowerCase();
-                if (title.includes(term) || desc.includes(term)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Add subtle animation for filter buttons
-        const filterBtns = document.querySelectorAll('button.rounded-full');
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-primary', 'text-on-primary');
-                    b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
-                });
-                btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
-                btn.classList.add('bg-primary', 'text-on-primary');
-            });
-        });
-    </script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            window.location.href = 'login.html';
-            return;
-        }
+<body>
+    <div class="app-layout">
         
-        try {
-            const user = JSON.parse(localStorage.getItem('user'));
-            if (user && user.name) {
-                const nameElements = document.querySelectorAll('.user-name-display');
-                nameElements.forEach(el => el.textContent = user.name);
-            }
-        } catch(e) {}
-    });
-</script>
-
-<script>
-  async function loadCategories() {
-    const token = localStorage.getItem('token');
-    try {
-      const res = await fetch('http://localhost:5000/api/data/categories', {
-        headers: { 'Authorization': 'Bearer ' + token }
-      });
-      const data = await res.json();
-      const container = document.getElementById('categories-container');
-      container.innerHTML = data.map(cat => `
-        <div class="category-card flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-elevation transition-all duration-300 group">
-            <div class="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center mb-md group-hover:bg-primary transition-colors duration-300">
-                <span class="material-symbols-outlined text-primary group-hover:text-on-primary transition-colors">${cat.icon.replace('fa-', '')}</span>
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">gavel</span>
+                </div>
+                <div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                </div>
             </div>
-            <h3 class="font-headline-md text-headline-md text-primary mb-sm">${cat.title}</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant mb-xl flex-grow">${cat.description}</p>
-            <ul class="mb-md text-sm text-on-surface-variant list-disc pl-5">
-              ${cat.commonIssues.slice(0,2).map(issue => '<li>' + issue + '</li>').join('')}
-            </ul>
-            <button onclick="window.location.href='ai-chat.html'" class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg hover:bg-primary-container transition-colors shadow-sm">
-                Get Help <span class="material-symbols-outlined text-body-md">arrow_forward</span>
+
+            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href='ai-chat.html'">
+                <span class="material-symbols-outlined">add</span> New Question
             </button>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link active">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="profile.html" class="nav-link">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center flex-grow" style="max-width: 400px;">
+                    <div class="input-group" style="width: 100%;">
+                        <div class="input-icon"><span class="material-symbols-outlined">search</span></div>
+                        <input type="text" class="form-control" placeholder="Search laws and rights...">
+                    </div>
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
+                    </button>
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content" style="max-width: 1000px;">
+                <div class="d-flex justify-between align-center mb-xl animate-fade-in">
+                    <div>
+                        <h2 class="text-primary mb-xs">Explore Legal Categories</h2>
+                        <p class="text-muted m-0">Understand your rights across different domains of Indian law.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-lg animate-slide-up">
+                    <a href="ai-chat.html?prompt=Tell me about Consumer Rights" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(0, 81, 213, 0.1);">
+                            <span class="material-symbols-outlined text-secondary">shopping_cart</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Consumer Protection</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">Defective products, service deficiency, or unfair trade practices.</p>
+                        </div>
+                    </a>
+
+                    <a href="ai-chat.html?prompt=Tell me about Labour Rights" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(243, 148, 97, 0.1);">
+                            <span class="material-symbols-outlined text-accent">engineering</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Labour & Employment</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">Unpaid wages, harassment, wrongful termination.</p>
+                        </div>
+                    </a>
+
+                    <a href="ai-chat.html?prompt=Tell me about Cyber Law" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(30, 58, 138, 0.1);">
+                            <span class="material-symbols-outlined text-primary">security</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Cyber Crime</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">Online fraud, identity theft, data breach.</p>
+                        </div>
+                    </a>
+
+                    <a href="ai-chat.html?prompt=Tell me about Property Law" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(22, 163, 74, 0.1);">
+                            <span class="material-symbols-outlined text-success">house</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Property Disputes</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">Tenant-landlord disputes, illegal possession.</p>
+                        </div>
+                    </a>
+
+                    <a href="ai-chat.html?prompt=Tell me about Family Law" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(186, 26, 26, 0.1);">
+                            <span class="material-symbols-outlined text-error">family_restroom</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Family Law</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">Divorce, maintenance, domestic violence.</p>
+                        </div>
+                    </a>
+
+                    <a href="ai-chat.html?prompt=Tell me about Criminal Law" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: var(--surface-high);">
+                            <span class="material-symbols-outlined text-muted">local_police</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Criminal Offenses</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">IPC & BNS specifics, FIR processes.</p>
+                        </div>
+                    </a>
+                </div>
+            </main>
         </div>
-      `).join('');
-    } catch(err) { console.error(err); }
-  }
-  loadCategories();
-</script>
-</body></html>
+    </div>
 
+    <!-- Mobile Navigation -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="categories.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">gavel</span><span style="font-size: 0.625rem;">Explore</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
 
-
+    <style>
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .page-content { padding-bottom: 80px; }
+            .grid-cols-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</body>
+</html>

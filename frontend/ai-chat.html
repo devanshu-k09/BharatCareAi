@@ -1,28 +1,72 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AI Assistant | BharatCare AI</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AI Assistant | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .chat-viewport {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 120px;
         }
-        .chat-scroll-container::-webkit-scrollbar {
+        .chat-viewport::-webkit-scrollbar {
             width: 6px;
         }
-        .chat-scroll-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .chat-scroll-container::-webkit-scrollbar-thumb {
-            background: #e2e8f0;
+        .chat-viewport::-webkit-scrollbar-thumb {
+            background: var(--border);
             border-radius: 10px;
         }
+        .chat-input-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--spacing-md);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border);
+            z-index: 20;
+        }
+        .message-row {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            animation: slideUp 0.3s ease-out forwards;
+        }
+        .message-row.reverse {
+            flex-direction: row-reverse;
+        }
+        .message-bubble {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-xl);
+            max-width: 85%;
+            font-size: 1rem;
+            line-height: 1.5;
+            box-shadow: var(--shadow-sm);
+        }
+        .message-row:not(.reverse) .message-bubble {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top-left-radius: 0;
+        }
+        .message-row.reverse .message-bubble {
+            background: var(--primary);
+            color: var(--text-inverse);
+            border-top-right-radius: 0;
+            text-align: right;
+        }
+        .typing-indicator {
+            display: inline-flex;
+            gap: 4px;
+            align-items: center;
+        }
         .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--text-muted);
+            border-radius: 50%;
             animation: typing 1.4s infinite ease-in-out;
         }
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
@@ -31,422 +75,242 @@
             0%, 60%, 100% { transform: translateY(0); }
             30% { transform: translateY(-4px); }
         }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(229, 231, 235, 0.5);
+        .floating-tools {
+            position: absolute;
+            bottom: 120px;
+            right: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            z-index: 10;
+        }
+        .floating-tools .btn-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
         }
     </style>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "on-primary-container": "#90a8ff",
-                        "secondary": "#0051d5",
-                        "surface-tint": "#4059aa",
-                        "on-surface": "#191c1e",
-                        "tertiary-container": "#6e2c00",
-                        "on-primary": "#ffffff",
-                        "surface-container-lowest": "#ffffff",
-                        "surface-bright": "#f7f9fb",
-                        "surface-container-low": "#f2f4f6",
-                        "on-error-container": "#93000a",
-                        "primary-fixed-dim": "#b6c4ff",
-                        "on-secondary-container": "#fefcff",
-                        "primary": "#00236f",
-                        "on-error": "#ffffff",
-                        "surface-container-high": "#e6e8ea",
-                        "tertiary-fixed": "#ffdbcb",
-                        "outline-variant": "#c5c5d3",
-                        "on-primary-fixed": "#00164e",
-                        "surface-container-highest": "#e0e3e5",
-                        "on-tertiary-fixed-variant": "#773205",
-                        "surface-container": "#eceef0",
-                        "surface-variant": "#e0e3e5",
-                        "on-secondary-fixed": "#00174b",
-                        "surface-dim": "#d8dadc",
-                        "on-background": "#191c1e",
-                        "primary-container": "#1e3a8a",
-                        "on-tertiary": "#ffffff",
-                        "inverse-surface": "#2d3133",
-                        "error": "#ba1a1a",
-                        "primary-fixed": "#dce1ff",
-                        "on-primary-fixed-variant": "#264191",
-                        "on-surface-variant": "#444651",
-                        "on-tertiary-fixed": "#341100",
-                        "tertiary": "#4b1c00",
-                        "tertiary-fixed-dim": "#ffb691",
-                        "background": "#f7f9fb",
-                        "inverse-on-surface": "#eff1f3",
-                        "inverse-primary": "#b6c4ff",
-                        "secondary-container": "#316bf3",
-                        "outline": "#757682",
-                        "secondary-fixed": "#dbe1ff",
-                        "on-secondary": "#ffffff",
-                        "surface": "#f7f9fb",
-                        "on-tertiary-container": "#f39461",
-                        "error-container": "#ffdad6",
-                        "secondary-fixed-dim": "#b4c5ff",
-                        "on-secondary-fixed-variant": "#003ea8"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "xs": "4px",
-                        "xl": "32px",
-                        "3xl": "64px",
-                        "container-max": "1280px",
-                        "2xl": "48px",
-                        "base": "4px",
-                        "gutter": "24px",
-                        "lg": "24px",
-                        "sm": "8px",
-                        "md": "16px"
-                    },
-                    "fontFamily": {
-                        "label-sm": ["Inter"],
-                        "display-lg": ["Manrope"],
-                        "body-sm": ["Inter"],
-                        "headline-md": ["Manrope"],
-                        "headline-lg": ["Manrope"],
-                        "body-md": ["Inter"],
-                        "label-md": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "headline-lg-mobile": ["Manrope"]
-                    },
-                    "fontSize": {
-                        "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "600"}],
-                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
-                    }
-                },
-            },
-        }
-    </script>
 </head>
-<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed-dim">
-<!-- SideNavBar (Desktop Only) -->
-<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant py-xl px-md gap-sm z-50">
-<div class="flex items-center gap-sm mb-xl px-md">
-<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gavel</span>
-</div>
-<div>
-<h1 class="font-headline-md text-headline-md font-bold text-primary leading-tight">BharatCare AI</h1>
-<p class="font-label-md text-label-md text-on-surface-variant">Citizen Help Platform</p>
-</div>
-</div>
-<button class="mb-lg mx-md bg-primary-container text-on-primary-container rounded-lg px-md py-sm font-label-md flex items-center justify-center gap-sm hover:opacity-90 transition-all active:scale-95">
-<span class="material-symbols-outlined text-[20px]">add</span>New Question</button>
-<nav class="flex flex-col gap-xs overflow-y-auto">
-<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-colors" href="dashboard.html">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-label-md">Dashboard</span>
-</a>
-<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-lg px-md py-sm transition-colors" href="ai-chat.html">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
-<span class="font-label-md">AI Assistant</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-colors" href="complaint.html">
-<span class="material-symbols-outlined">description</span>
-<span class="font-label-md">Complaint Generator</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-colors" href="categories.html">
-<span class="material-symbols-outlined">gavel</span>
-<span class="font-label-md">Explore My Rights</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-colors" href="authorities.html">
-<span class="material-symbols-outlined">account_balance</span>
-<span class="font-label-md">Government Help</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-colors" href="history.html">
-<span class="material-symbols-outlined">history</span>
-<span class="font-label-md">My Past Questions</span>
-</a>
-</nav>
-<div class="mt-auto pt-lg border-t border-outline-variant flex flex-col gap-xs">
-<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-colors" href="profile.html">
-<span class="material-symbols-outlined">person</span>
-<span class="font-label-md">Profile</span>
-</a>
-<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-colors" href="settings.html">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-label-md">Settings</span>
-</a>
-<a class="flex items-center gap-md text-error hover:bg-error-container/20 px-md py-sm rounded-lg transition-colors" href="login.html" onclick="localStorage.clear()">
-<span class="material-symbols-outlined">logout</span>
-<span class="font-label-md">Logout</span>
-</a>
-</div>
-</aside>
-<!-- Main Content Canvas -->
-<main class="md:ml-64 flex flex-col h-screen relative">
-<!-- TopNavBar -->
-<header class="flex justify-between items-center w-full px-lg h-16 sticky top-0 z-40 bg-surface-container-lowest shadow-sm">
-<div class="flex items-center gap-md md:hidden">
-<span class="material-symbols-outlined text-primary">menu</span>
-<span class="font-headline-md text-headline-md font-bold text-primary">BharatCare AI</span>
-</div>
-<!-- Breadcrumb style title -->
-<div class="hidden md:flex items-center gap-sm">
-<span class="text-on-surface-variant font-label-md">Citizen Help Platform</span>
-<span class="material-symbols-outlined text-outline text-sm">chevron_right</span>
-<span class="text-primary font-bold font-label-md">AI Legal Assistant</span>
-</div>
-<div class="flex items-center gap-md">
-<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-on-surface-variant">language</span>
-</button>
-<div class="relative">
-<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
-</button>
-<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
-</div>
-<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Close-up professional headshot of a corporate user for a legal AI SaaS platform profile, featuring soft studio lighting, a neutral gray background, and high-detail facial features to convey trust and authority in a modern minimalist tech environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ"/>
-</div>
-</div>
-</header>
-<!-- Chat Container -->
-<div class="flex-1 overflow-y-auto chat-scroll-container pb-[180px]" id="chat-viewport">
-<div class="max-w-4xl mx-auto px-md py-xl">
-<!-- Initial Welcome State -->
-<div class="flex flex-col items-center justify-center text-center mt-12 mb-16" id="welcome-section">
-<div class="w-20 h-20 rounded-3xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-lg mb-lg">
-<span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
-</div>
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Namaste! I'm BharatCare AI</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">How can I assist with your legal inquiries today? I specialize in Indian Law, tenant rights, and consumer protection.</p>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-md mt-xl w-full max-w-2xl">
-<button class="p-md bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-left group">
-<span class="material-symbols-outlined text-primary mb-xs block">home_work</span>
-<span class="font-label-md text-on-surface block font-bold mb-xs">Tenant Rights</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant">What are my rights if my landlord increases rent without notice?</p>
-</button>
-<button class="p-md bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-left group">
-<span class="material-symbols-outlined text-primary mb-xs block">shopping_bag</span>
-<span class="font-label-md text-on-surface block font-bold mb-xs">Consumer Protection</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant">How do I file a complaint against a faulty electronics brand?</p>
-</button>
-</div>
-</div>
-<!-- Chat Messages List -->
-<div class="flex flex-col gap-xl">
-<!-- AI Message Example -->
-<div class="flex gap-md">
-<div class="w-10 h-10 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-on-primary-container">
-<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
-</div>
-<div class="flex-1 max-w-[85%]">
-<div class="bg-white p-lg rounded-2xl rounded-tl-none shadow-sm border border-outline-variant">
-<p class="font-body-md text-body-md text-on-surface leading-relaxed mb-md">
-                                    Under the **Real Estate (Regulation and Development) Act, 2016 (RERA)**, you have several protections as a homebuyer. If the builder delays possession beyond the agreed date, you are entitled to a full refund with interest or compensation for the delay period.
-                                </p>
-<div class="flex flex-wrap gap-xs items-center">
-<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Sources:</span>
-<a class="px-sm py-1 bg-surface-container-low rounded-full text-xs font-medium text-secondary hover:underline flex items-center gap-1" href="#">
-<span class="material-symbols-outlined text-[14px]">link</span>
-                                        RERA Section 18
-                                    </a>
-<a class="px-sm py-1 bg-surface-container-low rounded-full text-xs font-medium text-secondary hover:underline flex items-center gap-1" href="#">
-<span class="material-symbols-outlined text-[14px]">link</span>
-                                        Supreme Court Precedents (2021)
-                                    </a>
-</div>
-</div>
-</div>
-</div>
-<!-- User Message Example -->
-<div class="flex gap-md flex-row-reverse">
-<div class="w-10 h-10 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center text-on-surface-variant">
-<span class="material-symbols-outlined text-[20px]">person</span>
-</div>
-<div class="flex-1 max-w-[85%] text-right">
-<div class="bg-primary text-on-primary p-lg rounded-2xl rounded-tr-none shadow-md inline-block text-left">
-<p class="font-body-md text-body-md leading-relaxed">
-                                    Can you draft a formal notice to the builder requesting my refund under RERA?
-                                </p>
-</div>
-</div>
-</div>
-<!-- AI Message (Typing) -->
-<div class="flex gap-md">
-<div class="w-10 h-10 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-on-primary-container">
-<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
-</div>
-<div class="flex-1 max-w-[85%]">
-<div class="bg-white p-lg rounded-2xl rounded-tl-none shadow-sm border border-outline-variant inline-flex gap-1.5 items-center">
-<div class="w-2 h-2 bg-outline rounded-full typing-dot"></div>
-<div class="w-2 h-2 bg-outline rounded-full typing-dot"></div>
-<div class="w-2 h-2 bg-outline rounded-full typing-dot"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Floating Utilities -->
-<div class="fixed bottom-[130px] right-lg flex flex-col gap-sm z-30">
-<button class="w-12 h-12 bg-white rounded-full shadow-lg border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-error hover:shadow-xl transition-all active:scale-90" title="Clear Chat">
-<span class="material-symbols-outlined">delete_sweep</span>
-</button>
-<button class="w-12 h-12 bg-white rounded-full shadow-lg border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:shadow-xl transition-all active:scale-90" title="Copy Response">
-<span class="material-symbols-outlined">content_copy</span>
-</button>
-<button class="w-12 h-12 bg-white rounded-full shadow-lg border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-secondary hover:shadow-xl transition-all active:scale-90" title="Download PDF">
-<span class="material-symbols-outlined">picture_as_pdf</span>
-</button>
-</div>
-<!-- Fixed Input Area -->
-<div class="absolute bottom-0 left-0 right-0 p-lg glass-panel border-t border-outline-variant">
-<div class="max-w-4xl mx-auto">
-<div class="relative flex items-end gap-sm bg-surface-container-low border border-outline-variant rounded-2xl p-sm focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
-<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors">
-<span class="material-symbols-outlined">attach_file</span>
-</button>
-<textarea class="flex-1 bg-transparent border-none focus:ring-0 py-sm px-xs resize-none font-body-md text-on-surface placeholder:text-on-surface-variant/60 max-h-40" id="chat-input" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'" placeholder="Type your legal query here..." rows="1"></textarea>
-<div class="flex items-center gap-xs pr-sm pb-1">
-<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-colors">
-<span class="material-symbols-outlined">mic</span>
-</button>
-<button class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-md">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
-</button>
-</div>
-</div>
-<p class="text-center text-[11px] text-on-surface-variant/70 mt-sm">BharatCare AI may provide helpful information but does not constitute formal legal advice. Always consult with a registered advocate.</p>
-</div>
-</div>
-</main>
-<!-- BottomNavBar (Mobile Only) -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-lowest h-16 border-t border-outline-variant flex items-center justify-around px-md z-50">
-<button class="flex flex-col items-center text-on-surface-variant">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="text-[10px] font-medium">Home</span>
-</button>
-<button class="flex flex-col items-center text-primary">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
-<span class="text-[10px] font-bold">Assistant</span>
-</button>
-<button class="flex flex-col items-center text-on-surface-variant">
-<span class="material-symbols-outlined">history</span>
-<span class="text-[10px] font-medium">Cases</span>
-</button>
-<button class="flex flex-col items-center text-on-surface-variant">
-<span class="material-symbols-outlined">person</span>
-<span class="text-[10px] font-medium">Profile</span>
-</button>
-</nav>
-<script>
-        // Micro-interactions and atmospheric logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const chatInput = document.getElementById('chat-input');
-            const viewport = document.getElementById('chat-viewport');
-
-            // Scroll to bottom on load
-            if (viewport) {
-                viewport.scrollTop = viewport.scrollHeight;
-            }
-
-            // Auto-resize textarea
-            if (chatInput) {
-                chatInput.addEventListener('input', function() {
-                    this.style.height = 'auto';
-                    this.style.height = (this.scrollHeight) + 'px';
-                });
-            }
-        });
-    </script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            window.location.href = 'login.html';
-            return;
-        }
+<body>
+    <div class="app-layout">
         
-        try {
-            const user = JSON.parse(localStorage.getItem('user'));
-            if (user && user.name) {
-                const nameElements = document.querySelectorAll('.user-name-display');
-                nameElements.forEach(el => el.textContent = user.name);
-            }
-        } catch(e) {}
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', async () => {
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">gavel</span>
+                </div>
+                <div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block mb-lg" onclick="localStorage.removeItem('chatHistory'); window.location.href='ai-chat.html'">
+                <span class="material-symbols-outlined">add</span> New Question
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link active">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="profile.html" class="nav-link">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper" style="position: relative;">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center gap-sm">
+                    <span class="text-muted" style="font-size: 0.875rem; font-weight: 500;">Citizen Help Platform</span>
+                    <span class="material-symbols-outlined text-muted" style="font-size: 1rem;">chevron_right</span>
+                    <span class="text-primary" style="font-size: 0.875rem; font-weight: 600;">AI Legal Assistant</span>
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
+                    </button>
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                </div>
+            </header>
+
+            <!-- Chat Container -->
+            <div class="chat-viewport" id="chat-viewport">
+                <div class="container" style="max-width: 800px; padding: var(--spacing-xl) var(--spacing-md);" id="chat-container">
+                    
+                    <!-- Welcome Section (Initial State) -->
+                    <div id="welcome-section" class="text-center" style="margin: 4rem auto; transition: opacity 0.3s ease;">
+                        <div class="d-flex justify-center align-center mx-auto mb-lg" style="width: 80px; height: 80px; border-radius: 24px; background: rgba(30, 58, 138, 0.1); color: var(--primary);">
+                            <span class="material-symbols-outlined" style="font-size: 40px;">smart_toy</span>
+                        </div>
+                        <h2 class="mb-sm">Namaste! I'm BharatCare AI</h2>
+                        <p style="font-size: 1.125rem; max-width: 600px; margin: 0 auto var(--spacing-xl);">How can I assist with your legal inquiries today? I specialize in Indian Law, tenant rights, and consumer protection.</p>
+                        
+                        <div class="grid grid-cols-2 gap-md text-left" style="max-width: 600px; margin: 0 auto;">
+                            <button class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface-low); border: 1px solid var(--border);">
+                                <span class="material-symbols-outlined text-primary mb-xs">home_work</span>
+                                <strong class="mb-xs">Tenant Rights</strong>
+                                <span class="text-muted" style="font-size: 0.875rem;">What are my rights if my landlord increases rent without notice?</span>
+                            </button>
+                            <button class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface-low); border: 1px solid var(--border);">
+                                <span class="material-symbols-outlined text-primary mb-xs">shopping_bag</span>
+                                <strong class="mb-xs">Consumer Protection</strong>
+                                <span class="text-muted" style="font-size: 0.875rem;">How do I file a complaint against a faulty electronics brand?</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Messages will be injected here -->
+                </div>
+            </div>
+
+            <!-- Floating Utilities -->
+            <div class="floating-tools">
+                <button class="btn-icon text-muted" title="Clear Chat" id="clearChatBtn">
+                    <span class="material-symbols-outlined">delete_sweep</span>
+                </button>
+                <button class="btn-icon text-primary" title="Copy Response">
+                    <span class="material-symbols-outlined">content_copy</span>
+                </button>
+                <button class="btn-icon text-secondary" title="Download PDF">
+                    <span class="material-symbols-outlined">picture_as_pdf</span>
+                </button>
+            </div>
+
+            <!-- Chat Input Area -->
+            <div class="chat-input-wrapper">
+                <div class="container" style="max-width: 800px;">
+                    <div class="input-group" style="padding: var(--spacing-xs); background: var(--surface-low); align-items: flex-end;">
+                        <button class="btn-icon"><span class="material-symbols-outlined">attach_file</span></button>
+                        <textarea class="form-control" id="chat-input" rows="1" placeholder="Type your legal query here..." style="max-height: 150px; resize: none; padding-top: 10px; padding-bottom: 10px; overflow-y: auto;"></textarea>
+                        <div class="d-flex align-center gap-xs" style="padding-bottom: 4px; padding-right: 4px;">
+                            <button class="btn-icon"><span class="material-symbols-outlined">mic</span></button>
+                            <button class="btn btn-primary" id="sendBtn" style="padding: 0.5rem; border-radius: var(--radius-md);">
+                                <span class="material-symbols-outlined">send</span>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-center text-muted mt-sm m-0" style="font-size: 0.7rem;">BharatCare AI may provide helpful information but does not constitute formal legal advice. Always consult with a registered advocate.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="ai-chat.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">smart_toy</span><span style="font-size: 0.625rem;">AI</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
+
+    <style>
+        .hover-lift { transition: transform var(--transition-fast), box-shadow var(--transition-fast); cursor: pointer; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--primary-light) !important; }
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .floating-tools { bottom: 180px; }
+            .chat-viewport { padding-bottom: 180px; }
+        }
+    </style>
+
+    <script>
+        // Setup height auto resize
         const chatInput = document.getElementById('chat-input');
-        const sendBtn = chatInput.nextElementSibling.querySelector('button.bg-primary');
-        const chatContainer = document.querySelector('.flex.flex-col.gap-xl');
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) window.location.href = 'login.html';
+        });
+
+        // Chat Logic
+        const sendBtn = document.getElementById('sendBtn');
+        const chatContainer = document.getElementById('chat-container');
         const welcomeSection = document.getElementById('welcome-section');
-        let currentChatId = null;
+        const viewport = document.getElementById('chat-viewport');
 
-        if (!sendBtn || !chatInput || !chatContainer) return;
-
-        // Clear default static mockup messages
-        const staticMessages = chatContainer.querySelectorAll('.flex.gap-md');
-        staticMessages.forEach(msg => msg.remove());
+        let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
 
         const addMessage = (text, isAi = false, isLoading = false) => {
             if (welcomeSection) {
-                welcomeSection.style.opacity = '0';
-                setTimeout(() => welcomeSection.remove(), 300);
+                welcomeSection.style.display = 'none';
             }
 
             const wrapper = document.createElement('div');
-            wrapper.className = isAi ? "flex gap-md" : "flex gap-md flex-row-reverse";
+            wrapper.className = `message-row ${!isAi ? 'reverse' : ''}`;
 
-            let iconHtml = isAi 
-                ? `<div class="w-10 h-10 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-on-primary-container">
-                    <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
-                   </div>`
-                : `<div class="w-10 h-10 rounded-full bg-surface-container-high flex-shrink-0 flex items-center justify-center text-on-surface-variant">
-                    <span class="material-symbols-outlined text-[20px]">person</span>
-                   </div>`;
+            const iconHtml = isAi 
+                ? `<div class="d-flex align-center justify-center rounded-full" style="width: 40px; height: 40px; background: rgba(30, 58, 138, 0.1); color: var(--primary); flex-shrink: 0;"><span class="material-symbols-outlined">smart_toy</span></div>`
+                : `<div class="d-flex align-center justify-center rounded-full" style="width: 40px; height: 40px; background: var(--surface-high); color: var(--text-muted); flex-shrink: 0;"><span class="material-symbols-outlined">person</span></div>`;
 
             let contentHtml = '';
             if (isLoading) {
-                contentHtml = `<div class="bg-white p-lg rounded-2xl rounded-tl-none shadow-sm border border-outline-variant inline-flex gap-1.5 items-center">
-                    <div class="w-2 h-2 bg-outline rounded-full typing-dot"></div>
-                    <div class="w-2 h-2 bg-outline rounded-full typing-dot"></div>
-                    <div class="w-2 h-2 bg-outline rounded-full typing-dot"></div>
-                </div>`;
+                contentHtml = `
+                    <div class="message-bubble typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>`;
             } else {
-                let classes = isAi 
-                    ? "bg-white p-lg rounded-2xl rounded-tl-none shadow-sm border border-outline-variant font-body-md text-on-surface"
-                    : "bg-primary text-on-primary p-lg rounded-2xl rounded-tr-none shadow-md inline-block text-left font-body-md";
-                
                 let formattedText = text
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
+                    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
                     .replace(/\n/g, '<br>')
                     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                    
-                contentHtml = `<div class="${classes}"><p class="leading-relaxed">${formattedText}</p></div>`;
+                contentHtml = `<div class="message-bubble">${formattedText}</div>`;
             }
 
-            wrapper.innerHTML = iconHtml + `<div class="flex-1 max-w-[85%] ${isAi ? '' : 'text-right'}">${contentHtml}</div>`;
+            wrapper.innerHTML = iconHtml + contentHtml;
             chatContainer.appendChild(wrapper);
-            
-            const viewport = document.getElementById('chat-viewport');
             viewport.scrollTop = viewport.scrollHeight;
-            
             return wrapper;
+        };
+
+        const saveChat = () => {
+            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+        };
+
+        const renderHistory = () => {
+            if (chatHistory.length > 0) {
+                chatHistory.forEach(msg => {
+                    addMessage(msg.content, msg.role === 'ai');
+                });
+            }
         };
 
         const handleSend = async () => {
@@ -454,29 +318,31 @@
             if (!prompt) return;
 
             addMessage(prompt, false);
+            chatHistory.push({ role: 'user', content: prompt });
+            saveChat();
+
             chatInput.value = '';
             chatInput.style.height = 'auto';
 
             const loadingMsg = addMessage('', true, true);
 
             try {
-                const res = await fetch('http://localhost:5000/api/ai/chat', {
+                const res = await fetch('http://localhost:5000/api/legal-assistant', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     },
-                    body: JSON.stringify({ prompt, chatId: currentChatId })
+                    body: JSON.stringify({ query: prompt })
                 });
 
                 const data = await res.json();
                 loadingMsg.remove();
 
-                if (res.ok) {
-                    currentChatId = data.chatId;
-                    addMessage(data.aiResponse, true);
-                    // Update URL silently so refresh keeps you in same chat
-                    window.history.replaceState({}, '', `ai-chat.html?id=${currentChatId}`);
+                if (res.ok && data.success) {
+                    addMessage(data.answer, true);
+                    chatHistory.push({ role: 'ai', content: data.answer });
+                    saveChat();
                 } else {
                     addMessage('Error: ' + (data.message || 'Failed to get response'), true);
                 }
@@ -486,11 +352,7 @@
             }
         };
 
-        sendBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            handleSend();
-        });
-
+        sendBtn.addEventListener('click', handleSend);
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -498,64 +360,19 @@
             }
         });
 
-        // Load existing chat if ID is in URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const chatId = urlParams.get('id');
-        if (chatId) {
-            try {
-                const res = await fetch('http://localhost:5000/api/ai/chats', {
-                    headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
-                });
-                const chats = await res.json();
-                const chat = chats.find(c => c._id === chatId);
-                if (chat) {
-                    currentChatId = chatId;
-                    if (welcomeSection) {
-                        welcomeSection.style.opacity = '0';
-                        setTimeout(() => welcomeSection.remove(), 300);
-                    }
-                    chat.messages.forEach(msg => {
-                        addMessage(msg.content, msg.role === 'ai');
-                    });
-                }
-            } catch (e) { console.error('Failed to load chat history', e); }
-        }
+        // Init
+        renderHistory();
         
-        // Floating utilities
-        const clearBtn = document.querySelector('[title="Clear Chat"]');
+        // Clear chat
+        const clearBtn = document.getElementById('clearChatBtn');
         if (clearBtn) {
             clearBtn.addEventListener('click', () => {
                 if (confirm('Delete this conversation?')) {
-                    if (currentChatId) {
-                        fetch(`http://localhost:5000/api/ai/chat/${currentChatId}`, {
-                            method: 'DELETE',
-                            headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
-                        }).then(() => {
-                            window.location.href = 'ai-chat.html';
-                        });
-                    } else {
-                        window.location.href = 'ai-chat.html';
-                    }
+                    localStorage.removeItem('chatHistory');
+                    window.location.reload();
                 }
             });
         }
-        
-        // "New Question" sidebar button functionality
-        document.querySelectorAll('button').forEach(btn => {
-            if (btn.textContent.includes('New Question')) {
-                // Ensure it overrides any default href 
-                btn.removeAttribute('onclick');
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = 'ai-chat.html'; // reloading clears UI and resets currentChatId
-                });
-            }
-        });
-    });
-</script>
-</body></html>
-
-
-
-
-
+    </script>
+</body>
+</html>

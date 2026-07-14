@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import { v4 as uuidv4 } from 'uuid';
 import db from '../config/db.js';
 
@@ -9,8 +9,7 @@ export const generateLegalAdvice = async (req, res) => {
     if (!apiKey || apiKey === 'your_gemini_api_key_here') {
       return res.status(500).json({ message: 'Gemini API Key not configured. Please add your GEMINI_API_KEY in backend/.env' });
     }
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model  = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const ai = new GoogleGenAI({ apiKey });
 
     const systemPrompt = `You are BharatCare AI, a friendly government help assistant for common Indian citizens (not for lawyers).
 The user does not understand legal jargon, so you MUST use simple, everyday English.
@@ -32,8 +31,12 @@ Structure your response simply:
 6. **Where to Complain (Government Office/Portal)**
 7. **⚠️ Note:** This information is for guidance and education, not a substitute for professional legal advice.`;
 
-    const result = await model.generateContent(systemPrompt);
-    const aiResponse = result.response.text();
+    const result = await ai.models.generateContent({
+        model: 'gemini-3.1-flash-lite',
+        contents: systemPrompt
+    });
+    
+    const aiResponse = result.text;
 
     const data = db.data;
     let chat = chatId ? data.chats.find(c => c._id === chatId && c.user === req.user._id) : null;

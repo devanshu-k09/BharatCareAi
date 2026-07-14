@@ -62,6 +62,33 @@
       "role": "user",
       "language": "English",
       "createdAt": "2026-07-13T14:21:52.942Z"
+    },
+    {
+      "_id": "05420efa-8b29-4bd1-9501-3fdf84307947",
+      "name": "test2",
+      "email": "test2@example.com",
+      "password": "$2a$10$BLuTwg8p2DhByTTV0z2sA.9uTzraUrvYUQps9Lui3N2NQBxlitjPy",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-14T16:17:08.338Z"
+    },
+    {
+      "_id": "e58c92e0-3648-413d-ba42-d1e3c06a8632",
+      "name": "Devanshu ",
+      "email": "devanshukukade694@gmail.com",
+      "password": "$2a$10$GVeWX4Tb.3pOSepAhZOZf.lQmWKjW/YPpuwFduCnHaWmn4kFB.unK",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-14T16:29:32.012Z"
+    },
+    {
+      "_id": "719d410a-6059-48be-9f60-c769de37d516",
+      "name": "Test User",
+      "email": "test_api@example.com",
+      "password": "$2a$10$ZDwEnY4C/33ERgV1Vk2TX.XWRWcB/p/nc1.L5XHHe.yhH.shwVwae",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-14T17:17:41.953Z"
     }
   ],
   "chats": [
@@ -91,5 +118,14 @@
       "updatedAt": "2026-07-13T06:47:21.857Z"
     }
   ],
-  "complaints": []
+  "complaints": [
+    {
+      "_id": "1ea201d7-799e-4ebc-99c6-06201aa5ba0d",
+      "user": "e58c92e0-3648-413d-ba42-d1e3c06a8632",
+      "type": "Consumer",
+      "details": "I purchased a mobile phone from Flipkart on 5 July 2026 for ₹18,999. The phone stopped working within three days. I requested a replacement, but the seller rejected my request without giving a valid reason. I contacted customer support several times, but they have not resolved my issue. I want a replacement or a full refund.",
+      "generatedDraft": "[Your Full Name]\n[Your Address]\n[Your Phone Number]\n[Your Email Address]\n\n[Date]\n\nTo,\nThe Grievance Officer,\nFlipkart Internet Pvt. Ltd.,\nBuildings Alyssa, Begonia & Clover,\nEmbassy Tech Village, Outer Ring Road,\nDevarabeesanahalli Village,\nBengaluru – 560103, Karnataka.\n\n**Subject: Formal Complaint regarding defective product – Order ID: [Insert Order ID]**\n\nDear Sir/Madam,\n\nI am writing to formally express my extreme dissatisfaction with a recent purchase made through your platform. On 5 July 2026, I purchased a [Insert Mobile Phone Model Name] for a total amount of ₹18,999 (Order ID: [Insert Order ID]).\n\nThe device was delivered on [Insert Delivery Date]. To my dismay, the mobile phone ceased to function entirely within just three days of use. Despite the product being under the initial warranty and return window, my subsequent request for a replacement was summarily rejected by the seller without any valid technical explanation or justification.\n\nFollowing this, I contacted your customer support team on multiple occasions ([Mention Ticket/Case IDs if available]), seeking a resolution. Regrettably, despite numerous assurances, the issue remains unresolved, and I have been left with a non-functional device for which I have paid in full.\n\nAs a consumer, I am entitled to receive a product that is free from defects and fit for use. The supply of a faulty device, coupled with the refusal to provide a replacement or refund, constitutes a deficiency in service and an unfair trade practice.\n\nThrough this letter, I request you to urgently look into this matter and facilitate a replacement of the device with a functional unit or initiate a full refund of ₹18,999 to my original payment source within 7 (seven) business days of the receipt of this letter.\n\nPlease note that if this matter is not resolved within the stipulated timeframe, I will be constrained to escalate this complaint to the National Consumer Helpline (NCH) and proceed with formal legal action against Flipkart and the seller through the Consumer Disputes Redressal Commission for compensation towards the cost of the product, mental agony, and legal expenses.\n\nI have attached a copy of the purchase invoice and the communication logs with your support team for your reference. I look forward to your prompt response and a favorable resolution.\n\nYours sincerely,\n\n[Signature]\n\n[Your Full Name]",
+      "createdAt": "2026-07-14T17:28:02.709Z"
+    }
+  ]
 }
