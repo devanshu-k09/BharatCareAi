@@ -1,0 +1,528 @@
+﻿<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BharatCare AI | Understand Your Legal Rights with AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#90a8ff",
+                      "secondary": "#0051d5",
+                      "surface-tint": "#4059aa",
+                      "on-surface": "#191c1e",
+                      "tertiary-container": "#6e2c00",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#f7f9fb",
+                      "surface-container-low": "#f2f4f6",
+                      "on-error-container": "#93000a",
+                      "primary-fixed-dim": "#b6c4ff",
+                      "on-secondary-container": "#fefcff",
+                      "primary": "#00236f",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#e6e8ea",
+                      "tertiary-fixed": "#ffdbcb",
+                      "outline-variant": "#c5c5d3",
+                      "on-primary-fixed": "#00164e",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-tertiary-fixed-variant": "#773205",
+                      "surface-container": "#eceef0",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-fixed": "#00174b",
+                      "surface-dim": "#d8dadc",
+                      "on-background": "#191c1e",
+                      "primary-container": "#1e3a8a",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#dce1ff",
+                      "on-primary-fixed-variant": "#264191",
+                      "on-surface-variant": "#444651",
+                      "on-tertiary-fixed": "#341100",
+                      "tertiary": "#4b1c00",
+                      "tertiary-fixed-dim": "#ffb691",
+                      "background": "#f7f9fb",
+                      "inverse-on-surface": "#eff1f3",
+                      "inverse-primary": "#b6c4ff",
+                      "secondary-container": "#316bf3",
+                      "outline": "#757682",
+                      "secondary-fixed": "#dbe1ff",
+                      "on-secondary": "#ffffff",
+                      "surface": "#f7f9fb",
+                      "on-tertiary-container": "#f39461",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#b4c5ff",
+                      "on-secondary-fixed-variant": "#003ea8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "xl": "32px",
+                      "3xl": "64px",
+                      "container-max": "1280px",
+                      "2xl": "48px",
+                      "base": "4px",
+                      "gutter": "24px",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "display-lg": ["Manrope"],
+                      "body-sm": ["Inter"],
+                      "headline-md": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg-mobile": ["Manrope"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 50% -20%, #e0e7ff 0%, #f7f9fb 60%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="bg-surface-container-lowest flex justify-between items-center w-full px-lg h-16 sticky top-0 z-50 shadow-sm transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-sm">
+<img alt="BharatCare AI Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJH2nOcyxSsVchjtGKaZx3Q44364A80kZAf_LLRxSaaTKETNu0JDU0ZIN2TbQeu8sGgYERCyo2cWUT_e6TAkvHVj-73qRfIHRdZ6A8ZfQQrLGEMRpIH-5HoRouPUJs1qCoi5rVB7V_VBmSwck_RIthiPvM1sdtUmRZ7q4VXgDP94DWOPhgz77nyrnlTeZEyFL3YBeJd1gxQ_S3ey3e2FMDnnYHBZHvHIk1vs4u9r1f2QOSTUnF1EjTiQ"/>
+<span class="font-headline-md text-headline-md font-bold text-primary">BharatCare AI</span>
+</div>
+<div class="hidden md:flex items-center gap-xl font-body-md text-body-md">
+<a class="text-primary font-bold border-b-2 border-primary hover:bg-surface-container-low transition-colors px-xs" href="#features">Features</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-xs" href="#how-it-works">Process</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-xs" href="#categories">Categories</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low transition-colors px-xs" href="#faq">FAQ</a>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-xs hover:bg-surface-container-low rounded-full transition-colors">language</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-xs hover:bg-surface-container-low rounded-full transition-colors">notifications</span>
+<button onclick="window.location.href='login.html'" class="bg-primary text-on-primary px-md py-sm rounded-lg font-label-md transition-all hover:opacity-90 active:scale-95">Get Started</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="hero-gradient pt-24 pb-32 px-md">
+<div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+<div class="space-y-lg">
+<div class="inline-flex items-center gap-xs bg-primary-container/10 text-primary-container px-sm py-xs rounded-full border border-primary-container/20">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<span class="text-label-sm font-label-sm">Empowering 1.4 Billion Citizens</span>
+</div>
+<h1 class="font-display-lg text-display-lg md:text-[56px] text-primary leading-tight">
+                    Understand Your Legal Rights with AI
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                    Ask legal questions in simple language and receive easy-to-understand guidance based on Indian laws. Navigate the complex legal landscape with clarity.
+                </p>
+<div class="flex flex-wrap gap-md pt-md">
+<button onclick="window.location.href='login.html'" class="bg-primary text-on-primary px-xl py-md rounded-xl font-headline-md flex items-center gap-sm hover:shadow-lg transition-all">
+                        Ask AI <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="bg-white text-primary border border-outline-variant px-xl py-md rounded-xl font-headline-md hover:bg-surface-container-low transition-all">
+                        Explore Rights
+                    </button>
+<button onclick="window.location.href='login.html'" class="w-full sm:w-auto text-primary font-label-md flex items-center justify-center gap-xs hover:underline mt-2 sm:mt-0">
+<span class="material-symbols-outlined">description</span> Complaint Generator
+                    </button>
+</div>
+<div class="flex items-center gap-md pt-xl">
+<div class="flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-2 border-white object-cover" data-alt="A close-up portrait of a professional Indian woman in a modern office, smiling confidently, representing a satisfied legal professional. The lighting is soft and corporate, with a clean white and blue color scheme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZz0Bys55UgmpqrObju9b9I2ONxZX_MOSv1503RhorlJzxJSWUOtrSzXEV36cxSjBCNVaKqx53MMBInDXOyJXoAsh_J4FmEj6Oes_a2LmY1ILe4PwXjIt-98KRZlBWPbtZAH4cTb-KO1Ss-XUqO_9CXuqtYVo92D7B83YLbQfsQeqzU2v1lh17LJuBEynpJ-hN_YN_tAiPoWs9fSgZkpQDfQ1QZsfPYfh8tFMMdL_3VAkD8zhvPe4DGQ"/>
+<img class="w-10 h-10 rounded-full border-2 border-white object-cover" data-alt="A portrait of a middle-aged man in business casual attire, looking relieved and happy, symbolizing a successful legal resolution. The image follows a high-end SaaS aesthetic with bright, airy lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvZne3Vqd_q7Ha7gsZ4UG4kWZQbehQuRoWGobCAEIYz0j0SwE9IcrNRNsFlEREgEw3iSYP1BshIOqKyrnvLUihTg1MGgnaJd6PFGwEU_SpCH_YT0iTWxqMBEJZmm1Rjs6r_dB-m_6STzGLutJM0RU7VA_bjiQKac83jhckDzZ7XE-zOw5ytzT7kg6USe85gSUjCyca-0pmo2buj40rXIJevwGfmiuv73EuZAqA4TWKS_yvt7Ayz8oozQ"/>
+<img class="w-10 h-10 rounded-full border-2 border-white object-cover" data-alt="A young professional woman looking at a tablet screen with a satisfied expression. The background is a blurred minimalist legal office. The visual style is crisp and premium, using a navy and slate palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDexiJ-XfCLvARTklDpfXPwB2urMCbYhbcI5ghMMAtCa-_de3vRpxsRY1QwSA2XlyRq7on7nhehetXA98egyDcbN8PjcQPcbz-GwOwobkCBg-RUTkFw3_fBrX1A6EADlAI0BqITcsCkGohquYc3j56pzNc1Be4Jrduj0ibO-Ht-RjRDI1mO2KGXbmlPmNoMqBiDvm1ADvLIK9IZ861SzOVIZT5LJKLkgNX1Nm52v6q2cS4XC6IZjDY72g"/>
+</div>
+<p class="text-label-md text-on-surface-variant">Trusted by 50,000+ users across India</p>
+</div>
+</div>
+<div class="relative">
+<div class="glass-card rounded-[2rem] p-md shadow-2xl relative z-10 overflow-hidden border-outline-variant/30">
+<img class="w-full h-auto rounded-xl" data-alt="A high-tech digital illustration of an AI legal assistant. The interface shows a chat window with elegant typography, legal document icons, and glowing nodes representing Indian law data. The style is clean, corporate, and minimalist with primary blue accents and soft white surfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALHROgQ5-F6auzLIG5MJ9P80FegD9-MAMxUU5AXPLEUbcaZtQO2JWfwZS2x1ScCmhpCBL2LFRK55R-bHFb49zMTCliRAHPDaOaWHl6b05dRTJDzSVPAvO7YQ5NQsTgWd3rIwR4ZY6Q8uuSXgI9lOBR-lRJZnjhv8TkyjiZ3CCo-WmcSeFfLpKlZoMFlTC32Fq9FgclrHk3nNqaYVvLfroI_7Loz93g-UhQggbPwkyaPdjwTc7a64sRgQ"/>
+<!-- Floating Badge -->
+<div class="absolute bottom-10 left-[-20px] bg-white p-sm rounded-lg shadow-xl border border-outline-variant flex items-center gap-sm animate-bounce duration-[3000ms]">
+<div class="bg-secondary/10 p-xs rounded-md">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface">Verified Sources</p>
+<p class="text-[10px] text-on-surface-variant">Based on IPC &amp; BNS</p>
+</div>
+</div>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute -top-10 -right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+<div class="absolute -bottom-10 -left-10 w-48 h-48 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Features Section -->
+<section class="py-3xl px-md bg-white" id="features">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-24">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md">Comprehensive Citizen Help Platform</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Modern tools designed to simplify the complexities of the Indian legal system for every citizen.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Large Feature -->
+<div class="md:col-span-2 bg-surface-container-low rounded-3xl p-xl flex flex-col justify-between group hover:shadow-lg transition-all border border-transparent hover:border-primary/10">
+<div class="space-y-md">
+<div class="w-12 h-12 bg-primary text-on-primary flex items-center justify-center rounded-xl">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Contextual AI Legal Advice</h3>
+<p class="font-body-md text-on-surface-variant">Our LLM is specifically trained on Indian Constitutional Law, IPC, and the new Bharatiya Nyaya Sanhita (BNS). Get advice that understands local context and language nuances.</p>
+</div>
+<img class="mt-xl rounded-2xl w-full h-48 object-cover group-hover:scale-[1.02] transition-transform" data-alt="A minimalist infographic displaying a 3D visualization of legal document connections and data nodes. The art style is premium corporate SaaS, featuring a light blue and white palette with clean lines and depth-inducing shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcE_nl5WhReCSz2cbBGRzstV9C6kA2j3P9iEVfWmj4uueCJjyJtS6Wtv2nr6ARrZIrlyojTn5NzGhiYKM-hcDyT1McBCJujOnku9dh35-a07i8baEzjvr44WaRJwQAnQkr-ijGiO1qmuOFz7qQUbqIfEypqdWxnmj8S6wv1fyM8L_7vtCrHHbbmRLr3s0fkS1TkWzKdXzA45PTLV0hi4fvW9Ob_Z2_gRg-tQhNdRjXf9hoypMZ0A7Hdg"/>
+</div>
+<!-- Small Feature 1 -->
+<div class="bg-primary text-on-primary rounded-3xl p-xl flex flex-col justify-between hover:scale-[1.02] transition-transform">
+<div class="space-y-md">
+<div class="w-12 h-12 bg-white/10 text-white flex items-center justify-center rounded-xl backdrop-blur-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<h3 class="font-headline-md text-headline-md">Smart Letter Generator</h3>
+<p class="font-body-md opacity-80">Generate legally sound notices, complaints, and RTIs in seconds by just describing your situation.</p>
+</div>
+<div class="mt-xl flex justify-end">
+<span class="material-symbols-outlined text-4xl opacity-20">history_edu</span>
+</div>
+</div>
+<!-- Small Feature 2 -->
+<div class="bg-surface-container-highest rounded-3xl p-xl flex flex-col gap-md group hover:shadow-md transition-all border border-outline-variant/30">
+<div class="w-12 h-12 bg-secondary text-on-secondary flex items-center justify-center rounded-xl">
+<span class="material-symbols-outlined">search</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Intelligent Law Search</h3>
+<p class="font-body-md text-on-surface-variant">Search through thousands of sections and case laws using natural language. No more complex legal keywords.</p>
+<div class="mt-auto pt-md flex items-center gap-xs text-secondary font-label-md">
+                        Learn More <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</div>
+</div>
+<!-- Mid Feature -->
+<div class="md:col-span-2 bg-surface-container-low rounded-3xl p-xl grid grid-cols-1 md:grid-cols-2 gap-xl items-center hover:shadow-lg transition-all border border-transparent hover:border-primary/10">
+<div class="space-y-md">
+<div class="w-12 h-12 bg-tertiary-container text-on-tertiary-container flex items-center justify-center rounded-xl">
+<span class="material-symbols-outlined">translate</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Vernacular Support</h3>
+<p class="font-body-md text-on-surface-variant">Justice shouldn't have a language barrier. BharatCare AI supports Hindi, Bengali, Tamil, and 10+ other Indian languages.</p>
+</div>
+<div class="bg-white rounded-2xl p-md shadow-sm border border-outline-variant/20">
+<div class="flex items-center gap-sm mb-xs">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-xs font-label-md text-on-surface-variant">Live Translation</span>
+</div>
+<p class="font-label-md text-on-surface italic">"à¤®à¥à¤à¥‡ à¤®à¥‡à¤°à¥‡ à¤¶à¥à¤°à¤® à¤…à¤§à¤¿à¤•à¤¾à¤°à¥‹à¤‚ à¤•à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚ à¤¬à¤¤à¤¾à¤à¤‚..."</p>
+<hr class="my-sm border-outline-variant/30"/>
+<p class="text-xs text-on-surface-variant">"Tell me about my labor rights..."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works Section -->
+<section class="py-3xl px-md bg-surface-bright" id="how-it-works">
+<div class="max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end gap-md mb-24">
+<div class="max-w-xl">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md">Your Path to Resolution</h2>
+<p class="font-body-lg text-on-surface-variant">From initial confusion to legal clarity in three simple steps.</p>
+</div>
+<div class="hidden md:block w-32 h-[1px] bg-outline-variant mb-4"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-2xl">
+<!-- Step 1 -->
+<div class="relative group">
+<div class="text-[120px] font-bold text-surface-container-high absolute -top-16 -left-4 select-none -z-0">01</div>
+<div class="relative z-10 pt-8">
+<h3 class="font-headline-md text-headline-md text-primary mb-sm">Ask</h3>
+<p class="font-body-md text-on-surface-variant">Type your query or upload a document. Explain your situation as if you're talking to a friend.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative group">
+<div class="text-[120px] font-bold text-surface-container-high absolute -top-16 -left-4 select-none -z-0">02</div>
+<div class="relative z-10 pt-8">
+<h3 class="font-headline-md text-headline-md text-primary mb-sm">Analyze</h3>
+<p class="font-body-md text-on-surface-variant">Our AI scans relevant statutes, historical case laws, and legal procedures to find the best match for your scenario.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative group">
+<div class="text-[120px] font-bold text-surface-container-high absolute -top-16 -left-4 select-none -z-0">03</div>
+<div class="relative z-10 pt-8">
+<h3 class="font-headline-md text-headline-md text-primary mb-sm">Resolve</h3>
+<p class="font-body-md text-on-surface-variant">Receive a step-by-step action plan, drafted documents, and links to government portals for filing.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories Section -->
+<section class="py-3xl px-md" id="categories">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-primary text-center mb-24">Specialized Legal Domains</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-md">
+<!-- Category Item -->
+<div class="bg-white border border-outline-variant/30 p-lg rounded-2xl text-center hover:bg-primary hover:text-on-primary transition-all group cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-sm group-hover:text-on-primary text-primary transition-colors">shopping_cart</span>
+<p class="font-label-md">Consumer</p>
+</div>
+<div class="bg-white border border-outline-variant/30 p-lg rounded-2xl text-center hover:bg-primary hover:text-on-primary transition-all group cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-sm group-hover:text-on-primary text-primary transition-colors">work</span>
+<p class="font-label-md">Labour Law</p>
+</div>
+<div class="bg-white border border-outline-variant/30 p-lg rounded-2xl text-center hover:bg-primary hover:text-on-primary transition-all group cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-sm group-hover:text-on-primary text-primary transition-colors">apartment</span>
+<p class="font-label-md">Property</p>
+</div>
+<div class="bg-white border border-outline-variant/30 p-lg rounded-2xl text-center hover:bg-primary hover:text-on-primary transition-all group cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-sm group-hover:text-on-primary text-primary transition-colors">family_restroom</span>
+<p class="font-label-md">Family</p>
+</div>
+<div class="bg-white border border-outline-variant/30 p-lg rounded-2xl text-center hover:bg-primary hover:text-on-primary transition-all group cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-sm group-hover:text-on-primary text-primary transition-colors">account_balance</span>
+<p class="font-label-md">Taxes</p>
+</div>
+<div class="bg-white border border-outline-variant/30 p-lg rounded-2xl text-center hover:bg-primary hover:text-on-primary transition-all group cursor-pointer">
+<span class="material-symbols-outlined text-3xl mb-sm group-hover:text-on-primary text-primary transition-colors">shield_person</span>
+<p class="font-label-md">Cyber Law</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-3xl px-md bg-primary">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-primary text-center mb-24">Impact on Ground</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<div class="bg-white/5 backdrop-blur-md p-xl rounded-3xl border border-white/10 text-on-primary">
+<div class="flex text-on-tertiary-container mb-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md mb-xl italic opacity-90">"I was confused about a property dispute. BharatCare AI explained the sections so clearly that I felt confident talking to my lawyer later. The letter generator saved me hours."</p>
+<div class="flex items-center gap-md">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A portrait of a senior man with grey hair, wearing traditional Indian spectacles, looking thoughtful and satisfied. The image uses a premium, soft-focus background of a home library. Visuals are clean and high-contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0Ac7Was7MrWOu-cwVW2vSnMCyKNBhMHAsQFvmHvcbFZjmClCliyiZDd_Y0aTvPEXh0KzZyzdJ_TCXhqeUE_lQIk4Vjes4wdrHRPw8KK6c6kvkBmIfSRK-KIS0O25RxStyY8pmPkptsdp9OJQm8oxbgl4qKpIjnBEHkuxRoZtHGHl8vNevkIK-M9QisjALwYNG4Q0m7fh3inMqUup2gfb09MBvmzBmZY5iGWOtZqkIOiNQn29McndbQg"/>
+<div>
+<p class="font-label-md">Rajesh Khanna</p>
+<p class="text-xs opacity-70">Retired Teacher, Pune</p>
+</div>
+</div>
+</div>
+<div class="bg-white/5 backdrop-blur-md p-xl rounded-3xl border border-white/10 text-on-primary md:translate-y-8">
+<div class="flex text-on-tertiary-container mb-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md mb-xl italic opacity-90">"As a small business owner, I used to worry about labor laws. The AI bot helps me check compliance instantly. It's like having a legal department for free."</p>
+<div class="flex items-center gap-md">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A portrait of a young Indian entrepreneur, a woman with a bright smile, standing in a brightly lit modern coworking space. The image follows the design's corporate precision aesthetic with soft gradients." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvJZVBX9zOE0ERZkkCFFyjbkKQKFcsowgh6Ye3_RMs-7o900WSiK_zMhUyFCeX2MqCyVuDWCkbAmheZtyfFeCe0i6w7oQP6L78HPw8mglBu3fN7DUEZWruap_qoaKu98FdQGpg-OPlBEcnLKTlgkXKaeUt361lGNHwaTbWORpkeM1kk8-bM7eSBkYRaZeKX4u3FhNvnWboAqMmKFGL5ypIkDqJ3fTjqz9HWeVdRjADzFSCoH_KyU0jZQ"/>
+<div>
+<p class="font-label-md">Ananya Sharma</p>
+<p class="text-xs opacity-70">Startup Founder, Bangalore</p>
+</div>
+</div>
+</div>
+<div class="bg-white/5 backdrop-blur-md p-xl rounded-3xl border border-white/10 text-on-primary">
+<div class="flex text-on-tertiary-container mb-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md mb-xl italic opacity-90">"The vernacular support is the best part. I asked in Hindi and got perfectly accurate information about consumer rights. Essential app for everyone."</p>
+<div class="flex items-center gap-md">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A professional man in his 30s, wearing a crisp white shirt, smiling and holding a smartphone. The setting is a bright urban environment in India. The photo is clean, professional, and follows the brand's blue-white theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDClaS4RZLa7Cpxj6EOICXGgXQ_n743i-xunATzyrmUwNbwVnWxAgVJUqZETz1giTOXKKMIRg58AhG54pTH_q5whfqk50tDrVtphmaayUOmkRVvsueJL85tt4clHbU_GlMxr_KfSwg7WbIT5e745OsevashwUFNqoKpuWHG9N3AlqBZCs4Jdb07IXpL4xtOR2mgKrozXPJqD7jR-tVKVv7huAoQyUjD4tcLgUyWR2mmx8LjxWyfBKwXEw"/>
+<div>
+<p class="font-label-md">Vikram Singh</p>
+<p class="text-xs opacity-70">Store Manager, Delhi</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-3xl px-md" id="faq">
+<div class="max-w-3xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-primary text-center mb-24">Frequently Asked Questions</h2>
+<div class="space-y-md">
+<!-- FAQ item -->
+<div class="border-b border-outline-variant pb-md group">
+<button class="w-full flex justify-between items-center text-left py-md" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('span').innerHTML = this.nextElementSibling.classList.contains('hidden') ? 'add' : 'remove';">
+<span class="font-headline-md text-primary">Is BharatCare AI a replacement for a lawyer?</span>
+<span class="material-symbols-outlined text-secondary">add</span>
+</button>
+<div class="hidden px-xs pb-md text-on-surface-variant font-body-md">
+                        No, BharatCare AI provides legal guidance and information but does not constitute a lawyer-client relationship. We recommend consulting a certified professional for critical litigation matters.
+                    </div>
+</div>
+<div class="border-b border-outline-variant pb-md group">
+<button class="w-full flex justify-between items-center text-left py-md" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('span').innerHTML = this.nextElementSibling.classList.contains('hidden') ? 'add' : 'remove';">
+<span class="font-headline-md text-primary">Which Indian laws are covered?</span>
+<span class="material-symbols-outlined text-secondary">add</span>
+</button>
+<div class="hidden px-xs pb-md text-on-surface-variant font-body-md">
+                        We cover the Indian Penal Code (IPC), Bharatiya Nyaya Sanhita (BNS), Civil Procedure Code (CPC), Consumer Protection Act, Labor Laws, Family Laws, and specialized acts like RERA and IT Act.
+                    </div>
+</div>
+<div class="border-b border-outline-variant pb-md group">
+<button class="w-full flex justify-between items-center text-left py-md" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('span').innerHTML = this.nextElementSibling.classList.contains('hidden') ? 'add' : 'remove';">
+<span class="font-headline-md text-primary">Is my data secure?</span>
+<span class="material-symbols-outlined text-secondary">add</span>
+</button>
+<div class="hidden px-xs pb-md text-on-surface-variant font-body-md">
+                        Yes, we use enterprise-grade encryption. Your queries are anonymized and processed according to strict data privacy guidelines. We do not sell your personal data.
+                    </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant py-3xl px-md">
+<div class="max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-2xl mb-24">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-sm mb-lg">
+<img alt="BharatCare AI Logo" class="h-10 w-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJH2nOcyxSsVchjtGKaZx3Q44364A80kZAf_LLRxSaaTKETNu0JDU0ZIN2TbQeu8sGgYERCyo2cWUT_e6TAkvHVj-73qRfIHRdZ6A8ZfQQrLGEMRpIH-5HoRouPUJs1qCoi5rVB7V_VBmSwck_RIthiPvM1sdtUmRZ7q4VXgDP94DWOPhgz77nyrnlTeZEyFL3YBeJd1gxQ_S3ey3e2FMDnnYHBZHvHIk1vs4u9r1f2QOSTUnF1EjTiQ"/>
+<span class="font-headline-md text-headline-md font-bold text-primary">BharatCare AI</span>
+</div>
+<p class="font-body-md text-on-surface-variant mb-lg">Democratizing Citizen Help Platform for everyone in India. Simple, accessible, and accurate.</p>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">face_nod</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">language</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">share</span>
+</div>
+</div>
+<div>
+<h4 class="font-headline-md text-primary mb-lg">Product</h4>
+<ul class="space-y-sm font-label-md text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">AI Assistant</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Document Generator</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Search Engine</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-primary mb-lg">Company</h4>
+<ul class="space-y-sm font-label-md text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Mission</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-primary mb-lg">Legal</h4>
+<ul class="space-y-sm font-label-md text-on-surface-variant">
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Disclaimer</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-md border-t border-outline-variant/30 pt-xl">
+<p class="font-label-md text-on-surface-variant">Â© 2024 BharatCare AI. Built with â¤ï¸ for India.</p>
+<div class="flex gap-xl text-xs font-label-md text-on-surface-variant">
+<span>English (IN)</span>
+<span>Hindi (IN)</span>
+<span>Tamil (IN)</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- FAB for AI Assistance -->
+<button onclick="window.location.href='login.html'" class="fixed bottom-8 right-8 bg-primary text-on-primary w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-[60] group">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-12 transition-transform">smart_toy</span>
+<div class="absolute right-full mr-4 bg-white text-primary px-md py-sm rounded-lg shadow-xl font-label-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-outline-variant pointer-events-none">
+            Need legal help? Ask me!
+        </div>
+</button>
+<script>
+        // Smooth scroll for nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active state
+                document.querySelectorAll('nav a').forEach(a => {
+                    a.className = "text-on-surface-variant hover:bg-surface-container-low transition-colors px-xs";
+                });
+                this.className = "text-primary font-bold border-b-2 border-primary hover:bg-surface-container-low transition-colors px-xs";
+            });
+        });
+
+        // Simple animation on scroll visibility
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'ease-out', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>
+
+

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Complaint Generator Wizard | BharatCare AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#90a8ff",
+                    "secondary": "#0051d5",
+                    "surface-tint": "#4059aa",
+                    "on-surface": "#191c1e",
+                    "tertiary-container": "#6e2c00",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "surface-container-low": "#f2f4f6",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#b6c4ff",
+                    "on-secondary-container": "#fefcff",
+                    "primary": "#00236f",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#e6e8ea",
+                    "tertiary-fixed": "#ffdbcb",
+                    "outline-variant": "#c5c5d3",
+                    "on-primary-fixed": "#00164e",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-tertiary-fixed-variant": "#773205",
+                    "surface-container": "#eceef0",
+                    "surface-variant": "#e0e3e5",
+                    "on-secondary-fixed": "#00174b",
+                    "surface-dim": "#d8dadc",
+                    "on-background": "#191c1e",
+                    "primary-container": "#1e3a8a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#dce1ff",
+                    "on-primary-fixed-variant": "#264191",
+                    "on-surface-variant": "#444651",
+                    "on-tertiary-fixed": "#341100",
+                    "tertiary": "#4b1c00",
+                    "tertiary-fixed-dim": "#ffb691",
+                    "background": "#f7f9fb",
+                    "inverse-on-surface": "#eff1f3",
+                    "inverse-primary": "#b6c4ff",
+                    "secondary-container": "#316bf3",
+                    "outline": "#757682",
+                    "secondary-fixed": "#dbe1ff",
+                    "on-secondary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-container": "#f39461",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "on-secondary-fixed-variant": "#003ea8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "xl": "32px",
+                    "3xl": "64px",
+                    "container-max": "1280px",
+                    "2xl": "48px",
+                    "base": "4px",
+                    "gutter": "24px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e0e3e5; border-radius: 10px; }
+        .step-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .elevation-soft { box-shadow: 0px 1px 3px rgba(0,0,0,0.05), 0px 10px 15px rgba(0,0,0,0.03); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen flex">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col py-xl px-md gap-sm z-50">
+<div class="flex items-center gap-sm mb-xl px-md">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">BharatCare AI</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Citizen Help Platform</p>
+</div>
+</div>
+<nav class="flex-1 space-y-xs overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-all active:scale-95" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-all active:scale-95" href="ai-chat.html">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-md text-label-md">AI Assistant</span>
+</a>
+<!-- Active State: Complaint Generator -->
+<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-lg px-md py-sm transition-all" href="complaint.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Complaint Generator</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-all active:scale-95" href="categories.html">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-md text-label-md">Explore My Rights</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-all active:scale-95" href="authorities.html">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="font-label-md text-label-md">Government Help</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-all active:scale-95" href="history.html">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">My Past Questions</span>
+</a>
+</nav>
+<div class="mt-auto space-y-xs border-t border-outline-variant pt-md">
+<a class="flex items-center gap-md text-on-surface-variant hover:bg-surface-container-high px-md py-sm rounded-lg transition-all active:scale-95" href="settings.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-md text-error hover:bg-error-container px-md py-sm rounded-lg transition-all active:scale-95" href="login.html" onclick="localStorage.clear()">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col h-screen relative overflow-hidden">
+<!-- TopNavBar Anchor -->
+<header class="flex justify-between items-center w-full px-xl h-16 sticky top-0 z-40 bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-md flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full font-body-sm text-body-sm focus:ring-2 focus:ring-primary-container" placeholder="Search legal templates, laws, or cases..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">language</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="flex items-center gap-md pl-md border-l border-outline-variant">
+<img class="w-9 h-9 rounded-full object-cover" data-alt="A professional headshot of a person in a corporate environment, featuring soft natural lighting, a blurred office background, and a calm confident expression, following a premium clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvjER1PdnmsZYoXV5MKhinkOqSd3_Cc763H6MG0YPgwBcxxQCuWdf7Pat_E7tlT2xRf6JESSyGR-6oEGIK-Nuu1Kx93jdruzBAsVs2S7001U3O6bDXSmUQK1lt8H5KB3l9cIyUcTgKPSveHRPmxFVS57Ua7M87P90SrB4-W6dLKb5bGHQ1Tjdn0PGAFVlJfDv_FdXXAZjRztihvRbwJecZZkBS2ps-gnpql5h3Aw2dzNStwY8C6InZQQ"/>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Adv. <span class="user-name-display">Arjun Mehta</span></span>
+</div>
+</div>
+</header>
+<!-- Progress Indicator Section -->
+<section class="px-3xl py-xl bg-surface-bright">
+<div class="max-w-4xl mx-auto">
+<div class="relative flex justify-between items-center mb-8">
+<!-- Progress Line -->
+<div class="absolute top-5 left-0 w-full h-[2px] bg-outline-variant -z-10"></div>
+<div class="absolute top-5 left-0 w-1/3 h-[2px] bg-primary transition-all duration-500 -z-10" id="progress-line-active"></div>
+<!-- Steps -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold elevation-soft border-4 border-surface-bright">1</div>
+<span class="font-label-sm text-label-sm text-primary">Category</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold elevation-soft border-4 border-surface-bright">2</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Details</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold elevation-soft border-4 border-surface-bright">3</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">AI Draft</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold elevation-soft border-4 border-surface-bright">4</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Review</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Form Canvas -->
+<section class="flex-1 overflow-y-auto px-3xl pb-3xl custom-scrollbar">
+<div class="max-w-4xl mx-auto mt-lg">
+<!-- Step 1 Content: Category Selection -->
+<div class="step-transition" id="step-1">
+<div class="mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Select Complaint Category</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">To help our AI generate the most accurate legal document, please choose the relevant domain for your grievance.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+<!-- Consumer Card -->
+<div class="group relative bg-surface-container-lowest p-xl rounded-xl border border-outline-variant hover:border-primary cursor-pointer transition-all elevation-soft hover:-translate-y-1" onclick="selectCategory(this)">
+<div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-md group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Consumer</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Defective products, service deficiency, or unfair trade practices.</p>
+<div class="absolute top-4 right-4 opacity-0 group-[.selected]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Labour Card -->
+<div class="group relative bg-surface-container-lowest p-xl rounded-xl border border-outline-variant hover:border-primary cursor-pointer transition-all elevation-soft hover:-translate-y-1" onclick="selectCategory(this)">
+<div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center mb-md group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">engineering</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Labour/HR</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Unpaid wages, harassment, wrongful termination, or safety issues.</p>
+<div class="absolute top-4 right-4 opacity-0 group-[.selected]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Cyber Card -->
+<div class="group relative bg-surface-container-lowest p-xl rounded-xl border border-outline-variant hover:border-primary cursor-pointer transition-all elevation-soft hover:-translate-y-1" onclick="selectCategory(this)">
+<div class="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center mb-md group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">security</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Cyber Crime</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Online fraud, identity theft, data breach, or digital harassment.</p>
+<div class="absolute top-4 right-4 opacity-0 group-[.selected]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Property Card -->
+<div class="group relative bg-surface-container-lowest p-xl rounded-xl border border-outline-variant hover:border-primary cursor-pointer transition-all elevation-soft hover:-translate-y-1" onclick="selectCategory(this)">
+<div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mb-md group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">house</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Property</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tenant-landlord disputes, illegal possession, or registration issues.</p>
+<div class="absolute top-4 right-4 opacity-0 group-[.selected]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Civil Card -->
+<div class="group relative bg-surface-container-lowest p-xl rounded-xl border border-outline-variant hover:border-primary cursor-pointer transition-all elevation-soft hover:-translate-y-1" onclick="selectCategory(this)">
+<div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center mb-md group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">balance</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">General Civil</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Family matters, contract breaches, or small claims litigation.</p>
+<div class="absolute top-4 right-4 opacity-0 group-[.selected]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Other Card -->
+<div class="group relative bg-surface-container-lowest p-xl rounded-xl border border-outline-variant hover:border-primary cursor-pointer transition-all elevation-soft hover:-translate-y-1" onclick="selectCategory(this)">
+<div class="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center mb-md group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Other</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">If your category isn't listed, our AI will attempt to categorize it based on your description.</p>
+<div class="absolute top-4 right-4 opacity-0 group-[.selected]:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Navigation -->
+<div class="flex justify-between items-center pt-xl border-t border-outline-variant">
+<button class="flex items-center gap-sm px-xl py-md rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">arrow_back</span>
+                        Back
+                    </button>
+<button class="flex items-center gap-sm px-3xl py-md bg-primary text-white rounded-lg font-label-md text-label-md elevation-soft hover:opacity-90 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed" id="next-btn">
+                        Next
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Subtle Atmospheric Decoration -->
+<div class="absolute -bottom-24 -right-24 w-96 h-96 bg-primary-container/10 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="absolute -top-24 -left-24 w-64 h-64 bg-secondary/5 blur-[80px] rounded-full pointer-events-none"></div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        try {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user && user.name) {
+                const nameElements = document.querySelectorAll('.user-name-display');
+                nameElements.forEach(el => el.textContent = user.name);
+            }
+        } catch(e) {}
+    });
+</script>
+<script>
+    let selectedType = '';
+    
+    function selectCategory(element) {
+        document.querySelectorAll('[onclick="selectCategory(this)"]').forEach(card => {
+            card.classList.remove('selected', 'border-primary', 'ring-2', 'ring-primary/20');
+        });
+        element.classList.add('selected', 'border-primary', 'ring-2', 'ring-primary/20');
+        selectedType = element.querySelector('h3').innerText;
+        document.getElementById('next-btn').removeAttribute('disabled');
+    }
+
+    document.getElementById('next-btn').setAttribute('disabled', 'true');
+
+    document.getElementById('next-btn').addEventListener('click', async () => {
+        const step1 = document.getElementById('step-1');
+        
+        if (document.getElementById('next-btn').innerText.includes('Next')) {
+            // Move to Step 2
+            step1.innerHTML = `
+                <div class="mb-xl">
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Enter Complaint Details</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant">Please describe your issue regarding ${selectedType} in detail.</p>
+                </div>
+                <textarea id="complaint-details" class="w-full h-64 p-lg bg-surface-container-lowest border border-outline-variant rounded-xl font-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none" placeholder="Provide all relevant dates, names, amounts, and context..."></textarea>
+            `;
+            document.getElementById('next-btn').innerHTML = `Generate <span class="material-symbols-outlined">description</span>`;
+            
+            // Update progress visual
+            document.getElementById('progress-line-active').style.width = '66%';
+            document.querySelectorAll('.rounded-full')[1].classList.replace('bg-surface-container-high', 'bg-primary');
+            document.querySelectorAll('.rounded-full')[1].classList.replace('text-on-surface-variant', 'text-white');
+        } 
+        else if (document.getElementById('next-btn').innerText.includes('Generate')) {
+            const details = document.getElementById('complaint-details').value;
+            if(!details) return alert('Please enter details');
+            
+            document.getElementById('next-btn').innerHTML = `Generating... <span class="material-symbols-outlined animate-spin">progress_activity</span>`;
+            document.getElementById('next-btn').setAttribute('disabled', 'true');
+            
+            try {
+                const res = await fetch('http://localhost:5000/api/complaints/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    body: JSON.stringify({ type: selectedType, details })
+                });
+                const data = await res.json();
+                
+                if (res.ok) {
+                    step1.innerHTML = `
+                        <div class="mb-xl">
+                            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">AI Generated Draft</h2>
+                        </div>
+                        <div class="p-lg bg-white border border-outline-variant rounded-xl max-h-96 overflow-y-auto whitespace-pre-wrap font-body-md">${data.generatedDraft}</div>
+                    `;
+                    document.getElementById('next-btn').style.display = 'none';
+                    
+                    document.getElementById('progress-line-active').style.width = '100%';
+                    document.querySelectorAll('.rounded-full')[2].classList.replace('bg-surface-container-high', 'bg-primary');
+                    document.querySelectorAll('.rounded-full')[2].classList.replace('text-on-surface-variant', 'text-white');
+                    document.querySelectorAll('.rounded-full')[3].classList.replace('bg-surface-container-high', 'bg-primary');
+                    document.querySelectorAll('.rounded-full')[3].classList.replace('text-on-surface-variant', 'text-white');
+                } else {
+                    alert('Error: ' + data.message);
+                    document.getElementById('next-btn').innerHTML = `Generate <span class="material-symbols-outlined">description</span>`;
+                    document.getElementById('next-btn').removeAttribute('disabled');
+                }
+            } catch(e) {
+                alert('Network error');
+                document.getElementById('next-btn').innerHTML = `Generate <span class="material-symbols-outlined">description</span>`;
+                document.getElementById('next-btn').removeAttribute('disabled');
+            }
+        }
+    });
+</script>
+</body></html>
+
+
+
+
