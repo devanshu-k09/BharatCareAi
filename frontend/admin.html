@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Dashboard | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">admin_panel_settings</span>
+                </div>
+                <div>
+                    <h2>BharatCare Admin</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Management Console</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active">
+                    <span class="material-symbols-outlined">dashboard</span> Overview
+                </a>
+                <a href="#" class="nav-link">
+                    <span class="material-symbols-outlined">group</span> Users
+                </a>
+                <a href="#" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaints
+                </a>
+                <a href="#" class="nav-link">
+                    <span class="material-symbols-outlined">bar_chart</span> Analytics
+                </a>
+                <a href="#" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> System Settings
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">arrow_back</span> Back to App
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center flex-grow" style="max-width: 400px;">
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">notifications</span></button>
+                    <div class="d-flex align-center gap-sm">
+                        <span class="font-label-md">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content">
+                <div class="mb-xl animate-fade-in">
+                    <h2 class="text-primary mb-xs">Admin Overview</h2>
+                    <p class="text-muted m-0">Monitor system performance and user metrics.</p>
+                </div>
+
+                <div class="grid grid-cols-4 gap-md mb-xl animate-slide-up">
+                    <div class="card card-body">
+                        <h4 class="text-muted mb-xs">Total Users</h4>
+                        <p class="text-primary m-0" style="font-size: 2rem; font-weight: bold;">12,450</p>
+                        <span class="text-success" style="font-size: 0.875rem;">+15% this week</span>
+                    </div>
+                    <div class="card card-body">
+                        <h4 class="text-muted mb-xs">Queries Answered</h4>
+                        <p class="text-primary m-0" style="font-size: 2rem; font-weight: bold;">45,820</p>
+                        <span class="text-success" style="font-size: 0.875rem;">+22% this week</span>
+                    </div>
+                    <div class="card card-body">
+                        <h4 class="text-muted mb-xs">Complaints Drafted</h4>
+                        <p class="text-primary m-0" style="font-size: 2rem; font-weight: bold;">8,930</p>
+                        <span class="text-success" style="font-size: 0.875rem;">+5% this week</span>
+                    </div>
+                    <div class="card card-body">
+                        <h4 class="text-muted mb-xs">System Health</h4>
+                        <p class="text-success m-0" style="font-size: 2rem; font-weight: bold;">99.9%</p>
+                        <span class="text-muted" style="font-size: 0.875rem;">All services operational</span>
+                    </div>
+                </div>
+
+                <div class="card p-xl animate-slide-up stagger-1">
+                    <h4 class="mb-lg">Recent User Activity</h4>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border); text-align: left;">
+                                <th style="padding: var(--spacing-sm); color: var(--text-muted);">User</th>
+                                <th style="padding: var(--spacing-sm); color: var(--text-muted);">Action</th>
+                                <th style="padding: var(--spacing-sm); color: var(--text-muted);">Date</th>
+                                <th style="padding: var(--spacing-sm); color: var(--text-muted);">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: var(--spacing-sm);">Arjun Mehta</td>
+                                <td style="padding: var(--spacing-sm);">Generated Complaint (Consumer)</td>
+                                <td style="padding: var(--spacing-sm);">Today, 10:45 AM</td>
+                                <td style="padding: var(--spacing-sm);"><span class="badge badge-success">Completed</span></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: var(--spacing-sm);">Priya Sharma</td>
+                                <td style="padding: var(--spacing-sm);">AI Query (Property)</td>
+                                <td style="padding: var(--spacing-sm);">Today, 09:30 AM</td>
+                                <td style="padding: var(--spacing-sm);"><span class="badge badge-success">Completed</span></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: var(--spacing-sm);">Rahul Verma</td>
+                                <td style="padding: var(--spacing-sm);">Registered Account</td>
+                                <td style="padding: var(--spacing-sm);">Yesterday</td>
+                                <td style="padding: var(--spacing-sm);"><span class="badge badge-primary">New</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

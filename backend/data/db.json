@@ -1,0 +1,190 @@
+{
+  "users": [
+    {
+      "_id": "9fc273bc-e7e5-48bd-b47c-702afdf27dea",
+      "name": "Test User",
+      "email": "test@bharatcare.com",
+      "password": "$2a$10$R8FCcqb.taEZa0gzV6I.7eebOIaP4w2xGZXN4pf9cd/Rhrs9bBEjC",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-13T06:06:14.893Z"
+    },
+    {
+      "_id": "55d2a77c-eca5-4d9c-b5b3-68623aa1952a",
+      "name": "Amit Kumar",
+      "email": "amit@bharatcare.com",
+      "password": "$2a$10$Ia6iyvkeZLUu2PTJRreUPuoPvqJgxrycLWFi5BuxXuG5gZGeiwnZ.",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-13T06:12:25.741Z"
+    },
+    {
+      "_id": "e3ee3b28-c31d-468b-8e68-f7d32cb8646e",
+      "name": "Rohit kalaskar",
+      "email": "rohit@gmail.com",
+      "password": "$2a$10$y.svnENVe4NvWkn98BUC7ORAvmfpKvKJh4gN5XnVQxNGHvT5jYIKm",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-13T06:55:34.461Z"
+    },
+    {
+      "_id": "e31bfd31-f070-4d94-8221-52fd63b1c5fd",
+      "name": "pp",
+      "email": "rups@gmail.com",
+      "password": "$2a$10$9eJxen7m9wAD7NAo2lUYMecNUc/NKFKZhbf800CjmvJh8kA1q8PpO",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-13T13:57:24.646Z"
+    },
+    {
+      "_id": "75acf32e-e555-4424-9bb8-55d196557d1b",
+      "name": "System Test",
+      "email": "test_system@example.com",
+      "password": "$2a$10$pbHkgcV4yBnaXDjdyRqP7O1ktBl8UJr2iOBvjfaajlAaxN6HcaHve",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-13T14:20:19.723Z"
+    },
+    {
+      "_id": "972a59d0-281a-4352-9115-de7d56dc3d50",
+      "name": "System Test",
+      "email": "test_system_new@example.com",
+      "password": "$2a$10$n7xtdeI9H8PxxfXc4R3sL.32F2OpVkHUGLXPQJMEn3yuHmznwATTa",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-13T14:21:02.277Z"
+    },
+    {
+      "_id": "cdc96f10-53da-44e5-a36e-99413e3d4a4c",
+      "name": "Parag Kalaskar",
+      "email": "paragkalaskar18@gmail.com",
+      "password": "$2a$10$jdV7mrsnECh1.kJHV.zWE.v41iZbtqhYNJyAASeJOBVnGs7s9Vriy",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-13T14:21:52.942Z"
+    },
+    {
+      "_id": "05420efa-8b29-4bd1-9501-3fdf84307947",
+      "name": "test2",
+      "email": "test2@example.com",
+      "password": "$2a$10$BLuTwg8p2DhByTTV0z2sA.9uTzraUrvYUQps9Lui3N2NQBxlitjPy",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-14T16:17:08.338Z"
+    },
+    {
+      "_id": "e58c92e0-3648-413d-ba42-d1e3c06a8632",
+      "name": "Devanshu ",
+      "email": "devanshukukade694@gmail.com",
+      "password": "$2a$10$GVeWX4Tb.3pOSepAhZOZf.lQmWKjW/YPpuwFduCnHaWmn4kFB.unK",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-14T16:29:32.012Z"
+    },
+    {
+      "_id": "719d410a-6059-48be-9f60-c769de37d516",
+      "name": "Test User",
+      "email": "test_api@example.com",
+      "password": "$2a$10$ZDwEnY4C/33ERgV1Vk2TX.XWRWcB/p/nc1.L5XHHe.yhH.shwVwae",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-14T17:17:41.953Z"
+    },
+    {
+      "_id": "9fe82ee6-1e97-4f52-9b6c-abc9da8bb0ac",
+      "name": "Parag Kalaskar",
+      "email": "parag@gmail.com",
+      "password": "$2a$10$nv5vN2lR1UqljRTc5d9pM.ERnrKs1H6LmiuYovtzeGkPneDly3o1q",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-15T04:46:12.235Z"
+    }
+  ],
+  "chats": [
+    {
+      "_id": "4b2aa796-88c4-4829-9dd8-26c4916dee57",
+      "user": "55d2a77c-eca5-4d9c-b5b3-68623aa1952a",
+      "title": "Getting divorced or dissolving a civil partnership...",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Getting divorced or dissolving a civil partnership can be a difficult time. A family law solicitor will support you through the whole process, making it as simple and stress-free as possible by:   listening to you and discussing your options with you  telling you where you stand and what your rights are  helping you understand your ex-partner's rights  giving you trusted advice about your family, home and financial security If you’ve been living together but are not married, a family solicitor can help you understand your rights if you break up.  If a divorce is against your religion, a solicitor can tell you about other forms of separation."
+        },
+        {
+          "role": "ai",
+          "content": "Namaste! I am **BharatCare AI**, your legal assistant. Below is a structured guide tailored to Indian laws regarding divorce, separation, live-in relationships, and alternative legal options.\n\n---\n\n### 1. Legal Category\n* **Family Law / Matrimonial Law**\n\n---\n\n### 2. Problem Summary\nThe user is seeking clarity on navigating the process of divorce, understanding their rights during a separation, exploring alternatives to divorce due to religious or personal reasons (such as judicial separation), and understanding the legal standing of cohabitation (live-in relationships) under Indian law.\n\n---\n\n### 3. Your Rights (as an Indian Citizen)\n* **Right to Seek Judicial Separation:** If you do not wish to divorce due to religious, cultural, or personal reasons, you have the right to seek a legal separation where you live apart but remain legally married.\n* **Right to Alimony/Maintenance:** A spouse (primarily the wife) has the right to claim financial support (interim during the court case and permanent after the case) for herself and her children.\n* **Right to Streedhan:** A Hindu woman has absolute ownership over her *Streedhan* (gifts, gold, money, and assets given to her before, during, or after marriage). \n* **Rights of Live-In Partners:** While \"civil partnerships\" are not formally registered in India, the Supreme Court recognizes \"live-in relationships in the nature of marriage.\" Women in such relationships have the right to claim maintenance and protection from domestic violence.\n* **Right to Child Custody:** Parents have the right to claim custody/visitation. The Indian courts decide custody based on the \"paramount welfare of the child.\"\n\n---\n\n### 4. Applicable Indian Laws\nSince India has different personal laws based on religion, the applicable acts are:\n\n* **For Hindus, Buddhists, Jains, and Sikhs:**\n  * **Hindu Marriage Act, 1955 (HMA):** \n    * *Section 13B:* Divorce by Mutual Consent.\n    * *Section 13:* Contested Divorce (on grounds of cruelty, desertion, adultery, etc.).\n    * *Section 10:* **Judicial Separation** (an alternative to divorce where you stay legally married but live separately).\n    * *Section 24 & 25:* Interim and Permanent Maintenance.\n* **For Inter-faith/Secular Marriages:**\n  * **Special Marriage Act, 1954 (SMA):** Section 27 (Contested Divorce), Section 28 (Mutual Divorce), and Section 23 (Judicial Separation).\n* **For Christians:**\n  * **Indian Divorce Act, 1869.**\n* **For Muslims:**\n  * **Dissolution of Muslim Marriages Act, 1939** (for wives) and Muslim personal laws.\n* **For Protection & Live-In Relationships:**\n  * **Protection of Women from Domestic Violence Act, 2005 (DV Act):** Section 12 & 20 (Provides protection, right to residence, and maintenance to wives and live-in partners).\n  * **Section 125 of the Code of Criminal Procedure (now Section 144 of the Bharatiya Nagarik Suraksha Sanhita, 2023):** Right of wives and children to claim maintenance.\n\n---\n\n### 5. Step-by-Step Guidance\n\n* **Step 1: Decide Between Separation or Divorce**\n  * If divorce goes against your religious/personal beliefs, file for **Judicial Separation** (under Section 10 of HMA). This gives you legal status to live separately without breaking the marriage bond.\n* **Step 2: Legal Consultation & Mediation**\n  * Consult a family lawyer. Indian courts actively encourage pre-litigation mediation to settle disputes (maintenance, child custody, division of assets) amicably.\n* **Step 3: Draft and File the Petition**\n  * **Mutual Consent:** If both agree, draft a joint petition detailing the settlement terms.\n  * **Contested/Separation:** If one party disagrees, file a petition under the specific grounds (e.g., cruelty, desertion) in the local Family Court.\n* **Step 4: Court Proceedings & Cooling-off Period**\n  * For mutual divorce, there is a statutory cooling-off period of **6 months** (which can be waived by court discretion in urgent cases). \n* **Step 5: Final Decree**\n  * Upon satisfaction of the terms and recording of statements, the Family Court judge will pass a decree of Judicial Separation or Divorce.\n\n---\n\n### 6. Required Documents\nTo initiate the process, you generally require:\n1. **Marriage Certificate** or proof of marriage (wedding photos/invitation card).\n2. **Address Proof** of both husband and wife (Aadhaar Card, Voter ID, Passport).\n3. **Passport-size photographs** of both parties.\n4. **Income & Asset Disclosure:** Salary slips, Income Tax Returns (ITR) of the last 2–3 years (crucial for deciding maintenance).\n5. **Separation Agreement / Settlement Deed** (if opting for mutual consent, detailing child custody and alimony terms).\n6. **Evidence of Grounds** (such as medical reports, police complaints, or chat logs, if filing a contested divorce).\n\n---\n\n### 7. Recommended Government Authority\n* **The Family Court:** Located in your respective district headquarters (established under the Family Courts Act, 1984).\n* **District Legal Services Authority (DLSA):** Located in every district court complex. They provide **free legal aid** and counseling to women and marginalized citizens who cannot afford a private lawyer.\n\n---\n\n### 8. ⚠️ Disclaimer\n*This information is for educational and awareness purposes only under Indian Law. Matrimonial and personal laws in India vary heavily based on religion and personal circumstances. Please consult a qualified family law advocate or contact your local District Legal Services Authority (DLSA) for case-specific legal advice.*"
+        },
+        {
+          "role": "user",
+          "content": "Getting divorced or dissolving a civil partnership can be a difficult time. A family law solicitor will support you through the whole process, making it as simple and stress-free as possible by:   listening to you and discussing your options with you  telling you where you stand and what your rights are  helping you understand your ex-partner's rights  giving you trusted advice about your family, home and financial security If you’ve been living together but are not married, a family solicitor can help you understand your rights if you break up.  If a divorce is against your religion, a solicitor can tell you about other forms of separation."
+        },
+        {
+          "role": "ai",
+          "content": "Namaste! I am **BharatCare AI**, your legal assistant. \n\nNavigating the breakdown of a relationship—whether it is a marriage or a live-in relationship—is emotionally and legally complex in India. Below is a structured guide tailored to Indian laws to help you understand your rights, options, and the legal recourse available to you.\n\n---\n\n### 1. Legal Category\n* **Family Law / Matrimonial Law**\n\n---\n\n### 2. Problem Summary\nThe user is seeking information on how to legally navigate a separation, divorce, or the breakdown of a cohabiting (live-in) relationship in India. This includes understanding legal rights regarding financial security, custody, asset division, and alternatives to divorce (such as Judicial Separation) if divorce is against their religious beliefs.\n\n---\n\n### 3. Your Rights (as an Indian Citizen)\n* **Right to Maintenance (Alimony):** Wives (and in certain conditions under personal laws, husbands) have the right to claim financial support (interim and permanent) during and after the divorce proceedings. \n* **Right to Stridhan:** A Hindu woman has absolute ownership over her *Stridhan* (gifts, jewelry, cash, or assets given to her before, during, or after marriage by her family, in-laws, or relatives).\n* **Right to a Shared Household:** Under domestic violence laws, a wife or a woman in a live-in relationship has the right to reside in the matrimonial/shared household, even if she does not own the property.\n* **Rights in a Live-in Relationship:** The Supreme Court of India recognizes live-in relationships \"in the nature of marriage.\" Women in such relationships have the right to claim maintenance and protection from abuse under domestic violence laws.\n* **Child Custody and Support:** Both parents have the right to seek custody. However, the court decides custody based on the \"paramount welfare of the minor child.\"\n* **Right to Judicial Separation:** If you do not want a complete divorce (due to religious beliefs, social stigma, or hope for reconciliation), you have the right to legally separate, which suspends the obligation to cohabit but keeps the marriage legally intact.\n\n---\n\n### 4. Applicable Indian Laws\nIndian matrimonial laws are governed by personal religious laws and secular laws:\n\n* **For Hindus, Buddhists, Jains, and Sikhs:**\n  * **Hindu Marriage Act, 1955 (HMA):** \n    * *Section 13B:* Divorce by Mutual Consent.\n    * *Section 13(1):* Contested Divorce (grounds like cruelty, desertion, adultery, etc.).\n    * *Section 10:* Judicial Separation (alternative to divorce).\n    * *Sections 24 & 25:* Interim and Permanent Maintenance.\n* **For Inter-Faith / Civil Marriages:**\n  * **Special Marriage Act, 1954 (SMA):**\n    * *Section 28:* Divorce by Mutual Consent.\n    * *Section 27:* Contested Divorce.\n* **For Muslims:**\n  * **Dissolution of Muslim Marriages Act, 1939** (for women seeking divorce).\n  * **Muslim Women (Protection of Rights on Divorce) Act, 1986** (for maintenance).\n* **For Christians:**\n  * **Indian Divorce Act, 1869.**\n* **For Live-in Relationships & Domestic Protection (All Religions):**\n  * **Protection of Women from Domestic Violence Act, 2005 (DV Act):** \n    * *Section 12:* Allows women in marriages or \"relationships in the nature of marriage\" (live-in) to seek maintenance, protection orders, and housing rights.\n  * **Section 125 of the Code of Criminal Procedure (CrPC) / Section 144 of the Bharatiya Nagarik Suraksha Sanhita (BNSS), 2023:** Right to claim maintenance for wives, children, and dependent parents.\n\n---\n\n### 5. Step-by-Step Guidance\n\n#### Option A: Divorce by Mutual Consent (Fastest & Least Stressful)\n1. **Drafting the Petition:** Both parties, with their lawyers, draft a joint petition outlining agreements on alimony, child custody, and division of assets.\n2. **Filing in Family Court:** File the petition in the Family Court of the district where you married, where you currently live, or where you last lived together.\n3. **First Motion:** The court records statements of both parties. \n4. **Cooling-Off Period:** The court grants a mandatory 6-month cooling-off period (which can be waived via a Supreme Court plea if there is no chance of reconciliation).\n5. **Second Motion:** After 6 months (and before 18 months), if both parties still want a divorce, they appear for the second motion.\n6. **Final Decree:** The court passes the divorce decree.\n\n#### Option B: Contested Divorce (If one partner does not agree)\n1. **Filing the Petition:** One spouse files for divorce under specific legal grounds (cruelty, desertion, conversion, mental illness, etc.).\n2. **Summons:** The court sends notice to the other spouse.\n3. **Mediation:** The court will mandatorily send the couple for mediation to check if reconciliation is possible.\n4. **Trial:** If mediation fails, the court conducts a trial (evidence, cross-examination, and arguments).\n5. **Judgment:** The judge passes a final order on divorce, alimony, and custody.\n\n#### Option C: For Live-in Relationships (Upon Breakup)\n1. If financial support is required, file an application for maintenance under **Section 125 CrPC/Section 144 BNSS** or under the **DV Act, 2005**.\n2. Provide evidence of cohabitation (e.g., joint lease, joint bank accounts, neighbors' testimonies) to prove the relationship was \"in the nature of marriage.\"\n\n---\n\n### 6. Required Documents\n* **Proof of Identity & Address:** Aadhaar Card, Passport, or Voter ID.\n* **Marriage Proof:** Marriage Certificate, wedding photographs, and wedding invitation card (not required for live-in breakups).\n* **Financial Proofs (for maintenance/alimony claims):** Income Tax Returns (ITRs) of the last 3 years, salary slips, bank statements, and details of owned assets/properties.\n* **Evidence of Dispute:** Medical reports (in case of physical cruelty), text messages, emails, or police complaints (FIRs), if applicable.\n* **For Live-In Partnerships:** Joint rent agreements, shared utility bills, or bank accounts showing cohabitation.\n\n---\n\n### 7. Recommended Government Authority\n* **Family Courts:** The local Family Court of your district is the primary authority for filing divorce, judicial separation, custody, and maintenance cases.\n* **District Legal Services Authority (DLSA):** Located in every district court complex, the DLSA provides **free legal aid** and lawyers to women, children, and marginalized individuals who cannot afford legal representation.\n* **Protection Officers / One Stop Centres (Sakhi):** Accessible via local police/social welfare departments for immediate assistance and shelter in cases of domestic abuse.\n\n---\n\n**⚠️ Disclaimer:** This is for educational purposes only. Consult a qualified lawyer for case-specific advice."
+        }
+      ],
+      "createdAt": "2026-07-13T06:45:59.152Z",
+      "updatedAt": "2026-07-13T06:47:21.857Z"
+    },
+    {
+      "_id": "05237108-4ab9-4f8d-8dea-ea2ef42a5575",
+      "user": "e3ee3b28-c31d-468b-8e68-f7d32cb8646e",
+      "title": "hii",
+      "messages": [
+        {
+          "role": "user",
+          "content": "hii"
+        },
+        {
+          "role": "ai",
+          "content": "Namaste! I am **BharatCare AI**, your friendly assistant here to help you navigate government services and understand your rights in simple, everyday language.\n\nSince you just said \"hii,\" I am ready to help you with any issue you might be facing—whether it’s about a ration card, a lost document, a consumer complaint, or anything else.\n\n**How can I help you today?** \n\nPlease share a little bit about what is troubling you, and I will guide you step-by-step using the structure below:\n\n1. **Understanding Your Problem:** (Tell me what happened)\n2. **Your Rights (In Simple Words):** (What you are allowed to do)\n3. **What the Law Says (Briefly):** (The practical meaning of the law)\n4. **What You Should Do Now (Step-by-Step):** (Your action plan)\n5. **Documents to Keep Handy:** (The papers you need)\n6. **Where to Complain (Government Office/Portal):** (Where to go)\n7. **⚠️ Note:** (Disclaimer)\n\n***\n\n*I am listening! Please tell me what issue you would like to resolve.*"
+        },
+        {
+          "role": "user",
+          "content": "for bad quality seed where i complaint"
+        },
+        {
+          "role": "ai",
+          "content": "Namaste! I am **BharatCare AI**. I am very sorry to hear that you are facing issues with your seeds. As a farmer or gardener, your hard work depends on the quality of those seeds, and it is unfair if they do not perform as promised.\n\nPlease don't worry; there is a clear process to help you get justice. Here is your step-by-step guide:\n\n### 1. Understanding Your Problem\nWhen you buy seeds that are of poor quality (e.g., they don't sprout, are mixed with other varieties, or are infected), you have been sold a faulty product. You have the right to seek compensation for the loss of your crop and the cost of the seeds.\n\n### 2. Your Rights (In Simple Words)\n*   **Right to Quality:** You have the right to receive seeds that match the description and quality promised on the packet.\n*   **Right to Compensation:** If the seeds fail to sprout or are defective, you are entitled to get your money back or receive compensation for the loss caused to your farm/garden.\n\n### 3. What the Law Says (Briefly)\nUnder the **Seeds Act, 1966** and the **Consumer Protection Act, 2019**, seed sellers are responsible for the quality of their products. If they sell \"sub-standard\" or \"misbranded\" seeds, they are breaking the law. You are treated as a \"consumer,\" and the government has set up forums to ensure you aren't cheated.\n\n### 4. What You Should Do Now (Step-by-Step)\n1.  **Do not destroy the crop:** Keep the field or the pots as they are. You may need an official to inspect them.\n2.  **Inform the Seller:** Immediately notify the shopkeeper where you bought the seeds. If they don't help, proceed to the government authorities.\n3.  **Contact the Agriculture Office:** Reach out to your local District Agriculture Officer. They have the power to test the seeds and verify your claim.\n4.  **File a Complaint:** If the local office doesn't resolve it, you can approach the District Consumer Disputes Redressal Commission.\n\n### 5. Documents to Keep Handy\n*   **The Original Bill/Invoice:** This is the most important proof of purchase.\n*   **Seed Packet/Label:** Keep the original empty packets (or the remaining seeds). Do not throw these away.\n*   **Photos/Videos:** Take clear pictures of the affected field or pots.\n*   **Lot Number:** Note the batch or lot number printed on the packet.\n*   **A Written Complaint:** A simple letter explaining when you bought them, from whom, and what the problem is.\n\n### 6. Where to Complain (Government Office/Portal)\n*   **District Agriculture Office:** Visit your local Block or District Agriculture office (Krishi Vigyan Kendra). Ask for the \"Seed Inspector.\"\n*   **National Consumer Helpline:** You can call **1915** or **1800-11-4000**. They will guide you on how to file a complaint against the seed company.\n*   **Online Portal:** You can file a complaint on the **[National Consumer Helpline (NCH) Portal](https://consumerhelpline.gov.in/)**. \n\n### ⚠️ Note:\nThis information is for guidance and education, not a substitute for professional legal advice. If your financial loss is very large, I recommend visiting your local district legal services authority or a legal professional for specific assistance.\n\n**Don't lose hope!** Keeping your purchase receipts and reporting this early is the best way to ensure the authorities can take action. Let me know if you need help finding the contact details for your specific state!"
+        }
+      ],
+      "createdAt": "2026-07-15T03:39:46.435Z",
+      "updatedAt": "2026-07-15T03:40:59.382Z"
+    },
+    {
+      "_id": "53f58e64-d632-4710-a095-e7386fd51435",
+      "user": "e3ee3b28-c31d-468b-8e68-f7d32cb8646e",
+      "title": "property dispute rights",
+      "messages": [
+        {
+          "role": "user",
+          "content": "property dispute rights"
+        },
+        {
+          "role": "ai",
+          "content": "Namaste! I am BharatCare AI. I understand that property disputes can be very stressful, but please don’t worry. I am here to help you understand your rights in simple, everyday language so you can take the right steps.\n\n### 1. Understanding Your Problem\nA property dispute usually happens when there is a disagreement over who owns a piece of land or house, or if someone is trying to take over your property illegally. Whether it is an issue with family members (ancestral property) or a neighbor encroaching on your land, the most important thing is to stay calm and collect your facts.\n\n### 2. Your Rights (In Simple Words)\n*   **Right to Possession:** If the property is legally yours, you have the right to live in it or use it peacefully. Nobody can force you out without a court order.\n*   **Right to Inheritance:** If the property belonged to your parents or grandparents, you have a rightful share in it according to family law.\n*   **Protection against Illegal Force:** No one can physically grab your land or change its boundaries without your permission.\n*   **Right to Documentation:** You have the right to view and get copies of official records that prove the property belongs to you.\n\n### 3. What the Law Says (Briefly)\nIn India, the **Transfer of Property Act** and the **Indian Succession Act** are the main laws that protect your rights. \n*   Essentially, these laws say that property ownership must be backed by a registered document (like a Sale Deed or Will). \n*   If someone is trying to threaten you, the **Indian Penal Code** protects you against criminal intimidation or trespassing (entering your property without permission).\n\n### 4. What You Should Do Now (Step-by-Step)\n1.  **Talk it out:** If it is a family issue, try to settle it through a family elder or a mediator first. It saves time and money.\n2.  **Report the Incident:** If someone is trying to grab your land, immediately go to your local police station and file a **\"Non-Cognizable Report\" (NCR)** or an **FIR** if there is violence.\n3.  **Send a Legal Notice:** Before going to court, ask a lawyer to send a formal letter (Legal Notice) to the person causing the dispute. Often, this makes them realize you are serious and they may choose to talk instead.\n4.  **Civil Suit:** If nothing else works, you will need to file a \"Civil Suit\" in the local district court to ask the judge to declare you the owner or to stop the other person from interfering.\n\n### 5. Documents to Keep Handy\nGather these documents in a folder:\n*   **Sale Deed / Title Deed:** The main paper that proves you bought the property.\n*   **Mutation Certificate:** A document from the local municipal office showing the property is in your name.\n*   **Property Tax Receipts:** Proof that you have been paying taxes for the property.\n*   **Encumbrance Certificate:** A document that shows the property is free from any legal debt.\n*   **Identity Proof:** Aadhaar card or Voter ID.\n*   **Photos/Videos:** If someone has tried to damage your property, take clear photos as evidence.\n\n### 6. Where to Complain (Government Office/Portal)\n*   **Local Municipal Office/Tehsildar Office:** This is where you go to check land records, verify ownership, and report illegal construction.\n*   **Local Police Station:** For any immediate threat or illegal attempt to take over your land.\n*   **State Legal Services Authority (SLSA):** Every state has an SLSA that provides **free legal aid** to those who cannot afford expensive lawyers. You can find your state's portal here: [nalsa.gov.in](https://nalsa.gov.in/)\n\n### ⚠️ Note: \nI am an AI, and this information is for your general guidance and education. It is not a substitute for professional legal advice. Property laws can be complex depending on your state and specific family situation, so please consult a qualified lawyer or visit your nearest **District Legal Services Authority** office before taking major legal action. \n\n**Stay strong, you have rights! Is there anything else you would like me to clarify?**"
+        }
+      ],
+      "createdAt": "2026-07-15T13:25:00.732Z",
+      "updatedAt": "2026-07-15T13:25:00.732Z"
+    }
+  ],
+  "complaints": [
+    {
+      "_id": "1ea201d7-799e-4ebc-99c6-06201aa5ba0d",
+      "user": "e58c92e0-3648-413d-ba42-d1e3c06a8632",
+      "type": "Consumer",
+      "details": "I purchased a mobile phone from Flipkart on 5 July 2026 for ₹18,999. The phone stopped working within three days. I requested a replacement, but the seller rejected my request without giving a valid reason. I contacted customer support several times, but they have not resolved my issue. I want a replacement or a full refund.",
+      "generatedDraft": "[Your Full Name]\n[Your Address]\n[Your Phone Number]\n[Your Email Address]\n\n[Date]\n\nTo,\nThe Grievance Officer,\nFlipkart Internet Pvt. Ltd.,\nBuildings Alyssa, Begonia & Clover,\nEmbassy Tech Village, Outer Ring Road,\nDevarabeesanahalli Village,\nBengaluru – 560103, Karnataka.\n\n**Subject: Formal Complaint regarding defective product – Order ID: [Insert Order ID]**\n\nDear Sir/Madam,\n\nI am writing to formally express my extreme dissatisfaction with a recent purchase made through your platform. On 5 July 2026, I purchased a [Insert Mobile Phone Model Name] for a total amount of ₹18,999 (Order ID: [Insert Order ID]).\n\nThe device was delivered on [Insert Delivery Date]. To my dismay, the mobile phone ceased to function entirely within just three days of use. Despite the product being under the initial warranty and return window, my subsequent request for a replacement was summarily rejected by the seller without any valid technical explanation or justification.\n\nFollowing this, I contacted your customer support team on multiple occasions ([Mention Ticket/Case IDs if available]), seeking a resolution. Regrettably, despite numerous assurances, the issue remains unresolved, and I have been left with a non-functional device for which I have paid in full.\n\nAs a consumer, I am entitled to receive a product that is free from defects and fit for use. The supply of a faulty device, coupled with the refusal to provide a replacement or refund, constitutes a deficiency in service and an unfair trade practice.\n\nThrough this letter, I request you to urgently look into this matter and facilitate a replacement of the device with a functional unit or initiate a full refund of ₹18,999 to my original payment source within 7 (seven) business days of the receipt of this letter.\n\nPlease note that if this matter is not resolved within the stipulated timeframe, I will be constrained to escalate this complaint to the National Consumer Helpline (NCH) and proceed with formal legal action against Flipkart and the seller through the Consumer Disputes Redressal Commission for compensation towards the cost of the product, mental agony, and legal expenses.\n\nI have attached a copy of the purchase invoice and the communication logs with your support team for your reference. I look forward to your prompt response and a favorable resolution.\n\nYours sincerely,\n\n[Signature]\n\n[Your Full Name]",
+      "createdAt": "2026-07-14T17:28:02.709Z"
+    },
+    {
+      "_id": "4c690a6c-725b-47da-b162-d1ef5bd8aff5",
+      "user": "e3ee3b28-c31d-468b-8e68-f7d32cb8646e",
+      "type": "Cyber Crime",
+      "details": "20000 rs is missing in my account my account no. 36934311431\nifsc code is SBIN00123 i want to resister complaint to cyber cell \n",
+      "generatedDraft": "To,\nThe Inspector/Officer-in-Charge,\nCyber Crime Cell,\n[City Name],\n[State Name].\n\n[Date: DD/MM/YYYY]\n\n**Subject: Formal Complaint regarding unauthorized fraudulent transaction of ₹20,000/-**\n\nRespected Sir/Madam,\n\nI, [Your Full Name], residing at [Your Full Address], am writing to formally report an unauthorized fraudulent transaction from my bank account, resulting in a financial loss of ₹20,000/-.\n\nThe details of my bank account are as follows:\n*   **Bank Name:** State Bank of India\n*   **Account Number:** 36934311431\n*   **IFSC Code:** SBIN00123\n\nThe incident occurred on [Date of Incident] at approximately [Time of Incident]. I received a notification stating that an amount of ₹20,000/- was debited from my account without my authorization or consent. I have not shared my OTP, PIN, password, or any other banking credentials with any individual or entity. \n\nI have already informed my bank regarding this fraudulent transaction and have requested them to freeze the account/debit transaction. However, I am now submitting this formal complaint to your office for further investigation and to initiate the process of recovery of the stolen funds.\n\n**Details of the transaction are as follows:**\n*   **Transaction ID/Reference Number:** [Enter Transaction ID from Bank Statement]\n*   **Amount Debited:** ₹20,000/-\n*   **Mode of Transaction:** [e.g., UPI, Net Banking, Credit/Debit Card]\n\nI have attached a copy of my bank statement and the transaction notification/SMS for your reference. \n\nI request you to kindly register an FIR/NCR and take necessary action against the perpetrator(s) involved in this cyber fraud. Please guide me regarding any further documentation required from my end to assist in your investigation.\n\nThanking you.\n\nYours sincerely,\n\n(Signature)\n\n[Your Full Name]\n[Your Phone Number]\n[Your Email Address]\n\n**Enclosures:**\n1. Copy of Bank Statement showing the transaction.\n2. Copy of Transaction SMS/Notification.\n3. Copy of Aadhar Card/Identity Proof.",
+      "createdAt": "2026-07-15T03:25:20.175Z"
+    }
+  ]
+}

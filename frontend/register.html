@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Register | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .login-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-lg);
+        }
+        .login-card {
+            width: 100%;
+            max-width: 440px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="ambient-blob primary"></div>
+        <div class="ambient-blob secondary"></div>
+    </div>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            <!-- Header Section -->
+            <div class="text-center mb-xl animate-slide-up">
+                <span class="material-symbols-outlined text-primary mb-md" style="font-size: 3rem;">person_add</span>
+                <h1 class="text-primary m-0" style="font-size: 2rem;">Create Account</h1>
+                <p class="mt-xs">Join the BharatCare AI platform.</p>
+            </div>
+
+            <!-- Register Card -->
+            <div class="card card-body animate-slide-up stagger-1">
+                <form action="#" method="POST" id="registerForm">
+                    
+                    <!-- Name Field -->
+                    <div class="form-group">
+                        <label class="form-label" for="name">Full Name</label>
+                        <div class="input-group">
+                            <div class="input-icon">
+                                <span class="material-symbols-outlined icon-indicator">person</span>
+                            </div>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" required/>
+                        </div>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="form-group mt-md">
+                        <label class="form-label" for="email">Email Address</label>
+                        <div class="input-group">
+                            <div class="input-icon">
+                                <span class="material-symbols-outlined icon-indicator">mail</span>
+                            </div>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@company.com" required/>
+                        </div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="form-group mt-md">
+                        <label class="form-label" for="password">Password</label>
+                        <div class="input-group">
+                            <div class="input-icon">
+                                <span class="material-symbols-outlined icon-indicator">lock</span>
+                            </div>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required/>
+                            <button type="button" class="btn-icon" id="togglePassword" style="margin-right: var(--spacing-sm);">
+                                <span class="material-symbols-outlined" id="eyeIcon">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Register Button -->
+                    <button type="submit" class="btn btn-primary btn-block mt-lg" id="submitBtn">
+                        Create Account
+                        <span class="material-symbols-outlined" style="font-size: 1.25rem;">person_add</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Footer Links -->
+            <p class="text-center mt-xl mb-xl">
+                Already have an account? 
+                <a href="login.html" style="font-weight: 600;">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Dynamic Toast Container -->
+    <div id="toast-container"></div>
+
+    <script>
+        // Password Toggle Logic
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#password');
+        const eyeIcon = document.querySelector('#eyeIcon');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            eyeIcon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+        });
+
+        function showToast(message, type) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'check_circle' : 'error';
+            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Form Submission and Backend Integration
+        const registerForm = document.getElementById('registerForm');
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalContent = btn.innerHTML;
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span> Creating...';
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Success';
+                    btn.style.background = 'var(--success)';
+                    
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data));
+                    
+                    showToast('Registration successful!', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 500);
+                } else {
+                    btn.innerHTML = '<span class="material-symbols-outlined">error</span> Failed';
+                    btn.style.background = 'var(--error)';
+                    showToast(data.message || 'Registration Failed', 'error');
+                    
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.innerHTML = originalContent;
+                        btn.style.background = '';
+                    }, 2000);
+                }
+            } catch (error) {
+                console.error("Registration error:", error);
+                btn.innerHTML = '<span class="material-symbols-outlined">error</span> Error';
+                btn.style.background = 'var(--error)';
+                showToast('Network Error', 'error');
+                
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalContent;
+                    btn.style.background = '';
+                }, 2000);
+            }
+        });
+
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes spin { 100% { transform: rotate(360deg); } }`;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

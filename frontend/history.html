@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>My Past Questions | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">gavel</span>
+                </div>
+                <div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href='ai-chat.html'">
+                <span class="material-symbols-outlined">add</span> New Question
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link active">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="profile.html" class="nav-link">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center flex-grow" style="max-width: 400px;">
+                    <div class="input-group" style="width: 100%;">
+                        <div class="input-icon"><span class="material-symbols-outlined">search</span></div>
+                        <input type="text" class="form-control" placeholder="Search previous conversations...">
+                    </div>
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
+                    </button>
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content">
+                <div class="d-flex justify-between align-center mb-xl">
+                    <div>
+                        <h2 class="text-primary mb-xs">My Past Questions</h2>
+                        <p class="text-muted m-0">Review and manage the questions you've asked the AI assistant.</p>
+                    </div>
+                    <div class="d-flex gap-sm">
+                        <button class="btn btn-secondary">
+                            <span class="material-symbols-outlined">filter_list</span> Filter
+                        </button>
+                        <button class="btn btn-secondary">
+                            <span class="material-symbols-outlined">sort</span> Sort
+                        </button>
+                    </div>
+                </div>
+
+                <div id="history-container" class="flex-column gap-md">
+                    <p class="text-muted p-lg text-center">Loading past questions...</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="history.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">history</span><span style="font-size: 0.625rem;">Cases</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
+
+    <style>
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .page-content { padding-bottom: 80px; }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) window.location.href = 'login.html';
+        });
+
+        async function loadHistory() {
+            const token = localStorage.getItem('token');
+            try {
+                const resChats = await fetch('http://localhost:5000/api/ai/chats', { headers: { 'Authorization': 'Bearer ' + token } });
+                const resComplaints = await fetch('http://localhost:5000/api/complaints', { headers: { 'Authorization': 'Bearer ' + token } });
+                
+                let chats = [], complaints = [];
+                if(resChats.ok) chats = await resChats.json();
+                if(resComplaints.ok) complaints = await resComplaints.json();
+                
+                const allHistory = [...chats.map(c => ({...c, type: 'chat'})), ...complaints.map(c => ({...c, type: 'complaint'}))]
+                    .sort((a,b) => new Date(b.createdAt || b.updatedAt) - new Date(a.createdAt || a.updatedAt));
+
+                const container = document.getElementById('history-container');
+                if (allHistory.length === 0) {
+                    container.innerHTML = '<div class="card card-body text-center text-muted">No past questions found.</div>';
+                    return;
+                }
+                
+                container.innerHTML = allHistory.map(item => `
+                    <div class="card p-md d-flex justify-between align-center" style="transition: transform 0.2s, box-shadow 0.2s;">
+                        <div class="d-flex align-center gap-lg">
+                            <div class="d-flex align-center justify-center rounded-lg" style="width: 48px; height: 48px; background: ${item.type === 'chat' ? 'rgba(30,58,138,0.1)' : 'var(--surface-high)'}; color: ${item.type === 'chat' ? 'var(--primary)' : 'var(--text-muted)'};">
+                                <span class="material-symbols-outlined">${item.type === 'chat' ? 'forum' : 'description'}</span>
+                            </div>
+                            <div>
+                                <h4 class="m-0 text-primary" style="font-size: 1.125rem;">${item.title || item.type + ' Draft'}</h4>
+                                <div class="d-flex align-center gap-xs text-muted mt-xs" style="font-size: 0.875rem;">
+                                    <span class="material-symbols-outlined" style="font-size: 1rem;">calendar_today</span>
+                                    ${new Date(item.createdAt || item.updatedAt).toLocaleDateString()}
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="window.location.href='${item.type === 'chat' ? 'ai-chat.html?id=' + item._id : 'complaint.html?id=' + item._id}'">
+                            View
+                        </button>
+                    </div>
+                `).join('');
+            } catch(err) { 
+                console.error(err);
+                document.getElementById('history-container').innerHTML = '<div class="card card-body text-center text-error">Failed to load history.</div>';
+            }
+        }
+        loadHistory();
+    </script>
+</body>
+</html>

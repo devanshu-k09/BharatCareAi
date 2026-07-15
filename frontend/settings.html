@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Settings | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--surface-high); transition: .4s; border-radius: 24px;
+        }
+        .toggle-slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+            background-color: white; transition: .4s; border-radius: 50%; box-shadow: var(--shadow-sm);
+        }
+        input:checked + .toggle-slider { background-color: var(--primary); }
+        input:checked + .toggle-slider:before { transform: translateX(20px); }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">gavel</span>
+                </div>
+                <div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href='ai-chat.html'">
+                <span class="material-symbols-outlined">add</span> New Question
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="profile.html" class="nav-link">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link active">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center flex-grow" style="max-width: 400px;">
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content" style="max-width: 800px;">
+                <div class="mb-xl animate-fade-in">
+                    <h2 class="text-primary mb-xs">Settings</h2>
+                    <p class="text-muted m-0">Customize your experience on BharatCare AI.</p>
+                </div>
+
+                <div class="card p-xl mb-md animate-slide-up">
+                    <h4 class="mb-md">Notifications</h4>
+                    <div class="d-flex justify-between align-center py-md" style="border-bottom: 1px solid var(--border);">
+                        <div>
+                            <strong style="display: block; margin-bottom: 4px;">Email Notifications</strong>
+                            <span class="text-muted" style="font-size: 0.875rem;">Receive updates about your complaints and saved queries.</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="d-flex justify-between align-center py-md">
+                        <div>
+                            <strong style="display: block; margin-bottom: 4px;">Important Alerts</strong>
+                            <span class="text-muted" style="font-size: 0.875rem;">Get notified about changes in laws relevant to your searches.</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card p-xl animate-slide-up stagger-1">
+                    <h4 class="mb-md">Security & Privacy</h4>
+                    <div class="d-flex justify-between align-center py-md" style="border-bottom: 1px solid var(--border);">
+                        <div>
+                            <strong style="display: block; margin-bottom: 4px;">Change Password</strong>
+                            <span class="text-muted" style="font-size: 0.875rem;">Update your account password for enhanced security.</span>
+                        </div>
+                        <button class="btn btn-secondary">Update</button>
+                    </div>
+                    <div class="d-flex justify-between align-center py-md" style="border-bottom: 1px solid var(--border);">
+                        <div>
+                            <strong style="display: block; margin-bottom: 4px;">Save Search History</strong>
+                            <span class="text-muted" style="font-size: 0.875rem;">Keep a log of your AI queries for future reference.</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="d-flex justify-between align-center py-md">
+                        <div>
+                            <strong class="text-error" style="display: block; margin-bottom: 4px;">Delete Account</strong>
+                            <span class="text-muted" style="font-size: 0.875rem;">Permanently remove your account and all associated data.</span>
+                        </div>
+                        <button class="btn btn-secondary" style="border-color: var(--error); color: var(--error);">Delete</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="categories.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">gavel</span><span style="font-size: 0.625rem;">Explore</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
+
+    <style>
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .page-content { padding-bottom: 80px; }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Explore Categories | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .category-card { transition: all var(--transition-base); }
+        .category-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--primary-light); }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">gavel</span>
+                </div>
+                <div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href='ai-chat.html'">
+                <span class="material-symbols-outlined">add</span> New Question
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link active">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="profile.html" class="nav-link">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center flex-grow" style="max-width: 400px;">
+                    <div class="input-group" style="width: 100%;">
+                        <div class="input-icon"><span class="material-symbols-outlined">search</span></div>
+                        <input type="text" class="form-control" placeholder="Search laws and rights...">
+                    </div>
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
+                    </button>
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content" style="max-width: 1000px;">
+                <div class="d-flex justify-between align-center mb-xl animate-fade-in">
+                    <div>
+                        <h2 class="text-primary mb-xs">Explore Legal Categories</h2>
+                        <p class="text-muted m-0">Understand your rights across different domains of Indian law.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-lg animate-slide-up">
+                    <a href="ai-chat.html?prompt=Tell me about Consumer Rights" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(0, 81, 213, 0.1);">
+                            <span class="material-symbols-outlined text-secondary">shopping_cart</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Consumer Protection</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">Defective products, service deficiency, or unfair trade practices.</p>
+                        </div>
+                    </a>
+
+                    <a href="ai-chat.html?prompt=Tell me about Labour Rights" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(243, 148, 97, 0.1);">
+                            <span class="material-symbols-outlined text-accent">engineering</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Labour & Employment</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">Unpaid wages, harassment, wrongful termination.</p>
+                        </div>
+                    </a>
+
+                    <a href="ai-chat.html?prompt=Tell me about Cyber Law" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(30, 58, 138, 0.1);">
+                            <span class="material-symbols-outlined text-primary">security</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Cyber Crime</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">Online fraud, identity theft, data breach.</p>
+                        </div>
+                    </a>
+
+                    <a href="ai-chat.html?prompt=Tell me about Property Law" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(22, 163, 74, 0.1);">
+                            <span class="material-symbols-outlined text-success">house</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Property Disputes</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">Tenant-landlord disputes, illegal possession.</p>
+                        </div>
+                    </a>
+
+                    <a href="ai-chat.html?prompt=Tell me about Family Law" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(186, 26, 26, 0.1);">
+                            <span class="material-symbols-outlined text-error">family_restroom</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Family Law</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">Divorce, maintenance, domestic violence.</p>
+                        </div>
+                    </a>
+
+                    <a href="ai-chat.html?prompt=Tell me about Criminal Law" class="card card-body category-card flex-column justify-between hover-lift" style="height: 200px; text-decoration: none;">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: var(--surface-high);">
+                            <span class="material-symbols-outlined text-muted">local_police</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Criminal Offenses</h4>
+                            <p class="text-muted m-0" style="font-size: 0.875rem;">IPC & BNS specifics, FIR processes.</p>
+                        </div>
+                    </a>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="categories.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">gavel</span><span style="font-size: 0.625rem;">Explore</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
+
+    <style>
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .page-content { padding-bottom: 80px; }
+            .grid-cols-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</body>
+</html>
