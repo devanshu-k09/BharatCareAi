@@ -31,6 +31,13 @@ Structure your response simply:
 6. **Where to Complain (Government Office/Portal)**
 7. **⚠️ Note:** This information is for guidance and education, not a substitute for professional legal advice.`;
 
+    console.log(`[API LOG] Dispatching Gemini API Request...`);
+    console.log(`[API LOG] Gemini Model: gemini-3.1-flash-lite`);
+    console.log(`[API LOG] Gemini System Prompt snippet: ${systemPrompt.substring(0, 100)}...`);
+    if (req.file) {
+      console.log(`[API LOG] Gemini Multimodal attachment size: ${req.file.size} bytes, type: ${req.file.mimetype}`);
+    }
+
     const result = await ai.models.generateContent({
         model: 'gemini-3.1-flash-lite',
         contents: [
@@ -50,15 +57,20 @@ Structure your response simply:
     });
     
     const aiResponse = result.text;
+    console.log(`[API LOG] Gemini API Response received successfully.`);
+    console.log(`[API LOG] Gemini Response snippet: ${aiResponse.substring(0, 100)}...`);
 
     const data = db.data;
+    console.log(`[API LOG] Executing LowDB Query: Finding active chat by ID "${chatId}" for user "${req.user._id}"`);
     let chat = chatId ? data.chats.find(c => c._id === chatId && c.user === req.user._id) : null;
 
     if (chat) {
+      console.log(`[API LOG] Appending messages to existing chat ID "${chat._id}"`);
       chat.messages.push({ role: 'user', content: prompt });
       chat.messages.push({ role: 'ai',   content: aiResponse });
       chat.updatedAt = new Date().toISOString();
     } else {
+      console.log(`[API LOG] Creating a new chat thread for user "${req.user._id}"`);
       chat = {
         _id: uuidv4(),
         user: req.user._id,
@@ -73,11 +85,14 @@ Structure your response simply:
       data.chats.push(chat);
     }
 
+    console.log(`[API LOG] Writing updates to db.json...`);
     db.write(data);
+    
+    console.log(`[API LOG] Sending Final Response: HTTP 200 OK`);
     res.json({ aiResponse, chatId: chat._id });
   } catch (error) {
-    console.error('AI error:', error);
-    res.status(500).json({ message: 'AI Error: ' + error.message });
+    console.error('[API LOG] AI Request processing failed. Error:', error);
+    res.status(500).json({ message: 'Failed to process AI Request: ' + error.message });
   }
 };
 

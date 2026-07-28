@@ -6,11 +6,46 @@
     <title>AI Assistant | BharatCare AI</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* ChatGPT-like Layout Overrides */
+        .app-layout {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            width: 100vw;
+        }
+        
+        .main-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh !important;
+            overflow: hidden !important;
+            position: relative;
+            background-color: var(--bg-color);
+        }
+
+        .top-header {
+            flex-shrink: 0;
+            height: var(--header-height);
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-lg);
+            z-index: 30;
+        }
+
         .chat-viewport {
             flex-grow: 1;
             overflow-y: auto;
-            padding-bottom: 120px;
+            position: relative;
+            padding-bottom: 160px; /* Space for bottom input bar */
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
         }
+
         .chat-viewport::-webkit-scrollbar {
             width: 6px;
         }
@@ -18,50 +53,101 @@
             background: var(--border);
             border-radius: 10px;
         }
+
+        #chat-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: var(--spacing-lg) var(--spacing-md);
+            gap: var(--spacing-lg);
+        }
+
+        #welcome-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            margin: auto;
+            padding: var(--spacing-xl) 0;
+            width: 100%;
+        }
+
         .chat-input-wrapper {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             padding: var(--spacing-md);
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
+            background: var(--surface);
             border-top: 1px solid var(--border);
             z-index: 20;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
         }
+
         .message-row {
             display: flex;
             gap: var(--spacing-md);
-            margin-bottom: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+            width: 100%;
+            align-items: flex-start;
             animation: slideUp 0.3s ease-out forwards;
         }
+
         .message-row.reverse {
             flex-direction: row-reverse;
         }
+
         .message-bubble {
             padding: var(--spacing-md) var(--spacing-lg);
             border-radius: var(--radius-xl);
-            max-width: 85%;
+            max-width: 75%;
             font-size: 1rem;
-            line-height: 1.5;
+            line-height: 1.6;
             box-shadow: var(--shadow-sm);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
+
         .message-row:not(.reverse) .message-bubble {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-top-left-radius: 0;
+            border-top-left-radius: 4px;
+            color: var(--text-primary);
         }
+
         .message-row.reverse .message-bubble {
             background: var(--primary);
             color: var(--text-inverse);
-            border-top-right-radius: 0;
-            text-align: right;
+            border-top-right-radius: 4px;
+            text-align: left;
         }
+
+        /* Override links inside AI answers to match theme */
+        .message-bubble a {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+        
+        .message-row.reverse .message-bubble a {
+            color: var(--accent);
+        }
+
         .typing-indicator {
             display: inline-flex;
             gap: 4px;
             align-items: center;
+            padding: 12px 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            width: fit-content;
         }
+
         .typing-dot {
             width: 8px;
             height: 8px;
@@ -71,25 +157,37 @@
         }
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
         @keyframes typing {
             0%, 60%, 100% { transform: translateY(0); }
             30% { transform: translateY(-4px); }
         }
-        .floating-tools {
-            position: absolute;
-            bottom: 120px;
-            right: var(--spacing-lg);
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-sm);
-            z-index: 10;
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .floating-tools .btn-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .chat-viewport {
+                padding-bottom: 220px; /* More padding on mobile for menu space */
+            }
+            .message-bubble {
+                max-width: 85%;
+            }
+            #welcome-section {
+                padding: var(--spacing-md) 0;
+            }
+            #welcome-section h2 {
+                font-size: 1.5rem;
+            }
+            #welcome-section p {
+                font-size: 0.95rem;
+            }
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -158,12 +256,25 @@
                 </div>
 
                 <div class="d-flex align-center gap-md">
-                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
-                    <button class="btn-icon relative">
-                        <span class="material-symbols-outlined">notifications</span>
-                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
+                    <!-- Integrated Utility Actions -->
+                    <button class="btn-icon text-muted" title="Clear Chat" id="clearChatBtn" style="padding: 6px;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">delete_sweep</span>
                     </button>
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                    <button class="btn-icon text-primary" title="Copy Response" id="copyResponseBtn" style="padding: 6px;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">content_copy</span>
+                    </button>
+                    <button class="btn-icon text-secondary" title="Download PDF" id="downloadPdfBtn" style="padding: 6px;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">picture_as_pdf</span>
+                    </button>
+
+                    <span style="width: 1px; height: 18px; background: var(--border); margin: 0 4px;"></span>
+
+                    <button class="btn-icon" style="padding: 6px;"><span class="material-symbols-outlined" style="font-size: 20px;">language</span></button>
+                    <button class="btn-icon relative" style="padding: 6px;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 6px; height: 6px; background: var(--error); border-radius: 50%;"></span>
+                    </button>
+                    <img id="header-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
                 </div>
             </header>
 
@@ -197,18 +308,7 @@
                 </div>
             </div>
 
-            <!-- Floating Utilities -->
-            <div class="floating-tools">
-                <button class="btn-icon text-muted" title="Clear Chat" id="clearChatBtn">
-                    <span class="material-symbols-outlined">delete_sweep</span>
-                </button>
-                <button class="btn-icon text-primary" title="Copy Response" id="copyResponseBtn">
-                    <span class="material-symbols-outlined">content_copy</span>
-                </button>
-                <button class="btn-icon text-secondary" title="Download PDF" id="downloadPdfBtn">
-                    <span class="material-symbols-outlined">picture_as_pdf</span>
-                </button>
-            </div>
+
 
             <!-- Chat Input Area -->
             <div class="chat-input-wrapper">
@@ -291,7 +391,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
-            if (!token) window.location.href = '/login';
+            if (!token) window.location.href = 'login.html';
         });
 
         // Chat Logic
@@ -436,6 +536,63 @@
             handleSend();
         };
 
+        function parseMarkdown(text) {
+            if (!text) return '';
+            
+            let html = text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+                
+            const codeBlockRegex = /```(\w*)\n([\s\S]*?)```/g;
+            html = html.replace(codeBlockRegex, (match, lang, code) => {
+                return `<pre style="background: var(--surface-low); border: 1px solid var(--border); padding: var(--spacing-md); border-radius: var(--radius-md); overflow-x: auto; margin: var(--spacing-md) 0; font-family: monospace; font-size: 0.9rem; text-align: left;"><code class="language-${lang}">${code.trim()}</code></pre>`;
+            });
+            
+            html = html.replace(/`([^`]+)`/g, '<code style="background: var(--surface-low); padding: 2px 6px; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.9rem;">$1</code>');
+            html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+            html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+            html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
+            
+            html = html.replace(/^### (.*?)$/gm, '<h5 style="margin-top: var(--spacing-md); margin-bottom: var(--spacing-xs); color: var(--primary); font-size: 1.1rem; font-weight: 700; text-align: left;">$1</h5>');
+            html = html.replace(/^## (.*?)$/gm, '<h4 style="margin-top: var(--spacing-md); margin-bottom: var(--spacing-xs); color: var(--primary); font-size: 1.25rem; font-weight: 700; text-align: left;">$1</h4>');
+            html = html.replace(/^# (.*?)$/gm, '<h3 style="margin-top: var(--spacing-md); margin-bottom: var(--spacing-xs); color: var(--primary); font-size: 1.5rem; font-weight: 700; text-align: left;">$1</h3>');
+            
+            html = html.replace(/^(?:\*|-)\s+(.*?)$/gm, '<li style="margin-left: var(--spacing-lg); margin-bottom: var(--spacing-xs); list-style-type: disc; text-align: left;">$1</li>');
+            html = html.replace(/^\d+\.\s+(.*?)$/gm, '<li style="margin-left: var(--spacing-lg); margin-bottom: var(--spacing-xs); list-style-type: decimal; text-align: left;">$1</li>');
+            
+            let lines = html.split('\n');
+            let processedLines = [];
+            let inList = false;
+            
+            for (let line of lines) {
+                let trimmed = line.trim();
+                if (trimmed.startsWith('<li')) {
+                    if (!inList) {
+                        processedLines.push('<ul style="margin: var(--spacing-sm) 0; padding-left: 0;">');
+                        inList = true;
+                    }
+                    processedLines.push(line);
+                } else {
+                    if (inList) {
+                        processedLines.push('</ul>');
+                        inList = false;
+                    }
+                    if (trimmed && !trimmed.startsWith('<h') && !trimmed.startsWith('<pre') && !trimmed.startsWith('</pre') && !trimmed.startsWith('<code') && !trimmed.startsWith('</code')) {
+                        processedLines.push(`<p style="margin-bottom: var(--spacing-sm); text-align: left; line-height: 1.6;">${line}</p>`);
+                    } else {
+                        processedLines.push(line);
+                    }
+                }
+            }
+            if (inList) {
+                processedLines.push('</ul>');
+            }
+            
+            return processedLines.join('\n');
+        }
+
         const addMessage = (text, isAi = false, isLoading = false, imageUrl = null) => {
             if (welcomeSection) {
                 welcomeSection.style.display = 'none';
@@ -457,22 +614,21 @@
                         <div class="typing-dot"></div>
                     </div>`;
             } else {
-                let formattedText = text
-                    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-                    .replace(/\n/g, '<br>')
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                
+                let formattedText = parseMarkdown(text);
                 let imageHtml = '';
                 if (imageUrl) {
                     imageHtml = `<div class="mb-sm"><img src="${imageUrl}" style="max-width: 250px; max-height: 200px; border-radius: var(--radius-md); object-fit: cover;"></div>`;
                 }
-                
                 contentHtml = `<div class="message-bubble">${imageHtml}${formattedText}</div>`;
             }
 
             wrapper.innerHTML = iconHtml + contentHtml;
             chatContainer.appendChild(wrapper);
-            viewport.scrollTop = viewport.scrollHeight;
+            
+            setTimeout(() => {
+                viewport.scrollTop = viewport.scrollHeight;
+            }, 50);
+            
             return wrapper;
         };
 
@@ -482,10 +638,13 @@
         };
 
         const renderHistory = () => {
+            chatContainer.innerHTML = '';
             if (chatHistory.length > 0) {
                 chatHistory.forEach(msg => {
                     addMessage(msg.content, msg.role === 'ai');
                 });
+            } else {
+                if (welcomeSection) welcomeSection.style.display = 'flex';
             }
         };
 
@@ -561,12 +720,52 @@
             }
         });
 
-        // Init
-        renderHistory();
+        // Load chat from URL or render local storage history
+        const loadChatFromUrl = async (chatId) => {
+            const loadingMsg = addMessage('Loading chat history...', true, true);
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/ai/chats`, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                });
+                loadingMsg.remove();
+                if (res.ok) {
+                    const chats = await res.json();
+                    const chat = chats.find(c => c._id === chatId);
+                    if (chat) {
+                        currentChatId = chat._id;
+                        chatHistory = chat.messages || [];
+                        localStorage.setItem('currentChatId', currentChatId);
+                        localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+                        renderHistory();
+                    } else {
+                        showToast('Chat history not found.', 'error');
+                        renderHistory();
+                    }
+                } else {
+                    showToast('Failed to load chat history from server.', 'error');
+                    renderHistory();
+                }
+            } catch (err) {
+                console.error('Failed to load chat history:', err);
+                loadingMsg.remove();
+                showToast('Network error loading chat history.', 'error');
+                renderHistory();
+            }
+        };
 
-        // Check for injected prompts from categories search parameters
+        // Init
         const urlParams = new URLSearchParams(window.location.search);
+        const chatIdFromUrl = urlParams.get('id');
         const queryPrompt = urlParams.get('prompt');
+
+        if (chatIdFromUrl) {
+            loadChatFromUrl(chatIdFromUrl);
+        } else {
+            renderHistory();
+        }
+
         if (queryPrompt) {
             chatInput.value = queryPrompt;
             chatInput.style.height = 'auto';
