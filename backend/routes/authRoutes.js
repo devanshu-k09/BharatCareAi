@@ -1,5 +1,16 @@
 import express from 'express';
-import { registerUser, loginUser, getUserProfile, uploadAvatar } from '../controllers/authController.js';
+import { 
+  registerUser, 
+  loginUser, 
+  getUserProfile, 
+  updateUserProfile, 
+  uploadAvatar, 
+  deleteAvatar,
+  getUserSettings,
+  updateUserSettings,
+  changePassword,
+  deleteUserAccount
+} from '../controllers/authController.js';
 import { protect } from '../middleware/authMiddleware.js';
 import multer from 'multer';
 import path from 'path';
@@ -9,13 +20,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Ensure the profile pictures upload folder exists inside data/uploads/avatars
+// Ensure profile pictures upload directory exists
 const avatarUploadDir = path.join(__dirname, '../data/uploads/avatars');
 if (!fs.existsSync(avatarUploadDir)) {
   fs.mkdirSync(avatarUploadDir, { recursive: true });
 }
 
-// Multer Disk Storage config
+// Multer Storage Configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, avatarUploadDir);
@@ -36,16 +47,25 @@ const upload = multer({
     if (mimetype && extname) {
       return cb(null, true);
     }
-    cb(new Error('Only JPEG, PNG, and WEBP image uploads are supported.'));
+    cb(new Error('Only JPG, JPEG, PNG, and WEBP image uploads are supported.'));
   },
-  limits: { fileSize: 5 * 1024 * 1024 } // Max 5MB file size
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB limit
 });
 
 const router = express.Router();
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
+
 router.get('/profile', protect, getUserProfile);
+router.put('/profile', protect, updateUserProfile);
 router.post('/profile/avatar', protect, upload.single('avatar'), uploadAvatar);
+router.delete('/profile/avatar', protect, deleteAvatar);
+
+router.get('/settings', protect, getUserSettings);
+router.put('/settings', protect, updateUserSettings);
+
+router.put('/change-password', protect, changePassword);
+router.delete('/account', protect, deleteUserAccount);
 
 export default router;

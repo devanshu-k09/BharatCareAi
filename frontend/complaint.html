@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Complaint Generator | BharatCare AI</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         .step-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .category-card { cursor: pointer; transition: all var(--transition-base); border: 2px solid transparent; }
@@ -171,12 +172,17 @@
 
                 <!-- Footer Navigation -->
                 <div class="d-flex justify-between align-center mt-auto" style="padding-top: var(--spacing-lg); border-top: 1px solid var(--border);">
-                    <button class="btn btn-secondary">
+                    <button class="btn btn-secondary" id="back-btn">
                         <span class="material-symbols-outlined">arrow_back</span> Back
                     </button>
-                    <button class="btn btn-primary" id="next-btn" disabled style="opacity: 0.5; cursor: not-allowed;">
-                        Next <span class="material-symbols-outlined">arrow_forward</span>
-                    </button>
+                    <div class="d-flex align-center gap-sm">
+                        <button class="btn btn-danger" id="export-pdf-btn" disabled style="opacity: 0.5; cursor: not-allowed;">
+                            <span class="material-symbols-outlined" style="font-size: 1.25rem;">picture_as_pdf</span> Export to PDF
+                        </button>
+                        <button class="btn btn-primary" id="next-btn" disabled style="opacity: 0.5; cursor: not-allowed;">
+                            Next <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
                 </div>
             </main>
         </div>
@@ -190,6 +196,9 @@
         <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
     </div>
 
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
     <style>
         @media (max-width: 768px) {
             #mobileNav { display: flex !important; position: fixed; }
@@ -200,6 +209,15 @@
 
     <script>
         const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
+        let currentStep = 1;
+        let selectedType = '';
+        let currentDetails = '';
+        let currentDraftText = '';
+
+        const nextBtn = document.getElementById('next-btn');
+        const backBtn = document.getElementById('back-btn');
+        const exportPdfBtn = document.getElementById('export-pdf-btn');
 
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
@@ -213,9 +231,24 @@
             } catch(e) {}
         });
 
-        let selectedType = '';
-        const nextBtn = document.getElementById('next-btn');
-        
+        function showToast(message, type = 'info') {
+            let container = document.getElementById('toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'toast-container';
+                document.body.appendChild(container);
+            }
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'check_circle' : 'error';
+            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
         function selectCategory(element) {
             document.querySelectorAll('.category-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
@@ -225,27 +258,140 @@
             nextBtn.style.cursor = 'pointer';
         }
 
-        nextBtn.addEventListener('click', async () => {
+        // Back button navigation
+        backBtn.addEventListener('click', () => {
+            if (currentStep === 3) {
+                renderStep2();
+            } else if (currentStep === 2) {
+                renderStep1();
+            } else {
+                window.location.href = 'dashboard.html';
+            }
+        });
+
+        function renderStep1() {
+            currentStep = 1;
             const step1 = document.getElementById('step-1');
-            
-            if (nextBtn.innerText.includes('Next')) {
-                // Move to Step 2
-                step1.innerHTML = `
-                    <div class="mb-xl text-center">
-                        <h2 class="text-primary mb-xs">Enter Complaint Details</h2>
-                        <p class="text-muted">Please describe your issue regarding ${selectedType} in detail.</p>
+            step1.innerHTML = `
+                <div class="mb-xl text-center">
+                    <h2 class="text-primary mb-xs">Select Complaint Category</h2>
+                    <p class="text-muted">To help our AI generate the most accurate legal document, please choose the relevant domain for your grievance.</p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-md mb-xl">
+                    <div class="card card-body category-card relative ${selectedType === 'Consumer' ? 'selected' : ''}" onclick="selectCategory(this)">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(0, 81, 213, 0.1);">
+                            <span class="material-symbols-outlined text-secondary">shopping_cart</span>
+                        </div>
+                        <h4 class="mb-xs text-primary">Consumer</h4>
+                        <p class="text-muted m-0" style="font-size: 0.75rem;">Defective products, service deficiency, or unfair trade practices.</p>
+                        <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
                     </div>
-                    <textarea id="complaint-details" class="form-control card card-body" style="height: 250px; resize: none;" placeholder="Provide all relevant dates, names, amounts, and context..."></textarea>
-                `;
-                nextBtn.innerHTML = `Generate <span class="material-symbols-outlined">description</span>`;
-                
-                // Update progress visual
-                document.getElementById('progress-line-active').style.width = '66%';
-                document.querySelectorAll('.progress-circle')[1].classList.add('active');
+                    <div class="card card-body category-card relative ${selectedType === 'Labour/HR' ? 'selected' : ''}" onclick="selectCategory(this)">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(243, 148, 97, 0.1);">
+                            <span class="material-symbols-outlined text-accent">engineering</span>
+                        </div>
+                        <h4 class="mb-xs text-primary">Labour/HR</h4>
+                        <p class="text-muted m-0" style="font-size: 0.75rem;">Unpaid wages, harassment, wrongful termination.</p>
+                        <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                    </div>
+                    <div class="card card-body category-card relative ${selectedType === 'Cyber Crime' ? 'selected' : ''}" onclick="selectCategory(this)">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(30, 58, 138, 0.1);">
+                            <span class="material-symbols-outlined text-primary">security</span>
+                        </div>
+                        <h4 class="mb-xs text-primary">Cyber Crime</h4>
+                        <p class="text-muted m-0" style="font-size: 0.75rem;">Online fraud, identity theft, data breach.</p>
+                        <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                    </div>
+                    <div class="card card-body category-card relative ${selectedType === 'Property' ? 'selected' : ''}" onclick="selectCategory(this)">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(22, 163, 74, 0.1);">
+                            <span class="material-symbols-outlined text-success">house</span>
+                        </div>
+                        <h4 class="mb-xs text-primary">Property</h4>
+                        <p class="text-muted m-0" style="font-size: 0.75rem;">Tenant-landlord disputes, illegal possession.</p>
+                        <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                    </div>
+                    <div class="card card-body category-card relative ${selectedType === 'General Civil' ? 'selected' : ''}" onclick="selectCategory(this)">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(186, 26, 26, 0.1);">
+                            <span class="material-symbols-outlined text-error">balance</span>
+                        </div>
+                        <h4 class="mb-xs text-primary">General Civil</h4>
+                        <p class="text-muted m-0" style="font-size: 0.75rem;">Family matters, contract breaches.</p>
+                        <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                    </div>
+                    <div class="card card-body category-card relative ${selectedType === 'Other' ? 'selected' : ''}" onclick="selectCategory(this)">
+                        <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: var(--surface-high);">
+                            <span class="material-symbols-outlined text-muted">more_horiz</span>
+                        </div>
+                        <h4 class="mb-xs text-primary">Other</h4>
+                        <p class="text-muted m-0" style="font-size: 0.75rem;">AI will attempt to categorize it.</p>
+                        <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                    </div>
+                </div>
+            `;
+            
+            nextBtn.style.display = 'inline-flex';
+            nextBtn.innerHTML = `Next <span class="material-symbols-outlined">arrow_forward</span>`;
+            if (selectedType) {
+                nextBtn.removeAttribute('disabled');
+                nextBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+            } else {
+                nextBtn.setAttribute('disabled', 'true');
+                nextBtn.style.opacity = '0.5';
+                nextBtn.style.cursor = 'not-allowed';
+            }
+
+            exportPdfBtn.setAttribute('disabled', 'true');
+            exportPdfBtn.style.opacity = '0.5';
+            exportPdfBtn.style.cursor = 'not-allowed';
+
+            document.getElementById('progress-line-active').style.width = '33%';
+            const circles = document.querySelectorAll('.progress-circle');
+            circles[0].classList.add('active');
+            circles[1].classList.remove('active');
+            circles[2].classList.remove('active');
+            circles[3].classList.remove('active');
+        }
+
+        function renderStep2() {
+            currentStep = 2;
+            const step1 = document.getElementById('step-1');
+            step1.innerHTML = `
+                <div class="mb-xl text-center">
+                    <h2 class="text-primary mb-xs">Enter Complaint Details</h2>
+                    <p class="text-muted">Please describe your issue regarding ${selectedType} in detail.</p>
+                </div>
+                <textarea id="complaint-details" class="form-control card card-body" style="height: 250px; resize: none;" placeholder="Provide all relevant dates, names, amounts, and context...">${currentDetails}</textarea>
+            `;
+            
+            nextBtn.style.display = 'inline-flex';
+            nextBtn.innerHTML = `Generate <span class="material-symbols-outlined">description</span>`;
+            nextBtn.removeAttribute('disabled');
+            nextBtn.style.opacity = '1';
+            nextBtn.style.cursor = 'pointer';
+
+            exportPdfBtn.setAttribute('disabled', 'true');
+            exportPdfBtn.style.opacity = '0.5';
+            exportPdfBtn.style.cursor = 'not-allowed';
+
+            document.getElementById('progress-line-active').style.width = '66%';
+            const circles = document.querySelectorAll('.progress-circle');
+            circles[0].classList.add('active');
+            circles[1].classList.add('active');
+            circles[2].classList.remove('active');
+            circles[3].classList.remove('active');
+        }
+
+        nextBtn.addEventListener('click', async () => {
+            if (currentStep === 1) {
+                if (!selectedType) return;
+                renderStep2();
             } 
-            else if (nextBtn.innerText.includes('Generate')) {
-                const details = document.getElementById('complaint-details').value;
-                if(!details) return alert('Please enter details');
+            else if (currentStep === 2) {
+                const detailsInput = document.getElementById('complaint-details');
+                currentDetails = detailsInput ? detailsInput.value.trim() : '';
+                if (!currentDetails) return showToast('Please enter complaint details', 'error');
                 
                 nextBtn.innerHTML = `Generating... <span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span>`;
                 nextBtn.setAttribute('disabled', 'true');
@@ -258,36 +404,139 @@
                             'Content-Type': 'application/json',
                             'Authorization': 'Bearer ' + localStorage.getItem('token')
                         },
-                        body: JSON.stringify({ type: selectedType, details })
+                        body: JSON.stringify({ type: selectedType, details: currentDetails })
                     });
                     const data = await res.json();
                     
                     if (res.ok) {
+                        currentStep = 3;
+                        currentDraftText = data.generatedDraft;
+
+                        const step1 = document.getElementById('step-1');
                         step1.innerHTML = `
                             <div class="mb-xl text-center">
                                 <h2 class="text-primary mb-xs">AI Generated Draft</h2>
+                                <p class="text-muted">Review your legally formatted complaint letter below. You can export it to PDF or go back to modify details.</p>
                             </div>
-                            <div class="card card-body" style="max-height: 400px; overflow-y: auto; white-space: pre-wrap; font-family: monospace; background: var(--surface-low);">${data.generatedDraft}</div>
+                            <div class="card card-body" id="draft-container" style="max-height: 400px; overflow-y: auto; white-space: pre-wrap; font-family: monospace; background: var(--surface-low); line-height: 1.6; font-size: 0.95rem;">${data.generatedDraft}</div>
                         `;
+
                         nextBtn.style.display = 'none';
                         
+                        exportPdfBtn.removeAttribute('disabled');
+                        exportPdfBtn.style.opacity = '1';
+                        exportPdfBtn.style.cursor = 'pointer';
+
                         document.getElementById('progress-line-active').style.width = '100%';
-                        document.querySelectorAll('.progress-circle')[2].classList.add('active');
-                        document.querySelectorAll('.progress-circle')[3].classList.add('active');
+                        const circles = document.querySelectorAll('.progress-circle');
+                        circles[0].classList.add('active');
+                        circles[1].classList.add('active');
+                        circles[2].classList.add('active');
+                        circles[3].classList.add('active');
+                        showToast('Complaint draft generated successfully!', 'success');
                     } else {
-                        alert('Error: ' + data.message);
+                        showToast('Error: ' + (data.message || 'Generation failed'), 'error');
                         nextBtn.innerHTML = `Generate <span class="material-symbols-outlined">description</span>`;
                         nextBtn.removeAttribute('disabled');
                         nextBtn.style.opacity = '1';
                     }
                 } catch(e) {
-                    alert('Network error');
+                    showToast('Network error while generating complaint', 'error');
                     nextBtn.innerHTML = `Generate <span class="material-symbols-outlined">description</span>`;
                     nextBtn.removeAttribute('disabled');
                     nextBtn.style.opacity = '1';
                 }
             }
         });
+
+        // Export PDF click handler
+        exportPdfBtn.addEventListener('click', () => {
+            if (!currentDraftText || exportPdfBtn.hasAttribute('disabled') || exportPdfBtn.disabled) {
+                showToast('Generate a complaint draft before exporting.', 'error');
+                return;
+            }
+            exportToPdf();
+        });
+
+        function exportToPdf() {
+            const draftContainer = document.getElementById('draft-container');
+            const draftText = draftContainer ? (draftContainer.innerText || draftContainer.textContent) : currentDraftText;
+
+            if (!draftText || !draftText.trim()) {
+                showToast('Generate a complaint draft before exporting.', 'error');
+                return;
+            }
+
+            const today = new Date().toISOString().split('T')[0];
+            const formattedDate = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Format category for file name
+            const rawCategory = selectedType || 'General';
+            const sanitizedCategory = rawCategory
+                .trim()
+                .replace(/[^a-zA-Z0-9]+/g, '_')
+                .replace(/^_+|_+$/g, '');
+            
+            const fileName = `Complaint_${sanitizedCategory}_${today}.pdf`;
+
+            // Prepare formatted content preserving headings, spacing, breaks, bullets
+            let bodyHtml = draftText
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>');
+
+            const element = document.createElement('div');
+            element.style.padding = '20mm';
+            element.style.fontFamily = "'Times New Roman', Times, Georgia, serif";
+            element.style.color = '#111827';
+            element.style.lineHeight = '1.6';
+            element.style.backgroundColor = '#ffffff';
+            element.style.boxSizing = 'border-box';
+
+            element.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #00236f; padding-bottom: 14px; margin-bottom: 24px;">
+                    <div>
+                        <h1 style="margin: 0; font-size: 22pt; color: #00236f; font-family: 'Times New Roman', serif; font-weight: bold; letter-spacing: -0.5px;">Complaint Letter</h1>
+                        <p style="margin: 4px 0 0 0; font-size: 10pt; color: #4b5563; text-transform: uppercase; letter-spacing: 0.5px; font-family: Arial, sans-serif;">Category: ${rawCategory}</p>
+                    </div>
+                    <div style="text-align: right; font-size: 10pt; color: #374151; font-family: Arial, sans-serif;">
+                        <strong>Date Generated:</strong> ${formattedDate}
+                    </div>
+                </div>
+
+                <div style="font-size: 12pt; color: #1f2937; line-height: 1.6; text-align: justify; margin-bottom: 40px;">
+                    ${bodyHtml}
+                </div>
+
+                <div style="border-top: 1px solid #e5e7eb; padding-top: 14px; margin-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 9pt; color: #6b7280; font-family: Arial, sans-serif;">
+                    <div>Generated by <strong>BharatCare AI</strong></div>
+                    <div>Official Legal Helper Document</div>
+                </div>
+            `;
+
+            const opt = {
+                margin:       0,
+                filename:     fileName,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, logging: false },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().from(element).set(opt).save()
+                .then(() => {
+                    showToast('PDF downloaded successfully!', 'success');
+                })
+                .catch(err => {
+                    console.error('PDF generation error:', err);
+                    showToast('Failed to export PDF.', 'error');
+                });
+        }
 
         const style = document.createElement('style');
         style.innerHTML = `@keyframes spin { 100% { transform: rotate(360deg); } }`;

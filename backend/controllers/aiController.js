@@ -61,35 +61,46 @@ Structure your response simply:
     console.log(`[API LOG] Gemini Response snippet: ${aiResponse.substring(0, 100)}...`);
 
     const data = db.data;
-    console.log(`[API LOG] Executing LowDB Query: Finding active chat by ID "${chatId}" for user "${req.user._id}"`);
-    let chat = chatId ? data.chats.find(c => c._id === chatId && c.user === req.user._id) : null;
+    const userSettings = req.user.settings || {};
+    const shouldSaveHistory = userSettings.saveSearchHistory !== false;
 
-    if (chat) {
-      console.log(`[API LOG] Appending messages to existing chat ID "${chat._id}"`);
-      chat.messages.push({ role: 'user', content: prompt });
-      chat.messages.push({ role: 'ai',   content: aiResponse });
-      chat.updatedAt = new Date().toISOString();
+    let responseChatId = chatId || uuidv4();
+
+    if (shouldSaveHistory) {
+      console.log(`[API LOG] Executing LowDB Query: Finding active chat by ID "${chatId}" for user "${req.user._id}"`);
+      let chat = chatId ? data.chats.find(c => c._id === chatId && c.user === req.user._id) : null;
+
+      if (chat) {
+        console.log(`[API LOG] Appending messages to existing chat ID "${chat._id}"`);
+        chat.messages.push({ role: 'user', content: prompt });
+        chat.messages.push({ role: 'ai',   content: aiResponse });
+        chat.updatedAt = new Date().toISOString();
+        responseChatId = chat._id;
+      } else {
+        console.log(`[API LOG] Creating a new chat thread for user "${req.user._id}"`);
+        chat = {
+          _id: uuidv4(),
+          user: req.user._id,
+          title: prompt.substring(0, 50) + (prompt.length > 50 ? '...' : ''),
+          messages: [
+            { role: 'user', content: prompt },
+            { role: 'ai',   content: aiResponse }
+          ],
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+        data.chats.push(chat);
+        responseChatId = chat._id;
+      }
+
+      console.log(`[API LOG] Writing updates to db.json...`);
+      db.write(data);
     } else {
-      console.log(`[API LOG] Creating a new chat thread for user "${req.user._id}"`);
-      chat = {
-        _id: uuidv4(),
-        user: req.user._id,
-        title: prompt.substring(0, 50) + (prompt.length > 50 ? '...' : ''),
-        messages: [
-          { role: 'user', content: prompt },
-          { role: 'ai',   content: aiResponse }
-        ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      };
-      data.chats.push(chat);
+      console.log(`[API LOG] Search history logging is disabled by user settings.`);
     }
-
-    console.log(`[API LOG] Writing updates to db.json...`);
-    db.write(data);
     
     console.log(`[API LOG] Sending Final Response: HTTP 200 OK`);
-    res.json({ aiResponse, chatId: chat._id });
+    res.json({ aiResponse, chatId: responseChatId });
   } catch (error) {
     console.error('[API LOG] AI Request processing failed. Error:', error);
     res.status(500).json({ message: 'Failed to process AI Request: ' + error.message });

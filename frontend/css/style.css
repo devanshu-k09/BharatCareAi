@@ -385,6 +385,26 @@ p {
   border-color: var(--primary-light);
 }
 
+.btn-danger {
+  background-color: #dc2626;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.3);
+}
+
+.btn-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 .btn-create-account {
   background-color: #ffffff;
   color: #1E40AF;

@@ -23,32 +23,38 @@ function logout() {
 
 window.logout = logout;
 
-// Automatically sync user profile avatars across all page views
+// Function to update all user profile elements across the document
+function syncUserProfileData(user) {
+  if (!user) return;
+  const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+  const avatarUrl = user.avatar 
+    ? (user.avatar.startsWith('http') || user.avatar.startsWith('data:') ? user.avatar : `${API_BASE_URL}${user.avatar}`) 
+    : `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || 'User')}&background=0D8ABC&color=fff`;
+
+  document.querySelectorAll('img').forEach(img => {
+    if (img.id === 'profileAvatar' || (img.src && (img.src.includes('ui-avatars.com/api/') || img.src.includes('/uploads/avatars/')))) {
+      img.src = avatarUrl;
+    }
+  });
+
+  if (user.name) {
+    document.querySelectorAll('.user-name-display').forEach(el => el.textContent = user.name);
+  }
+  if (user.email) {
+    document.querySelectorAll('.user-email-display').forEach(el => el.textContent = user.email);
+  }
+}
+
+window.syncUserProfileData = syncUserProfileData;
+
 document.addEventListener('DOMContentLoaded', () => {
   const userStr = localStorage.getItem('user');
   if (userStr) {
     try {
       const user = JSON.parse(userStr);
-      if (user) {
-        const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
-        const avatarUrl = user.avatar 
-          ? (user.avatar.startsWith('http') || user.avatar.startsWith('data:') ? user.avatar : `${API_BASE_URL}${user.avatar}`) 
-          : null;
-        
-        document.querySelectorAll('img').forEach(img => {
-          if (img.src && (img.src.includes('ui-avatars.com/api/') || img.src.includes('/uploads/avatars/'))) {
-            if (avatarUrl) {
-              img.src = avatarUrl;
-            } else if (user.name) {
-              // Custom default avatar using user name
-              const nameQuery = encodeURIComponent(user.name);
-              img.src = `https://ui-avatars.com/api/?name=${nameQuery}&background=0D8ABC&color=fff`;
-            }
-          }
-        });
-      }
+      syncUserProfileData(user);
     } catch (e) {
-      console.error('Error synchronizing user avatar:', e);
+      console.error('Error synchronizing user profile:', e);
     }
   }
 });

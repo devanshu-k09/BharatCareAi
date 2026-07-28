@@ -91,7 +91,7 @@
                     <button class="btn-icon relative">
                         <span class="material-symbols-outlined">notifications</span>
                     </button>
-                    <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                    <img id="headerAvatar" src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
                 </div>
             </header>
 
@@ -102,6 +102,7 @@
                     <p class="text-muted m-0">Customize your experience on BharatCare AI.</p>
                 </div>
 
+                <!-- Notifications Card -->
                 <div class="card p-xl mb-md animate-slide-up">
                     <h4 class="mb-md">Notifications</h4>
                     <div class="d-flex justify-between align-center py-md" style="border-bottom: 1px solid var(--border);">
@@ -110,7 +111,7 @@
                             <span class="text-muted" style="font-size: 0.875rem;">Receive updates about your complaints and saved queries.</span>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" id="emailNotificationsToggle" checked>
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
@@ -120,12 +121,13 @@
                             <span class="text-muted" style="font-size: 0.875rem;">Get notified about changes in laws relevant to your searches.</span>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" id="importantAlertsToggle" checked>
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
                 </div>
 
+                <!-- Security & Privacy Card -->
                 <div class="card p-xl animate-slide-up stagger-1">
                     <h4 class="mb-md">Security & Privacy</h4>
                     <div class="d-flex justify-between align-center py-md" style="border-bottom: 1px solid var(--border);">
@@ -133,7 +135,7 @@
                             <strong style="display: block; margin-bottom: 4px;">Change Password</strong>
                             <span class="text-muted" style="font-size: 0.875rem;">Update your account password for enhanced security.</span>
                         </div>
-                        <button class="btn btn-secondary">Update</button>
+                        <button class="btn btn-secondary" id="openChangePasswordBtn">Update</button>
                     </div>
                     <div class="d-flex justify-between align-center py-md" style="border-bottom: 1px solid var(--border);">
                         <div>
@@ -141,7 +143,7 @@
                             <span class="text-muted" style="font-size: 0.875rem;">Keep a log of your AI queries for future reference.</span>
                         </div>
                         <label class="toggle-switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" id="saveSearchHistoryToggle" checked>
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
@@ -150,7 +152,7 @@
                             <strong class="text-error" style="display: block; margin-bottom: 4px;">Delete Account</strong>
                             <span class="text-muted" style="font-size: 0.875rem;">Permanently remove your account and all associated data.</span>
                         </div>
-                        <button class="btn btn-secondary" style="border-color: var(--error); color: var(--error);">Delete</button>
+                        <button class="btn btn-secondary" id="openDeleteAccountBtn" style="border-color: var(--error); color: var(--error);">Delete</button>
                     </div>
                 </div>
             </main>
@@ -165,6 +167,82 @@
         <a href="profile.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
     </div>
 
+    <!-- Change Password Modal -->
+    <div id="passwordModal" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 1rem;">
+        <div class="card p-xl animate-slide-up" style="max-width: 480px; width: 100%; position: relative;">
+            <div class="d-flex justify-between align-center mb-lg">
+                <h3 class="m-0 text-primary">Change Password</h3>
+                <button class="btn-icon" id="closePasswordModalBtn"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <form id="changePasswordForm">
+                <div class="form-group mb-md">
+                    <label class="form-label" for="currentPassword">Current Password</label>
+                    <div class="input-group">
+                        <div class="input-icon"><span class="material-symbols-outlined">lock</span></div>
+                        <input type="password" class="form-control" id="currentPassword" placeholder="••••••••" required>
+                        <button type="button" class="btn-icon toggle-pass-btn" data-target="currentPassword" style="margin-right: var(--spacing-sm);">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group mb-md">
+                    <label class="form-label" for="newPassword">New Password</label>
+                    <div class="input-group">
+                        <div class="input-icon"><span class="material-symbols-outlined">lock_reset</span></div>
+                        <input type="password" class="form-control" id="newPassword" placeholder="At least 6 characters" required minlength="6">
+                        <button type="button" class="btn-icon toggle-pass-btn" data-target="newPassword" style="margin-right: var(--spacing-sm);">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group mb-lg">
+                    <label class="form-label" for="confirmPassword">Confirm New Password</label>
+                    <div class="input-group">
+                        <div class="input-icon"><span class="material-symbols-outlined">check_circle</span></div>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Re-enter new password" required>
+                        <button type="button" class="btn-icon toggle-pass-btn" data-target="confirmPassword" style="margin-right: var(--spacing-sm);">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="d-flex justify-end gap-md">
+                    <button type="button" class="btn btn-secondary" id="cancelPasswordModalBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="savePasswordBtn">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div id="deleteAccountModal" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 1rem;">
+        <div class="card p-xl animate-slide-up" style="max-width: 480px; width: 100%; position: relative;">
+            <div class="d-flex justify-between align-center mb-md">
+                <h3 class="m-0 text-error d-flex align-center gap-xs">
+                    <span class="material-symbols-outlined text-error">warning</span> Delete Account
+                </h3>
+                <button class="btn-icon" id="closeDeleteModalBtn"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <p class="text-secondary mb-md" style="font-size: 0.9375rem; line-height: 1.5;">
+                This action is <strong>irreversible</strong>. Permanently deleting your account will remove your profile, complaints, AI search history, and saved preferences.
+            </p>
+            <p class="text-muted mb-md" style="font-size: 0.875rem;">
+                Please type <strong style="color: var(--error);">DELETE</strong> below to confirm:
+            </p>
+            <div class="form-group mb-lg">
+                <input type="text" class="form-control card border" style="border: 1px solid var(--border);" id="deleteConfirmInput" placeholder="Type DELETE to confirm">
+            </div>
+            <div class="d-flex justify-end gap-md">
+                <button type="button" class="btn btn-secondary" id="cancelDeleteModalBtn">Cancel</button>
+                <button type="button" class="btn btn-secondary text-error" id="confirmDeleteBtn" disabled style="border-color: var(--error); color: var(--error); opacity: 0.5; cursor: not-allowed;">
+                    Delete My Account
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
     <style>
         @media (max-width: 768px) {
             #mobileNav { display: flex !important; position: fixed; }
@@ -173,10 +251,253 @@
     </style>
 
     <script>
+        const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
+        function showToast(message, type = 'success') {
+            let container = document.getElementById('toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'toast-container';
+                document.body.appendChild(container);
+            }
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'check_circle' : (type === 'error' ? 'error' : 'info');
+            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        async function loadSettings() {
+            const token = localStorage.getItem('token');
+            if (!token) return window.location.href = 'login.html';
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/auth/settings`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (res.ok) {
+                    const settings = await res.json();
+                    document.getElementById('emailNotificationsToggle').checked = settings.emailNotifications !== false;
+                    document.getElementById('importantAlertsToggle').checked = settings.importantAlerts !== false;
+                    document.getElementById('saveSearchHistoryToggle').checked = settings.saveSearchHistory !== false;
+                } else if (res.status === 401) {
+                    localStorage.clear();
+                    window.location.href = 'login.html';
+                }
+            } catch(e) {
+                console.error('Error loading settings:', e);
+            }
+        }
+
+        async function saveSettingChange() {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+
+            const emailNotifications = document.getElementById('emailNotificationsToggle').checked;
+            const importantAlerts = document.getElementById('importantAlertsToggle').checked;
+            const saveSearchHistory = document.getElementById('saveSearchHistoryToggle').checked;
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/auth/settings`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ emailNotifications, importantAlerts, saveSearchHistory })
+                });
+
+                if (res.ok) {
+                    showToast('Preference updated successfully!', 'success');
+                } else {
+                    const data = await res.json();
+                    showToast(data.message || 'Failed to save preference.', 'error');
+                }
+            } catch(e) {
+                console.error('Error saving settings:', e);
+                showToast('Network error while updating setting.', 'error');
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
             if (!token) window.location.href = 'login.html';
+
+            loadSettings();
+
+            // Toggle change events
+            ['emailNotificationsToggle', 'importantAlertsToggle', 'saveSearchHistoryToggle'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('change', saveSettingChange);
+            });
+
+            // Password modal logic
+            const passwordModal = document.getElementById('passwordModal');
+            const openChangePasswordBtn = document.getElementById('openChangePasswordBtn');
+            const closePasswordModalBtn = document.getElementById('closePasswordModalBtn');
+            const cancelPasswordModalBtn = document.getElementById('cancelPasswordModalBtn');
+            const changePasswordForm = document.getElementById('changePasswordForm');
+
+            function openPasswordModal() {
+                if (changePasswordForm) changePasswordForm.reset();
+                passwordModal.style.display = 'flex';
+            }
+
+            function closePasswordModal() {
+                passwordModal.style.display = 'none';
+            }
+
+            if (openChangePasswordBtn) openChangePasswordBtn.addEventListener('click', openPasswordModal);
+            if (closePasswordModalBtn) closePasswordModalBtn.addEventListener('click', closePasswordModal);
+            if (cancelPasswordModalBtn) cancelPasswordModalBtn.addEventListener('click', closePasswordModal);
+
+            // Toggle password inputs
+            document.querySelectorAll('.toggle-pass-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.getAttribute('data-target');
+                    const input = document.getElementById(targetId);
+                    const icon = btn.querySelector('.material-symbols-outlined');
+                    if (input && icon) {
+                        const type = input.type === 'password' ? 'text' : 'password';
+                        input.type = type;
+                        icon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+                    }
+                });
+            });
+
+            // Form Submit for Change Password
+            if (changePasswordForm) {
+                changePasswordForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const currentPassword = document.getElementById('currentPassword').value;
+                    const newPassword = document.getElementById('newPassword').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+
+                    if (newPassword.length < 6) {
+                        showToast('New password must be at least 6 characters long.', 'error');
+                        return;
+                    }
+
+                    if (newPassword !== confirmPassword) {
+                        showToast('New passwords do not match.', 'error');
+                        return;
+                    }
+
+                    const savePasswordBtn = document.getElementById('savePasswordBtn');
+                    const originalHtml = savePasswordBtn.innerHTML;
+                    savePasswordBtn.disabled = true;
+                    savePasswordBtn.innerHTML = `<span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span> Updating...`;
+
+                    try {
+                        const res = await fetch(`${API_BASE_URL}/api/auth/change-password`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify({ currentPassword, newPassword })
+                        });
+
+                        const data = await res.json();
+                        savePasswordBtn.disabled = false;
+                        savePasswordBtn.innerHTML = originalHtml;
+
+                        if (res.ok) {
+                            showToast('Password updated successfully!', 'success');
+                            closePasswordModal();
+                        } else {
+                            showToast(data.message || 'Failed to update password.', 'error');
+                        }
+                    } catch(e) {
+                        console.error('Password change error:', e);
+                        savePasswordBtn.disabled = false;
+                        savePasswordBtn.innerHTML = originalHtml;
+                        showToast('Network error while updating password.', 'error');
+                    }
+                });
+            }
+
+            // Delete Account modal logic
+            const deleteAccountModal = document.getElementById('deleteAccountModal');
+            const openDeleteAccountBtn = document.getElementById('openDeleteAccountBtn');
+            const closeDeleteModalBtn = document.getElementById('closeDeleteModalBtn');
+            const cancelDeleteModalBtn = document.getElementById('cancelDeleteModalBtn');
+            const deleteConfirmInput = document.getElementById('deleteConfirmInput');
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+            function openDeleteModal() {
+                deleteConfirmInput.value = '';
+                confirmDeleteBtn.disabled = true;
+                confirmDeleteBtn.style.opacity = '0.5';
+                confirmDeleteBtn.style.cursor = 'not-allowed';
+                deleteAccountModal.style.display = 'flex';
+            }
+
+            function closeDeleteModal() {
+                deleteAccountModal.style.display = 'none';
+            }
+
+            if (openDeleteAccountBtn) openDeleteAccountBtn.addEventListener('click', openDeleteModal);
+            if (closeDeleteModalBtn) closeDeleteModalBtn.addEventListener('click', closeDeleteModal);
+            if (cancelDeleteModalBtn) cancelDeleteModalBtn.addEventListener('click', closeDeleteModal);
+
+            deleteConfirmInput.addEventListener('input', (e) => {
+                const value = e.target.value.trim();
+                if (value === 'DELETE') {
+                    confirmDeleteBtn.disabled = false;
+                    confirmDeleteBtn.style.opacity = '1';
+                    confirmDeleteBtn.style.cursor = 'pointer';
+                } else {
+                    confirmDeleteBtn.disabled = true;
+                    confirmDeleteBtn.style.opacity = '0.5';
+                    confirmDeleteBtn.style.cursor = 'not-allowed';
+                }
+            });
+
+            if (confirmDeleteBtn) {
+                confirmDeleteBtn.addEventListener('click', async () => {
+                    if (deleteConfirmInput.value.trim() !== 'DELETE') return;
+
+                    const originalHtml = confirmDeleteBtn.innerHTML;
+                    confirmDeleteBtn.disabled = true;
+                    confirmDeleteBtn.innerHTML = `<span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span> Deleting...`;
+
+                    try {
+                        const res = await fetch(`${API_BASE_URL}/api/auth/account`, {
+                            method: 'DELETE',
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        });
+
+                        if (res.ok) {
+                            showToast('Account deleted successfully.', 'success');
+                            setTimeout(() => {
+                                localStorage.clear();
+                                window.location.href = 'login.html';
+                            }, 1000);
+                        } else {
+                            const data = await res.json();
+                            confirmDeleteBtn.disabled = false;
+                            confirmDeleteBtn.innerHTML = originalHtml;
+                            showToast(data.message || 'Failed to delete account.', 'error');
+                        }
+                    } catch(e) {
+                        console.error('Delete account error:', e);
+                        confirmDeleteBtn.disabled = false;
+                        confirmDeleteBtn.innerHTML = originalHtml;
+                        showToast('Network error while deleting account.', 'error');
+                    }
+                });
+            }
         });
+
+        const spinStyle = document.createElement('style');
+        spinStyle.innerHTML = `@keyframes spin { 100% { transform: rotate(360deg); } }`;
+        document.head.appendChild(spinStyle);
     </script>
 </body>
 </html>
