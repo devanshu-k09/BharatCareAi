@@ -67,7 +67,7 @@
                 <div class="d-flex align-center flex-grow" style="max-width: 400px;">
                     <div class="input-group" style="width: 100%;">
                         <div class="input-icon"><span class="material-symbols-outlined">search</span></div>
-                        <input type="text" class="form-control" placeholder="Search authorities, portals, helplines...">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search authorities, portals, helplines...">
                     </div>
                 </div>
 
@@ -77,7 +77,7 @@
                         <span class="material-symbols-outlined">notifications</span>
                         <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
                     </button>
-                    <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                    <img id="headerAvatar" src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
                 </div>
             </header>
 
@@ -90,23 +90,23 @@
 
                 <!-- Helplines Section -->
                 <h3 class="mb-md">Emergency & Helplines</h3>
-                <div class="grid grid-cols-4 gap-md mb-2xl animate-slide-up">
-                    <div class="card card-body bg-error-bg d-flex flex-column align-center text-center">
+                <div class="grid grid-cols-4 gap-md mb-2xl animate-slide-up" id="helplinesGrid">
+                    <div class="card card-body bg-error-bg d-flex flex-column align-center text-center resource-card">
                         <span class="material-symbols-outlined text-error mb-xs" style="font-size: 2rem;">local_police</span>
                         <h4 class="text-error m-0 mb-xs">Police</h4>
                         <p class="text-error m-0" style="font-size: 1.5rem; font-weight: bold;">112</p>
                     </div>
-                    <div class="card card-body d-flex flex-column align-center text-center" style="background: rgba(30, 58, 138, 0.1);">
+                    <div class="card card-body d-flex flex-column align-center text-center resource-card" style="background: rgba(30, 58, 138, 0.1);">
                         <span class="material-symbols-outlined text-primary mb-xs" style="font-size: 2rem;">security</span>
                         <h4 class="text-primary m-0 mb-xs">Cyber Crime</h4>
                         <p class="text-primary m-0" style="font-size: 1.5rem; font-weight: bold;">1930</p>
                     </div>
-                    <div class="card card-body d-flex flex-column align-center text-center" style="background: rgba(186, 26, 26, 0.1);">
+                    <div class="card card-body d-flex flex-column align-center text-center resource-card" style="background: rgba(186, 26, 26, 0.1);">
                         <span class="material-symbols-outlined text-error mb-xs" style="font-size: 2rem;">female</span>
                         <h4 class="text-error m-0 mb-xs">Women Helpline</h4>
                         <p class="text-error m-0" style="font-size: 1.5rem; font-weight: bold;">1091</p>
                     </div>
-                    <div class="card card-body d-flex flex-column align-center text-center" style="background: rgba(0, 81, 213, 0.1);">
+                    <div class="card card-body d-flex flex-column align-center text-center resource-card" style="background: rgba(0, 81, 213, 0.1);">
                         <span class="material-symbols-outlined text-secondary mb-xs" style="font-size: 2rem;">shopping_bag</span>
                         <h4 class="text-secondary m-0 mb-xs">Consumer</h4>
                         <p class="text-secondary m-0" style="font-size: 1.5rem; font-weight: bold;">1915</p>
@@ -115,48 +115,48 @@
 
                 <!-- Portals Section -->
                 <h3 class="mb-md">Official Portals</h3>
-                <div class="grid grid-cols-2 gap-lg animate-slide-up stagger-1">
-                    <div class="card card-body d-flex gap-lg align-center" style="transition: transform 0.2s;">
+                <div class="grid grid-cols-2 gap-lg animate-slide-up stagger-1" id="portalsGrid">
+                    <div class="card card-body d-flex gap-lg align-center resource-card" style="transition: transform 0.2s;">
                         <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" style="height: 32px; opacity: 0.8;" alt="Emblem">
                         </div>
                         <div class="flex-grow">
                             <h4 class="text-primary m-0 mb-xs">e-Daakhil</h4>
                             <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">Filing consumer complaints online with the National Consumer Disputes Redressal Commission.</p>
-                            <a href="https://edaakhil.nic.in/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                            <a href="https://edaakhil.nic.in/" target="_blank" rel="noopener noreferrer" onclick="return openPortal('https://edaakhil.nic.in/', event)" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
                         </div>
                     </div>
 
-                    <div class="card card-body d-flex gap-lg align-center" style="transition: transform 0.2s;">
+                    <div class="card card-body d-flex gap-lg align-center resource-card" style="transition: transform 0.2s;">
                         <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" style="height: 32px; opacity: 0.8;" alt="Emblem">
                         </div>
                         <div class="flex-grow">
                             <h4 class="text-primary m-0 mb-xs">National Cyber Crime Reporting</h4>
                             <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">Report cyber crimes and track your complaints online officially through MHA.</p>
-                            <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                            <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" onclick="return openPortal('https://cybercrime.gov.in/', event)" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
                         </div>
                     </div>
 
-                    <div class="card card-body d-flex gap-lg align-center" style="transition: transform 0.2s;">
+                    <div class="card card-body d-flex gap-lg align-center resource-card" style="transition: transform 0.2s;">
                         <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
                             <span class="material-symbols-outlined text-primary" style="font-size: 2rem;">gavel</span>
                         </div>
                         <div class="flex-grow">
                             <h4 class="text-primary m-0 mb-xs">e-Courts Services</h4>
                             <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">Track case status, view court orders, and access cause lists across all Indian courts.</p>
-                            <a href="https://ecourts.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                            <a href="https://ecourts.gov.in/" target="_blank" rel="noopener noreferrer" onclick="return openPortal('https://ecourts.gov.in/', event)" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
                         </div>
                     </div>
 
-                    <div class="card card-body d-flex gap-lg align-center" style="transition: transform 0.2s;">
+                    <div class="card card-body d-flex gap-lg align-center resource-card" style="transition: transform 0.2s;">
                         <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
                             <span class="material-symbols-outlined text-primary" style="font-size: 2rem;">find_in_page</span>
                         </div>
                         <div class="flex-grow">
                             <h4 class="text-primary m-0 mb-xs">RTI Online</h4>
                             <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">File Right to Information applications for central government departments and ministries.</p>
-                            <a href="https://rtionline.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                            <a href="https://rtionline.gov.in/" target="_blank" rel="noopener noreferrer" onclick="return openPortal('https://rtionline.gov.in/', event)" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
                         </div>
                     </div>
                 </div>
@@ -172,6 +172,9 @@
         <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
     </div>
 
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
     <style>
         @media (max-width: 768px) {
             #mobileNav { display: flex !important; position: fixed; }
@@ -180,5 +183,66 @@
             .grid-cols-2 { grid-template-columns: 1fr; }
         }
     </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) window.location.href = 'login.html';
+
+            // Filter cards on search input
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    document.querySelectorAll('.resource-card').forEach(card => {
+                        const text = card.innerText.toLowerCase();
+                        if (text.includes(query)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+
+        function showToast(message, type = 'error') {
+            let container = document.getElementById('toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'toast-container';
+                document.body.appendChild(container);
+            }
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'check_circle' : 'error';
+            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function openPortal(url, event) {
+            if (event) event.preventDefault();
+            try {
+                if (!url) {
+                    showToast('Unable to open the portal. Please try again later.', 'error');
+                    return false;
+                }
+                const win = window.open(url, '_blank', 'noopener,noreferrer');
+                if (!win || win.closed || typeof win.closed === 'undefined') {
+                    showToast('Unable to open the portal. Please try again later.', 'error');
+                    return false;
+                }
+            } catch (e) {
+                console.error('Error opening portal:', e);
+                showToast('Unable to open the portal. Please try again later.', 'error');
+                return false;
+            }
+            return false;
+        }
+    </script>
 </body>
 </html>
