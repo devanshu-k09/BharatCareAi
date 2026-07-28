@@ -38,8 +38,29 @@
       <button class="btn btn-icon" onclick="alert('Language selection coming soon!')"><span class="material-symbols-outlined">language</span></button>
       <button class="btn btn-icon" onclick="alert('No new notifications!')"><span class="material-symbols-outlined">notifications</span></button>
       <a href="login.html" class="btn btn-primary">Get Started</a>
+      <button class="btn btn-icon mobile-menu-toggle"><span class="material-symbols-outlined">menu</span></button>
     </div>
   </nav>
+
+  <!-- Mobile Sidebar Navigation for Landing Page -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+        <span class="material-symbols-outlined text-white">gavel</span>
+      </div>
+      <div>
+        <h2>BharatCare AI</h2>
+        <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#how-it-works" class="nav-link">Process</a>
+      <a href="#categories" class="nav-link">Categories</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="login.html" class="nav-link text-primary"><span class="material-symbols-outlined">login</span> Get Started</a>
+    </nav>
+  </aside>
 
   <!-- Hero Section -->
   <section class="py-3xl">
@@ -81,7 +102,7 @@
           <img src="https://picsum.photos/800/400?random=1" style="width: 100%; border-radius: var(--radius-lg);" alt="AI Legal Assistant interface">
         </div>
         
-        <div class="absolute glass-card p-sm d-flex align-center gap-sm" style="bottom: 40px; left: -20px; animation: float 6s ease-in-out infinite;">
+        <div class="absolute glass-card p-sm d-flex align-center gap-sm" style="bottom: 40px; left: 10px; animation: float 6s ease-in-out infinite;">
           <div class="badge-success p-xs rounded-md">
             <span class="material-symbols-outlined text-success">verified_user</span>
           </div>
@@ -104,7 +125,7 @@
 
       <div class="grid grid-cols-3 gap-lg">
         <!-- Large Feature -->
-        <div class="card p-xl flex-column justify-between" style="grid-column: span 2;">
+        <div class="card p-xl flex-column justify-between col-span-2">
           <div class="flex-column gap-md">
             <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 48px; height: 48px;">
               <span class="material-symbols-outlined text-white">smart_toy</span>
@@ -142,7 +163,7 @@
         </div>
 
         <!-- Mid Feature -->
-        <div class="card p-xl grid grid-cols-2 align-center gap-xl" style="grid-column: span 2;">
+        <div class="card p-xl grid grid-cols-2 align-center gap-xl col-span-2">
           <div class="flex-column gap-md">
             <div class="d-flex align-center justify-center rounded-lg" style="width: 48px; height: 48px; background-color: #6e2c00; color: white;">
               <span class="material-symbols-outlined">translate</span>

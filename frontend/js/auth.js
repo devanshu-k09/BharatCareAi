@@ -58,3 +58,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+// Responsive Mobile Navigation Handler (Requirement 14 & 20)
+document.addEventListener('DOMContentLoaded', () => {
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) {
+    let backdrop = document.querySelector('.sidebar-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'sidebar-backdrop';
+      document.body.appendChild(backdrop);
+    }
+
+    const toggleBtns = document.querySelectorAll('.mobile-menu-toggle, #mobileMenuBtn');
+    toggleBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle('open');
+        backdrop.classList.toggle('active');
+      });
+    });
+
+    backdrop.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      backdrop.classList.remove('active');
+    });
+
+    // Close sidebar when clicking a nav link on small screens
+    sidebar.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('open');
+          backdrop.classList.remove('active');
+        }
+      });
+    });
+  }
+});

@@ -11,7 +11,7 @@
     <div class="app-layout">
         
         <!-- Sidebar Navigation -->
-        <aside class="sidebar d-none-mobile" id="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-logo">
                 <div class="bg-primary-light d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
                     <span class="material-symbols-outlined text-white">account_balance</span>
@@ -61,7 +61,8 @@
         <div class="main-wrapper">
             <!-- Top Header -->
             <header class="top-header">
-                <div class="d-flex align-center" style="width: 50%; max-width: 400px;">
+                <div class="d-flex align-center flex-grow" style="max-width: 400px;">
+                    <button class="btn btn-icon mobile-menu-toggle mr-sm" style="padding: 6px; margin-right: 8px;"><span class="material-symbols-outlined">menu</span></button>
                     <div class="input-group" style="width: 100%;">
                         <div class="input-icon"><span class="material-symbols-outlined">search</span></div>
                         <input type="text" class="form-control" placeholder="Search questions, topics..." style="padding: 0.5rem var(--spacing-md); font-size: 0.875rem;">
@@ -151,7 +152,7 @@
 
                 <div class="grid grid-cols-3 gap-xl animate-slide-up stagger-2">
                     <!-- Left Column: Recent Conversations -->
-                    <div style="grid-column: span 2;" class="flex-column gap-xl">
+                    <div class="flex-column gap-xl col-span-2">
                         <div class="card">
                             <div class="card-header d-flex justify-between align-center" style="border-bottom: 1px solid var(--border); padding-bottom: var(--spacing-md);">
                                 <h3 class="m-0" style="font-size: 1.25rem;">Recent Conversations</h3>
@@ -235,16 +236,16 @@
     </div>
 
     <!-- Floating Action Button -->
-    <a href="/ai-chat" class="btn btn-primary rounded-full absolute d-flex align-center justify-center" style="bottom: 2rem; right: 2rem; width: 64px; height: 64px; z-index: 100; box-shadow: var(--shadow-xl);">
+    <a href="ai-chat.html" class="btn btn-primary rounded-full absolute d-flex align-center justify-center floating-fab" style="bottom: 2rem; right: 2rem; width: 64px; height: 64px; z-index: 90; box-shadow: var(--shadow-xl);">
         <span class="material-symbols-outlined" style="font-size: 2rem;">chat_spark</span>
     </a>
 
     <!-- Mobile Navigation (Simple implementation) -->
     <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
-        <a href="/dashboard" class="text-primary text-center"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
-        <a href="/ai-chat" class="text-muted text-center"><span class="material-symbols-outlined d-block">smart_toy</span><span style="font-size: 0.625rem;">AI</span></a>
-        <a href="/complaint" class="text-muted text-center"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
-        <a href="/profile" class="text-muted text-center"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+        <a href="dashboard.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="ai-chat.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">smart_toy</span><span style="font-size: 0.625rem;">AI</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
     </div>
 
     <style>
@@ -304,6 +305,8 @@
         @media (max-width: 768px) {
             #mobileNav { display: flex !important; position: fixed; }
             .ai-assistant-card { min-height: 180px; }
+            .floating-fab { bottom: 80px !important; position: fixed !important; }
+            .page-content { padding-bottom: 90px; }
         }
 
         @media (max-width: 480px) {

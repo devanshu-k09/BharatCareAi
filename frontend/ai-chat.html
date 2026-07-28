@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>AI Assistant | BharatCare AI</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/auth.js"></script>
     <style>
         /* ChatGPT-like Layout Overrides */
         .app-layout {
@@ -173,8 +174,17 @@
             .chat-viewport {
                 padding-bottom: 220px; /* More padding on mobile for menu space */
             }
+            .chat-input-wrapper {
+                bottom: 64px !important;
+                position: fixed !important;
+            }
             .message-bubble {
-                max-width: 85%;
+                max-width: 90%;
+                word-break: break-word;
+                overflow-x: auto;
+            }
+            .breadcrumb-prefix {
+                display: none !important;
             }
             #welcome-section {
                 padding: var(--spacing-md) 0;
@@ -196,7 +206,7 @@
     <div class="app-layout">
         
         <!-- Sidebar Navigation -->
-        <aside class="sidebar d-none-mobile" id="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-logo">
                 <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
                     <span class="material-symbols-outlined text-white">gavel</span>
@@ -250,8 +260,9 @@
             <!-- Top Header -->
             <header class="top-header">
                 <div class="d-flex align-center gap-sm">
-                    <span class="text-muted" style="font-size: 0.875rem; font-weight: 500;">Citizen Help Platform</span>
-                    <span class="material-symbols-outlined text-muted" style="font-size: 1rem;">chevron_right</span>
+                    <button class="btn btn-icon mobile-menu-toggle mr-sm" style="padding: 6px;"><span class="material-symbols-outlined">menu</span></button>
+                    <span class="text-muted breadcrumb-prefix" style="font-size: 0.875rem; font-weight: 500;">Citizen Help Platform</span>
+                    <span class="material-symbols-outlined text-muted breadcrumb-prefix" style="font-size: 1rem;">chevron_right</span>
                     <span class="text-primary" style="font-size: 0.875rem; font-weight: 600;">AI Legal Assistant</span>
                 </div>
 

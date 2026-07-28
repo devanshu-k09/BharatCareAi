@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Complaint Generator | BharatCare AI</title>
     <link rel="stylesheet" href="css/style.css">
+<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+=======
+    <script src="js/auth.js"></script>
+>>>>>>> 21b4188 (D! Mobile Compitable)
     <style>
         .step-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .category-card { cursor: pointer; transition: all var(--transition-base); border: 2px solid transparent; }
@@ -21,7 +25,7 @@
     <div class="app-layout">
         
         <!-- Sidebar Navigation -->
-        <aside class="sidebar d-none-mobile" id="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-logo">
                 <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
                     <span class="material-symbols-outlined text-white">gavel</span>
@@ -71,8 +75,9 @@
             <!-- Top Header -->
             <header class="top-header">
                 <div class="d-flex align-center gap-sm">
-                    <span class="text-muted" style="font-size: 0.875rem; font-weight: 500;">Citizen Help Platform</span>
-                    <span class="material-symbols-outlined text-muted" style="font-size: 1rem;">chevron_right</span>
+                    <button class="btn btn-icon mobile-menu-toggle mr-sm" style="padding: 6px;"><span class="material-symbols-outlined">menu</span></button>
+                    <span class="text-muted breadcrumb-prefix" style="font-size: 0.875rem; font-weight: 500;">Citizen Help Platform</span>
+                    <span class="material-symbols-outlined text-muted breadcrumb-prefix" style="font-size: 1rem;">chevron_right</span>
                     <span class="text-primary" style="font-size: 0.875rem; font-weight: 600;">Complaint Generator</span>
                 </div>
 
@@ -204,6 +209,12 @@
             #mobileNav { display: flex !important; position: fixed; }
             .page-content { padding-bottom: 80px; }
             .grid-cols-3 { grid-template-columns: 1fr; }
+            .breadcrumb-prefix { display: none !important; }
+            .progress-circle { width: 32px; height: 32px; font-size: 0.875rem; }
+        }
+        @media (max-width: 480px) {
+            .progress-circle + span { font-size: 0.65rem !important; }
+            .px-lg { padding-left: var(--spacing-xs) !important; padding-right: var(--spacing-xs) !important; }
         }
     </style>
 

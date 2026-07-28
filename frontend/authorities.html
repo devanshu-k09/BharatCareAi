@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Government Help | BharatCare AI</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="/js/auth.js"></script>
+    <script src="js/auth.js"></script>
 </head>
 <body>
     <div class="app-layout">
         
         <!-- Sidebar Navigation -->
-        <aside class="sidebar d-none-mobile" id="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-logo">
                 <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
                     <span class="material-symbols-outlined text-white">gavel</span>
@@ -65,6 +65,7 @@
             <!-- Top Header -->
             <header class="top-header">
                 <div class="d-flex align-center flex-grow" style="max-width: 400px;">
+                    <button class="btn btn-icon mobile-menu-toggle mr-sm" style="padding: 6px; margin-right: 8px;"><span class="material-symbols-outlined">menu</span></button>
                     <div class="input-group" style="width: 100%;">
                         <div class="input-icon"><span class="material-symbols-outlined">search</span></div>
                         <input type="text" class="form-control" id="searchInput" placeholder="Search authorities, portals, helplines...">
@@ -179,8 +180,12 @@
         @media (max-width: 768px) {
             #mobileNav { display: flex !important; position: fixed; }
             .page-content { padding-bottom: 80px; }
-            .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
-            .grid-cols-2 { grid-template-columns: 1fr; }
+            .grid-cols-4 { grid-template-columns: repeat(2, 1fr) !important; }
+            .grid-cols-2 { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+            .grid-cols-4 { grid-template-columns: 1fr !important; }
+            .card-body { padding: var(--spacing-sm) !important; }
         }
     </style>
 
