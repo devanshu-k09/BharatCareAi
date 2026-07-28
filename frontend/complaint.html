@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Complaint Generator | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .step-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .category-card { cursor: pointer; transition: all var(--transition-base); border: 2px solid transparent; }
+        .category-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary-light); }
+        .category-card.selected { border-color: var(--primary); background: var(--surface-low); }
+        .category-card.selected .check-icon { opacity: 1; }
+        .check-icon { opacity: 0; transition: opacity var(--transition-fast); }
+        .progress-circle { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; background: var(--surface-high); color: var(--text-muted); border: 4px solid var(--surface); z-index: 2; position: relative; }
+        .progress-circle.active { background: var(--primary); color: var(--text-inverse); }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">gavel</span>
+                </div>
+                <div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link active">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="profile.html" class="nav-link">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center gap-sm">
+                    <span class="text-muted" style="font-size: 0.875rem; font-weight: 500;">Citizen Help Platform</span>
+                    <span class="material-symbols-outlined text-muted" style="font-size: 1rem;">chevron_right</span>
+                    <span class="text-primary" style="font-size: 0.875rem; font-weight: 600;">Complaint Generator</span>
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                    <span class="user-name-display" style="font-size: 0.875rem; font-weight: 600;">Loading...</span>
+                </div>
+            </header>
+
+            <!-- Progress Indicator Section -->
+            <section class="bg-surface py-xl border-bottom border-outline-variant" style="border-bottom: 1px solid var(--border);">
+                <div class="container" style="max-width: 800px;">
+                    <div class="relative d-flex justify-between align-center px-lg">
+                        <div class="absolute" style="top: 50%; left: var(--spacing-lg); right: var(--spacing-lg); height: 2px; background: var(--border); z-index: 1;"></div>
+                        <div class="absolute" id="progress-line-active" style="top: 50%; left: var(--spacing-lg); width: 33%; height: 2px; background: var(--primary); z-index: 1; transition: width 0.5s ease;"></div>
+                        
+                        <div class="flex-column align-center gap-xs">
+                            <div class="progress-circle active">1</div>
+                            <span style="font-size: 0.75rem; font-weight: 600; color: var(--primary);">Category</span>
+                        </div>
+                        <div class="flex-column align-center gap-xs">
+                            <div class="progress-circle">2</div>
+                            <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">Details</span>
+                        </div>
+                        <div class="flex-column align-center gap-xs">
+                            <div class="progress-circle">3</div>
+                            <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">AI Draft</span>
+                        </div>
+                        <div class="flex-column align-center gap-xs">
+                            <div class="progress-circle">4</div>
+                            <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted);">Review</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Form Canvas -->
+            <main class="page-content" style="max-width: 800px; display: flex; flex-direction: column;">
+                <div class="step-transition flex-grow" id="step-1">
+                    <div class="mb-xl text-center">
+                        <h2 class="text-primary mb-xs">Select Complaint Category</h2>
+                        <p class="text-muted">To help our AI generate the most accurate legal document, please choose the relevant domain for your grievance.</p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-md mb-xl">
+                        <!-- Category Cards -->
+                        <div class="card card-body category-card relative" onclick="selectCategory(this)">
+                            <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(0, 81, 213, 0.1);">
+                                <span class="material-symbols-outlined text-secondary">shopping_cart</span>
+                            </div>
+                            <h4 class="mb-xs text-primary">Consumer</h4>
+                            <p class="text-muted m-0" style="font-size: 0.75rem;">Defective products, service deficiency, or unfair trade practices.</p>
+                            <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                        </div>
+                        <div class="card card-body category-card relative" onclick="selectCategory(this)">
+                            <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(243, 148, 97, 0.1);">
+                                <span class="material-symbols-outlined text-accent">engineering</span>
+                            </div>
+                            <h4 class="mb-xs text-primary">Labour/HR</h4>
+                            <p class="text-muted m-0" style="font-size: 0.75rem;">Unpaid wages, harassment, wrongful termination.</p>
+                            <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                        </div>
+                        <div class="card card-body category-card relative" onclick="selectCategory(this)">
+                            <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(30, 58, 138, 0.1);">
+                                <span class="material-symbols-outlined text-primary">security</span>
+                            </div>
+                            <h4 class="mb-xs text-primary">Cyber Crime</h4>
+                            <p class="text-muted m-0" style="font-size: 0.75rem;">Online fraud, identity theft, data breach.</p>
+                            <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                        </div>
+                        <div class="card card-body category-card relative" onclick="selectCategory(this)">
+                            <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(22, 163, 74, 0.1);">
+                                <span class="material-symbols-outlined text-success">house</span>
+                            </div>
+                            <h4 class="mb-xs text-primary">Property</h4>
+                            <p class="text-muted m-0" style="font-size: 0.75rem;">Tenant-landlord disputes, illegal possession.</p>
+                            <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                        </div>
+                        <div class="card card-body category-card relative" onclick="selectCategory(this)">
+                            <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: rgba(186, 26, 26, 0.1);">
+                                <span class="material-symbols-outlined text-error">balance</span>
+                            </div>
+                            <h4 class="mb-xs text-primary">General Civil</h4>
+                            <p class="text-muted m-0" style="font-size: 0.75rem;">Family matters, contract breaches.</p>
+                            <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                        </div>
+                        <div class="card card-body category-card relative" onclick="selectCategory(this)">
+                            <div class="d-flex align-center justify-center rounded-lg mb-md" style="width: 48px; height: 48px; background: var(--surface-high);">
+                                <span class="material-symbols-outlined text-muted">more_horiz</span>
+                            </div>
+                            <h4 class="mb-xs text-primary">Other</h4>
+                            <p class="text-muted m-0" style="font-size: 0.75rem;">AI will attempt to categorize it.</p>
+                            <span class="material-symbols-outlined check-icon absolute text-primary" style="top: var(--spacing-md); right: var(--spacing-md);">check_circle</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Navigation -->
+                <div class="d-flex justify-between align-center mt-auto" style="padding-top: var(--spacing-lg); border-top: 1px solid var(--border);">
+                    <button class="btn btn-secondary">
+                        <span class="material-symbols-outlined">arrow_back</span> Back
+                    </button>
+                    <button class="btn btn-primary" id="next-btn" disabled style="opacity: 0.5; cursor: not-allowed;">
+                        Next <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="ai-chat.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">smart_toy</span><span style="font-size: 0.625rem;">AI</span></a>
+        <a href="complaint.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
+
+    <style>
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .page-content { padding-bottom: 80px; }
+            .grid-cols-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <script>
+        const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) window.location.href = 'login.html';
+            
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user && user.name) {
+                    document.querySelectorAll('.user-name-display').forEach(el => el.textContent = user.name);
+                }
+            } catch(e) {}
+        });
+
+        let selectedType = '';
+        const nextBtn = document.getElementById('next-btn');
+        
+        function selectCategory(element) {
+            document.querySelectorAll('.category-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedType = element.querySelector('h4').innerText;
+            nextBtn.removeAttribute('disabled');
+            nextBtn.style.opacity = '1';
+            nextBtn.style.cursor = 'pointer';
+        }
+
+        nextBtn.addEventListener('click', async () => {
+            const step1 = document.getElementById('step-1');
+            
+            if (nextBtn.innerText.includes('Next')) {
+                // Move to Step 2
+                step1.innerHTML = `
+                    <div class="mb-xl text-center">
+                        <h2 class="text-primary mb-xs">Enter Complaint Details</h2>
+                        <p class="text-muted">Please describe your issue regarding ${selectedType} in detail.</p>
+                    </div>
+                    <textarea id="complaint-details" class="form-control card card-body" style="height: 250px; resize: none;" placeholder="Provide all relevant dates, names, amounts, and context..."></textarea>
+                `;
+                nextBtn.innerHTML = `Generate <span class="material-symbols-outlined">description</span>`;
+                
+                // Update progress visual
+                document.getElementById('progress-line-active').style.width = '66%';
+                document.querySelectorAll('.progress-circle')[1].classList.add('active');
+            } 
+            else if (nextBtn.innerText.includes('Generate')) {
+                const details = document.getElementById('complaint-details').value;
+                if(!details) return alert('Please enter details');
+                
+                nextBtn.innerHTML = `Generating... <span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span>`;
+                nextBtn.setAttribute('disabled', 'true');
+                nextBtn.style.opacity = '0.5';
+                
+                try {
+                    const res = await fetch(`${API_BASE_URL}/api/complaints/generate`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                        body: JSON.stringify({ type: selectedType, details })
+                    });
+                    const data = await res.json();
+                    
+                    if (res.ok) {
+                        step1.innerHTML = `
+                            <div class="mb-xl text-center">
+                                <h2 class="text-primary mb-xs">AI Generated Draft</h2>
+                            </div>
+                            <div class="card card-body" style="max-height: 400px; overflow-y: auto; white-space: pre-wrap; font-family: monospace; background: var(--surface-low);">${data.generatedDraft}</div>
+                        `;
+                        nextBtn.style.display = 'none';
+                        
+                        document.getElementById('progress-line-active').style.width = '100%';
+                        document.querySelectorAll('.progress-circle')[2].classList.add('active');
+                        document.querySelectorAll('.progress-circle')[3].classList.add('active');
+                    } else {
+                        alert('Error: ' + data.message);
+                        nextBtn.innerHTML = `Generate <span class="material-symbols-outlined">description</span>`;
+                        nextBtn.removeAttribute('disabled');
+                        nextBtn.style.opacity = '1';
+                    }
+                } catch(e) {
+                    alert('Network error');
+                    nextBtn.innerHTML = `Generate <span class="material-symbols-outlined">description</span>`;
+                    nextBtn.removeAttribute('disabled');
+                    nextBtn.style.opacity = '1';
+                }
+            }
+        });
+
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes spin { 100% { transform: rotate(360deg); } }`;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

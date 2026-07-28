@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AI Assistant | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .chat-viewport {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 120px;
+        }
+        .chat-viewport::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-viewport::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 10px;
+        }
+        .chat-input-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--spacing-md);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border);
+            z-index: 20;
+        }
+        .message-row {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            animation: slideUp 0.3s ease-out forwards;
+        }
+        .message-row.reverse {
+            flex-direction: row-reverse;
+        }
+        .message-bubble {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-xl);
+            max-width: 85%;
+            font-size: 1rem;
+            line-height: 1.5;
+            box-shadow: var(--shadow-sm);
+        }
+        .message-row:not(.reverse) .message-bubble {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top-left-radius: 0;
+        }
+        .message-row.reverse .message-bubble {
+            background: var(--primary);
+            color: var(--text-inverse);
+            border-top-right-radius: 0;
+            text-align: right;
+        }
+        .typing-indicator {
+            display: inline-flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-4px); }
+        }
+        .floating-tools {
+            position: absolute;
+            bottom: 120px;
+            right: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            z-index: 10;
+        }
+        .floating-tools .btn-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">gavel</span>
+                </div>
+                <div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block mb-lg" onclick="localStorage.removeItem('chatHistory'); localStorage.removeItem('currentChatId'); window.location.href='ai-chat.html'">
+                <span class="material-symbols-outlined">add</span> New Question
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link active">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="profile.html" class="nav-link">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper" style="position: relative;">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center gap-sm">
+                    <span class="text-muted" style="font-size: 0.875rem; font-weight: 500;">Citizen Help Platform</span>
+                    <span class="material-symbols-outlined text-muted" style="font-size: 1rem;">chevron_right</span>
+                    <span class="text-primary" style="font-size: 0.875rem; font-weight: 600;">AI Legal Assistant</span>
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
+                    </button>
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                </div>
+            </header>
+
+            <!-- Chat Container -->
+            <div class="chat-viewport" id="chat-viewport">
+                <div class="container" style="max-width: 800px; padding: var(--spacing-xl) var(--spacing-md);" id="chat-container">
+                    
+                    <!-- Welcome Section (Initial State) -->
+                    <div id="welcome-section" class="text-center" style="margin: 4rem auto; transition: opacity 0.3s ease;">
+                        <div class="d-flex justify-center align-center mx-auto mb-lg" style="width: 80px; height: 80px; border-radius: 24px; background: rgba(30, 58, 138, 0.1); color: var(--primary);">
+                            <span class="material-symbols-outlined" style="font-size: 40px;">smart_toy</span>
+                        </div>
+                        <h2 class="mb-sm">Namaste! I'm BharatCare AI</h2>
+                        <p style="font-size: 1.125rem; max-width: 600px; margin: 0 auto var(--spacing-xl);">How can I assist with your legal inquiries today? I specialize in Indian Law, tenant rights, and consumer protection.</p>
+                        
+                        <div class="grid grid-cols-2 gap-md text-left" style="max-width: 600px; margin: 0 auto;">
+                            <button onclick="sendQuickQuestion('What are my rights if my landlord increases rent without notice?')" class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface-low); border: 1px solid var(--border);">
+                                <span class="material-symbols-outlined text-primary mb-xs">home_work</span>
+                                <strong class="mb-xs">Tenant Rights</strong>
+                                <span class="text-muted" style="font-size: 0.875rem;">What are my rights if my landlord increases rent without notice?</span>
+                            </button>
+                            <button onclick="sendQuickQuestion('How do I file a complaint against a faulty electronics brand?')" class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface-low); border: 1px solid var(--border);">
+                                <span class="material-symbols-outlined text-primary mb-xs">shopping_bag</span>
+                                <strong class="mb-xs">Consumer Protection</strong>
+                                <span class="text-muted" style="font-size: 0.875rem;">How do I file a complaint against a faulty electronics brand?</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Messages will be injected here -->
+                </div>
+            </div>
+
+            <!-- Floating Utilities -->
+            <div class="floating-tools">
+                <button class="btn-icon text-muted" title="Clear Chat" id="clearChatBtn">
+                    <span class="material-symbols-outlined">delete_sweep</span>
+                </button>
+                <button class="btn-icon text-primary" title="Copy Response" id="copyResponseBtn">
+                    <span class="material-symbols-outlined">content_copy</span>
+                </button>
+                <button class="btn-icon text-secondary" title="Download PDF" id="downloadPdfBtn">
+                    <span class="material-symbols-outlined">picture_as_pdf</span>
+                </button>
+            </div>
+
+            <!-- Chat Input Area -->
+            <div class="chat-input-wrapper">
+                <div class="container" style="max-width: 800px;">
+                    <!-- Image Preview Container -->
+                    <div id="imagePreviewContainer" class="d-none align-center gap-sm mb-sm p-xs rounded-md" style="background: var(--surface-high); border: 1px solid var(--border); width: fit-content; max-width: 100%;">
+                        <img id="imagePreview" style="max-width: 50px; max-height: 50px; border-radius: var(--radius-sm); object-fit: cover;">
+                        <span id="imageFilename" class="text-muted" style="font-size: 0.8rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+                        <button id="removeImageBtn" class="btn-icon text-error" style="padding: 2px; width: 24px; height: 24px; min-width: 24px;"><span class="material-symbols-outlined" style="font-size: 18px;">close</span></button>
+                    </div>
+
+                    <div class="input-group" style="padding: var(--spacing-xs); background: var(--surface-low); align-items: flex-end;">
+                        <button id="attachBtn" class="btn-icon"><span class="material-symbols-outlined">attach_file</span></button>
+                        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                        <textarea class="form-control" id="chat-input" rows="1" placeholder="Type your legal query here..." style="max-height: 150px; resize: none; padding-top: 10px; padding-bottom: 10px; overflow-y: auto;"></textarea>
+                        <div class="d-flex align-center gap-xs" style="padding-bottom: 4px; padding-right: 4px;">
+                            <button id="micBtn" class="btn-icon"><span class="material-symbols-outlined">mic</span></button>
+                            <button class="btn btn-primary" id="sendBtn" style="padding: 0.5rem; border-radius: var(--radius-md);">
+                                <span class="material-symbols-outlined">send</span>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-center text-muted mt-sm m-0" style="font-size: 0.7rem;">BharatCare AI may provide helpful information but does not constitute formal legal advice. Always consult with a registered advocate.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="ai-chat.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">smart_toy</span><span style="font-size: 0.625rem;">AI</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
+
+    <style>
+        .hover-lift { transition: transform var(--transition-fast), box-shadow var(--transition-fast); cursor: pointer; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--primary-light) !important; }
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .floating-tools { bottom: 180px; }
+            .chat-viewport { padding-bottom: 180px; }
+        }
+        .recording {
+            color: var(--error) !important;
+            animation: pulse-mic 1.2s infinite;
+        }
+        @keyframes pulse-mic {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+
+    <script>
+        const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
+        // Toast notifications utility
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'check_circle' : 'error';
+            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Setup height auto resize
+        const chatInput = document.getElementById('chat-input');
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) window.location.href = '/login';
+        });
+
+        // Chat Logic
+        const sendBtn = document.getElementById('sendBtn');
+        const chatContainer = document.getElementById('chat-container');
+        const welcomeSection = document.getElementById('welcome-section');
+        const viewport = document.getElementById('chat-viewport');
+
+        let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+        let currentChatId = localStorage.getItem('currentChatId') || null;
+
+        // Image attachment state and DOM elements
+        let selectedImageFile = null;
+        const imageInput = document.getElementById('imageInput');
+        const attachBtn = document.getElementById('attachBtn');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+        const imageFilename = document.getElementById('imageFilename');
+        const removeImageBtn = document.getElementById('removeImageBtn');
+
+        attachBtn.addEventListener('click', () => imageInput.click());
+
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Validate image type
+            if (!file.type.startsWith('image/')) {
+                showToast('Please select a valid image file (PNG, JPG, WEBP).', 'error');
+                imageInput.value = '';
+                return;
+            }
+
+            // Validate file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                showToast('Image size exceeds the 5MB limit.', 'error');
+                imageInput.value = '';
+                return;
+            }
+
+            selectedImageFile = file;
+            imageFilename.textContent = file.name;
+
+            // Create object URL for local thumbnail preview
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview.src = e.target.result;
+                imagePreviewContainer.classList.remove('d-none');
+                imagePreviewContainer.classList.add('d-flex');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        removeImageBtn.addEventListener('click', () => {
+            selectedImageFile = null;
+            imageInput.value = '';
+            imagePreviewContainer.classList.add('d-none');
+            imagePreviewContainer.classList.remove('d-flex');
+            imagePreview.src = '';
+            imageFilename.textContent = '';
+        });
+
+        // Speech-to-Text (Web Speech API)
+        const micBtn = document.getElementById('micBtn');
+        let recognition = null;
+        let isRecording = false;
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-IN';
+
+            recognition.onstart = () => {
+                isRecording = true;
+                const icon = micBtn.querySelector('span');
+                if (icon) icon.classList.add('recording');
+                showToast('Listening... Speak into your microphone.', 'success');
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                if (transcript) {
+                    const currentVal = chatInput.value.trim();
+                    chatInput.value = currentVal ? `${currentVal} ${transcript}` : transcript;
+                    chatInput.focus();
+                    
+                    chatInput.style.height = 'auto';
+                    chatInput.style.height = (chatInput.scrollHeight) + 'px';
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                if (event.error === 'not-allowed') {
+                    showToast('Microphone access denied.', 'error');
+                } else {
+                    showToast(`Speech recognition error: ${event.error}`, 'error');
+                }
+                stopRecording();
+            };
+
+            recognition.onend = () => {
+                stopRecording();
+            };
+        }
+
+        function stopRecording() {
+            isRecording = false;
+            if (micBtn) {
+                const icon = micBtn.querySelector('span');
+                if (icon) icon.classList.remove('recording');
+            }
+        }
+
+        if (micBtn) {
+            micBtn.addEventListener('click', () => {
+                if (!recognition) {
+                    showToast('Speech recognition is not supported in this browser. Try Chrome.', 'error');
+                    return;
+                }
+
+                if (isRecording) {
+                    recognition.stop();
+                } else {
+                    try {
+                        recognition.start();
+                    } catch (err) {
+                        console.error('Failed to start speech recognition:', err);
+                    }
+                }
+            });
+        }
+
+        // Quick action card click helper
+        window.sendQuickQuestion = (questionText) => {
+            chatInput.value = questionText;
+            chatInput.style.height = 'auto';
+            chatInput.style.height = (chatInput.scrollHeight) + 'px';
+            chatInput.focus();
+            handleSend();
+        };
+
+        const addMessage = (text, isAi = false, isLoading = false, imageUrl = null) => {
+            if (welcomeSection) {
+                welcomeSection.style.display = 'none';
+            }
+
+            const wrapper = document.createElement('div');
+            wrapper.className = `message-row ${!isAi ? 'reverse' : ''}`;
+
+            const iconHtml = isAi 
+                ? `<div class="d-flex align-center justify-center rounded-full" style="width: 40px; height: 40px; background: rgba(30, 58, 138, 0.1); color: var(--primary); flex-shrink: 0;"><span class="material-symbols-outlined">smart_toy</span></div>`
+                : `<div class="d-flex align-center justify-center rounded-full" style="width: 40px; height: 40px; background: var(--surface-high); color: var(--text-muted); flex-shrink: 0;"><span class="material-symbols-outlined">person</span></div>`;
+
+            let contentHtml = '';
+            if (isLoading) {
+                contentHtml = `
+                    <div class="message-bubble typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>`;
+            } else {
+                let formattedText = text
+                    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                    .replace(/\n/g, '<br>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                
+                let imageHtml = '';
+                if (imageUrl) {
+                    imageHtml = `<div class="mb-sm"><img src="${imageUrl}" style="max-width: 250px; max-height: 200px; border-radius: var(--radius-md); object-fit: cover;"></div>`;
+                }
+                
+                contentHtml = `<div class="message-bubble">${imageHtml}${formattedText}</div>`;
+            }
+
+            wrapper.innerHTML = iconHtml + contentHtml;
+            chatContainer.appendChild(wrapper);
+            viewport.scrollTop = viewport.scrollHeight;
+            return wrapper;
+        };
+
+        const saveChat = () => {
+            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+            if (currentChatId) localStorage.setItem('currentChatId', currentChatId);
+        };
+
+        const renderHistory = () => {
+            if (chatHistory.length > 0) {
+                chatHistory.forEach(msg => {
+                    addMessage(msg.content, msg.role === 'ai');
+                });
+            }
+        };
+
+        const handleSend = async () => {
+            const prompt = chatInput.value.trim();
+            if (!prompt && !selectedImageFile) return;
+
+            let userImageUrl = null;
+            if (selectedImageFile) {
+                userImageUrl = URL.createObjectURL(selectedImageFile);
+            }
+
+            // Render message on screen
+            addMessage(prompt, false, false, userImageUrl);
+            chatHistory.push({ role: 'user', content: prompt });
+            saveChat();
+
+            // Prepare multipart payload using FormData
+            const formData = new FormData();
+            formData.append('prompt', prompt);
+            if (currentChatId) {
+                formData.append('chatId', currentChatId);
+            }
+            if (selectedImageFile) {
+                formData.append('image', selectedImageFile);
+            }
+
+            // Clear inputs and previews immediately
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+            if (selectedImageFile) {
+                selectedImageFile = null;
+                imageInput.value = '';
+                imagePreviewContainer.classList.add('d-none');
+                imagePreviewContainer.classList.remove('d-flex');
+                imagePreview.src = '';
+                imageFilename.textContent = '';
+            }
+
+            const loadingMsg = addMessage('', true, true);
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/ai/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    body: formData
+                });
+
+                const data = await res.json();
+                loadingMsg.remove();
+
+                if (res.ok && data.aiResponse) {
+                    currentChatId = data.chatId;
+                    addMessage(data.aiResponse, true);
+                    chatHistory.push({ role: 'ai', content: data.aiResponse });
+                    saveChat();
+                } else {
+                    addMessage('Error: ' + (data.message || 'Failed to get response'), true);
+                }
+            } catch (err) {
+                loadingMsg.remove();
+                addMessage('Network error occurred while contacting AI.', true);
+            }
+        };
+
+        sendBtn.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+            }
+        });
+
+        // Init
+        renderHistory();
+
+        // Check for injected prompts from categories search parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryPrompt = urlParams.get('prompt');
+        if (queryPrompt) {
+            chatInput.value = queryPrompt;
+            chatInput.style.height = 'auto';
+            chatInput.style.height = (chatInput.scrollHeight) + 'px';
+            setTimeout(() => {
+                handleSend();
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }, 300);
+        }
+        
+        // Clear chat
+        const clearBtn = document.getElementById('clearChatBtn');
+        if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to clear the chat?')) {
+                    localStorage.removeItem('chatHistory');
+                    localStorage.removeItem('currentChatId');
+                    chatHistory = [];
+                    currentChatId = null;
+                    chatContainer.innerHTML = '';
+                    if (welcomeSection) {
+                        welcomeSection.style.display = 'block';
+                    }
+                    showToast('Chat cleared successfully.', 'success');
+                }
+            });
+        }
+
+        // Copy response
+        const copyResponseBtn = document.getElementById('copyResponseBtn');
+        if (copyResponseBtn) {
+            copyResponseBtn.addEventListener('click', () => {
+                const lastAiMsg = [...chatHistory].reverse().find(msg => msg.role === 'ai');
+                if (!lastAiMsg) {
+                    showToast('No AI response available to copy.', 'error');
+                    return;
+                }
+
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(lastAiMsg.content)
+                        .then(() => {
+                            showToast('Latest response copied to clipboard!', 'success');
+                        })
+                        .catch(err => {
+                            console.error('Clipboard write failed:', err);
+                            showToast('Failed to copy response to clipboard.', 'error');
+                        });
+                } else {
+                    // Fallback using textarea
+                    try {
+                        const textArea = document.createElement('textarea');
+                        textArea.value = lastAiMsg.content;
+                        textArea.style.position = 'fixed'; // Avoid scrolling to bottom
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        const successful = document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        if (successful) {
+                            showToast('Latest response copied to clipboard!', 'success');
+                        } else {
+                            showToast('Failed to copy response to clipboard.', 'error');
+                        }
+                    } catch (err) {
+                        console.error('Fallback copy failed:', err);
+                        showToast('Clipboard unavailable.', 'error');
+                    }
+                }
+            });
+        }
+
+        // Download PDF
+        const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+        if (downloadPdfBtn) {
+            downloadPdfBtn.addEventListener('click', () => {
+                const lastUserMsg = [...chatHistory].reverse().find(msg => msg.role === 'user');
+                const lastAiMsg = [...chatHistory].reverse().find(msg => msg.role === 'ai');
+
+                if (!lastUserMsg || !lastAiMsg) {
+                    showToast('No active conversation history to download.', 'error');
+                    return;
+                }
+
+                const today = new Date().toISOString().split('T')[0];
+                const timestamp = new Date().toLocaleString('en-IN');
+
+                // Create document wrapper for PDF output
+                const element = document.createElement('div');
+                element.style.padding = '35px';
+                element.style.fontFamily = 'Helvetica, Arial, sans-serif';
+                element.style.color = '#1f2937';
+
+                // Simple helper to replace markdown double-asterisks with HTML bold tags
+                const formatMarkdownToHtml = (mdText) => {
+                    return mdText
+                        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                        .replace(/\n/g, '<br>')
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                };
+
+                element.innerHTML = `
+                    <div style="border-bottom: 2px solid #0051d5; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div>
+                            <h1 style="color: #0051d5; margin: 0; font-size: 26px; font-weight: 700;">BharatCare AI</h1>
+                            <p style="margin: 4px 0 0 0; font-size: 13px; color: #4b5563;">Official Citizen Legal Advice Document</p>
+                        </div>
+                        <div style="text-align: right; font-size: 11px; color: #6b7280;">
+                            Date: ${timestamp}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px; background: #f3f4f6; padding: 18px; border-radius: 8px; border-left: 5px solid #6b7280;">
+                        <h3 style="margin-top: 0; margin-bottom: 8px; color: #374151; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">User Inquiry</h3>
+                        <p style="margin: 0; font-size: 13.5px; line-height: 1.5; color: #1f2937; white-space: pre-wrap;">${lastUserMsg.content}</p>
+                    </div>
+
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="margin-top: 0; margin-bottom: 12px; color: #0051d5; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Legal Guidance & Recommendations</h3>
+                        <div style="font-size: 13px; line-height: 1.6; color: #111827;">
+                            ${formatMarkdownToHtml(lastAiMsg.content)}
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 50px; border-top: 1px solid #e5e7eb; padding-top: 15px; text-align: center; font-size: 11px; color: #6b7280;">
+                        <p style="margin: 0 0 6px 0;">Generated by BharatCare AI Platform.</p>
+                        <p style="margin: 0; font-weight: 600; color: #dc2626;">⚠️ Disclaimer: This information is for educational and guidance purposes only, and does not constitute formal legal advice.</p>
+                    </div>
+                `;
+
+                const opt = {
+                    margin:       12,
+                    filename:     `bharatcare-chat-${today}.pdf`,
+                    image:        { type: 'jpeg', quality: 0.98 },
+                    html2canvas:  { scale: 2, useCORS: true },
+                    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                html2pdf().from(element).set(opt).save()
+                    .then(() => showToast('PDF downloaded successfully!', 'success'))
+                    .catch(err => {
+                        console.error('PDF export failed:', err);
+                        showToast('Failed to generate PDF document.', 'error');
+                    });
+            });
+        }
+
+    </script>
+    <div id="toast-container"></div>
+</body>
+</html>

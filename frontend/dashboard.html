@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BharatCare AI - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="/js/auth.js"></script>
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary-light d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">account_balance</span>
+                </div>
+                <div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link active">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="ai-chat.html" class="btn btn-primary btn-block mb-md text-center justify-center" style="padding: 0.5rem;">New Question</a>
+                <a href="profile.html" class="nav-link">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center" style="width: 50%; max-width: 400px;">
+                    <div class="input-group" style="width: 100%;">
+                        <div class="input-icon"><span class="material-symbols-outlined">search</span></div>
+                        <input type="text" class="form-control" placeholder="Search questions, topics..." style="padding: 0.5rem var(--spacing-md); font-size: 0.875rem;">
+                    </div>
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
+                    </button>
+                    <div class="d-flex align-center gap-sm pl-md" style="border-left: 1px solid var(--border);">
+                        <div class="d-none-mobile text-right">
+                            <h4 class="user-name-display m-0" style="font-size: 0.875rem;">Loading...</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Premium User</span>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content">
+                <section class="mb-xl animate-fade-in">
+                    <h2 class="text-primary mb-xs">Welcome back, <span class="user-name-display">User</span></h2>
+                    <p style="font-size: 1.125rem;">Your Citizen Help Platform dashboard is ready. What would you like to handle today?</p>
+                </section>
+
+                <!-- Action Cards -->
+                <section class="grid grid-cols-4 gap-md mb-xl animate-slide-up stagger-1">
+                    <a href="ai-chat.html" class="card ai-assistant-card" id="ai-assistant-card">
+                        <div class="ai-card-content">
+                            <div>
+                                <div class="ai-icon-wrapper">
+                                    <span class="material-symbols-outlined">smart_toy</span>
+                                </div>
+                                <h4>AI Assistant</h4>
+                                <p class="ai-card-desc">Ask legal questions in simple language and get instant guidance.</p>
+                            </div>
+                            <span class="ai-open-btn">
+                                Open Assistant
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </span>
+                        </div>
+                    </a>
+
+                    <a href="complaint.html" class="card card-body flex-column justify-between hover-lift" style="height: 180px; text-decoration: none;">
+                        <div class="d-flex justify-between align-center">
+                            <div class="d-flex align-center justify-center rounded-lg p-sm" style="background: rgba(0, 81, 213, 0.1);">
+                                <span class="material-symbols-outlined text-secondary">description</span>
+                            </div>
+                            <span class="material-symbols-outlined text-muted">add_circle</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Generate Complaint</h4>
+                            <p class="text-muted" style="font-size: 0.875rem; margin: 0;">Automated filing drafts</p>
+                        </div>
+                    </a>
+
+                    <a href="categories.html" class="card card-body flex-column justify-between hover-lift" style="height: 180px; text-decoration: none;">
+                        <div class="d-flex justify-between align-center">
+                            <div class="d-flex align-center justify-center rounded-lg p-sm" style="background: rgba(243, 148, 97, 0.1);">
+                                <span class="material-symbols-outlined" style="color: var(--accent);">gavel</span>
+                            </div>
+                            <span class="material-symbols-outlined text-muted">category</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Explore My Rights</h4>
+                            <p class="text-muted" style="font-size: 0.875rem; margin: 0;">Explore common real-life situations</p>
+                        </div>
+                    </a>
+
+                    <a href="authorities.html" class="card card-body flex-column justify-between hover-lift" style="height: 180px; text-decoration: none;">
+                        <div class="d-flex justify-between align-center">
+                            <div class="d-flex align-center justify-center rounded-lg p-sm bg-error-bg">
+                                <span class="material-symbols-outlined text-error">account_balance</span>
+                            </div>
+                            <span class="material-symbols-outlined text-muted">help</span>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-xs">Government Help</h4>
+                            <p class="text-muted" style="font-size: 0.875rem; margin: 0;">Connect with official services</p>
+                        </div>
+                    </a>
+                </section>
+
+                <div class="grid grid-cols-3 gap-xl animate-slide-up stagger-2">
+                    <!-- Left Column: Recent Conversations -->
+                    <div style="grid-column: span 2;" class="flex-column gap-xl">
+                        <div class="card">
+                            <div class="card-header d-flex justify-between align-center" style="border-bottom: 1px solid var(--border); padding-bottom: var(--spacing-md);">
+                                <h3 class="m-0" style="font-size: 1.25rem;">Recent Conversations</h3>
+                                <a href="history.html" style="font-size: 0.875rem; font-weight: 600;">View All</a>
+                            </div>
+                            <div id="recent-convos-container">
+                                <!-- Populated by JS -->
+                                <p class="p-md text-muted">Loading history...</p>
+                            </div>
+                        </div>
+
+                        <!-- Trending Topics -->
+                        <div class="flex-column gap-md">
+                            <div class="d-flex align-center gap-sm">
+                                <span class="material-symbols-outlined text-primary">trending_up</span>
+                                <h3 class="m-0" style="font-size: 1.25rem;">Common Topics Right Now</h3>
+                            </div>
+                            <div class="grid grid-cols-2 gap-md">
+                                <div class="card card-body d-flex gap-md align-center hover-lift">
+                                    <div class="p-sm bg-warning-bg rounded-lg">
+                                        <span class="material-symbols-outlined text-warning">article</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="m-0" style="font-size: 1rem;">Data Protection Act</h4>
+                                        <p class="m-0" style="font-size: 0.75rem;">Understanding compliance rules</p>
+                                    </div>
+                                </div>
+                                <div class="card card-body d-flex gap-md align-center hover-lift">
+                                    <div class="p-sm rounded-lg" style="background: rgba(0, 81, 213, 0.1);">
+                                        <span class="material-symbols-outlined text-secondary">balance</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="m-0" style="font-size: 1rem;">Bhartiya Nyaya Sanhita</h4>
+                                        <p class="m-0" style="font-size: 0.75rem;">Differences from old IPC</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-sm mt-sm">
+                                <span class="badge" style="background: var(--surface-high); color: var(--text-secondary);">#CyberLaw</span>
+                                <span class="badge" style="background: var(--surface-high); color: var(--text-secondary);">#TenantRights</span>
+                                <span class="badge" style="background: var(--surface-high); color: var(--text-secondary);">#StartupIndia</span>
+                                <span class="badge" style="background: var(--surface-high); color: var(--text-secondary);">#GSTCompliance</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Activity Timeline -->
+                    <aside class="card card-body" style="height: fit-content;">
+                        <h3 class="m-0 mb-lg" style="font-size: 1.25rem;">Recent Activity</h3>
+                        <div class="relative" style="padding-left: 24px;">
+                            <!-- Line -->
+                            <div class="absolute" style="left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--border);"></div>
+                            
+                            <!-- Items -->
+                            <div class="relative mb-lg">
+                                <div class="absolute bg-primary" style="left: -24px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: var(--shadow-sm);"></div>
+                                <h4 class="m-0" style="font-size: 1rem;">Document Exported</h4>
+                                <p class="text-muted m-0" style="font-size: 0.875rem;">Consumer complaint draft was exported to PDF.</p>
+                                <span style="font-size: 0.75rem; color: var(--border-focus);">10:45 AM</span>
+                            </div>
+                            
+                            <div class="relative mb-lg">
+                                <div class="absolute bg-secondary" style="left: -24px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: var(--shadow-sm);"></div>
+                                <h4 class="m-0" style="font-size: 1rem;">Question Saved</h4>
+                                <p class="text-muted m-0" style="font-size: 0.875rem;">Saved a new question for Home Rent Dispute.</p>
+                                <span style="font-size: 0.75rem; color: var(--border-focus);">Yesterday</span>
+                            </div>
+
+                            <div class="relative mb-lg">
+                                <div class="absolute bg-success" style="left: -24px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: var(--shadow-sm);"></div>
+                                <h4 class="m-0" style="font-size: 1rem;">Login Detected</h4>
+                                <p class="text-muted m-0" style="font-size: 0.875rem;">Successful login from new device.</p>
+                                <span style="font-size: 0.75rem; color: var(--border-focus);">Oct 14, 2024</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary btn-block mt-xl" style="font-size: 0.875rem;">Clear Activity Log</button>
+                    </aside>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <a href="/ai-chat" class="btn btn-primary rounded-full absolute d-flex align-center justify-center" style="bottom: 2rem; right: 2rem; width: 64px; height: 64px; z-index: 100; box-shadow: var(--shadow-xl);">
+        <span class="material-symbols-outlined" style="font-size: 2rem;">chat_spark</span>
+    </a>
+
+    <!-- Mobile Navigation (Simple implementation) -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="/dashboard" class="text-primary text-center"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="/ai-chat" class="text-muted text-center"><span class="material-symbols-outlined d-block">smart_toy</span><span style="font-size: 0.625rem;">AI</span></a>
+        <a href="/complaint" class="text-muted text-center"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="/profile" class="text-muted text-center"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
+
+    <style>
+        .hover-lift { transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+        .hover-lift:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+        /* Loading skeleton for recent conversations */
+        .skeleton-loader {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .skeleton-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(90deg, var(--surface-low) 25%, var(--surface-high) 50%, var(--surface-low) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            flex-shrink: 0;
+        }
+        .skeleton-lines {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .skeleton-line {
+            height: 14px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--surface-low) 25%, var(--surface-high) 50%, var(--surface-low) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        .skeleton-line.short { width: 40%; }
+        .skeleton-line.long { width: 80%; }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Error state card */
+        .error-banner {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: var(--error-bg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-md);
+        }
+        .error-banner .material-symbols-outlined { color: var(--error); }
+        .error-banner p { color: var(--error); margin: 0; font-size: 0.875rem; }
+
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .ai-assistant-card { min-height: 180px; }
+        }
+
+        @media (max-width: 480px) {
+            .ai-assistant-card .ai-card-content { padding: var(--spacing-md); }
+            .ai-assistant-card h4 { font-size: 1.1rem; }
+            .ai-assistant-card .ai-card-desc { font-size: 0.8rem; }
+        }
+    </style>
+
+    <!-- User & Auth Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/login';
+                return;
+            }
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user && user.name) {
+                    document.querySelectorAll('.user-name-display').forEach(el => el.textContent = user.name);
+                }
+            } catch(e) {}
+
+            // Ensure AI Assistant card is always visible
+            ensureAICardVisible();
+        });
+
+        /**
+         * Guarantees the AI Assistant card is always rendered and visible.
+         * If somehow removed from the DOM, re-injects a fallback.
+         */
+        function ensureAICardVisible() {
+            let aiCard = document.getElementById('ai-assistant-card');
+            if (!aiCard) {
+                // Re-inject the card as a fallback
+                const actionGrid = document.querySelector('.grid.grid-cols-4');
+                if (actionGrid) {
+                    const fallback = document.createElement('a');
+                    fallback.href = '/ai-chat';
+                    fallback.id = 'ai-assistant-card';
+                    fallback.className = 'card ai-assistant-card';
+                    fallback.innerHTML = `
+                        <div class="ai-card-content">
+                            <div>
+                                <div class="ai-icon-wrapper">
+                                    <span class="material-symbols-outlined">smart_toy</span>
+                                </div>
+                                <h4>AI Assistant</h4>
+                                <p class="ai-card-desc">Ask legal questions in simple language and get instant guidance.</p>
+                            </div>
+                            <span class="ai-open-btn">
+                                Open Assistant
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </span>
+                        </div>
+                    `;
+                    actionGrid.prepend(fallback);
+                    aiCard = fallback;
+                }
+            }
+
+            // Force visibility
+            if (aiCard) {
+                aiCard.style.display = 'block';
+                aiCard.style.visibility = 'visible';
+                aiCard.style.opacity = '1';
+            }
+        }
+    </script>
+    <script>
+        const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
+        async function loadDashboardHistory() {
+            const container = document.getElementById('recent-convos-container');
+            const token = localStorage.getItem('token');
+
+            // Show loading skeleton
+            container.innerHTML = `
+                <div class="skeleton-loader">
+                    <div class="skeleton-circle"></div>
+                    <div class="skeleton-lines">
+                        <div class="skeleton-line long"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                </div>
+                <div class="skeleton-loader">
+                    <div class="skeleton-circle"></div>
+                    <div class="skeleton-lines">
+                        <div class="skeleton-line long"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                </div>
+            `;
+
+            try {
+                const [resChats, resComplaints] = await Promise.all([
+                    fetch(`${API_BASE_URL}/api/ai/chats`, { headers: { 'Authorization': 'Bearer ' + token } }),
+                    fetch(`${API_BASE_URL}/api/complaints`, { headers: { 'Authorization': 'Bearer ' + token } })
+                ]);
+                
+                let allHistory = [];
+                if(resChats.ok) {
+                    const chats = await resChats.json();
+                    allHistory = allHistory.concat(chats.map(c => ({...c, type: 'chat'})));
+                }
+                if(resComplaints.ok) {
+                    const complaints = await resComplaints.json();
+                    allHistory = allHistory.concat(complaints.map(c => ({...c, type: 'complaint'})));
+                }
+                
+                allHistory = allHistory.sort((a,b) => new Date(b.createdAt || b.updatedAt) - new Date(a.createdAt || a.updatedAt)).slice(0, 3);
+                
+                if (allHistory.length === 0) {
+                    container.innerHTML = `
+                        <div class="p-md d-flex flex-column align-center justify-center gap-sm" style="padding: var(--spacing-xl);">
+                            <span class="material-symbols-outlined text-muted" style="font-size: 48px; opacity: 0.3;">forum</span>
+                            <p class="text-muted m-0">No recent conversations yet.</p>
+                            <a href="ai-chat.html" class="btn btn-primary" style="margin-top: var(--spacing-sm); font-size: 0.875rem; padding: 0.5rem 1rem;">Start Your First Question</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                container.innerHTML = allHistory.map(item => `
+                    <a href="${item.type === 'chat' ? 'ai-chat.html?id=' + item._id : 'complaint.html?id=' + item._id}" class="d-flex align-center gap-md p-md hover-lift" style="text-decoration: none; border-bottom: 1px solid var(--border);">
+                        <div class="d-flex align-center justify-center rounded-full" style="width: 48px; height: 48px; background: ${item.type === 'chat' ? 'rgba(30, 58, 138, 0.1)' : 'var(--surface-high)'}; color: ${item.type === 'chat' ? 'var(--primary)' : 'var(--text-muted)'}; flex-shrink: 0;">
+                            <span class="material-symbols-outlined">${item.type === 'chat' ? 'chat' : 'description'}</span>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="d-flex justify-between align-center">
+                                <h4 class="text-primary m-0" style="font-size: 1rem;">${item.title || item.type + ' Draft'}</h4>
+                                <span style="font-size: 0.75rem; color: var(--text-muted);">${new Date(item.createdAt || item.updatedAt).toLocaleDateString()}</span>
+                            </div>
+                        </div>
+                    </a>
+                `).join('');
+            } catch(err) { 
+                console.error('Dashboard history load error:', err);
+                container.innerHTML = `
+                    <div class="error-banner">
+                        <span class="material-symbols-outlined">error</span>
+                        <div>
+                            <p><strong>Could not load history</strong></p>
+                            <p style="opacity: 0.8;">The server may be offline. Your AI Assistant is still available.</p>
+                        </div>
+                    </div>
+                    <div class="p-md d-flex flex-column align-center justify-center gap-sm">
+                        <a href="ai-chat.html" class="btn btn-primary" style="font-size: 0.875rem; padding: 0.5rem 1rem;">Open AI Assistant</a>
+                    </div>
+                `;
+            }
+
+            // Always ensure AI card stays visible, even after async operations
+            ensureAICardVisible();
+        }
+        loadDashboardHistory();
+    </script>
+</body>
+</html>

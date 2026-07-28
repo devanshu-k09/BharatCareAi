@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Government Help | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="/js/auth.js"></script>
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">gavel</span>
+                </div>
+                <div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href='ai-chat.html'">
+                <span class="material-symbols-outlined">add</span> New Question
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link active">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="profile.html" class="nav-link">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center flex-grow" style="max-width: 400px;">
+                    <div class="input-group" style="width: 100%;">
+                        <div class="input-icon"><span class="material-symbols-outlined">search</span></div>
+                        <input type="text" class="form-control" placeholder="Search authorities, portals, helplines...">
+                    </div>
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
+                    </button>
+                    <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content" style="max-width: 1000px;">
+                <div class="mb-xl animate-fade-in">
+                    <h2 class="text-primary mb-xs">Government Authorities & Portals</h2>
+                    <p class="text-muted m-0">Quickly access official portals, helpline numbers, and legal resources.</p>
+                </div>
+
+                <!-- Helplines Section -->
+                <h3 class="mb-md">Emergency & Helplines</h3>
+                <div class="grid grid-cols-4 gap-md mb-2xl animate-slide-up">
+                    <div class="card card-body bg-error-bg d-flex flex-column align-center text-center">
+                        <span class="material-symbols-outlined text-error mb-xs" style="font-size: 2rem;">local_police</span>
+                        <h4 class="text-error m-0 mb-xs">Police</h4>
+                        <p class="text-error m-0" style="font-size: 1.5rem; font-weight: bold;">112</p>
+                    </div>
+                    <div class="card card-body d-flex flex-column align-center text-center" style="background: rgba(30, 58, 138, 0.1);">
+                        <span class="material-symbols-outlined text-primary mb-xs" style="font-size: 2rem;">security</span>
+                        <h4 class="text-primary m-0 mb-xs">Cyber Crime</h4>
+                        <p class="text-primary m-0" style="font-size: 1.5rem; font-weight: bold;">1930</p>
+                    </div>
+                    <div class="card card-body d-flex flex-column align-center text-center" style="background: rgba(186, 26, 26, 0.1);">
+                        <span class="material-symbols-outlined text-error mb-xs" style="font-size: 2rem;">female</span>
+                        <h4 class="text-error m-0 mb-xs">Women Helpline</h4>
+                        <p class="text-error m-0" style="font-size: 1.5rem; font-weight: bold;">1091</p>
+                    </div>
+                    <div class="card card-body d-flex flex-column align-center text-center" style="background: rgba(0, 81, 213, 0.1);">
+                        <span class="material-symbols-outlined text-secondary mb-xs" style="font-size: 2rem;">shopping_bag</span>
+                        <h4 class="text-secondary m-0 mb-xs">Consumer</h4>
+                        <p class="text-secondary m-0" style="font-size: 1.5rem; font-weight: bold;">1915</p>
+                    </div>
+                </div>
+
+                <!-- Portals Section -->
+                <h3 class="mb-md">Official Portals</h3>
+                <div class="grid grid-cols-2 gap-lg animate-slide-up stagger-1">
+                    <div class="card card-body d-flex gap-lg align-center" style="transition: transform 0.2s;">
+                        <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" style="height: 32px; opacity: 0.8;" alt="Emblem">
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-primary m-0 mb-xs">e-Daakhil</h4>
+                            <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">Filing consumer complaints online with the National Consumer Disputes Redressal Commission.</p>
+                            <a href="https://edaakhil.nic.in/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                        </div>
+                    </div>
+
+                    <div class="card card-body d-flex gap-lg align-center" style="transition: transform 0.2s;">
+                        <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" style="height: 32px; opacity: 0.8;" alt="Emblem">
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-primary m-0 mb-xs">National Cyber Crime Reporting</h4>
+                            <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">Report cyber crimes and track your complaints online officially through MHA.</p>
+                            <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                        </div>
+                    </div>
+
+                    <div class="card card-body d-flex gap-lg align-center" style="transition: transform 0.2s;">
+                        <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
+                            <span class="material-symbols-outlined text-primary" style="font-size: 2rem;">gavel</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-primary m-0 mb-xs">e-Courts Services</h4>
+                            <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">Track case status, view court orders, and access cause lists across all Indian courts.</p>
+                            <a href="https://ecourts.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                        </div>
+                    </div>
+
+                    <div class="card card-body d-flex gap-lg align-center" style="transition: transform 0.2s;">
+                        <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
+                            <span class="material-symbols-outlined text-primary" style="font-size: 2rem;">find_in_page</span>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-primary m-0 mb-xs">RTI Online</h4>
+                            <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">File Right to Information applications for central government departments and ministries.</p>
+                            <a href="https://rtionline.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="categories.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">gavel</span><span style="font-size: 0.625rem;">Explore</span></a>
+        <a href="authorities.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">account_balance</span><span style="font-size: 0.625rem;">Help</span></a>
+        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
+
+    <style>
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .page-content { padding-bottom: 80px; }
+            .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+            .grid-cols-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</body>
+</html>

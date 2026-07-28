@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>My Profile | BharatCare AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="/js/auth.js"></script>
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar d-none-mobile" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                    <span class="material-symbols-outlined text-white">gavel</span>
+                </div>
+                <div>
+                    <h2>BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href='ai-chat.html'">
+                <span class="material-symbols-outlined">add</span> New Question
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+                <a href="ai-chat.html" class="nav-link">
+                    <span class="material-symbols-outlined">smart_toy</span> AI Assistant
+                </a>
+                <a href="complaint.html" class="nav-link">
+                    <span class="material-symbols-outlined">description</span> Complaint Generator
+                </a>
+                <a href="categories.html" class="nav-link">
+                    <span class="material-symbols-outlined">gavel</span> Explore My Rights
+                </a>
+                <a href="authorities.html" class="nav-link">
+                    <span class="material-symbols-outlined">account_balance</span> Government Help
+                </a>
+                <a href="history.html" class="nav-link">
+                    <span class="material-symbols-outlined">history</span> My Past Questions
+                </a>
+            </nav>
+
+            <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
+                <a href="profile.html" class="nav-link active">
+                    <span class="material-symbols-outlined">person</span> Profile
+                </a>
+                <a href="settings.html" class="nav-link">
+                    <span class="material-symbols-outlined">settings</span> Settings
+                </a>
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="d-flex align-center flex-grow" style="max-width: 400px;">
+                </div>
+
+                <div class="d-flex align-center gap-md">
+                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content" style="max-width: 800px;">
+                <div class="mb-xl animate-fade-in">
+                    <h2 class="text-primary mb-xs">My Profile</h2>
+                    <p class="text-muted m-0">Manage your personal information and preferences.</p>
+                </div>
+
+                <div class="card p-xl mb-xl animate-slide-up text-center d-flex flex-column align-center gap-md">
+                    <img id="profileAvatar" src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--surface-high);">
+                    <div>
+                        <h3 class="m-0 text-primary user-name-display">Loading...</h3>
+                        <p class="text-muted user-email-display">loading@example.com</p>
+                    </div>
+                    <button id="uploadBtn" class="btn btn-secondary">Upload New Picture</button>
+                    <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                </div>
+
+                <div class="card p-xl animate-slide-up stagger-1">
+                    <h4 class="mb-lg border-bottom" style="padding-bottom: var(--spacing-sm); border-bottom: 1px solid var(--border);">Personal Information</h4>
+                    
+                    <form id="profileForm">
+                        <div class="grid grid-cols-2 gap-md mb-md">
+                            <div class="form-group m-0">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control card border" style="border: 1px solid var(--border);" id="profileName">
+                            </div>
+                            <div class="form-group m-0">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control card border" style="border: 1px solid var(--border);" id="profileEmail" disabled>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-lg">
+                            <label class="form-label">Phone Number (Optional)</label>
+                            <input type="text" class="form-control card border" style="border: 1px solid var(--border);" placeholder="+91">
+                        </div>
+
+                        <div class="d-flex justify-end gap-md">
+                            <button type="button" class="btn btn-secondary" onclick="window.location.reload()">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="alert('Profile updated successfully!')">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="categories.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">gavel</span><span style="font-size: 0.625rem;">Explore</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    </div>
+
+    <style>
+        @media (max-width: 768px) {
+            #mobileNav { display: flex !important; position: fixed; }
+            .page-content { padding-bottom: 80px; }
+            .grid-cols-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <script>
+        const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
+        // Toast notifications utility
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'check_circle' : 'error';
+            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) window.location.href = 'login.html';
+            
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user) {
+                    document.querySelectorAll('.user-name-display').forEach(el => el.textContent = user.name || 'User');
+                    document.querySelectorAll('.user-email-display').forEach(el => el.textContent = user.email || 'user@example.com');
+                    document.getElementById('profileName').value = user.name || '';
+                    document.getElementById('profileEmail').value = user.email || '';
+                }
+            } catch(e) {}
+        });
+
+        // Profile image upload functionality
+        const uploadBtn = document.getElementById('uploadBtn');
+        const avatarInput = document.getElementById('avatarInput');
+        const profileAvatar = document.getElementById('profileAvatar');
+
+        if (uploadBtn && avatarInput) {
+            uploadBtn.addEventListener('click', () => avatarInput.click());
+
+            avatarInput.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                // Validate image type
+                if (!file.type.startsWith('image/')) {
+                    showToast('Please select a valid image file (PNG, JPG, WEBP).', 'error');
+                    avatarInput.value = '';
+                    return;
+                }
+
+                // Validate file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    showToast('Image size exceeds the 5MB limit.', 'error');
+                    avatarInput.value = '';
+                    return;
+                }
+
+                // Show loading state
+                const originalText = uploadBtn.innerText;
+                uploadBtn.disabled = true;
+                uploadBtn.innerText = 'Uploading...';
+
+                try {
+                    const formData = new FormData();
+                    formData.append('avatar', file);
+
+                    const res = await fetch(`${API_BASE_URL}/api/auth/profile/avatar`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                        body: formData
+                    });
+
+                    const data = await res.json();
+                    uploadBtn.disabled = false;
+                    uploadBtn.innerText = originalText;
+                    avatarInput.value = '';
+
+                    if (res.ok) {
+                        // Update local storage user object
+                        localStorage.setItem('user', JSON.stringify(data));
+
+                        // Refresh all images immediately
+                        const avatarUrl = data.avatar.startsWith('http') || data.avatar.startsWith('data:') 
+                          ? data.avatar 
+                          : `${API_BASE_URL}${data.avatar}`;
+                        
+                        document.querySelectorAll('img').forEach(img => {
+                          if (img.src && (img.src.includes('ui-avatars.com/api/') || img.src.includes('/uploads/avatars/'))) {
+                            img.src = avatarUrl;
+                          }
+                        });
+
+                        showToast('Profile picture updated successfully!', 'success');
+                    } else {
+                        showToast(data.message || 'Failed to upload profile picture.', 'error');
+                    }
+                } catch (err) {
+                    console.error('Error uploading avatar:', err);
+                    uploadBtn.disabled = false;
+                    uploadBtn.innerText = originalText;
+                    avatarInput.value = '';
+                    showToast('Network error occurred during upload.', 'error');
+                }
+            });
+        }
+    </script>
+    <div id="toast-container"></div>
+</body>
+</html>
