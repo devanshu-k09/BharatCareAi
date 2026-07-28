@@ -6,6 +6,7 @@
   <title>BharatCare AI | Understand Your Legal Rights with AI</title>
   
   <link rel="stylesheet" href="css/style.css">
+    <script src="/js/auth.js"></script>
 </head>
 <body>
   <!-- Ambient Background -->
@@ -17,8 +18,13 @@
   <!-- Top Navigation Bar -->
   <nav class="top-header">
     <div class="d-flex align-center gap-sm">
-      <img alt="BharatCare AI Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJH2nOcyxSsVchjtGKaZx3Q44364A80kZAf_LLRxSaaTKETNu0JDU0ZIN2TbQeu8sGgYERCyo2cWUT_e6TAkvHVj-73qRfIHRdZ6A8ZfQQrLGEMRpIH-5HoRouPUJs1qCoi5rVB7V_VBmSwck_RIthiPvM1sdtUmRZ7q4VXgDP94DWOPhgz77nyrnlTeZEyFL3YBeJd1gxQ_S3ey3e2FMDnnYHBZHvHIk1vs4u9r1f2QOSTUnF1EjTiQ" height="32" width="32" style="object-fit: contain;"/>
-      <h3 class="text-primary m-0">BharatCare AI</h3>
+      <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+          <span class="material-symbols-outlined text-white">gavel</span>
+      </div>
+      <div>
+          <h3 class="text-primary m-0" style="line-height: 1;">BharatCare AI</h3>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+      </div>
     </div>
     
     <div class="d-none-mobile d-flex align-center gap-xl">
@@ -29,9 +35,9 @@
     </div>
 
     <div class="d-flex align-center gap-md">
-      <button class="btn btn-icon"><span class="material-symbols-outlined">language</span></button>
-      <button class="btn btn-icon"><span class="material-symbols-outlined">notifications</span></button>
-      <a href="login.html" class="btn btn-primary">Get Started</a>
+      <button class="btn btn-icon" onclick="alert('Language selection coming soon!')"><span class="material-symbols-outlined">language</span></button>
+      <button class="btn btn-icon" onclick="alert('No new notifications!')"><span class="material-symbols-outlined">notifications</span></button>
+      <a href="/login" class="btn btn-primary">Get Started</a>
     </div>
   </nav>
 
@@ -51,20 +57,20 @@
         </p>
         
         <div class="d-flex gap-md flex-wrap mt-md">
-          <a href="login.html" class="btn btn-primary">
+          <a href="/login" class="btn btn-primary">
             Ask AI <span class="material-symbols-outlined">arrow_forward</span>
           </a>
-          <button class="btn btn-secondary">Explore Rights</button>
-          <a href="complaint.html" class="btn btn-icon d-flex align-center gap-xs" style="text-decoration: none; border-radius: 0; color: var(--primary)">
+          <a href="/categories" class="btn btn-secondary" style="text-decoration: none;">Explore Rights</a>
+          <a href="/complaint" class="btn btn-icon d-flex align-center gap-xs" style="text-decoration: none; border-radius: 0; color: var(--primary)">
             <span class="material-symbols-outlined">description</span> Complaint Generator
           </a>
         </div>
         
         <div class="d-flex align-center gap-md mt-xl">
           <div class="d-flex" style="margin-left: 10px;">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZz0Bys55UgmpqrObju9b9I2ONxZX_MOSv1503RhorlJzxJSWUOtrSzXEV36cxSjBCNVaKqx53MMBInDXOyJXoAsh_J4FmEj6Oes_a2LmY1ILe4PwXjIt-98KRZlBWPbtZAH4cTb-KO1Ss-XUqO_9CXuqtYVo92D7B83YLbQfsQeqzU2v1lh17LJuBEynpJ-hN_YN_tAiPoWs9fSgZkpQDfQ1QZsfPYfh8tFMMdL_3VAkD8zhvPe4DGQ" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; margin-left: -10px;">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvZne3Vqd_q7Ha7gsZ4UG4kWZQbehQuRoWGobCAEIYz0j0SwE9IcrNRNsFlEREgEw3iSYP1BshIOqKyrnvLUihTg1MGgnaJd6PFGwEU_SpCH_YT0iTWxqMBEJZmm1Rjs6r_dB-m_6STzGLutJM0RU7VA_bjiQKac83jhckDzZ7XE-zOw5ytzT7kg6USe85gSUjCyca-0pmo2buj40rXIJevwGfmiuv73EuZAqA4TWKS_yvt7Ayz8oozQ" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; margin-left: -10px;">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDexiJ-XfCLvARTklDpfXPwB2urMCbYhbcI5ghMMAtCa-_de3vRpxsRY1QwSA2XlyRq7on7nhehetXA98egyDcbN8PjcQPcbz-GwOwobkCBg-RUTkFw3_fBrX1A6EADlAI0BqITcsCkGohquYc3j56pzNc1Be4Jrduj0ibO-Ht-RjRDI1mO2KGXbmlPmNoMqBiDvm1ADvLIK9IZ861SzOVIZT5LJKLkgNX1Nm52v6q2cS4XC6IZjDY72g" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; margin-left: -10px;">
+            <img src="https://i.pravatar.cc/100?img=1" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; margin-left: -10px;">
+            <img src="https://i.pravatar.cc/100?img=2" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; margin-left: -10px;">
+            <img src="https://i.pravatar.cc/100?img=3" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; margin-left: -10px;">
           </div>
           <p style="font-size: 0.875rem;">Trusted by 50,000+ users across India</p>
         </div>
@@ -72,7 +78,7 @@
       
       <div class="relative animate-fade-in stagger-2">
         <div class="glass-card p-md">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuALHROgQ5-F6auzLIG5MJ9P80FegD9-MAMxUU5AXPLEUbcaZtQO2JWfwZS2x1ScCmhpCBL2LFRK55R-bHFb49zMTCliRAHPDaOaWHl6b05dRTJDzSVPAvO7YQ5NQsTgWd3rIwR4ZY6Q8uuSXgI9lOBR-lRJZnjhv8TkyjiZ3CCo-WmcSeFfLpKlZoMFlTC32Fq9FgclrHk3nNqaYVvLfroI_7Loz93g-UhQggbPwkyaPdjwTc7a64sRgQ" style="width: 100%; border-radius: var(--radius-lg);" alt="AI Legal Assistant interface">
+          <img src="https://picsum.photos/800/400?random=1" style="width: 100%; border-radius: var(--radius-lg);" alt="AI Legal Assistant interface">
         </div>
         
         <div class="absolute glass-card p-sm d-flex align-center gap-sm" style="bottom: 40px; left: -20px; animation: float 6s ease-in-out infinite;">
@@ -106,7 +112,7 @@
             <h3 class="text-primary">Contextual AI Legal Advice</h3>
             <p>Our LLM is specifically trained on Indian Constitutional Law, IPC, and the new Bharatiya Nyaya Sanhita (BNS). Get advice that understands local context and language nuances.</p>
           </div>
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcE_nl5WhReCSz2cbBGRzstV9C6kA2j3P9iEVfWmj4uueCJjyJtS6Wtv2nr6ARrZIrlyojTn5NzGhiYKM-hcDyT1McBCJujOnku9dh35-a07i8baEzjvr44WaRJwQAnQkr-ijGiO1qmuOFz7qQUbqIfEypqdWxnmj8S6wv1fyM8L_7vtCrHHbbmRLr3s0fkS1TkWzKdXzA45PTLV0hi4fvW9Ob_Z2_gRg-tQhNdRjXf9hoypMZ0A7Hdg" style="margin-top: var(--spacing-xl); width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-lg);">
+          <img src="https://picsum.photos/800/400?random=2" style="margin-top: var(--spacing-xl); width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius-lg);">
         </div>
 
         <!-- Small Feature 1 -->
@@ -158,8 +164,32 @@
     </div>
   </section>
 
+  <!-- How It Works Section -->
+  <section class="py-3xl" id="how-it-works">
+    <div class="container text-center">
+      <h2 class="text-primary mb-2xl">How It Works</h2>
+      <div class="grid grid-cols-3 gap-xl">
+        <div class="card p-xl animate-slide-up">
+          <span class="material-symbols-outlined text-primary mb-md" style="font-size: 3rem;">login</span>
+          <h4>1. Sign In</h4>
+          <p class="mt-sm">Create a free account to access all citizen services.</p>
+        </div>
+        <div class="card p-xl animate-slide-up stagger-1">
+          <span class="material-symbols-outlined text-primary mb-md" style="font-size: 3rem;">help</span>
+          <h4>2. Ask Questions</h4>
+          <p class="mt-sm">Describe your legal issue in your preferred language.</p>
+        </div>
+        <div class="card p-xl animate-slide-up stagger-2">
+          <span class="material-symbols-outlined text-primary mb-md" style="font-size: 3rem;">task_alt</span>
+          <h4>3. Get Solutions</h4>
+          <p class="mt-sm">Receive actionable advice and auto-generated documents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Categories Section -->
-  <section class="py-3xl" id="categories">
+  <section class="bg-surface py-3xl" id="categories">
     <div class="container">
       <h2 class="text-primary text-center mb-2xl">Specialized Legal Domains</h2>
       <div class="grid grid-cols-4 gap-md">
@@ -184,14 +214,27 @@
     </div>
   </section>
 
+  <!-- FAQ Section -->
+  <section class="bg-surface py-3xl" id="faq">
+    <div class="container text-center">
+      <h2 class="text-primary mb-md">Frequently Asked Questions</h2>
+      <p class="text-muted" style="font-size: 1.125rem;">More details coming soon.</p>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="bg-surface py-3xl" style="border-top: 1px solid var(--border);">
     <div class="container">
       <div class="grid grid-cols-4 gap-2xl mb-2xl">
         <div>
           <div class="d-flex align-center gap-sm mb-lg">
-            <img alt="BharatCare AI Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJH2nOcyxSsVchjtGKaZx3Q44364A80kZAf_LLRxSaaTKETNu0JDU0ZIN2TbQeu8sGgYERCyo2cWUT_e6TAkvHVj-73qRfIHRdZ6A8ZfQQrLGEMRpIH-5HoRouPUJs1qCoi5rVB7V_VBmSwck_RIthiPvM1sdtUmRZ7q4VXgDP94DWOPhgz77nyrnlTeZEyFL3YBeJd1gxQ_S3ey3e2FMDnnYHBZHvHIk1vs4u9r1f2QOSTUnF1EjTiQ" height="32" width="32" style="object-fit: contain;"/>
-            <h4 class="text-primary m-0">BharatCare AI</h4>
+            <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 40px; height: 40px;">
+                <span class="material-symbols-outlined text-white">gavel</span>
+            </div>
+            <div>
+                <h4 class="text-primary m-0" style="line-height: 1;">BharatCare AI</h4>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+            </div>
           </div>
           <p class="mb-lg">Democratizing Citizen Help Platform for everyone in India. Simple, accessible, and accurate.</p>
         </div>

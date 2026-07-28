@@ -11,11 +11,21 @@ const generateToken = (id) => {
 };
 
 // POST /api/auth/register
-export const registerUser = async (req, res) => {
+export const registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
-    if (!name || !email || !password)
+    if (!name || !email || !password) {
       return res.status(400).json({ message: 'Please fill in all fields.' });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: 'Please enter a valid email address.' });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters.' });
+    }
 
     const data = db.data;
     const exists = data.users.find(u => u.email === email);
@@ -46,13 +56,12 @@ export const registerUser = async (req, res) => {
       token: generateToken(user._id)
     });
   } catch (error) {
-    console.error('Register error:', error);
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };
 
 // POST /api/auth/login
-export const loginUser = async (req, res) => {
+export const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     if (!email || !password)
@@ -75,16 +84,19 @@ export const loginUser = async (req, res) => {
       token: generateToken(user._id)
     });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };
 
 // GET /api/auth/profile  (protected)
-export const getUserProfile = async (req, res) => {
-  const data = db.data;
-  const user = data.users.find(u => u._id === req.user._id);
-  if (!user) return res.status(404).json({ message: 'User not found' });
-  const { password, ...safeUser } = user;
-  res.json(safeUser);
+export const getUserProfile = async (req, res, next) => {
+  try {
+    const data = db.data;
+    const user = data.users.find(u => u._id === req.user._id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    const { password, ...safeUser } = user;
+    res.json(safeUser);
+  } catch (error) {
+    next(error);
+  }
 };

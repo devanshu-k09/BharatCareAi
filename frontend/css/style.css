@@ -311,6 +311,8 @@ p {
 .mb-md { margin-bottom: var(--spacing-md); }
 .mb-lg { margin-bottom: var(--spacing-lg); }
 .mb-xl { margin-bottom: var(--spacing-xl); }
+.mb-2xl { margin-bottom: var(--spacing-2xl); }
+.mb-3xl { margin-bottom: var(--spacing-3xl); }
 .my-md { margin-top: var(--spacing-md); margin-bottom: var(--spacing-md); }
 
 .p-0 { padding: 0; }
@@ -322,6 +324,8 @@ p {
 .py-md { padding-top: var(--spacing-md); padding-bottom: var(--spacing-md); }
 .py-lg { padding-top: var(--spacing-lg); padding-bottom: var(--spacing-lg); }
 .py-xl { padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl); }
+.py-2xl { padding-top: var(--spacing-2xl); padding-bottom: var(--spacing-2xl); }
+.py-3xl { padding-top: var(--spacing-3xl); padding-bottom: var(--spacing-3xl); }
 .px-md { padding-left: var(--spacing-md); padding-right: var(--spacing-md); }
 .px-lg { padding-left: var(--spacing-lg); padding-right: var(--spacing-lg); }
 

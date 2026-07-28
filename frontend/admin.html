@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Admin Dashboard | BharatCare AI</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="/js/auth.js"></script>
 </head>
 <body>
     <div class="app-layout">
@@ -40,10 +41,10 @@
             </nav>
 
             <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
-                <a href="dashboard.html" class="nav-link">
+                <a href="/dashboard" class="nav-link">
                     <span class="material-symbols-outlined">arrow_back</span> Back to App
                 </a>
-                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                <a href="/login" class="nav-link text-error" onclick="localStorage.clear()">
                     <span class="material-symbols-outlined">logout</span> Logout
                 </a>
             </div>

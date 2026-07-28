@@ -19,6 +19,7 @@
             z-index: 10;
         }
     </style>
+    <script src="/js/auth.js"></script>
 </head>
 <body>
     <!-- Ambient Background -->
@@ -87,7 +88,7 @@
             <!-- Footer Links -->
             <p class="text-center mt-xl mb-xl">
                 Already have an account? 
-                <a href="login.html" style="font-weight: 600;">Login here</a>
+                <a href="/login" style="font-weight: 600;">Login here</a>
             </p>
         </div>
     </div>
@@ -96,6 +97,8 @@
     <div id="toast-container"></div>
 
     <script>
+        const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
         // Password Toggle Logic
         const togglePassword = document.querySelector('#togglePassword');
         const passwordInput = document.querySelector('#password');
@@ -135,7 +138,7 @@
             btn.innerHTML = '<span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span> Creating...';
             
             try {
-                const response = await fetch('http://localhost:5000/api/auth/register', {
+                const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, password })
@@ -147,13 +150,12 @@
                     btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Success';
                     btn.style.background = 'var(--success)';
                     
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('user', JSON.stringify(data));
+                    // Do not store token so the user must log in manually
                     
                     showToast('Registration successful!', 'success');
                     
                     setTimeout(() => {
-                        window.location.href = 'dashboard.html';
+                        window.location.href = '/login';
                     }, 500);
                 } else {
                     btn.innerHTML = '<span class="material-symbols-outlined">error</span> Failed';

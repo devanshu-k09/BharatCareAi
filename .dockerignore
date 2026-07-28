@@ -1,0 +1,29 @@
+# Exclude Node dependencies
+node_modules/
+backend/node_modules/
+
+# Exclude local environment files
+.env
+.env.*
+backend/.env
+backend/.env.*
+frontend/.env
+
+# Exclude database files to prevent baking dev data into production image
+backend/data/db.json
+
+# Exclude Git files
+.git/
+.gitignore
+
+# Exclude development scripts and files
+*.bat
+fix_*.js
+inject_*.js
+docker-compose.yml
+README.md
+docs/
+
+# Exclude OS metadata
+.DS_Store
+Thumbs.db

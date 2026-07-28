@@ -1,3 +1,5 @@
+const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
 document.addEventListener('DOMContentLoaded', () => {
   const chatForm = document.getElementById('chat-input');
   const sendBtn = document.getElementById('send-btn');
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
-      const res = await fetch('http://localhost:5000/api/ai/chat', {
+      const res = await fetch(`${API_BASE_URL}/api/ai/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

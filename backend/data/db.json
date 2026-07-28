@@ -98,6 +98,15 @@
       "role": "user",
       "language": "English",
       "createdAt": "2026-07-15T04:46:12.235Z"
+    },
+    {
+      "_id": "3fb45602-89d4-416a-824b-5472f1ef99ce",
+      "name": "Devanshu Kukade",
+      "email": "devanshukukade23@gmail.com",
+      "password": "$2a$10$Mz3cjB9oek0bbPMRuLUUIOs9zPOhSH2SGy.MADN5FnNm70TbblGn2",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-15T16:20:29.243Z"
     }
   ],
   "chats": [
@@ -167,6 +176,31 @@
       ],
       "createdAt": "2026-07-15T13:25:00.732Z",
       "updatedAt": "2026-07-15T13:25:00.732Z"
+    },
+    {
+      "_id": "7ff361d9-1e70-4b97-b47a-0a5bfa5c54fb",
+      "user": "3fb45602-89d4-416a-824b-5472f1ef99ce",
+      "title": "i loss my what i need to do now",
+      "messages": [
+        {
+          "role": "user",
+          "content": "i loss my what i need to do now"
+        },
+        {
+          "role": "ai",
+          "content": "Namaste! I am **BharatCare AI**. I understand that losing important documents (like an Aadhaar card, PAN card, or property papers) can be very stressful, but please don't worry. We will go through this step-by-step to help you get back on track.\n\n### 1. Understanding Your Problem\nLosing important identity or property documents is a common issue. The biggest risk is that someone else might try to misuse them. Your primary goal is to **officially record that these documents are missing** so that you are protected from any fraud.\n\n### 2. Your Rights (In Simple Words)\n*   **Protection against Fraud:** By reporting the loss, you inform the government that you are no longer in possession of those papers. If someone tries to use them illegally, the records will show that you had already reported them as lost.\n*   **Right to Replacement:** You have the full right to apply for \"duplicate\" copies of any government-issued document once you have followed the official process.\n\n### 3. What the Law Says (Briefly)\nUnder Indian law, if you lose a document, you are expected to inform the authorities. This is mainly a safety measure (under provisions related to public record and evidence). By filing a report, you create a \"paper trail\" that proves you acted responsibly if any legal issues arise later.\n\n### 4. What You Should Do Now (Step-by-Step)\n1.  **File an FIR or NCR:** Go to your nearest Police Station. If you lost an item (like a phone or wallet) or important documents, ask them to file a **\"Lost Report\"** or an **NCR (Non-Cognizable Report)**. If you think the documents were stolen, file an **FIR**.\n2.  **Publish a Notice:** For important papers like property deeds or share certificates, it is often required to place a small \"Lost and Found\" advertisement in two local newspapers (one in English and one in the local language).\n3.  **Apply for Duplicates:** Once you have the police report (and the newspaper clippings, if needed), contact the specific department that issued the original document to request a duplicate.\n\n### 5. Documents to Keep Handy\n*   **Copy of the FIR/NCR:** This is your most important piece of evidence.\n*   **Identity Proof:** Carry your Aadhaar card or Voter ID to prove who you are when requesting new papers.\n*   **Newspaper Clippings:** Keep the original copies of the newspapers where you published the notice.\n*   **Any Old Scanned Copies:** If you have photos or photocopies of the lost documents, keep them ready.\n\n### 6. Where to Complain (Government Office/Portal)\n*   **For General Loss:** Visit the **[Delhi Police Lost Report Portal](https://www.delhipolice.nic.in/lostreport)** (or your specific State Police website) to file an online report. Many states now allow you to file a \"Lost Article Report\" online without visiting a station.\n*   **For Specific Documents:**\n    *   **Aadhaar:** Visit [uidai.gov.in](https://uidai.gov.in/) to download an e-Aadhaar.\n    *   **PAN Card:** Visit the [NSDL](https://www.onlineservices.nsdl.com/) or [UTIITSL](https://www.utiitsl.com/) website to request a reprint.\n    *   **Passport:** Visit the [Passport Seva Portal](https://www.passportindia.gov.in/) to apply for a \"Re-issue\" due to loss.\n\n### ⚠️ Note:\n*This information is for guidance and education, not a substitute for professional legal advice. If your loss involves large amounts of money or property worth crores, please consult a local legal professional to ensure your interests are fully protected.*\n\n**Stay calm, and take it one step at a time. You can do this!**"
+        },
+        {
+          "role": "user",
+          "content": "i loss my phone"
+        },
+        {
+          "role": "ai",
+          "content": "Namaste! I am BharatCare AI. I am very sorry to hear that you lost your phone. Please don’t panic—it happens to many people, and there are clear steps you can take to secure your data and try to recover your device.\n\nHere is your step-by-step guide:\n\n### 1. Understanding Your Problem\nLosing a phone is stressful because it contains your personal photos, messages, and often access to your bank accounts. Your immediate goals are to stop someone else from using your phone and to officially report the loss so you are not blamed if your phone is used for something illegal.\n\n### 2. Your Rights (In Simple Words)\n*   **Right to Report:** You have the right to report your lost property to the police. They are required to register your complaint.\n*   **Right to Privacy:** You have the right to request that your mobile service provider blocks your SIM card so that no one can misuse your number.\n*   **Right to Block the Device:** You have the right to have your phone’s unique ID (IMEI number) blocked nationally so that the stolen or lost device becomes a \"useless brick\" and cannot be used on any network in India.\n\n### 3. What the Law Says (Briefly)\nUnder Indian law, losing a phone is treated as a loss of property. When you file a report (called an FIR or a Lost Property Report), it acts as an official record. This protects you legally if someone else uses your phone number for criminal activities, as you have proof that the phone was no longer in your possession.\n\n### 4. What You Should Do Now (Step-by-Step)\n*   **Step 1: Block your SIM card.** Call your telecom provider (Jio, Airtel, Vi, etc.) immediately and ask them to block your SIM. This prevents unauthorized calls or messages.\n*   **Step 2: Use \"Find My Device.\"** If you have a Google account (Android) or iCloud (iPhone) linked, use another device to log in to your account. You can remotely \"Lock\" or \"Erase\" your phone data.\n*   **Step 3: Get your IMEI number.** You can find this on your phone's original packaging box or your purchase invoice. \n*   **Step 4: File a report.** You can file a \"Lost Property Report\" online, which is often enough for insurance or blocking purposes.\n\n### 5. Documents to Keep Handy\n*   **IMEI Number:** Found on the phone box or bill.\n*   **Mobile Number:** The number that was active in the lost phone.\n*   **Purchase Invoice:** Your original bill of purchase (if available).\n*   **Aadhaar/ID Proof:** For verification purposes when filing the police report.\n\n### 6. Where to Complain (Government Office/Portal)\n*   **CEIR Portal:** This is the most important step. The Department of Telecommunications has a website called the **Central Equipment Identity Register (CEIR)**. Go to **[https://www.ceir.gov.in/](https://www.ceir.gov.in/)**. Here, you can report your phone as lost, and they will block it across all networks in India.\n*   **State Police Portal:** Visit your state’s police website (e.g., Delhi Police, Mumbai Police, etc.) and look for the \"Lost Property\" section to file an online report. You will receive a copy of the report via email.\n\n---\n\n**⚠️ Note:** This information is for guidance and education, not a substitute for professional legal advice. If you suspect your phone was stolen (and not just lost) or if you see suspicious activity on your bank accounts, please visit your nearest local police station in person immediately."
+        }
+      ],
+      "createdAt": "2026-07-15T16:56:57.201Z",
+      "updatedAt": "2026-07-15T16:57:30.566Z"
     }
   ],
   "complaints": [

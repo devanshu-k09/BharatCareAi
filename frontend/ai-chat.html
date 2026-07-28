@@ -247,6 +247,8 @@
     </style>
 
     <script>
+        const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
         // Setup height auto resize
         const chatInput = document.getElementById('chat-input');
         chatInput.addEventListener('input', function() {
@@ -329,7 +331,7 @@
             const loadingMsg = addMessage('', true, true);
 
             try {
-                const res = await fetch('http://localhost:5000/api/ai/chat', {
+                const res = await fetch(`${API_BASE_URL}/api/ai/chat`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

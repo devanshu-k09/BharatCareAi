@@ -43,6 +43,7 @@
             letter-spacing: 0.05em;
         }
     </style>
+    <script src="/js/auth.js"></script>
 </head>
 <body>
     <!-- Ambient Background -->
@@ -55,7 +56,11 @@
         <div class="login-card">
             <!-- Header Section -->
             <div class="text-center mb-xl animate-slide-up">
-                <img alt="BharatCare AI Logo" class="mb-md" style="height: 64px; width: 64px; object-fit: contain;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJH2nOcyxSsVchjtGKaZx3Q44364A80kZAf_LLRxSaaTKETNu0JDU0ZIN2TbQeu8sGgYERCyo2cWUT_e6TAkvHVj-73qRfIHRdZ6A8ZfQQrLGEMRpIH-5HoRouPUJs1qCoi5rVB7V_VBmSwck_RIthiPvM1sdtUmRZ7q4VXgDP94DWOPhgz77nyrnlTeZEyFL3YBeJd1gxQ_S3ey3e2FMDnnYHBZHvHIk1vs4u9r1f2QOSTUnF1EjTiQ"/>
+                <div class="d-flex align-center justify-center mb-md mx-auto">
+                    <div class="bg-primary d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px;">
+                        <span class="material-symbols-outlined text-white" style="font-size: 32px;">gavel</span>
+                    </div>
+                </div>
                 <h1 class="text-primary m-0" style="font-size: 2rem;">Welcome Back</h1>
                 <p class="mt-xs">Sign in to access your Citizen Help Platform dashboard.</p>
             </div>
@@ -124,7 +129,7 @@
             <!-- Footer Links -->
             <p class="text-center mt-xl mb-xl">
                 Don't have an account? 
-                <a href="register.html" style="font-weight: 600;">Register</a>
+                <a href="/register" style="font-weight: 600;">Register</a>
             </p>
 
             <!-- Legal -->
@@ -140,6 +145,8 @@
     <div id="toast-container"></div>
 
     <script>
+        const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
         // Password Toggle Logic
         const togglePassword = document.querySelector('#togglePassword');
         const passwordInput = document.querySelector('#password');
@@ -178,7 +185,7 @@
             btn.innerHTML = '<span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span> Authenticating...';
             
             try {
-                const response = await fetch('http://localhost:5000/api/auth/login', {
+                const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -196,7 +203,7 @@
                     showToast('Login successful!', 'success');
                     
                     setTimeout(() => {
-                        window.location.href = 'dashboard.html';
+                        window.location.href = '/dashboard';
                     }, 500);
                 } else {
                     btn.innerHTML = '<span class="material-symbols-outlined">error</span> Failed';
