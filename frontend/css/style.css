@@ -385,6 +385,26 @@ p {
   border-color: var(--primary-light);
 }
 
+.btn-create-account {
+  background-color: #ffffff;
+  color: #1E40AF;
+  border: 2px solid #1E40AF;
+  font-weight: 600;
+  height: 48px;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+.btn-create-account:hover {
+  background-color: #1E40AF;
+  color: #ffffff;
+  border-color: #1E40AF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
+}
+
 .btn-icon {
   padding: 0.5rem;
   border-radius: var(--radius-full);
