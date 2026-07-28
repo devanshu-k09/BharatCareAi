@@ -78,7 +78,7 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+/* body {
   font-family: var(--font-sans);
   background-color: var(--bg-color);
   color: var(--text-primary);
@@ -88,7 +88,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
+} */
 
 /* Material Icons */
 .material-symbols-outlined {
