@@ -92,6 +92,7 @@
             box-shadow: var(--shadow-md);
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <div class="app-layout">
@@ -179,12 +180,12 @@
                         <p style="font-size: 1.125rem; max-width: 600px; margin: 0 auto var(--spacing-xl);">How can I assist with your legal inquiries today? I specialize in Indian Law, tenant rights, and consumer protection.</p>
                         
                         <div class="grid grid-cols-2 gap-md text-left" style="max-width: 600px; margin: 0 auto;">
-                            <button class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface-low); border: 1px solid var(--border);">
+                            <button onclick="sendQuickQuestion('What are my rights if my landlord increases rent without notice?')" class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface-low); border: 1px solid var(--border);">
                                 <span class="material-symbols-outlined text-primary mb-xs">home_work</span>
                                 <strong class="mb-xs">Tenant Rights</strong>
                                 <span class="text-muted" style="font-size: 0.875rem;">What are my rights if my landlord increases rent without notice?</span>
                             </button>
-                            <button class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface-low); border: 1px solid var(--border);">
+                            <button onclick="sendQuickQuestion('How do I file a complaint against a faulty electronics brand?')" class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface-low); border: 1px solid var(--border);">
                                 <span class="material-symbols-outlined text-primary mb-xs">shopping_bag</span>
                                 <strong class="mb-xs">Consumer Protection</strong>
                                 <span class="text-muted" style="font-size: 0.875rem;">How do I file a complaint against a faulty electronics brand?</span>
@@ -201,10 +202,10 @@
                 <button class="btn-icon text-muted" title="Clear Chat" id="clearChatBtn">
                     <span class="material-symbols-outlined">delete_sweep</span>
                 </button>
-                <button class="btn-icon text-primary" title="Copy Response">
+                <button class="btn-icon text-primary" title="Copy Response" id="copyResponseBtn">
                     <span class="material-symbols-outlined">content_copy</span>
                 </button>
-                <button class="btn-icon text-secondary" title="Download PDF">
+                <button class="btn-icon text-secondary" title="Download PDF" id="downloadPdfBtn">
                     <span class="material-symbols-outlined">picture_as_pdf</span>
                 </button>
             </div>
@@ -212,11 +213,19 @@
             <!-- Chat Input Area -->
             <div class="chat-input-wrapper">
                 <div class="container" style="max-width: 800px;">
+                    <!-- Image Preview Container -->
+                    <div id="imagePreviewContainer" class="d-none align-center gap-sm mb-sm p-xs rounded-md" style="background: var(--surface-high); border: 1px solid var(--border); width: fit-content; max-width: 100%;">
+                        <img id="imagePreview" style="max-width: 50px; max-height: 50px; border-radius: var(--radius-sm); object-fit: cover;">
+                        <span id="imageFilename" class="text-muted" style="font-size: 0.8rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+                        <button id="removeImageBtn" class="btn-icon text-error" style="padding: 2px; width: 24px; height: 24px; min-width: 24px;"><span class="material-symbols-outlined" style="font-size: 18px;">close</span></button>
+                    </div>
+
                     <div class="input-group" style="padding: var(--spacing-xs); background: var(--surface-low); align-items: flex-end;">
-                        <button class="btn-icon"><span class="material-symbols-outlined">attach_file</span></button>
+                        <button id="attachBtn" class="btn-icon"><span class="material-symbols-outlined">attach_file</span></button>
+                        <input type="file" id="imageInput" accept="image/*" style="display: none;">
                         <textarea class="form-control" id="chat-input" rows="1" placeholder="Type your legal query here..." style="max-height: 150px; resize: none; padding-top: 10px; padding-bottom: 10px; overflow-y: auto;"></textarea>
                         <div class="d-flex align-center gap-xs" style="padding-bottom: 4px; padding-right: 4px;">
-                            <button class="btn-icon"><span class="material-symbols-outlined">mic</span></button>
+                            <button id="micBtn" class="btn-icon"><span class="material-symbols-outlined">mic</span></button>
                             <button class="btn btn-primary" id="sendBtn" style="padding: 0.5rem; border-radius: var(--radius-md);">
                                 <span class="material-symbols-outlined">send</span>
                             </button>
@@ -244,10 +253,34 @@
             .floating-tools { bottom: 180px; }
             .chat-viewport { padding-bottom: 180px; }
         }
+        .recording {
+            color: var(--error) !important;
+            animation: pulse-mic 1.2s infinite;
+        }
+        @keyframes pulse-mic {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
     </style>
 
     <script>
         const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
+        // Toast notifications utility
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'check_circle' : 'error';
+            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
 
         // Setup height auto resize
         const chatInput = document.getElementById('chat-input');
@@ -258,7 +291,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
-            if (!token) window.location.href = 'login.html';
+            if (!token) window.location.href = '/login';
         });
 
         // Chat Logic
@@ -270,7 +303,140 @@
         let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
         let currentChatId = localStorage.getItem('currentChatId') || null;
 
-        const addMessage = (text, isAi = false, isLoading = false) => {
+        // Image attachment state and DOM elements
+        let selectedImageFile = null;
+        const imageInput = document.getElementById('imageInput');
+        const attachBtn = document.getElementById('attachBtn');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+        const imageFilename = document.getElementById('imageFilename');
+        const removeImageBtn = document.getElementById('removeImageBtn');
+
+        attachBtn.addEventListener('click', () => imageInput.click());
+
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Validate image type
+            if (!file.type.startsWith('image/')) {
+                showToast('Please select a valid image file (PNG, JPG, WEBP).', 'error');
+                imageInput.value = '';
+                return;
+            }
+
+            // Validate file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                showToast('Image size exceeds the 5MB limit.', 'error');
+                imageInput.value = '';
+                return;
+            }
+
+            selectedImageFile = file;
+            imageFilename.textContent = file.name;
+
+            // Create object URL for local thumbnail preview
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview.src = e.target.result;
+                imagePreviewContainer.classList.remove('d-none');
+                imagePreviewContainer.classList.add('d-flex');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        removeImageBtn.addEventListener('click', () => {
+            selectedImageFile = null;
+            imageInput.value = '';
+            imagePreviewContainer.classList.add('d-none');
+            imagePreviewContainer.classList.remove('d-flex');
+            imagePreview.src = '';
+            imageFilename.textContent = '';
+        });
+
+        // Speech-to-Text (Web Speech API)
+        const micBtn = document.getElementById('micBtn');
+        let recognition = null;
+        let isRecording = false;
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-IN';
+
+            recognition.onstart = () => {
+                isRecording = true;
+                const icon = micBtn.querySelector('span');
+                if (icon) icon.classList.add('recording');
+                showToast('Listening... Speak into your microphone.', 'success');
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                if (transcript) {
+                    const currentVal = chatInput.value.trim();
+                    chatInput.value = currentVal ? `${currentVal} ${transcript}` : transcript;
+                    chatInput.focus();
+                    
+                    chatInput.style.height = 'auto';
+                    chatInput.style.height = (chatInput.scrollHeight) + 'px';
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                if (event.error === 'not-allowed') {
+                    showToast('Microphone access denied.', 'error');
+                } else {
+                    showToast(`Speech recognition error: ${event.error}`, 'error');
+                }
+                stopRecording();
+            };
+
+            recognition.onend = () => {
+                stopRecording();
+            };
+        }
+
+        function stopRecording() {
+            isRecording = false;
+            if (micBtn) {
+                const icon = micBtn.querySelector('span');
+                if (icon) icon.classList.remove('recording');
+            }
+        }
+
+        if (micBtn) {
+            micBtn.addEventListener('click', () => {
+                if (!recognition) {
+                    showToast('Speech recognition is not supported in this browser. Try Chrome.', 'error');
+                    return;
+                }
+
+                if (isRecording) {
+                    recognition.stop();
+                } else {
+                    try {
+                        recognition.start();
+                    } catch (err) {
+                        console.error('Failed to start speech recognition:', err);
+                    }
+                }
+            });
+        }
+
+        // Quick action card click helper
+        window.sendQuickQuestion = (questionText) => {
+            chatInput.value = questionText;
+            chatInput.style.height = 'auto';
+            chatInput.style.height = (chatInput.scrollHeight) + 'px';
+            chatInput.focus();
+            handleSend();
+        };
+
+        const addMessage = (text, isAi = false, isLoading = false, imageUrl = null) => {
             if (welcomeSection) {
                 welcomeSection.style.display = 'none';
             }
@@ -295,7 +461,13 @@
                     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
                     .replace(/\n/g, '<br>')
                     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                contentHtml = `<div class="message-bubble">${formattedText}</div>`;
+                
+                let imageHtml = '';
+                if (imageUrl) {
+                    imageHtml = `<div class="mb-sm"><img src="${imageUrl}" style="max-width: 250px; max-height: 200px; border-radius: var(--radius-md); object-fit: cover;"></div>`;
+                }
+                
+                contentHtml = `<div class="message-bubble">${imageHtml}${formattedText}</div>`;
             }
 
             wrapper.innerHTML = iconHtml + contentHtml;
@@ -319,14 +491,39 @@
 
         const handleSend = async () => {
             const prompt = chatInput.value.trim();
-            if (!prompt) return;
+            if (!prompt && !selectedImageFile) return;
 
-            addMessage(prompt, false);
+            let userImageUrl = null;
+            if (selectedImageFile) {
+                userImageUrl = URL.createObjectURL(selectedImageFile);
+            }
+
+            // Render message on screen
+            addMessage(prompt, false, false, userImageUrl);
             chatHistory.push({ role: 'user', content: prompt });
             saveChat();
 
+            // Prepare multipart payload using FormData
+            const formData = new FormData();
+            formData.append('prompt', prompt);
+            if (currentChatId) {
+                formData.append('chatId', currentChatId);
+            }
+            if (selectedImageFile) {
+                formData.append('image', selectedImageFile);
+            }
+
+            // Clear inputs and previews immediately
             chatInput.value = '';
             chatInput.style.height = 'auto';
+            if (selectedImageFile) {
+                selectedImageFile = null;
+                imageInput.value = '';
+                imagePreviewContainer.classList.add('d-none');
+                imagePreviewContainer.classList.remove('d-flex');
+                imagePreview.src = '';
+                imageFilename.textContent = '';
+            }
 
             const loadingMsg = addMessage('', true, true);
 
@@ -334,17 +531,15 @@
                 const res = await fetch(`${API_BASE_URL}/api/ai/chat`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     },
-                    body: JSON.stringify({ prompt, chatId: currentChatId })
+                    body: formData
                 });
 
                 const data = await res.json();
                 loadingMsg.remove();
 
                 if (res.ok && data.aiResponse) {
-                    // Thread chatId so follow-up messages join the same DB record
                     currentChatId = data.chatId;
                     addMessage(data.aiResponse, true);
                     chatHistory.push({ role: 'ai', content: data.aiResponse });
@@ -368,19 +563,157 @@
 
         // Init
         renderHistory();
+
+        // Check for injected prompts from categories search parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryPrompt = urlParams.get('prompt');
+        if (queryPrompt) {
+            chatInput.value = queryPrompt;
+            chatInput.style.height = 'auto';
+            chatInput.style.height = (chatInput.scrollHeight) + 'px';
+            setTimeout(() => {
+                handleSend();
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }, 300);
+        }
         
         // Clear chat
         const clearBtn = document.getElementById('clearChatBtn');
         if (clearBtn) {
             clearBtn.addEventListener('click', () => {
-                if (confirm('Delete this conversation?')) {
+                if (confirm('Are you sure you want to clear the chat?')) {
                     localStorage.removeItem('chatHistory');
                     localStorage.removeItem('currentChatId');
+                    chatHistory = [];
                     currentChatId = null;
-                    window.location.reload();
+                    chatContainer.innerHTML = '';
+                    if (welcomeSection) {
+                        welcomeSection.style.display = 'block';
+                    }
+                    showToast('Chat cleared successfully.', 'success');
                 }
             });
         }
+
+        // Copy response
+        const copyResponseBtn = document.getElementById('copyResponseBtn');
+        if (copyResponseBtn) {
+            copyResponseBtn.addEventListener('click', () => {
+                const lastAiMsg = [...chatHistory].reverse().find(msg => msg.role === 'ai');
+                if (!lastAiMsg) {
+                    showToast('No AI response available to copy.', 'error');
+                    return;
+                }
+
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(lastAiMsg.content)
+                        .then(() => {
+                            showToast('Latest response copied to clipboard!', 'success');
+                        })
+                        .catch(err => {
+                            console.error('Clipboard write failed:', err);
+                            showToast('Failed to copy response to clipboard.', 'error');
+                        });
+                } else {
+                    // Fallback using textarea
+                    try {
+                        const textArea = document.createElement('textarea');
+                        textArea.value = lastAiMsg.content;
+                        textArea.style.position = 'fixed'; // Avoid scrolling to bottom
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        const successful = document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        if (successful) {
+                            showToast('Latest response copied to clipboard!', 'success');
+                        } else {
+                            showToast('Failed to copy response to clipboard.', 'error');
+                        }
+                    } catch (err) {
+                        console.error('Fallback copy failed:', err);
+                        showToast('Clipboard unavailable.', 'error');
+                    }
+                }
+            });
+        }
+
+        // Download PDF
+        const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+        if (downloadPdfBtn) {
+            downloadPdfBtn.addEventListener('click', () => {
+                const lastUserMsg = [...chatHistory].reverse().find(msg => msg.role === 'user');
+                const lastAiMsg = [...chatHistory].reverse().find(msg => msg.role === 'ai');
+
+                if (!lastUserMsg || !lastAiMsg) {
+                    showToast('No active conversation history to download.', 'error');
+                    return;
+                }
+
+                const today = new Date().toISOString().split('T')[0];
+                const timestamp = new Date().toLocaleString('en-IN');
+
+                // Create document wrapper for PDF output
+                const element = document.createElement('div');
+                element.style.padding = '35px';
+                element.style.fontFamily = 'Helvetica, Arial, sans-serif';
+                element.style.color = '#1f2937';
+
+                // Simple helper to replace markdown double-asterisks with HTML bold tags
+                const formatMarkdownToHtml = (mdText) => {
+                    return mdText
+                        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                        .replace(/\n/g, '<br>')
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                };
+
+                element.innerHTML = `
+                    <div style="border-bottom: 2px solid #0051d5; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div>
+                            <h1 style="color: #0051d5; margin: 0; font-size: 26px; font-weight: 700;">BharatCare AI</h1>
+                            <p style="margin: 4px 0 0 0; font-size: 13px; color: #4b5563;">Official Citizen Legal Advice Document</p>
+                        </div>
+                        <div style="text-align: right; font-size: 11px; color: #6b7280;">
+                            Date: ${timestamp}
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 25px; background: #f3f4f6; padding: 18px; border-radius: 8px; border-left: 5px solid #6b7280;">
+                        <h3 style="margin-top: 0; margin-bottom: 8px; color: #374151; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">User Inquiry</h3>
+                        <p style="margin: 0; font-size: 13.5px; line-height: 1.5; color: #1f2937; white-space: pre-wrap;">${lastUserMsg.content}</p>
+                    </div>
+
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="margin-top: 0; margin-bottom: 12px; color: #0051d5; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Legal Guidance & Recommendations</h3>
+                        <div style="font-size: 13px; line-height: 1.6; color: #111827;">
+                            ${formatMarkdownToHtml(lastAiMsg.content)}
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 50px; border-top: 1px solid #e5e7eb; padding-top: 15px; text-align: center; font-size: 11px; color: #6b7280;">
+                        <p style="margin: 0 0 6px 0;">Generated by BharatCare AI Platform.</p>
+                        <p style="margin: 0; font-weight: 600; color: #dc2626;">⚠️ Disclaimer: This information is for educational and guidance purposes only, and does not constitute formal legal advice.</p>
+                    </div>
+                `;
+
+                const opt = {
+                    margin:       12,
+                    filename:     `bharatcare-chat-${today}.pdf`,
+                    image:        { type: 'jpeg', quality: 0.98 },
+                    html2canvas:  { scale: 2, useCORS: true },
+                    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                html2pdf().from(element).set(opt).save()
+                    .then(() => showToast('PDF downloaded successfully!', 'success'))
+                    .catch(err => {
+                        console.error('PDF export failed:', err);
+                        showToast('Failed to generate PDF document.', 'error');
+                    });
+            });
+        }
+
     </script>
+    <div id="toast-container"></div>
 </body>
 </html>

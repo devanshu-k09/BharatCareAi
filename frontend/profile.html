@@ -22,39 +22,39 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href="/ai-chat"">
+            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href='ai-chat.html'">
                 <span class="material-symbols-outlined">add</span> New Question
             </button>
 
             <nav class="sidebar-nav">
-                <a href="/dashboard" class="nav-link">
+                <a href="dashboard.html" class="nav-link">
                     <span class="material-symbols-outlined">dashboard</span> Dashboard
                 </a>
-                <a href="/ai-chat" class="nav-link">
+                <a href="ai-chat.html" class="nav-link">
                     <span class="material-symbols-outlined">smart_toy</span> AI Assistant
                 </a>
-                <a href="/complaint" class="nav-link">
+                <a href="complaint.html" class="nav-link">
                     <span class="material-symbols-outlined">description</span> Complaint Generator
                 </a>
-                <a href="/categories" class="nav-link">
+                <a href="categories.html" class="nav-link">
                     <span class="material-symbols-outlined">gavel</span> Explore My Rights
                 </a>
-                <a href="/authorities" class="nav-link">
+                <a href="authorities.html" class="nav-link">
                     <span class="material-symbols-outlined">account_balance</span> Government Help
                 </a>
-                <a href="/history" class="nav-link">
+                <a href="history.html" class="nav-link">
                     <span class="material-symbols-outlined">history</span> My Past Questions
                 </a>
             </nav>
 
             <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
-                <a href="/profile" class="nav-link active">
+                <a href="profile.html" class="nav-link active">
                     <span class="material-symbols-outlined">person</span> Profile
                 </a>
-                <a href="/settings" class="nav-link">
+                <a href="settings.html" class="nav-link">
                     <span class="material-symbols-outlined">settings</span> Settings
                 </a>
-                <a href="/login" class="nav-link text-error" onclick="localStorage.clear()">
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
                     <span class="material-symbols-outlined">logout</span> Logout
                 </a>
             </div>
@@ -84,12 +84,13 @@
                 </div>
 
                 <div class="card p-xl mb-xl animate-slide-up text-center d-flex flex-column align-center gap-md">
-                    <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--surface-high);">
+                    <img id="profileAvatar" src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--surface-high);">
                     <div>
                         <h3 class="m-0 text-primary user-name-display">Loading...</h3>
                         <p class="text-muted user-email-display">loading@example.com</p>
                     </div>
-                    <button class="btn btn-secondary">Upload New Picture</button>
+                    <button id="uploadBtn" class="btn btn-secondary">Upload New Picture</button>
+                    <input type="file" id="avatarInput" accept="image/*" style="display: none;">
                 </div>
 
                 <div class="card p-xl animate-slide-up stagger-1">
@@ -124,10 +125,10 @@
 
     <!-- Mobile Navigation -->
     <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
-        <a href="/dashboard" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
-        <a href="/categories" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">gavel</span><span style="font-size: 0.625rem;">Explore</span></a>
-        <a href="/complaint" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
-        <a href="/profile" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="categories.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">gavel</span><span style="font-size: 0.625rem;">Explore</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
     </div>
 
     <style>
@@ -139,9 +140,26 @@
     </style>
 
     <script>
+        const API_BASE_URL = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+
+        // Toast notifications utility
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'check_circle' : 'error';
+            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
-            if (!token) window.location.href = '/login';
+            if (!token) window.location.href = 'login.html';
             
             try {
                 const user = JSON.parse(localStorage.getItem('user'));
@@ -153,6 +171,84 @@
                 }
             } catch(e) {}
         });
+
+        // Profile image upload functionality
+        const uploadBtn = document.getElementById('uploadBtn');
+        const avatarInput = document.getElementById('avatarInput');
+        const profileAvatar = document.getElementById('profileAvatar');
+
+        if (uploadBtn && avatarInput) {
+            uploadBtn.addEventListener('click', () => avatarInput.click());
+
+            avatarInput.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                // Validate image type
+                if (!file.type.startsWith('image/')) {
+                    showToast('Please select a valid image file (PNG, JPG, WEBP).', 'error');
+                    avatarInput.value = '';
+                    return;
+                }
+
+                // Validate file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    showToast('Image size exceeds the 5MB limit.', 'error');
+                    avatarInput.value = '';
+                    return;
+                }
+
+                // Show loading state
+                const originalText = uploadBtn.innerText;
+                uploadBtn.disabled = true;
+                uploadBtn.innerText = 'Uploading...';
+
+                try {
+                    const formData = new FormData();
+                    formData.append('avatar', file);
+
+                    const res = await fetch(`${API_BASE_URL}/api/auth/profile/avatar`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                        body: formData
+                    });
+
+                    const data = await res.json();
+                    uploadBtn.disabled = false;
+                    uploadBtn.innerText = originalText;
+                    avatarInput.value = '';
+
+                    if (res.ok) {
+                        // Update local storage user object
+                        localStorage.setItem('user', JSON.stringify(data));
+
+                        // Refresh all images immediately
+                        const avatarUrl = data.avatar.startsWith('http') || data.avatar.startsWith('data:') 
+                          ? data.avatar 
+                          : `${API_BASE_URL}${data.avatar}`;
+                        
+                        document.querySelectorAll('img').forEach(img => {
+                          if (img.src && (img.src.includes('ui-avatars.com/api/') || img.src.includes('/uploads/avatars/'))) {
+                            img.src = avatarUrl;
+                          }
+                        });
+
+                        showToast('Profile picture updated successfully!', 'success');
+                    } else {
+                        showToast(data.message || 'Failed to upload profile picture.', 'error');
+                    }
+                } catch (err) {
+                    console.error('Error uploading avatar:', err);
+                    uploadBtn.disabled = false;
+                    uploadBtn.innerText = originalText;
+                    avatarInput.value = '';
+                    showToast('Network error occurred during upload.', 'error');
+                }
+            });
+        }
     </script>
+    <div id="toast-container"></div>
 </body>
 </html>

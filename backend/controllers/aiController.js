@@ -33,7 +33,20 @@ Structure your response simply:
 
     const result = await ai.models.generateContent({
         model: 'gemini-3.1-flash-lite',
-        contents: systemPrompt
+        contents: [
+          {
+            role: 'user',
+            parts: [
+              { text: systemPrompt },
+              ...(req.file ? [{
+                inlineData: {
+                  mimeType: req.file.mimetype,
+                  data: req.file.buffer.toString('base64')
+                }
+              }] : [])
+            ]
+          }
+        ]
     });
     
     const aiResponse = result.text;

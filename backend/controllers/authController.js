@@ -100,3 +100,30 @@ export const getUserProfile = async (req, res, next) => {
     next(error);
   }
 };
+
+// POST /api/auth/profile/avatar  (protected)
+export const uploadAvatar = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'Please upload an image file.' });
+    }
+
+    const data = db.data;
+    const userIndex = data.users.findIndex(u => u._id === req.user._id);
+    if (userIndex === -1) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    // Save relative URL path for static file serving
+    const avatarUrl = `/uploads/avatars/${req.file.filename}`;
+    data.users[userIndex].avatar = avatarUrl;
+    data.users[userIndex].updatedAt = new Date().toISOString();
+    
+    db.write(data);
+
+    const { password, ...safeUser } = data.users[userIndex];
+    res.json(safeUser);
+  } catch (error) {
+    next(error);
+  }
+};

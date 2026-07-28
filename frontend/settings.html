@@ -41,39 +41,39 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href="/ai-chat"">
+            <button class="btn btn-primary btn-block mb-lg" onclick="window.location.href='ai-chat.html'">
                 <span class="material-symbols-outlined">add</span> New Question
             </button>
 
             <nav class="sidebar-nav">
-                <a href="/dashboard" class="nav-link">
+                <a href="dashboard.html" class="nav-link">
                     <span class="material-symbols-outlined">dashboard</span> Dashboard
                 </a>
-                <a href="/ai-chat" class="nav-link">
+                <a href="ai-chat.html" class="nav-link">
                     <span class="material-symbols-outlined">smart_toy</span> AI Assistant
                 </a>
-                <a href="/complaint" class="nav-link">
+                <a href="complaint.html" class="nav-link">
                     <span class="material-symbols-outlined">description</span> Complaint Generator
                 </a>
-                <a href="/categories" class="nav-link">
+                <a href="categories.html" class="nav-link">
                     <span class="material-symbols-outlined">gavel</span> Explore My Rights
                 </a>
-                <a href="/authorities" class="nav-link">
+                <a href="authorities.html" class="nav-link">
                     <span class="material-symbols-outlined">account_balance</span> Government Help
                 </a>
-                <a href="/history" class="nav-link">
+                <a href="history.html" class="nav-link">
                     <span class="material-symbols-outlined">history</span> My Past Questions
                 </a>
             </nav>
 
             <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
-                <a href="/profile" class="nav-link">
+                <a href="profile.html" class="nav-link">
                     <span class="material-symbols-outlined">person</span> Profile
                 </a>
-                <a href="/settings" class="nav-link active">
+                <a href="settings.html" class="nav-link active">
                     <span class="material-symbols-outlined">settings</span> Settings
                 </a>
-                <a href="/login" class="nav-link text-error" onclick="localStorage.clear()">
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
                     <span class="material-symbols-outlined">logout</span> Logout
                 </a>
             </div>
@@ -159,10 +159,10 @@
 
     <!-- Mobile Navigation -->
     <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
-        <a href="/dashboard" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
-        <a href="/categories" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">gavel</span><span style="font-size: 0.625rem;">Explore</span></a>
-        <a href="/complaint" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
-        <a href="/profile" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
+        <a href="categories.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">gavel</span><span style="font-size: 0.625rem;">Explore</span></a>
+        <a href="complaint.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">description</span><span style="font-size: 0.625rem;">Drafts</span></a>
+        <a href="profile.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
     </div>
 
     <style>
@@ -175,7 +175,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
-            if (!token) window.location.href = '/login';
+            if (!token) window.location.href = 'login.html';
         });
     </script>
 </body>
