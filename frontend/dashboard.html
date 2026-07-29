@@ -243,11 +243,6 @@
         </div>
     </div>
 
-    <!-- Floating Action Button -->
-    <a href="ai-chat.html" class="btn btn-primary rounded-full absolute d-flex align-center justify-center floating-fab" style="bottom: 2rem; right: 2rem; width: 64px; height: 64px; z-index: 90; box-shadow: var(--shadow-xl);">
-        <span class="material-symbols-outlined" style="font-size: 2rem;">chat_spark</span>
-    </a>
-
     <!-- Mobile Navigation (Simple implementation) -->
     <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
         <a href="dashboard.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
@@ -313,7 +308,6 @@
         @media (max-width: 768px) {
             #mobileNav { display: flex !important; position: fixed; }
             .ai-assistant-card { min-height: 180px; }
-            .floating-fab { bottom: 80px !important; position: fixed !important; }
             .page-content { padding-bottom: 90px; }
         }
 
