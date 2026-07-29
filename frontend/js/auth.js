@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close sidebar when clicking a nav link on small screens
     sidebar.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 1024) {
           sidebar.classList.remove('open');
           backdrop.classList.remove('active');
         }
