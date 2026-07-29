@@ -70,19 +70,38 @@
         <!-- Main Wrapper -->
         <div class="main-wrapper">
             <!-- Top Header -->
-            <header class="top-header">
-                <div class="d-flex align-center gap-sm">
-                    <button class="btn btn-icon mobile-menu-toggle mr-sm" style="padding: 6px;"><span class="material-symbols-outlined">menu</span></button>
-                    <span class="text-muted breadcrumb-prefix" style="font-size: 0.875rem; font-weight: 500;">Citizen Help Platform</span>
-                    <span class="material-symbols-outlined text-muted breadcrumb-prefix" style="font-size: 1rem;">chevron_right</span>
-                    <span class="text-primary" style="font-size: 0.875rem; font-weight: 600;">Complaint Generator</span>
-                </div>
+            <header class="top-header glass-header">
+    <div class="header-left">
+        <button class="btn btn-icon mobile-menu-toggle"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+    
+    <div class="header-center search-wrapper">
+        <div class="search-input-container relative">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input type="text" id="global-search" class="form-control pill-search" placeholder="Search legal questions, complaints, rights..." autocomplete="off">
+            <!-- Search Dropdown -->
+            <div id="search-dropdown" class="dropdown-menu search-dropdown d-none"></div>
+        </div>
+    </div>
 
-                <div class="d-flex align-center gap-md">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
-                    <span class="user-name-display" style="font-size: 0.875rem; font-weight: 600;">Loading...</span>
-                </div>
-            </header>
+    <div class="header-right">
+        <div class="profile-section relative cursor-pointer" id="profile-toggle" tabindex="0" role="button" aria-haspopup="true">
+            <div class="d-none-mobile text-right mr-sm">
+                <h4 class="user-name-display m-0" style="font-size: 0.875rem;">Loading...</h4>
+                <span class="premium-badge text-muted" style="font-size: 0.75rem;">Premium User</span>
+            </div>
+            <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" id="nav-avatar" class="avatar-img" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+            
+            <!-- Profile Dropdown -->
+            <div id="profile-dropdown" class="dropdown-menu profile-dropdown d-none">
+                <a href="profile.html" class="dropdown-item"><span class="material-symbols-outlined">person</span> Profile</a>
+                <a href="settings.html" class="dropdown-item"><span class="material-symbols-outlined">settings</span> Settings</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" id="logout-btn" class="dropdown-item text-error"><span class="material-symbols-outlined">logout</span> Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
 
             <!-- Progress Indicator Section -->
             <section class="bg-surface py-xl border-bottom border-outline-variant" style="border-bottom: 1px solid var(--border);">
@@ -550,5 +569,6 @@
         style.innerHTML = `@keyframes spin { 100% { transform: rotate(360deg); } }`;
         document.head.appendChild(style);
     </script>
+    <script src="js/nav.js"></script>
 </body>
 </html>

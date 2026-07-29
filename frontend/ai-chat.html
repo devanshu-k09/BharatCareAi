@@ -124,21 +124,10 @@
         }
 
         .message-row.reverse .message-bubble {
-            background: var(--primary);
-            color: var(--text-inverse);
+            background: rgba(30, 58, 138, 0.1);
+            color: var(--text-primary);
             border-radius: 16px 16px 0 16px;
             text-align: left;
-        }
-
-        .message-row.reverse .message-bubble p,
-        .message-row.reverse .message-bubble h3,
-        .message-row.reverse .message-bubble h4,
-        .message-row.reverse .message-bubble h5,
-        .message-row.reverse .message-bubble li,
-        .message-row.reverse .message-bubble strong,
-        .message-row.reverse .message-bubble em,
-        .message-row.reverse .message-bubble span {
-            color: var(--text-inverse) !important;
         }
 
         /* Override links inside AI answers to match theme */
@@ -333,24 +322,38 @@
         <!-- Main Wrapper -->
         <div class="main-wrapper" style="position: relative;">
             <!-- Top Header -->
-            <header class="top-header">
-                <div class="d-flex align-center gap-sm">
-                    <button class="btn btn-icon mobile-menu-toggle mr-sm" style="padding: 6px;"><span class="material-symbols-outlined">menu</span></button>
-                    <span class="text-muted breadcrumb-prefix" style="font-size: 0.875rem; font-weight: 500;">Citizen Help Platform</span>
-                    <span class="material-symbols-outlined text-muted breadcrumb-prefix" style="font-size: 1rem;">chevron_right</span>
-                    <span class="text-primary" style="font-size: 0.875rem; font-weight: 600;">AI Legal Assistant</span>
-                </div>
+            <header class="top-header glass-header">
+    <div class="header-left">
+        <button class="btn btn-icon mobile-menu-toggle"><span class="material-symbols-outlined">menu</span></button>
+    </div>
+    
+    <div class="header-center search-wrapper">
+        <div class="search-input-container relative">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input type="text" id="global-search" class="form-control pill-search" placeholder="Search legal questions, complaints, rights..." autocomplete="off">
+            <!-- Search Dropdown -->
+            <div id="search-dropdown" class="dropdown-menu search-dropdown d-none"></div>
+        </div>
+    </div>
 
-                <div class="d-flex align-center gap-md">
-                    <!-- Integrated Utility Actions -->
-                    <button class="btn-icon" style="padding: 6px;"><span class="material-symbols-outlined" style="font-size: 20px;">language</span></button>
-                    <button class="btn-icon relative" style="padding: 6px;">
-                        <span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
-                        <span class="absolute" style="top: 2px; right: 2px; width: 6px; height: 6px; background: var(--error); border-radius: 50%;"></span>
-                    </button>
-                    <img id="header-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
-                </div>
-            </header>
+    <div class="header-right">
+        <div class="profile-section relative cursor-pointer" id="profile-toggle" tabindex="0" role="button" aria-haspopup="true">
+            <div class="d-none-mobile text-right mr-sm">
+                <h4 class="user-name-display m-0" style="font-size: 0.875rem;">Loading...</h4>
+                <span class="premium-badge text-muted" style="font-size: 0.75rem;">Premium User</span>
+            </div>
+            <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" id="nav-avatar" class="avatar-img" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+            
+            <!-- Profile Dropdown -->
+            <div id="profile-dropdown" class="dropdown-menu profile-dropdown d-none">
+                <a href="profile.html" class="dropdown-item"><span class="material-symbols-outlined">person</span> Profile</a>
+                <a href="settings.html" class="dropdown-item"><span class="material-symbols-outlined">settings</span> Settings</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" id="logout-btn" class="dropdown-item text-error"><span class="material-symbols-outlined">logout</span> Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
 
             <!-- Floating Utility Toolbar -->
             <div class="floating-toolbar">
@@ -998,5 +1001,6 @@
 
     </script>
     <div id="toast-container"></div>
+    <script src="js/nav.js"></script>
 </body>
 </html>
