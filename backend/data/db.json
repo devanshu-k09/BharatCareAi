@@ -109,6 +109,7 @@
       "createdAt": "2026-07-15T16:20:29.243Z"
     },
     {
+<<<<<<< HEAD
       "_id": "8ee3f312-1487-4c44-bb46-965c0c32b254",
       "name": "Test User",
       "email": "testuser_1785307261231@test.com",
@@ -124,6 +125,10 @@
       },
       "createdAt": "2026-07-29T06:41:01.493Z",
       "updatedAt": "2026-07-29T06:41:01.493Z"
+=======
+      "_id": "test",
+      "email": "test@test.com"
+>>>>>>> e6f49a1 (D! Login Session)
     }
   ],
   "chats": [

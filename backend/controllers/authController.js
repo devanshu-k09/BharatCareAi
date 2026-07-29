@@ -74,11 +74,14 @@ export const registerUser = async (req, res, next) => {
     data.users.push(user);
     db.write(data);
 
+    console.log(`[AUTH] User inserted successfully. ID: ${user._id}, Email: ${user.email}`);
+
     res.status(201).json({
       ...getSafeUser(user),
       token: generateToken(user._id)
     });
   } catch (error) {
+    console.error(`[AUTH] Registration error:`, error);
     next(error);
   }
 };
@@ -94,19 +97,24 @@ export const loginUser = async (req, res, next) => {
     const data = db.data;
     const user = data.users.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
     if (!user) {
+      console.warn(`[AUTH] Login failed: User not found for email ${email}`);
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
+      console.warn(`[AUTH] Login failed: Password mismatch for user ID: ${user._id}`);
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
+
+    console.log(`[AUTH] User logged in successfully. ID: ${user._id}`);
 
     res.json({
       ...getSafeUser(user),
       token: generateToken(user._id)
     });
   } catch (error) {
+    console.error(`[AUTH] Login error:`, error);
     next(error);
   }
 };
