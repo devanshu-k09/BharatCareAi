@@ -1,6 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { v4 as uuidv4 } from 'uuid';
 import db from '../config/db.js';
+import { createServerActivity } from '../utils/activityHelper.js';
 
 export const generateLegalAdvice = async (req, res) => {
   const { prompt, chatId } = req.body;
@@ -10,6 +11,11 @@ export const generateLegalAdvice = async (req, res) => {
       return res.status(500).json({ message: 'Gemini API Key not configured. Please add your GEMINI_API_KEY in backend/.env' });
     }
     const ai = new GoogleGenAI({ apiKey });
+
+    if (req.user && req.user._id) {
+      const summary = prompt ? (prompt.length > 40 ? prompt.substring(0, 40) + '...' : prompt) : 'Asked legal question';
+      createServerActivity(req.user._id, 'AI Question Asked', summary, 'smart_toy', 'ai');
+    }
 
     const systemPrompt = `You are BharatCare AI, a friendly government help assistant for common Indian citizens (not for lawyers).
 The user does not understand legal jargon, so you MUST use simple, everyday English.

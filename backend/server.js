@@ -15,6 +15,9 @@ import complaintRoutes from './routes/complaintRoutes.js';
 import dataRoutes from './routes/dataRoutes.js';
 import legalAssistantRoutes from './routes/legalAssistantRoutes.js';
 
+import activityRoutes from './routes/activityRoutes.js';
+import topicRoutes from './routes/topicRoutes.js';
+
 dotenv.config();
 
 // Initialise local JSON file database (no MongoDB required)
@@ -44,6 +47,8 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/data', dataRoutes);
 app.use('/api/legal-assistant', legalAssistantRoutes);
+app.use('/api/activity', activityRoutes);
+app.use('/api/topics', topicRoutes);
 
 // 404 Fallback
 app.use((req, res, next) => {

@@ -265,6 +265,7 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="/js/i18n.js"></script>
 </head>
 <body>
     <div class="app-layout">
@@ -276,8 +277,8 @@
                     <span class="material-symbols-outlined text-white">gavel</span>
                 </div>
                 <div>
-                    <h2>BharatCare AI</h2>
-                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                    <h2 data-i18n="app.title">BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);"><span data-i18n="app.subtitle">Citizen Help Platform</span>
                 </div>
             </div>
 
@@ -286,34 +287,34 @@
             </button>
 
             <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-link">
+                <a href="dashboard.html" class="nav-link" data-i18n="nav.dashboard">
                     <span class="material-symbols-outlined">dashboard</span> Dashboard
                 </a>
-                <a href="ai-chat.html" class="nav-link active">
+                <a href="ai-chat.html" class="nav-link active" data-i18n="nav.ai_assistant">
                     <span class="material-symbols-outlined">smart_toy</span> AI Assistant
                 </a>
-                <a href="complaint.html" class="nav-link">
+                <a href="complaint.html" class="nav-link" data-i18n="nav.complaint_generator">
                     <span class="material-symbols-outlined">description</span> Complaint Generator
                 </a>
-                <a href="categories.html" class="nav-link">
+                <a href="categories.html" class="nav-link" data-i18n="nav.explore_rights">
                     <span class="material-symbols-outlined">gavel</span> Explore My Rights
                 </a>
-                <a href="authorities.html" class="nav-link">
+                <a href="authorities.html" class="nav-link" data-i18n="nav.gov_help">
                     <span class="material-symbols-outlined">account_balance</span> Government Help
                 </a>
-                <a href="history.html" class="nav-link">
+                <a href="history.html" class="nav-link" data-i18n="nav.past_questions">
                     <span class="material-symbols-outlined">history</span> My Past Questions
                 </a>
             </nav>
 
             <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
-                <a href="profile.html" class="nav-link">
+                <a href="profile.html" class="nav-link" data-i18n="nav.profile">
                     <span class="material-symbols-outlined">person</span> Profile
                 </a>
-                <a href="settings.html" class="nav-link">
+                <a href="settings.html" class="nav-link" data-i18n="nav.settings">
                     <span class="material-symbols-outlined">settings</span> Settings
                 </a>
-                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()" data-i18n="nav.logout">
                     <span class="material-symbols-outlined">logout</span> Logout
                 </a>
             </div>
@@ -367,6 +368,66 @@
                     <span class="material-symbols-outlined">picture_as_pdf</span>
                 </button>
             </div>
+=======
+                    <span style="width: 1px; height: 18px; background: var(--border); margin: 0 4px;"></span>
+
+                    
+<div class="lang-dropdown-container">
+    <button class="btn-icon lang-selector-btn" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+        <span class="material-symbols-outlined">language</span>
+    </button>
+    <div class="lang-menu" role="menu">
+        <div class="lang-option" data-lang="en" role="menuitem" tabindex="0">
+            <div class="lang-option-text"><span class="lang-native">English</span></div>
+            <span class="material-symbols-outlined check-icon">check</span>
+        </div>
+        <div class="lang-option" data-lang="hi" role="menuitem" tabindex="0">
+            <div class="lang-option-text"><span class="lang-native">हिन्दी</span><span class="lang-en">Hindi</span></div>
+            <span class="material-symbols-outlined check-icon">check</span>
+        </div>
+        <div class="lang-option" data-lang="mr" role="menuitem" tabindex="0">
+            <div class="lang-option-text"><span class="lang-native">मराठी</span><span class="lang-en">Marathi</span></div>
+            <span class="material-symbols-outlined check-icon">check</span>
+        </div>
+        <div class="lang-option" data-lang="bn" role="menuitem" tabindex="0">
+            <div class="lang-option-text"><span class="lang-native">বাংলা</span><span class="lang-en">Bengali</span></div>
+            <span class="material-symbols-outlined check-icon">check</span>
+        </div>
+        <div class="lang-option" data-lang="ta" role="menuitem" tabindex="0">
+            <div class="lang-option-text"><span class="lang-native">தமிழ்</span><span class="lang-en">Tamil</span></div>
+            <span class="material-symbols-outlined check-icon">check</span>
+        </div>
+        <div class="lang-option" data-lang="te" role="menuitem" tabindex="0">
+            <div class="lang-option-text"><span class="lang-native">తెలుగు</span><span class="lang-en">Telugu</span></div>
+            <span class="material-symbols-outlined check-icon">check</span>
+        </div>
+        <div class="lang-option" data-lang="kn" role="menuitem" tabindex="0">
+            <div class="lang-option-text"><span class="lang-native">ಕನ್ನಡ</span><span class="lang-en">Kannada</span></div>
+            <span class="material-symbols-outlined check-icon">check</span>
+        </div>
+        <div class="lang-option" data-lang="ml" role="menuitem" tabindex="0">
+            <div class="lang-option-text"><span class="lang-native">മലയാളം</span><span class="lang-en">Malayalam</span></div>
+            <span class="material-symbols-outlined check-icon">check</span>
+        </div>
+        <div class="lang-option" data-lang="gu" role="menuitem" tabindex="0">
+            <div class="lang-option-text"><span class="lang-native">ગુજરાતી</span><span class="lang-en">Gujarati</span></div>
+            <span class="material-symbols-outlined check-icon">check</span>
+        </div>
+        <div class="lang-option" data-lang="pa" role="menuitem" tabindex="0">
+            <div class="lang-option-text"><span class="lang-native">ਪੰਜਾਬੀ</span><span class="lang-en">Punjabi</span></div>
+            <span class="material-symbols-outlined check-icon">check</span>
+        </div>
+    </div>
+</div>
+
+                    <button class="btn-icon relative" style="padding: 6px;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 6px; height: 6px; background: var(--error); border-radius: 50%;"></span>
+                    </button>
+                    <img id="header-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                </div>
+            </header>
+>>>>>>> 56059ff (R1 activity logs and common topics right now functionality)
 
             <!-- Chat Container -->
             <div class="chat-viewport" id="chat-viewport">

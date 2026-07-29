@@ -15,7 +15,15 @@
   }
 })();
 
-function logout() {
+async function logout() {
+  if (typeof ActivityService !== 'undefined') {
+    await ActivityService.logActivity({
+      title: 'Logout Detected',
+      description: 'Logged out of account.',
+      icon: 'logout',
+      type: 'auth'
+    });
+  }
   localStorage.removeItem('token');
   localStorage.removeItem('user');
   window.location.href = 'login.html';

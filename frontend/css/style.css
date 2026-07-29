@@ -1401,8 +1401,6 @@ p {
   font-weight: 600;
 }
 
-/* Override sticky z-index for sidebar if needed, ensuring header floats over content */
-
 /* Responsive Updates */
 @media (max-width: 1024px) {
   .glass-header {
@@ -1424,4 +1422,85 @@ p {
   .pill-search {
     padding: 0.5rem 1rem 0.5rem 2.2rem !important;
   }
+}
+
+/* Language Dropdown Styles */
+.lang-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.lang-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 160px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.lang-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid var(--surface-low);
+}
+
+.lang-option:last-child {
+  border-bottom: none;
+}
+
+.lang-option:hover {
+  background-color: var(--surface-low);
+}
+
+.lang-option .check-icon {
+  opacity: 0;
+  color: var(--secondary);
+  font-size: 1.1rem;
+}
+
+.lang-option.active {
+  background-color: rgba(0, 81, 213, 0.05);
+  font-weight: 600;
+}
+
+.lang-option.active .check-icon {
+  opacity: 1;
+}
+
+.lang-option-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.lang-native {
+  font-size: 0.9rem;
+}
+
+.lang-en {
+  font-size: 0.7rem;
+  color: var(--text-muted);
 }

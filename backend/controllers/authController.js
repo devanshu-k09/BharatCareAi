@@ -5,6 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import db from '../config/db.js';
+import { createServerActivity } from '../utils/activityHelper.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -74,6 +75,8 @@ export const registerUser = async (req, res, next) => {
     data.users.push(user);
     db.write(data);
 
+    createServerActivity(user._id, 'Account Created', 'Successfully registered your BharatCare AI account.', 'person_add', 'auth');
+
     console.log(`[AUTH] User inserted successfully. ID: ${user._id}, Email: ${user.email}`);
 
     res.status(201).json({
@@ -104,10 +107,12 @@ export const loginUser = async (req, res, next) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
       console.warn(`[AUTH] Login failed: Password mismatch for user ID: ${user._id}`);
+      createServerActivity(user._id, 'Failed Login Attempt', 'An incorrect password was entered.', 'gpp_bad', 'error');
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
 
     console.log(`[AUTH] User logged in successfully. ID: ${user._id}`);
+    createServerActivity(user._id, 'Login Detected', 'Successfully logged into your account.', 'login', 'auth');
 
     res.json({
       ...getSafeUser(user),
@@ -144,7 +149,7 @@ export const updateUserProfile = async (req, res, next) => {
     if (phone && phone.trim() !== '') {
       const digitsOnly = phone.replace(/\D/g, '');
       const tenDigits = digitsOnly.length === 12 && digitsOnly.startsWith('91') ? digitsOnly.slice(2) : digitsOnly;
-      
+
       if (!/^[0-9]{10}$/.test(tenDigits)) {
         return res.status(400).json({ message: 'Please enter a valid 10-digit phone number.' });
       }
@@ -162,6 +167,7 @@ export const updateUserProfile = async (req, res, next) => {
     data.users[userIndex].updatedAt = new Date().toISOString();
 
     db.write(data);
+    createServerActivity(req.user._id, 'Profile Updated', 'Updated profile details successfully.', 'manage_accounts', 'settings');
 
     res.json(getSafeUser(data.users[userIndex]));
   } catch (error) {
@@ -187,14 +193,14 @@ export const uploadAvatar = async (req, res, next) => {
     if (user.avatar && user.avatar.startsWith('/uploads/avatars/')) {
       const oldPath = path.join(__dirname, '../data', user.avatar);
       if (fs.existsSync(oldPath)) {
-        try { fs.unlinkSync(oldPath); } catch(e) {}
+        try { fs.unlinkSync(oldPath); } catch (e) { }
       }
     }
 
     const avatarUrl = `/uploads/avatars/${req.file.filename}`;
     data.users[userIndex].avatar = avatarUrl;
     data.users[userIndex].updatedAt = new Date().toISOString();
-    
+
     db.write(data);
 
     res.json(getSafeUser(data.users[userIndex]));
@@ -217,7 +223,7 @@ export const deleteAvatar = async (req, res, next) => {
     if (user.avatar && user.avatar.startsWith('/uploads/avatars/')) {
       const oldPath = path.join(__dirname, '../data', user.avatar);
       if (fs.existsSync(oldPath)) {
-        try { fs.unlinkSync(oldPath); } catch(e) {}
+        try { fs.unlinkSync(oldPath); } catch (e) { }
       }
     }
 
@@ -225,6 +231,7 @@ export const deleteAvatar = async (req, res, next) => {
     data.users[userIndex].updatedAt = new Date().toISOString();
 
     db.write(data);
+    createServerActivity(req.user._id, 'Avatar Removed', 'Successfully removed profile picture.', 'account_circle', 'settings');
 
     res.json(getSafeUser(data.users[userIndex]));
   } catch (error) {
@@ -323,6 +330,7 @@ export const changePassword = async (req, res, next) => {
     data.users[userIndex].updatedAt = new Date().toISOString();
 
     db.write(data);
+    createServerActivity(req.user._id, 'Password Changed', 'Successfully changed your account password.', 'key', 'auth');
 
     res.json({ message: 'Password updated successfully.' });
   } catch (error) {
@@ -346,7 +354,7 @@ export const deleteUserAccount = async (req, res, next) => {
     if (user.avatar && user.avatar.startsWith('/uploads/avatars/')) {
       const avatarPath = path.join(__dirname, '../data', user.avatar);
       if (fs.existsSync(avatarPath)) {
-        try { fs.unlinkSync(avatarPath); } catch(e) {}
+        try { fs.unlinkSync(avatarPath); } catch (e) { }
       }
     }
 

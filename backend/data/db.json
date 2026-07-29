@@ -4,6 +4,42 @@
       "_id": "871f46b2-d592-4015-ac8e-c2f5de507a9f",
       "name": "Deva",
       "email": "devanshukukade694@gmail.com",
+      "password": "$2a$10$GVeWX4Tb.3pOSepAhZOZf.lQmWKjW/YPpuwFduCnHaWmn4kFB.unK",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-14T16:29:32.012Z"
+    },
+    {
+      "_id": "719d410a-6059-48be-9f60-c769de37d516",
+      "name": "Test User",
+      "email": "test_api@example.com",
+      "password": "$2a$10$ZDwEnY4C/33ERgV1Vk2TX.XWRWcB/p/nc1.L5XHHe.yhH.shwVwae",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-14T17:17:41.953Z"
+    },
+    {
+      "_id": "9fe82ee6-1e97-4f52-9b6c-abc9da8bb0ac",
+      "name": "Parag Kalaskar",
+      "email": "parag@gmail.com",
+      "password": "$2a$10$nv5vN2lR1UqljRTc5d9pM.ERnrKs1H6LmiuYovtzeGkPneDly3o1q",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-15T04:46:12.235Z"
+    },
+    {
+      "_id": "3fb45602-89d4-416a-824b-5472f1ef99ce",
+      "name": "Devanshu Kukade",
+      "email": "devanshukukade23@gmail.com",
+      "password": "$2a$10$Mz3cjB9oek0bbPMRuLUUIOs9zPOhSH2SGy.MADN5FnNm70TbblGn2",
+      "role": "user",
+      "language": "English",
+      "createdAt": "2026-07-15T16:20:29.243Z"
+    },
+    {
+      "_id": "8ee3f312-1487-4c44-bb46-965c0c32b254",
+      "name": "Test User",
+      "email": "testuser_1785307261231@test.com",
       "phone": null,
       "avatar": null,
       "password": "$2a$10$o39YIQjX3eeqF13onGwS.e05bw0.mwi8FJSgHVgJOqGL34fRR5oKW",
@@ -16,6 +52,23 @@
       },
       "createdAt": "2026-07-29T07:43:37.193Z",
       "updatedAt": "2026-07-29T07:43:37.193Z"
+    },
+    {
+      "_id": "c126e38c-60a8-4758-bd11-05cfa78b10c8",
+      "name": "rohit kalaskar",
+      "email": "rohitkalaskar08@gmail.com",
+      "phone": null,
+      "avatar": null,
+      "password": "$2a$10$UAUmlvber5xl1g.8T4cOqeRFhyLAQeOeRcmdfDVlKfiU60l5z7yWe",
+      "role": "user",
+      "language": "English",
+      "settings": {
+        "emailNotifications": true,
+        "importantAlerts": true,
+        "saveSearchHistory": true
+      },
+      "createdAt": "2026-07-29T17:01:08.634Z",
+      "updatedAt": "2026-07-29T17:01:08.634Z"
     }
   ],
   "chats": [
@@ -37,5 +90,309 @@
       "updatedAt": "2026-07-29T07:45:38.284Z"
     }
   ],
-  "complaints": []
+  "complaints": [
+    {
+      "_id": "1ea201d7-799e-4ebc-99c6-06201aa5ba0d",
+      "user": "e58c92e0-3648-413d-ba42-d1e3c06a8632",
+      "type": "Consumer",
+      "details": "I purchased a mobile phone from Flipkart on 5 July 2026 for ₹18,999. The phone stopped working within three days. I requested a replacement, but the seller rejected my request without giving a valid reason. I contacted customer support several times, but they have not resolved my issue. I want a replacement or a full refund.",
+      "generatedDraft": "[Your Full Name]\n[Your Address]\n[Your Phone Number]\n[Your Email Address]\n\n[Date]\n\nTo,\nThe Grievance Officer,\nFlipkart Internet Pvt. Ltd.,\nBuildings Alyssa, Begonia & Clover,\nEmbassy Tech Village, Outer Ring Road,\nDevarabeesanahalli Village,\nBengaluru – 560103, Karnataka.\n\n**Subject: Formal Complaint regarding defective product – Order ID: [Insert Order ID]**\n\nDear Sir/Madam,\n\nI am writing to formally express my extreme dissatisfaction with a recent purchase made through your platform. On 5 July 2026, I purchased a [Insert Mobile Phone Model Name] for a total amount of ₹18,999 (Order ID: [Insert Order ID]).\n\nThe device was delivered on [Insert Delivery Date]. To my dismay, the mobile phone ceased to function entirely within just three days of use. Despite the product being under the initial warranty and return window, my subsequent request for a replacement was summarily rejected by the seller without any valid technical explanation or justification.\n\nFollowing this, I contacted your customer support team on multiple occasions ([Mention Ticket/Case IDs if available]), seeking a resolution. Regrettably, despite numerous assurances, the issue remains unresolved, and I have been left with a non-functional device for which I have paid in full.\n\nAs a consumer, I am entitled to receive a product that is free from defects and fit for use. The supply of a faulty device, coupled with the refusal to provide a replacement or refund, constitutes a deficiency in service and an unfair trade practice.\n\nThrough this letter, I request you to urgently look into this matter and facilitate a replacement of the device with a functional unit or initiate a full refund of ₹18,999 to my original payment source within 7 (seven) business days of the receipt of this letter.\n\nPlease note that if this matter is not resolved within the stipulated timeframe, I will be constrained to escalate this complaint to the National Consumer Helpline (NCH) and proceed with formal legal action against Flipkart and the seller through the Consumer Disputes Redressal Commission for compensation towards the cost of the product, mental agony, and legal expenses.\n\nI have attached a copy of the purchase invoice and the communication logs with your support team for your reference. I look forward to your prompt response and a favorable resolution.\n\nYours sincerely,\n\n[Signature]\n\n[Your Full Name]",
+      "createdAt": "2026-07-14T17:28:02.709Z"
+    },
+    {
+      "_id": "4c690a6c-725b-47da-b162-d1ef5bd8aff5",
+      "user": "e3ee3b28-c31d-468b-8e68-f7d32cb8646e",
+      "type": "Cyber Crime",
+      "details": "20000 rs is missing in my account my account no. 36934311431\nifsc code is SBIN00123 i want to resister complaint to cyber cell \n",
+      "generatedDraft": "To,\nThe Inspector/Officer-in-Charge,\nCyber Crime Cell,\n[City Name],\n[State Name].\n\n[Date: DD/MM/YYYY]\n\n**Subject: Formal Complaint regarding unauthorized fraudulent transaction of ₹20,000/-**\n\nRespected Sir/Madam,\n\nI, [Your Full Name], residing at [Your Full Address], am writing to formally report an unauthorized fraudulent transaction from my bank account, resulting in a financial loss of ₹20,000/-.\n\nThe details of my bank account are as follows:\n*   **Bank Name:** State Bank of India\n*   **Account Number:** 36934311431\n*   **IFSC Code:** SBIN00123\n\nThe incident occurred on [Date of Incident] at approximately [Time of Incident]. I received a notification stating that an amount of ₹20,000/- was debited from my account without my authorization or consent. I have not shared my OTP, PIN, password, or any other banking credentials with any individual or entity. \n\nI have already informed my bank regarding this fraudulent transaction and have requested them to freeze the account/debit transaction. However, I am now submitting this formal complaint to your office for further investigation and to initiate the process of recovery of the stolen funds.\n\n**Details of the transaction are as follows:**\n*   **Transaction ID/Reference Number:** [Enter Transaction ID from Bank Statement]\n*   **Amount Debited:** ₹20,000/-\n*   **Mode of Transaction:** [e.g., UPI, Net Banking, Credit/Debit Card]\n\nI have attached a copy of my bank statement and the transaction notification/SMS for your reference. \n\nI request you to kindly register an FIR/NCR and take necessary action against the perpetrator(s) involved in this cyber fraud. Please guide me regarding any further documentation required from my end to assist in your investigation.\n\nThanking you.\n\nYours sincerely,\n\n(Signature)\n\n[Your Full Name]\n[Your Phone Number]\n[Your Email Address]\n\n**Enclosures:**\n1. Copy of Bank Statement showing the transaction.\n2. Copy of Transaction SMS/Notification.\n3. Copy of Aadhar Card/Identity Proof.",
+      "createdAt": "2026-07-15T03:25:20.175Z"
+    }
+  ],
+  "activities": [
+    {
+      "_id": "3b90432c-1a99-4ad0-bb95-07d890dcd7b2",
+      "userId": "c126e38c-60a8-4758-bd11-05cfa78b10c8",
+      "title": "Account Created",
+      "description": "Successfully registered your BharatCare AI account.",
+      "icon": "person_add",
+      "type": "auth",
+      "metadata": {},
+      "timestamp": "2026-07-29T17:01:08.644Z"
+    },
+    {
+      "_id": "8dbf1614-5726-4164-b8fe-0a8c26fc4f3f",
+      "userId": "c126e38c-60a8-4758-bd11-05cfa78b10c8",
+      "title": "Login Detected",
+      "description": "Successfully logged into your account.",
+      "icon": "login",
+      "type": "auth",
+      "metadata": {},
+      "timestamp": "2026-07-29T17:01:14.429Z"
+    }
+  ],
+  "topics": [
+    {
+      "_id": "topic-1",
+      "title": "Data Protection & Privacy Rights",
+      "description": "Understanding compliance rules, personal data protection, and user rights under the Digital Personal Data Protection Act.",
+      "category": "Cyber & Tech Law",
+      "tags": [
+        "CyberLaw",
+        "Privacy",
+        "DataProtection"
+      ],
+      "icon": "shield_lock",
+      "views": 1420,
+      "status": "published",
+      "updatedAt": "2026-07-20T10:00:00.000Z",
+      "content": {
+        "explanation": "The Digital Personal Data Protection (DPDP) Act establishes strict norms for data fiduciaries collecting and processing personal information of citizens in India. It guarantees right to data access, correction, and erasure.",
+        "laws": [
+          "Digital Personal Data Protection Act, 2023",
+          "Information Technology Act, 2000 (Section 43A, 66E)"
+        ],
+        "rights": [
+          "Right to access summary of personal data being processed",
+          "Right to correction and erasure of personal data",
+          "Right to grievance redressal by Data Fiduciary and Data Protection Board",
+          "Right to nominate another individual in case of death or incapacity"
+        ],
+        "faqs": [
+          {
+            "q": "Can companies sell my personal phone number without consent?",
+            "a": "No, explicitly selling personal data without valid consent attracts heavy penalties under DPDP Act."
+          },
+          {
+            "q": "Where can I report data breaches?",
+            "a": "You can file a complaint with the Data Protection Board of India and the CERT-In portal."
+          }
+        ],
+        "officialLinks": [
+          {
+            "title": "MeitY DPDP Portal",
+            "url": "https://www.meity.gov.in"
+          },
+          {
+            "title": "CERT-In Cyber Incident Reporting",
+            "url": "https://www.cert-in.org.in"
+          }
+        ],
+        "relatedTopics": [
+          "topic-2",
+          "topic-4"
+        ]
+      }
+    },
+    {
+      "_id": "topic-2",
+      "title": "Bhartiya Nyaya Sanhita (BNS)",
+      "description": "Key differences from the old IPC, updated provisions for criminal justice, zero FIR, and electronic reporting.",
+      "category": "Criminal Law",
+      "tags": [
+        "BNS",
+        "CriminalLaw",
+        "ZeroFIR"
+      ],
+      "icon": "balance",
+      "views": 2150,
+      "status": "published",
+      "updatedAt": "2026-07-22T14:30:00.000Z",
+      "content": {
+        "explanation": "Bharatiya Nyaya Sanhita (BNS) replaced the Indian Penal Code (IPC) to modernize India's criminal justice system. It introduces mandatory forensics, Zero FIR capability across any police station, and strict timelines for trials.",
+        "laws": [
+          "Bharatiya Nyaya Sanhita, 2023",
+          "Bharatiya Nagarik Suraksha Sanhita, 2023",
+          "Bharatiya Sakshya Adhiniyam, 2023"
+        ],
+        "rights": [
+          "Right to file a Zero FIR at any police station regardless of jurisdiction",
+          "Right to obtain a free copy of the FIR immediately",
+          "Right to electronic service of summons and notices",
+          "Mandatory recording of search and seizure procedures using audio-video means"
+        ],
+        "faqs": [
+          {
+            "q": "What is a Zero FIR?",
+            "a": "A Zero FIR allows you to register a complaint at any police station, which is later transferred to the appropriate jurisdictional station."
+          },
+          {
+            "q": "Are electronic statements admissible in court?",
+            "a": "Yes, electronic records have equal legal standing under Bharatiya Sakshya Adhiniyam."
+          }
+        ],
+        "officialLinks": [
+          {
+            "title": "Ministry of Home Affairs BNS Portal",
+            "url": "https://www.mha.gov.in"
+          },
+          {
+            "title": "National Crime Records Bureau",
+            "url": "https://ncrb.gov.in"
+          }
+        ],
+        "relatedTopics": [
+          "topic-1",
+          "topic-3"
+        ]
+      }
+    },
+    {
+      "_id": "topic-3",
+      "title": "Tenant Rights & Rental Disputes",
+      "description": "Protection against forced eviction, security deposit recovery, notice periods, and Model Tenancy Act guidelines.",
+      "category": "Housing & Real Estate",
+      "tags": [
+        "TenantRights",
+        "Housing",
+        "RentAgreement"
+      ],
+      "icon": "home",
+      "views": 1890,
+      "status": "published",
+      "updatedAt": "2026-07-25T09:15:00.000Z",
+      "content": {
+        "explanation": "Tenant rights safeguard renters against arbitrary rent hikes, unlawful landlord intrusion, withholding of security deposits, and sudden evictions without statutory notice periods.",
+        "laws": [
+          "Model Tenancy Act, 2021",
+          "State Rent Control Acts"
+        ],
+        "rights": [
+          "Right to a written, registered tenancy agreement",
+          "Right to minimum 24-hour advance notice before landlord entry for inspection/repairs",
+          "Right to refund of security deposit within agreed timeframe upon vacant possession",
+          "Protection against disconnection of essential utility services (water/electricity) by landlord"
+        ],
+        "faqs": [
+          {
+            "q": "Can a landlord cut off electricity for delayed rent?",
+            "a": "No, cutting off basic amenities is illegal and punishable under Rent Control laws."
+          },
+          {
+            "q": "How much security deposit can a landlord ask?",
+            "a": "Under the Model Tenancy Act, residential deposit is capped at a maximum of 2 months' rent."
+          }
+        ],
+        "officialLinks": [
+          {
+            "title": "Ministry of Housing and Urban Affairs",
+            "url": "https://mohua.gov.in"
+          },
+          {
+            "title": "State Rent Authority Portal",
+            "url": "https://nalsa.gov.in"
+          }
+        ],
+        "relatedTopics": [
+          "topic-2",
+          "topic-4"
+        ]
+      }
+    },
+    {
+      "_id": "topic-4",
+      "title": "Startup India & Tax Exemptions",
+      "description": "DPIIT recognition benefits, Section 80-IAC tax holiday, angel tax relaxation, and fast-track patent applications.",
+      "category": "Corporate & Business Law",
+      "tags": [
+        "StartupIndia",
+        "GSTCompliance",
+        "DPIIT"
+      ],
+      "icon": "rocket_launch",
+      "views": 1650,
+      "status": "published",
+      "updatedAt": "2026-07-26T11:45:00.000Z",
+      "content": {
+        "explanation": "The Startup India initiative offers government incentives including 3-year tax exemptions, self-certification for labor laws, easy winding up of companies, and fast-track patent filings for DPIIT-recognized entities.",
+        "laws": [
+          "Income Tax Act, 1961 (Section 80-IAC, Section 56(2)(viib))",
+          "Companies Act, 2013"
+        ],
+        "rights": [
+          "Right to 100% tax deduction on profits for 3 consecutive financial years out of first 10 years",
+          "Self-certification under 6 Labor Laws and 3 Environmental Laws for 3 to 5 years",
+          "80% rebate on patent application fees and 50% rebate on trademark filings",
+          "Access to Fund of Funds (FFS) and Credit Guarantee Scheme for Startups"
+        ],
+        "faqs": [
+          {
+            "q": "How do I register a startup with DPIIT?",
+            "a": "You can apply online via the Startup India portal with your incorporation certificate and pitch write-up."
+          },
+          {
+            "q": "Is GST registration mandatory for all startups?",
+            "a": "GST registration is mandatory if turnover exceeds ₹20 Lakhs (services) or ₹40 Lakhs (goods) or for interstate sales."
+          }
+        ],
+        "officialLinks": [
+          {
+            "title": "Startup India Official Hub",
+            "url": "https://www.startupindia.gov.in"
+          },
+          {
+            "title": "DPIIT Recognition Portal",
+            "url": "https://dpiit.gov.in"
+          }
+        ],
+        "relatedTopics": [
+          "topic-1",
+          "topic-5"
+        ]
+      }
+    },
+    {
+      "_id": "topic-5",
+      "title": "GST Compliance & Invoicing Guide",
+      "description": "Simplified GST filing, e-way bill generation, input tax credit (ITC) rules, and penalty waivers.",
+      "category": "Taxation & Finance",
+      "tags": [
+        "GSTCompliance",
+        "Taxation",
+        "EInvoicing"
+      ],
+      "icon": "receipt_long",
+      "views": 1980,
+      "status": "published",
+      "updatedAt": "2026-07-28T16:20:00.000Z",
+      "content": {
+        "explanation": "Goods and Services Tax (GST) standardizes indirect taxation across India. Understanding Input Tax Credit (ITC), GSTR-1 & GSTR-3B monthly/quarterly filings, and e-invoicing ensures seamless business operations.",
+        "laws": [
+          "Central Goods and Services Tax (CGST) Act, 2017",
+          "Integrated Goods and Services Tax (IGST) Act, 2017"
+        ],
+        "rights": [
+          "Right to claim Input Tax Credit on business purchases",
+          "Right to opt for Composition Scheme for small businesses (turnover up to ₹1.5 Cr)",
+          "Right to rectify filing errors through amendment returns",
+          "Right to appeal against arbitrary tax assessment orders before GST Appellate Tribunal"
+        ],
+        "faqs": [
+          {
+            "q": "What is the penalty for late GST return filing?",
+            "a": "Late fee is ₹50 per day (₹20 per day for Nil returns) subject to statutory caps."
+          },
+          {
+            "q": "When is e-invoicing mandatory?",
+            "a": "E-invoicing is mandatory for businesses with aggregate turnover exceeding statutory thresholds (e.g. ₹5 Cr)."
+          }
+        ],
+        "officialLinks": [
+          {
+            "title": "GST Portal Official",
+            "url": "https://www.gst.gov.in"
+          },
+          {
+            "title": "E-Way Bill System Portal",
+            "url": "https://ewaybillgst.gov.in"
+          }
+        ],
+        "relatedTopics": [
+          "topic-4",
+          "topic-1"
+        ]
+      }
+    }
+  ],
+  "bookmarks": []
+>>>>>>> 56059ff (R1 activity logs and common topics right now functionality)
 }

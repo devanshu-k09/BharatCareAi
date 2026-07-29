@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -6,6 +7,9 @@
     <title>BharatCare AI - Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="/js/auth.js"></script>
+    <script src="/js/i18n.js"></script>
+    <script src="/js/activity.js"></script>
+    <script src="/js/topics.js"></script>
 </head>
 <body>
     <div class="app-layout">
@@ -17,41 +21,41 @@
                     <span class="material-symbols-outlined text-white">account_balance</span>
                 </div>
                 <div>
-                    <h2>BharatCare AI</h2>
-                    <span style="font-size: 0.75rem; color: var(--text-muted);">Citizen Help Platform</span>
+                    <h2 data-i18n="app.title">BharatCare AI</h2>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);"><span data-i18n="app.subtitle">Citizen Help Platform</span>
                 </div>
             </div>
 
             <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-link active">
+                <a href="dashboard.html" class="nav-link active" data-i18n="nav.dashboard">
                     <span class="material-symbols-outlined">dashboard</span> Dashboard
                 </a>
-                <a href="ai-chat.html" class="nav-link">
+                <a href="ai-chat.html" class="nav-link" data-i18n="nav.ai_assistant">
                     <span class="material-symbols-outlined">smart_toy</span> AI Assistant
                 </a>
-                <a href="complaint.html" class="nav-link">
+                <a href="complaint.html" class="nav-link" data-i18n="nav.complaint_generator">
                     <span class="material-symbols-outlined">description</span> Complaint Generator
                 </a>
-                <a href="categories.html" class="nav-link">
+                <a href="categories.html" class="nav-link" data-i18n="nav.explore_rights">
                     <span class="material-symbols-outlined">gavel</span> Explore My Rights
                 </a>
-                <a href="authorities.html" class="nav-link">
+                <a href="authorities.html" class="nav-link" data-i18n="nav.gov_help">
                     <span class="material-symbols-outlined">account_balance</span> Government Help
                 </a>
-                <a href="history.html" class="nav-link">
+                <a href="history.html" class="nav-link" data-i18n="nav.past_questions">
                     <span class="material-symbols-outlined">history</span> My Past Questions
                 </a>
             </nav>
 
             <div class="sidebar-nav" style="flex-grow: 0; margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--border);">
                 <a href="ai-chat.html" class="btn btn-primary btn-block mb-md text-center justify-center" style="padding: 0.5rem;">New Question</a>
-                <a href="profile.html" class="nav-link">
+                <a href="profile.html" class="nav-link" data-i18n="nav.profile">
                     <span class="material-symbols-outlined">person</span> Profile
                 </a>
-                <a href="settings.html" class="nav-link">
+                <a href="settings.html" class="nav-link" data-i18n="nav.settings">
                     <span class="material-symbols-outlined">settings</span> Settings
                 </a>
-                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()">
+                <a href="login.html" class="nav-link text-error" onclick="localStorage.clear()" data-i18n="nav.logout">
                     <span class="material-symbols-outlined">logout</span> Logout
                 </a>
             </div>
@@ -61,42 +65,90 @@
         <div class="main-wrapper">
             <!-- Top Header -->
             <header class="top-header glass-header">
-    <div class="header-left">
-        <button class="btn btn-icon mobile-menu-toggle"><span class="material-symbols-outlined">menu</span></button>
-    </div>
-    
-    <div class="header-center search-wrapper">
-        <div class="search-input-container relative">
-            <span class="material-symbols-outlined search-icon">search</span>
-            <input type="text" id="global-search" class="form-control pill-search" placeholder="Search legal questions, complaints, rights..." autocomplete="off">
-            <!-- Search Dropdown -->
-            <div id="search-dropdown" class="dropdown-menu search-dropdown d-none"></div>
-        </div>
-    </div>
+                <div class="header-left">
+                    <button class="btn btn-icon mobile-menu-toggle"><span class="material-symbols-outlined">menu</span></button>
+                </div>
+                
+                <div class="header-center search-wrapper">
+                    <div class="search-input-container relative">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                        <input type="text" id="global-search" class="form-control pill-search" placeholder="Search legal questions, complaints, rights..." autocomplete="off">
+                        <!-- Search Dropdown -->
+                        <div id="search-dropdown" class="dropdown-menu search-dropdown d-none"></div>
+                    </div>
+                </div>
 
-    <div class="header-right">
-        <div class="profile-section relative cursor-pointer" id="profile-toggle" tabindex="0" role="button" aria-haspopup="true">
-            <div class="d-none-mobile text-right mr-sm">
-                <h4 class="user-name-display m-0" style="font-size: 0.875rem;">Loading...</h4>
-                <span class="premium-badge text-muted" style="font-size: 0.75rem;">Premium User</span>
-            </div>
-            <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" id="nav-avatar" class="avatar-img" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-            
-            <!-- Profile Dropdown -->
-            <div id="profile-dropdown" class="dropdown-menu profile-dropdown d-none">
-                <a href="profile.html" class="dropdown-item"><span class="material-symbols-outlined">person</span> Profile</a>
-                <a href="settings.html" class="dropdown-item"><span class="material-symbols-outlined">settings</span> Settings</a>
-                <div class="dropdown-divider"></div>
-                <a href="#" id="logout-btn" class="dropdown-item text-error"><span class="material-symbols-outlined">logout</span> Logout</a>
-            </div>
-        </div>
-    </div>
-</header>
+                <div class="header-right d-flex align-center gap-md">
+                    <div class="lang-dropdown-container">
+                        <button class="btn-icon lang-selector-btn" aria-haspopup="true" aria-expanded="false" aria-label="Change language">
+                            <span class="material-symbols-outlined">language</span>
+                        </button>
+                        <div class="lang-menu" role="menu">
+                            <div class="lang-option" data-lang="en" role="menuitem" tabindex="0">
+                                <div class="lang-option-text"><span class="lang-native">English</span></div>
+                                <span class="material-symbols-outlined check-icon">check</span>
+                            </div>
+                            <div class="lang-option" data-lang="hi" role="menuitem" tabindex="0">
+                                <div class="lang-option-text"><span class="lang-native">हिन्दी</span><span class="lang-en">Hindi</span></div>
+                                <span class="material-symbols-outlined check-icon">check</span>
+                            </div>
+                            <div class="lang-option" data-lang="mr" role="menuitem" tabindex="0">
+                                <div class="lang-option-text"><span class="lang-native">मराठी</span><span class="lang-en">Marathi</span></div>
+                                <span class="material-symbols-outlined check-icon">check</span>
+                            </div>
+                            <div class="lang-option" data-lang="bn" role="menuitem" tabindex="0">
+                                <div class="lang-option-text"><span class="lang-native">বাংলা</span><span class="lang-en">Bengali</span></div>
+                                <span class="material-symbols-outlined check-icon">check</span>
+                            </div>
+                            <div class="lang-option" data-lang="ta" role="menuitem" tabindex="0">
+                                <div class="lang-option-text"><span class="lang-native">தமிழ்</span><span class="lang-en">Tamil</span></div>
+                                <span class="material-symbols-outlined check-icon">check</span>
+                            </div>
+                            <div class="lang-option" data-lang="te" role="menuitem" tabindex="0">
+                                <div class="lang-option-text"><span class="lang-native">తెలుగు</span><span class="lang-en">Telugu</span></div>
+                                <span class="material-symbols-outlined check-icon">check</span>
+                            </div>
+                            <div class="lang-option" data-lang="kn" role="menuitem" tabindex="0">
+                                <div class="lang-option-text"><span class="lang-native">ಕನ್ನಡ</span><span class="lang-en">Kannada</span></div>
+                                <span class="material-symbols-outlined check-icon">check</span>
+                            </div>
+                            <div class="lang-option" data-lang="ml" role="menuitem" tabindex="0">
+                                <div class="lang-option-text"><span class="lang-native">മലയാളം</span><span class="lang-en">Malayalam</span></div>
+                                <span class="material-symbols-outlined check-icon">check</span>
+                            </div>
+                            <div class="lang-option" data-lang="gu" role="menuitem" tabindex="0">
+                                <div class="lang-option-text"><span class="lang-native">ગુજરાતી</span><span class="lang-en">Gujarati</span></div>
+                                <span class="material-symbols-outlined check-icon">check</span>
+                            </div>
+                            <div class="lang-option" data-lang="pa" role="menuitem" tabindex="0">
+                                <div class="lang-option-text"><span class="lang-native">ਪੰਜਾਬੀ</span><span class="lang-en">Punjabi</span></div>
+                                <span class="material-symbols-outlined check-icon">check</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-section relative cursor-pointer" id="profile-toggle" tabindex="0" role="button" aria-haspopup="true">
+                        <div class="d-none-mobile text-right mr-sm">
+                            <h4 class="user-name-display m-0" style="font-size: 0.875rem;">Loading...</h4>
+                            <span class="premium-badge text-muted" style="font-size: 0.75rem;">Premium User</span>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" id="nav-avatar" class="avatar-img" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                        
+                        <!-- Profile Dropdown -->
+                        <div id="profile-dropdown" class="dropdown-menu profile-dropdown d-none">
+                            <a href="profile.html" class="dropdown-item"><span class="material-symbols-outlined">person</span> Profile</a>
+                            <a href="settings.html" class="dropdown-item"><span class="material-symbols-outlined">settings</span> Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" id="logout-btn" class="dropdown-item text-error"><span class="material-symbols-outlined">logout</span> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
 
             <!-- Page Content -->
             <main class="page-content">
                 <section class="mb-xl animate-fade-in">
-                    <h2 class="text-primary mb-xs">Welcome back, <span class="user-name-display">User</span></h2>
+                    <h2 class="text-primary mb-xs"><span data-i18n="dashboard.welcome">Welcome back</span>, <span class="user-name-display">User</span></h2>
                     <p style="font-size: 1.125rem;">Your Citizen Help Platform dashboard is ready. What would you like to handle today?</p>
                 </section>
 
@@ -174,35 +226,25 @@
 
                         <!-- Trending Topics -->
                         <div class="flex-column gap-md">
-                            <div class="d-flex align-center gap-sm">
-                                <span class="material-symbols-outlined text-primary">trending_up</span>
-                                <h3 class="m-0" style="font-size: 1.25rem;">Common Topics Right Now</h3>
-                            </div>
-                            <div class="grid grid-cols-2 gap-md">
-                                <div class="card card-body d-flex gap-md align-center hover-lift">
-                                    <div class="p-sm bg-warning-bg rounded-lg">
-                                        <span class="material-symbols-outlined text-warning">article</span>
-                                    </div>
-                                    <div>
-                                        <h4 class="m-0" style="font-size: 1rem;">Data Protection Act</h4>
-                                        <p class="m-0" style="font-size: 0.75rem;">Understanding compliance rules</p>
-                                    </div>
+                            <div class="d-flex align-center justify-between flex-wrap gap-sm">
+                                <div class="d-flex align-center gap-sm">
+                                    <span class="material-symbols-outlined text-primary">trending_up</span>
+                                    <h3 class="m-0" style="font-size: 1.25rem;">Common Topics Right Now</h3>
                                 </div>
-                                <div class="card card-body d-flex gap-md align-center hover-lift">
-                                    <div class="p-sm rounded-lg" style="background: rgba(0, 81, 213, 0.1);">
-                                        <span class="material-symbols-outlined text-secondary">balance</span>
-                                    </div>
-                                    <div>
-                                        <h4 class="m-0" style="font-size: 1rem;">Bhartiya Nyaya Sanhita</h4>
-                                        <p class="m-0" style="font-size: 0.75rem;">Differences from old IPC</p>
-                                    </div>
+                                <div class="input-group" style="max-width: 220px; font-size: 0.8rem;">
+                                    <div class="input-icon" style="left: 8px;"><span class="material-symbols-outlined" style="font-size: 16px;">search</span></div>
+                                    <input type="text" id="topic-search-input" class="form-control" placeholder="Search topics, laws..." style="padding: 0.35rem 0.5rem 0.35rem 2rem; font-size: 0.8rem; border-radius: 16px;">
                                 </div>
                             </div>
-                            <div class="d-flex flex-wrap gap-sm mt-sm">
-                                <span class="badge" style="background: var(--surface-high); color: var(--text-secondary);">#CyberLaw</span>
-                                <span class="badge" style="background: var(--surface-high); color: var(--text-secondary);">#TenantRights</span>
-                                <span class="badge" style="background: var(--surface-high); color: var(--text-secondary);">#StartupIndia</span>
-                                <span class="badge" style="background: var(--surface-high); color: var(--text-secondary);">#GSTCompliance</span>
+                            
+                            <!-- Dynamic Topics Grid -->
+                            <div class="grid grid-cols-2 gap-md" id="topics-grid-container">
+                                <!-- Populated dynamically by topics.js -->
+                            </div>
+
+                            <!-- Dynamic Hashtags -->
+                            <div class="d-flex flex-wrap gap-sm mt-xs" id="topics-tags-container">
+                                <!-- Populated dynamically by topics.js -->
                             </div>
                         </div>
                     </div>
@@ -215,28 +257,11 @@
                             <div class="absolute" style="left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--border);"></div>
                             
                             <!-- Items -->
-                            <div class="relative mb-lg">
-                                <div class="absolute bg-primary" style="left: -24px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: var(--shadow-sm);"></div>
-                                <h4 class="m-0" style="font-size: 1rem;">Document Exported</h4>
-                                <p class="text-muted m-0" style="font-size: 0.875rem;">Consumer complaint draft was exported to PDF.</p>
-                                <span style="font-size: 0.75rem; color: var(--border-focus);">10:45 AM</span>
-                            </div>
-                            
-                            <div class="relative mb-lg">
-                                <div class="absolute bg-secondary" style="left: -24px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: var(--shadow-sm);"></div>
-                                <h4 class="m-0" style="font-size: 1rem;">Question Saved</h4>
-                                <p class="text-muted m-0" style="font-size: 0.875rem;">Saved a new question for Home Rent Dispute.</p>
-                                <span style="font-size: 0.75rem; color: var(--border-focus);">Yesterday</span>
-                            </div>
-
-                            <div class="relative mb-lg">
-                                <div class="absolute bg-success" style="left: -24px; top: 4px; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: var(--shadow-sm);"></div>
-                                <h4 class="m-0" style="font-size: 1rem;">Login Detected</h4>
-                                <p class="text-muted m-0" style="font-size: 0.875rem;">Successful login from new device.</p>
-                                <span style="font-size: 0.75rem; color: var(--border-focus);">Oct 14, 2024</span>
+                            <div id="activity-timeline-container">
+                                <!-- Populated dynamically by activity.js -->
                             </div>
                         </div>
-                        <button class="btn btn-secondary btn-block mt-xl" style="font-size: 0.875rem;">Clear Activity Log</button>
+                        <button id="clear-activity-btn" class="btn btn-secondary btn-block mt-xl" style="font-size: 0.875rem;">Clear Activity Log</button>
                     </aside>
                 </div>
             </main>
@@ -464,6 +489,43 @@
 
             // Always ensure AI card stays visible, even after async operations
             ensureAICardVisible();
+
+            // Load and initialize Recent Activity Timeline
+            if (typeof ActivityService !== 'undefined') {
+                ActivityService.renderTimeline('activity-timeline-container');
+                
+                const clearBtn = document.getElementById('clear-activity-btn');
+                if (clearBtn) {
+                    clearBtn.addEventListener('click', async () => {
+                        if (confirm('Are you sure you want to clear your activity log? This action cannot be undone.')) {
+                            const success = await ActivityService.clearActivities();
+                            if (success) {
+                                ActivityService.renderTimeline('activity-timeline-container');
+                                alert('Activity log cleared successfully.');
+                            } else {
+                                alert('Failed to clear activity log. Please try again.');
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Load and initialize Common Topics Right Now
+            if (typeof TopicService !== 'undefined') {
+                TopicService.renderTopicsSection('topics-grid-container', 'topics-tags-container');
+
+                const topicSearch = document.getElementById('topic-search-input');
+                if (topicSearch) {
+                    let debounceTimer;
+                    topicSearch.addEventListener('input', (e) => {
+                        clearTimeout(debounceTimer);
+                        debounceTimer = setTimeout(() => {
+                            TopicService.searchQuery = e.target.value;
+                            TopicService.renderTopicsSection('topics-grid-container', 'topics-tags-container');
+                        }, 250);
+                    });
+                }
+            }
         }
         loadDashboardHistory();
     </script>

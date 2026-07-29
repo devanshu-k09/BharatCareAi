@@ -7,7 +7,7 @@ const __dirname  = path.dirname(__filename);
 const DB_PATH    = path.join(__dirname, '../data/db.json');
 const TMP_DB_PATH = DB_PATH + '.tmp';
 
-const defaultData = { users: [], chats: [], complaints: [] };
+const defaultData = { users: [], chats: [], complaints: [], activities: [], topics: [], bookmarks: [] };
 let dbInMemory = null;
 
 function readDB() {

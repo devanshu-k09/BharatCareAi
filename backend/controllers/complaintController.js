@@ -1,6 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { v4 as uuidv4 } from 'uuid';
 import db from '../config/db.js';
+import { createServerActivity } from '../utils/activityHelper.js';
 
 export const generateComplaintDraft = async (req, res) => {
   const { type, details } = req.body;
@@ -34,6 +35,8 @@ The tone must be formal and the letter ready to print or submit. Output only the
     const data = db.data;
     data.complaints.push(complaint);
     db.write(data);
+
+    createServerActivity(req.user._id, 'Complaint Generated', `Generated draft for ${type} complaint.`, 'description', 'complaint');
 
     res.json(complaint);
   } catch (error) {

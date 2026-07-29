@@ -1,10 +1,10 @@
 import express from 'express';
-import { 
-  registerUser, 
-  loginUser, 
-  getUserProfile, 
-  updateUserProfile, 
-  uploadAvatar, 
+import {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  updateUserProfile,
+  uploadAvatar,
   deleteAvatar,
   getUserSettings,
   updateUserSettings,
@@ -43,7 +43,7 @@ const upload = multer({
     const filetypes = /jpeg|jpg|png|webp/;
     const mimetype = filetypes.test(file.mimetype);
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    
+
     if (mimetype && extname) {
       return cb(null, true);
     }
