@@ -82,11 +82,13 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: var(--spacing-md);
-            background: var(--surface);
-            border-top: 1px solid var(--border);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: transparent;
+            border: none;
             z-index: 20;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
+            box-shadow: none;
+            display: flex;
+            justify-content: center;
         }
 
         .message-row {
@@ -117,15 +119,26 @@
         .message-row:not(.reverse) .message-bubble {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-top-left-radius: 4px;
+            border-radius: 16px 16px 16px 0;
             color: var(--text-primary);
         }
 
         .message-row.reverse .message-bubble {
             background: var(--primary);
             color: var(--text-inverse);
-            border-top-right-radius: 4px;
+            border-radius: 16px 16px 0 16px;
             text-align: left;
+        }
+
+        .message-row.reverse .message-bubble p,
+        .message-row.reverse .message-bubble h3,
+        .message-row.reverse .message-bubble h4,
+        .message-row.reverse .message-bubble h5,
+        .message-row.reverse .message-bubble li,
+        .message-row.reverse .message-bubble strong,
+        .message-row.reverse .message-bubble em,
+        .message-row.reverse .message-bubble span {
+            color: var(--text-inverse) !important;
         }
 
         /* Override links inside AI answers to match theme */
@@ -136,6 +149,47 @@
         
         .message-row.reverse .message-bubble a {
             color: var(--accent);
+        }
+
+        /* Floating Toolbar */
+        .floating-toolbar {
+            position: absolute;
+            right: var(--spacing-xl);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            z-index: 30;
+        }
+
+        .floating-toolbar .btn-icon {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+
+        .floating-toolbar .btn-icon:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Input pill */
+        .input-pill {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 32px;
+            box-shadow: var(--shadow-md);
+            padding: 8px 16px;
         }
 
         .typing-indicator {
@@ -177,6 +231,7 @@
             .chat-input-wrapper {
                 bottom: 64px !important;
                 position: fixed !important;
+                padding: var(--spacing-sm) var(--spacing-md);
             }
             .message-bubble {
                 max-width: 90%;
@@ -197,6 +252,26 @@
             }
             .grid-cols-2 {
                 grid-template-columns: 1fr;
+            }
+            .floating-toolbar {
+                top: auto;
+                bottom: 140px;
+                right: 50%;
+                transform: translateX(50%);
+                flex-direction: row;
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                padding: 6px 12px;
+                border-radius: 32px;
+                border: 1px solid var(--border);
+                box-shadow: var(--shadow-md);
+                width: max-content;
+            }
+            .floating-toolbar .btn-icon {
+                background: transparent;
+                border: none;
+                box-shadow: none;
             }
         }
     </style>
@@ -268,18 +343,6 @@
 
                 <div class="d-flex align-center gap-md">
                     <!-- Integrated Utility Actions -->
-                    <button class="btn-icon text-muted" title="Clear Chat" id="clearChatBtn" style="padding: 6px;">
-                        <span class="material-symbols-outlined" style="font-size: 20px;">delete_sweep</span>
-                    </button>
-                    <button class="btn-icon text-primary" title="Copy Response" id="copyResponseBtn" style="padding: 6px;">
-                        <span class="material-symbols-outlined" style="font-size: 20px;">content_copy</span>
-                    </button>
-                    <button class="btn-icon text-secondary" title="Download PDF" id="downloadPdfBtn" style="padding: 6px;">
-                        <span class="material-symbols-outlined" style="font-size: 20px;">picture_as_pdf</span>
-                    </button>
-
-                    <span style="width: 1px; height: 18px; background: var(--border); margin: 0 4px;"></span>
-
                     <button class="btn-icon" style="padding: 6px;"><span class="material-symbols-outlined" style="font-size: 20px;">language</span></button>
                     <button class="btn-icon relative" style="padding: 6px;">
                         <span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
@@ -288,6 +351,19 @@
                     <img id="header-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAsCO7T9F2LjSSVs157CJ-JaPF6AdWADbdAUWqE3sIuNgY2h1NZk2Xk9Z3QeSBMf2qw8oYiHyyE-h-G6-oRnpMKIZ6MFlPxVomsftvHZo6c2X0duRhELGCKsAk58NrFlRoiCzyH4KOlliGnEuyFztQY1VDEJY2jyMJ52F33dVuIgSq5YljVK0cxOWBIBzayJ7eYDh0CcQmq5JVIII_jk1DDv0ZYRpxfe498CNDYjyfQXT1azRmpIkVEQ" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
                 </div>
             </header>
+
+            <!-- Floating Utility Toolbar -->
+            <div class="floating-toolbar">
+                <button class="btn-icon text-muted" title="Clear Chat" id="clearChatBtn">
+                    <span class="material-symbols-outlined">delete_sweep</span>
+                </button>
+                <button class="btn-icon text-primary" title="Copy Response" id="copyResponseBtn">
+                    <span class="material-symbols-outlined">content_copy</span>
+                </button>
+                <button class="btn-icon text-secondary" title="Download PDF" id="downloadPdfBtn">
+                    <span class="material-symbols-outlined">picture_as_pdf</span>
+                </button>
+            </div>
 
             <!-- Chat Container -->
             <div class="chat-viewport" id="chat-viewport">
@@ -302,20 +378,21 @@
                         <p style="font-size: 1.125rem; max-width: 600px; margin: 0 auto var(--spacing-xl);">How can I assist with your legal inquiries today? I specialize in Indian Law, tenant rights, and consumer protection.</p>
                         
                         <div class="grid grid-cols-2 gap-md text-left" style="max-width: 600px; margin: 0 auto;">
-                            <button onclick="sendQuickQuestion('What are my rights if my landlord increases rent without notice?')" class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface-low); border: 1px solid var(--border);">
-                                <span class="material-symbols-outlined text-primary mb-xs">home_work</span>
-                                <strong class="mb-xs">Tenant Rights</strong>
+                            <button onclick="sendQuickQuestion('What are my rights if my landlord increases rent without notice?')" class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); border-radius: var(--radius-lg);">
+                                <span class="material-symbols-outlined text-primary mb-xs" style="font-size: 28px;">home_work</span>
+                                <strong class="mb-xs text-primary">Tenant Rights</strong>
                                 <span class="text-muted" style="font-size: 0.875rem;">What are my rights if my landlord increases rent without notice?</span>
                             </button>
-                            <button onclick="sendQuickQuestion('How do I file a complaint against a faulty electronics brand?')" class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface-low); border: 1px solid var(--border);">
-                                <span class="material-symbols-outlined text-primary mb-xs">shopping_bag</span>
-                                <strong class="mb-xs">Consumer Protection</strong>
+                            <button onclick="sendQuickQuestion('How do I file a complaint against a faulty electronics brand?')" class="card card-body hover-lift d-flex flex-column" style="text-align: left; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); border-radius: var(--radius-lg);">
+                                <span class="material-symbols-outlined text-primary mb-xs" style="font-size: 28px;">shopping_bag</span>
+                                <strong class="mb-xs text-primary">Consumer Protection</strong>
                                 <span class="text-muted" style="font-size: 0.875rem;">How do I file a complaint against a faulty electronics brand?</span>
                             </button>
                         </div>
                     </div>
                     
                     <!-- Messages will be injected here -->
+                    <div id="chat-messages" style="display: flex; flex-direction: column; width: 100%;"></div>
                 </div>
             </div>
 
@@ -323,15 +400,15 @@
 
             <!-- Chat Input Area -->
             <div class="chat-input-wrapper">
-                <div class="container" style="max-width: 800px;">
+                <div class="container" style="max-width: 800px; width: 100%;">
                     <!-- Image Preview Container -->
-                    <div id="imagePreviewContainer" class="d-none align-center gap-sm mb-sm p-xs rounded-md" style="background: var(--surface-high); border: 1px solid var(--border); width: fit-content; max-width: 100%;">
+                    <div id="imagePreviewContainer" class="align-center gap-sm mb-sm p-xs rounded-md" style="display: none; background: var(--surface-high); border: 1px solid var(--border); width: fit-content; max-width: 100%; margin: 0 auto;">
                         <img id="imagePreview" style="max-width: 50px; max-height: 50px; border-radius: var(--radius-sm); object-fit: cover;">
                         <span id="imageFilename" class="text-muted" style="font-size: 0.8rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
                         <button id="removeImageBtn" class="btn-icon text-error" style="padding: 2px; width: 24px; height: 24px; min-width: 24px;"><span class="material-symbols-outlined" style="font-size: 18px;">close</span></button>
                     </div>
 
-                    <div class="input-group" style="padding: var(--spacing-xs); background: var(--surface-low); align-items: flex-end;">
+                    <div class="input-group input-pill" style="align-items: flex-end;">
                         <button id="attachBtn" class="btn-icon"><span class="material-symbols-outlined">attach_file</span></button>
                         <input type="file" id="imageInput" accept="image/*" style="display: none;">
                         <textarea class="form-control" id="chat-input" rows="1" placeholder="Type your legal query here..." style="max-height: 150px; resize: none; padding-top: 10px; padding-bottom: 10px; overflow-y: auto;"></textarea>
@@ -408,6 +485,7 @@
         // Chat Logic
         const sendBtn = document.getElementById('sendBtn');
         const chatContainer = document.getElementById('chat-container');
+        const chatMessages = document.getElementById('chat-messages');
         const welcomeSection = document.getElementById('welcome-section');
         const viewport = document.getElementById('chat-viewport');
 
@@ -450,8 +528,7 @@
             const reader = new FileReader();
             reader.onload = (e) => {
                 imagePreview.src = e.target.result;
-                imagePreviewContainer.classList.remove('d-none');
-                imagePreviewContainer.classList.add('d-flex');
+                imagePreviewContainer.style.display = 'flex';
             };
             reader.readAsDataURL(file);
         });
@@ -459,8 +536,7 @@
         removeImageBtn.addEventListener('click', () => {
             selectedImageFile = null;
             imageInput.value = '';
-            imagePreviewContainer.classList.add('d-none');
-            imagePreviewContainer.classList.remove('d-flex');
+            imagePreviewContainer.style.display = 'none';
             imagePreview.src = '';
             imageFilename.textContent = '';
         });
@@ -634,7 +710,7 @@
             }
 
             wrapper.innerHTML = iconHtml + contentHtml;
-            chatContainer.appendChild(wrapper);
+            chatMessages.appendChild(wrapper);
             
             setTimeout(() => {
                 viewport.scrollTop = viewport.scrollHeight;
@@ -649,7 +725,7 @@
         };
 
         const renderHistory = () => {
-            chatContainer.innerHTML = '';
+            chatMessages.innerHTML = '';
             if (chatHistory.length > 0) {
                 chatHistory.forEach(msg => {
                     addMessage(msg.content, msg.role === 'ai');
@@ -686,14 +762,11 @@
             // Clear inputs and previews immediately
             chatInput.value = '';
             chatInput.style.height = 'auto';
-            if (selectedImageFile) {
-                selectedImageFile = null;
-                imageInput.value = '';
-                imagePreviewContainer.classList.add('d-none');
-                imagePreviewContainer.classList.remove('d-flex');
-                imagePreview.src = '';
-                imageFilename.textContent = '';
-            }
+            selectedImageFile = null;
+            imageInput.value = '';
+            imagePreviewContainer.style.display = 'none';
+            imagePreview.src = '';
+            imageFilename.textContent = '';
 
             const loadingMsg = addMessage('', true, true);
 
