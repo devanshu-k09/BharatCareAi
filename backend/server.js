@@ -25,7 +25,25 @@ initDB();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) {
+      return callback(null, true);
+    }
+    // For development, allow all origins by reflecting them.
+    // In production, replace `true` with an origin check.
+    const isAllowed = true;
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS blocked for origin: ${origin}`));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(helmet({
   contentSecurityPolicy: false, // allow inline scripts for local dev
   crossOriginResourcePolicy: false, // allow uploaded images to load across origins
