@@ -107,6 +107,23 @@
       "role": "user",
       "language": "English",
       "createdAt": "2026-07-15T16:20:29.243Z"
+    },
+    {
+      "_id": "8ee3f312-1487-4c44-bb46-965c0c32b254",
+      "name": "Test User",
+      "email": "testuser_1785307261231@test.com",
+      "phone": null,
+      "avatar": null,
+      "password": "$2a$10$PcL4f81naFRpQ4RfBwSgRuqT.bMUCugwQzp.V1mOb7pOpZScjxZvK",
+      "role": "user",
+      "language": "English",
+      "settings": {
+        "emailNotifications": true,
+        "importantAlerts": true,
+        "saveSearchHistory": true
+      },
+      "createdAt": "2026-07-29T06:41:01.493Z",
+      "updatedAt": "2026-07-29T06:41:01.493Z"
     }
   ],
   "chats": [

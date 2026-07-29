@@ -25,14 +25,15 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet({
   contentSecurityPolicy: false, // allow inline scripts for local dev
+  crossOriginResourcePolicy: false, // allow uploaded images to load across origins
 }));
 app.use(morgan('dev'));
 
 // Serve frontend static files without requiring .html extension
 app.use(express.static(path.join(__dirname, '../frontend'), { extensions: ['html'] }));
 
-// Serve uploaded user files from the volume-mounted persistent directory
-app.use('/uploads', express.static(path.join(__dirname, '../data/uploads')));
+// Serve uploaded user files from backend/data/uploads
+app.use('/uploads', express.static(path.join(__dirname, 'data/uploads')));
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', message: 'BharatCare AI API is running' }));

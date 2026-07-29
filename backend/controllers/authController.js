@@ -177,7 +177,7 @@ export const uploadAvatar = async (req, res, next) => {
     const user = data.users[userIndex];
 
     if (user.avatar && user.avatar.startsWith('/uploads/avatars/')) {
-      const oldPath = path.join(__dirname, '..', user.avatar);
+      const oldPath = path.join(__dirname, '../data', user.avatar);
       if (fs.existsSync(oldPath)) {
         try { fs.unlinkSync(oldPath); } catch(e) {}
       }
@@ -207,7 +207,7 @@ export const deleteAvatar = async (req, res, next) => {
     const user = data.users[userIndex];
 
     if (user.avatar && user.avatar.startsWith('/uploads/avatars/')) {
-      const oldPath = path.join(__dirname, '..', user.avatar);
+      const oldPath = path.join(__dirname, '../data', user.avatar);
       if (fs.existsSync(oldPath)) {
         try { fs.unlinkSync(oldPath); } catch(e) {}
       }
@@ -336,7 +336,7 @@ export const deleteUserAccount = async (req, res, next) => {
     const user = data.users[userIndex];
 
     if (user.avatar && user.avatar.startsWith('/uploads/avatars/')) {
-      const avatarPath = path.join(__dirname, '..', user.avatar);
+      const avatarPath = path.join(__dirname, '../data', user.avatar);
       if (fs.existsSync(avatarPath)) {
         try { fs.unlinkSync(avatarPath); } catch(e) {}
       }
