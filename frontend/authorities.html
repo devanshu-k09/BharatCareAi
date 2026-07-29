@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Government Help | BharatCare AI</title>
+    <meta name="description" content="Access official Indian Government portals, helplines, and legal resources quickly through BharatCare AI.">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/auth.js"></script>
 </head>
@@ -26,7 +27,7 @@
                 <span class="material-symbols-outlined">add</span> New Question
             </button>
 
-            <nav class="sidebar-nav">
+            <nav class="sidebar-nav" aria-label="Main navigation">
                 <a href="dashboard.html" class="nav-link">
                     <span class="material-symbols-outlined">dashboard</span> Dashboard
                 </a>
@@ -39,7 +40,7 @@
                 <a href="categories.html" class="nav-link">
                     <span class="material-symbols-outlined">gavel</span> Explore My Rights
                 </a>
-                <a href="authorities.html" class="nav-link active">
+                <a href="authorities.html" class="nav-link active" aria-current="page">
                     <span class="material-symbols-outlined">account_balance</span> Government Help
                 </a>
                 <a href="history.html" class="nav-link">
@@ -60,194 +61,757 @@
             </div>
         </aside>
 
+        <!-- Sidebar Backdrop (mobile) -->
+        <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
+
         <!-- Main Wrapper -->
         <div class="main-wrapper">
             <!-- Top Header -->
             <header class="top-header">
                 <div class="d-flex align-center flex-grow" style="max-width: 400px;">
-                    <button class="btn btn-icon mobile-menu-toggle mr-sm" style="padding: 6px; margin-right: 8px;"><span class="material-symbols-outlined">menu</span></button>
+                    <button class="btn btn-icon mobile-menu-toggle mr-sm" id="mobileMenuBtn" style="padding: 6px; margin-right: 8px;" aria-label="Open navigation menu" aria-expanded="false" aria-controls="sidebar">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
                     <div class="input-group" style="width: 100%;">
                         <div class="input-icon"><span class="material-symbols-outlined">search</span></div>
-                        <input type="text" class="form-control" id="searchInput" placeholder="Search authorities, portals, helplines...">
+                        <input type="text" class="form-control" id="searchInput"
+                               placeholder="Search portals..."
+                               aria-label="Search government portals"
+                               autocomplete="off">
                     </div>
                 </div>
 
                 <div class="d-flex align-center gap-md">
-                    <button class="btn-icon"><span class="material-symbols-outlined">language</span></button>
-                    <button class="btn-icon relative">
+                    <button class="btn-icon" aria-label="Change language"><span class="material-symbols-outlined">language</span></button>
+                    <button class="btn-icon relative" aria-label="Notifications">
                         <span class="material-symbols-outlined">notifications</span>
-                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;"></span>
+                        <span class="absolute" style="top: 2px; right: 2px; width: 8px; height: 8px; background: var(--error); border-radius: 50%;" aria-hidden="true"></span>
                     </button>
-                    <img id="headerAvatar" src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);">
+                    <img id="headerAvatar"
+                         src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff"
+                         style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border);"
+                         alt="Profile avatar">
                 </div>
             </header>
 
             <!-- Page Content -->
-            <main class="page-content" style="max-width: 1000px;">
+            <main class="page-content" style="max-width: 1100px;">
+
+                <!-- Page Title -->
                 <div class="mb-xl animate-fade-in">
-                    <h2 class="text-primary mb-xs">Government Authorities & Portals</h2>
+                    <h2 class="text-primary mb-xs">Government Authorities &amp; Portals</h2>
                     <p class="text-muted m-0">Quickly access official portals, helpline numbers, and legal resources.</p>
                 </div>
 
-                <!-- Helplines Section -->
-                <h3 class="mb-md">Emergency & Helplines</h3>
-                <div class="grid grid-cols-4 gap-md mb-2xl animate-slide-up" id="helplinesGrid">
-                    <div class="card card-body bg-error-bg d-flex flex-column align-center text-center resource-card">
-                        <span class="material-symbols-outlined text-error mb-xs" style="font-size: 2rem;">local_police</span>
+                <!-- Emergency & Helplines Section -->
+                <h3 class="mb-md">Emergency &amp; Helplines</h3>
+                <div class="grid grid-cols-4 gap-md mb-2xl animate-slide-up" id="helplinesGrid" role="list" aria-label="Emergency helpline numbers">
+                    <div class="card card-body bg-error-bg d-flex flex-column align-center text-center resource-card" role="listitem">
+                        <span class="material-symbols-outlined text-error mb-xs" style="font-size: 2rem;" aria-hidden="true">local_police</span>
                         <h4 class="text-error m-0 mb-xs">Police</h4>
                         <p class="text-error m-0" style="font-size: 1.5rem; font-weight: bold;">112</p>
                     </div>
-                    <div class="card card-body d-flex flex-column align-center text-center resource-card" style="background: rgba(30, 58, 138, 0.1);">
-                        <span class="material-symbols-outlined text-primary mb-xs" style="font-size: 2rem;">security</span>
+                    <div class="card card-body d-flex flex-column align-center text-center resource-card" style="background: rgba(30, 58, 138, 0.1);" role="listitem">
+                        <span class="material-symbols-outlined text-primary mb-xs" style="font-size: 2rem;" aria-hidden="true">security</span>
                         <h4 class="text-primary m-0 mb-xs">Cyber Crime</h4>
                         <p class="text-primary m-0" style="font-size: 1.5rem; font-weight: bold;">1930</p>
                     </div>
-                    <div class="card card-body d-flex flex-column align-center text-center resource-card" style="background: rgba(186, 26, 26, 0.1);">
-                        <span class="material-symbols-outlined text-error mb-xs" style="font-size: 2rem;">female</span>
+                    <div class="card card-body d-flex flex-column align-center text-center resource-card" style="background: rgba(186, 26, 26, 0.1);" role="listitem">
+                        <span class="material-symbols-outlined text-error mb-xs" style="font-size: 2rem;" aria-hidden="true">female</span>
                         <h4 class="text-error m-0 mb-xs">Women Helpline</h4>
                         <p class="text-error m-0" style="font-size: 1.5rem; font-weight: bold;">1091</p>
                     </div>
-                    <div class="card card-body d-flex flex-column align-center text-center resource-card" style="background: rgba(0, 81, 213, 0.1);">
-                        <span class="material-symbols-outlined text-secondary mb-xs" style="font-size: 2rem;">shopping_bag</span>
+                    <div class="card card-body d-flex flex-column align-center text-center resource-card" style="background: rgba(0, 81, 213, 0.1);" role="listitem">
+                        <span class="material-symbols-outlined text-secondary mb-xs" style="font-size: 2rem;" aria-hidden="true">shopping_bag</span>
                         <h4 class="text-secondary m-0 mb-xs">Consumer</h4>
                         <p class="text-secondary m-0" style="font-size: 1.5rem; font-weight: bold;">1915</p>
                     </div>
                 </div>
 
                 <!-- Portals Section -->
-                <h3 class="mb-md">Official Portals</h3>
-                <div class="grid grid-cols-2 gap-lg animate-slide-up stagger-1" id="portalsGrid">
-                    <div class="card card-body d-flex gap-lg align-center resource-card" style="transition: transform 0.2s;">
-                        <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" style="height: 32px; opacity: 0.8;" alt="Emblem">
-                        </div>
-                        <div class="flex-grow">
-                            <h4 class="text-primary m-0 mb-xs">e-Daakhil</h4>
-                            <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">Filing consumer complaints online with the National Consumer Disputes Redressal Commission.</p>
-                            <a href="https://edaakhil.nic.in/" target="_blank" rel="noopener noreferrer" onclick="return openPortal('https://edaakhil.nic.in/', event)" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                <div class="d-flex align-center justify-between flex-wrap gap-sm mb-md" style="gap: var(--spacing-sm);">
+                    <h3 class="m-0">Official Portals</h3>
+                    <span id="portalCount" class="badge badge-primary" aria-live="polite" aria-atomic="true"></span>
+                </div>
+
+                <!-- Category Filter Pills -->
+                <div class="portal-filter-bar mb-lg animate-fade-in" role="group" aria-label="Filter portals by category">
+                    <button class="filter-pill active" data-category="all" aria-pressed="true">
+                        <span class="material-symbols-outlined" aria-hidden="true">grid_view</span> All
+                    </button>
+                    <button class="filter-pill" data-category="Legal & Justice" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">gavel</span> Legal &amp; Justice
+                    </button>
+                    <button class="filter-pill" data-category="Identity & Documents" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">badge</span> Identity &amp; Documents
+                    </button>
+                    <button class="filter-pill" data-category="Citizen Services" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">people</span> Citizen Services
+                    </button>
+                    <button class="filter-pill" data-category="Finance & Taxation" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">account_balance_wallet</span> Finance &amp; Tax
+                    </button>
+                    <button class="filter-pill" data-category="Employment & Social Security" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">work</span> Employment
+                    </button>
+                    <button class="filter-pill" data-category="Health" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">health_and_safety</span> Health
+                    </button>
+                    <button class="filter-pill" data-category="Education" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">school</span> Education
+                    </button>
+                    <button class="filter-pill" data-category="Agriculture" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">agriculture</span> Agriculture
+                    </button>
+                    <button class="filter-pill" data-category="Elections & Governance" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">how_to_vote</span> Elections
+                    </button>
+                    <button class="filter-pill" data-category="Business & Commerce" aria-pressed="false">
+                        <span class="material-symbols-outlined" aria-hidden="true">storefront</span> Business
+                    </button>
+                </div>
+
+                <!-- Skeleton Loader -->
+                <div id="skeletonGrid" class="grid grid-cols-2 gap-lg" aria-hidden="true" aria-label="Loading portals">
+                    <div class="skeleton-card card card-body d-flex gap-lg align-center" style="min-height: 110px;">
+                        <div class="skeleton-box" style="width:56px;height:56px;border-radius:var(--radius-lg);flex-shrink:0;"></div>
+                        <div class="flex-grow" style="display:flex;flex-direction:column;gap:8px;">
+                            <div class="skeleton-box" style="height:18px;width:60%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:13px;width:90%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:13px;width:75%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:28px;width:110px;border-radius:8px;margin-top:4px;"></div>
                         </div>
                     </div>
-
-                    <div class="card card-body d-flex gap-lg align-center resource-card" style="transition: transform 0.2s;">
-                        <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" style="height: 32px; opacity: 0.8;" alt="Emblem">
-                        </div>
-                        <div class="flex-grow">
-                            <h4 class="text-primary m-0 mb-xs">National Cyber Crime Reporting</h4>
-                            <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">Report cyber crimes and track your complaints online officially through MHA.</p>
-                            <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" onclick="return openPortal('https://cybercrime.gov.in/', event)" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                    <div class="skeleton-card card card-body d-flex gap-lg align-center" style="min-height: 110px;">
+                        <div class="skeleton-box" style="width:56px;height:56px;border-radius:var(--radius-lg);flex-shrink:0;"></div>
+                        <div class="flex-grow" style="display:flex;flex-direction:column;gap:8px;">
+                            <div class="skeleton-box" style="height:18px;width:55%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:13px;width:85%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:13px;width:70%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:28px;width:110px;border-radius:8px;margin-top:4px;"></div>
                         </div>
                     </div>
-
-                    <div class="card card-body d-flex gap-lg align-center resource-card" style="transition: transform 0.2s;">
-                        <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
-                            <span class="material-symbols-outlined text-primary" style="font-size: 2rem;">gavel</span>
-                        </div>
-                        <div class="flex-grow">
-                            <h4 class="text-primary m-0 mb-xs">e-Courts Services</h4>
-                            <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">Track case status, view court orders, and access cause lists across all Indian courts.</p>
-                            <a href="https://ecourts.gov.in/" target="_blank" rel="noopener noreferrer" onclick="return openPortal('https://ecourts.gov.in/', event)" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                    <div class="skeleton-card card card-body d-flex gap-lg align-center" style="min-height: 110px;">
+                        <div class="skeleton-box" style="width:56px;height:56px;border-radius:var(--radius-lg);flex-shrink:0;"></div>
+                        <div class="flex-grow" style="display:flex;flex-direction:column;gap:8px;">
+                            <div class="skeleton-box" style="height:18px;width:65%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:13px;width:80%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:13px;width:65%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:28px;width:110px;border-radius:8px;margin-top:4px;"></div>
                         </div>
                     </div>
-
-                    <div class="card card-body d-flex gap-lg align-center resource-card" style="transition: transform 0.2s;">
-                        <div class="d-flex align-center justify-center rounded-lg" style="width: 56px; height: 56px; background: var(--surface-high);">
-                            <span class="material-symbols-outlined text-primary" style="font-size: 2rem;">find_in_page</span>
-                        </div>
-                        <div class="flex-grow">
-                            <h4 class="text-primary m-0 mb-xs">RTI Online</h4>
-                            <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">File Right to Information applications for central government departments and ministries.</p>
-                            <a href="https://rtionline.gov.in/" target="_blank" rel="noopener noreferrer" onclick="return openPortal('https://rtionline.gov.in/', event)" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Visit Portal <span class="material-symbols-outlined" style="font-size: 1rem;">open_in_new</span></a>
+                    <div class="skeleton-card card card-body d-flex gap-lg align-center" style="min-height: 110px;">
+                        <div class="skeleton-box" style="width:56px;height:56px;border-radius:var(--radius-lg);flex-shrink:0;"></div>
+                        <div class="flex-grow" style="display:flex;flex-direction:column;gap:8px;">
+                            <div class="skeleton-box" style="height:18px;width:50%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:13px;width:88%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:13px;width:72%;border-radius:6px;"></div>
+                            <div class="skeleton-box" style="height:28px;width:110px;border-radius:8px;margin-top:4px;"></div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Portals Grid (dynamically rendered) -->
+                <div class="grid grid-cols-2 gap-lg animate-slide-up stagger-1"
+                     id="portalsGrid"
+                     role="list"
+                     aria-label="Official government portals"
+                     style="display: none;">
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="card card-body text-center" style="display: none; padding: var(--spacing-3xl) var(--spacing-xl);" role="status" aria-live="polite">
+                    <span class="material-symbols-outlined text-muted mb-md" style="font-size: 3.5rem; display: block;" aria-hidden="true">search_off</span>
+                    <h4 class="text-muted m-0 mb-xs">No portals found</h4>
+                    <p class="text-muted m-0">Try a different search term or select a different category.</p>
+                    <button class="btn btn-secondary mt-md" id="clearFiltersBtn" style="width: auto; margin: var(--spacing-md) auto 0;">
+                        <span class="material-symbols-outlined" aria-hidden="true">restart_alt</span> Clear Filters
+                    </button>
+                </div>
+
             </main>
         </div>
     </div>
 
     <!-- Mobile Navigation -->
-    <div class="d-flex align-center justify-between bg-surface absolute" style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;" id="mobileNav">
-        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">dashboard</span><span style="font-size: 0.625rem;">Home</span></a>
-        <a href="categories.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">gavel</span><span style="font-size: 0.625rem;">Explore</span></a>
-        <a href="authorities.html" class="text-primary text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">account_balance</span><span style="font-size: 0.625rem;">Help</span></a>
-        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;"><span class="material-symbols-outlined d-block">person</span><span style="font-size: 0.625rem;">Profile</span></a>
+    <div class="d-flex align-center justify-between bg-surface absolute"
+         style="bottom: 0; left: 0; right: 0; height: 64px; border-top: 1px solid var(--border); z-index: 100; padding: 0 var(--spacing-md); display: none;"
+         id="mobileNav"
+         role="navigation"
+         aria-label="Mobile navigation">
+        <a href="dashboard.html" class="text-muted text-center" style="text-decoration:none;" aria-label="Dashboard">
+            <span class="material-symbols-outlined d-block" aria-hidden="true">dashboard</span>
+            <span style="font-size: 0.625rem;">Home</span>
+        </a>
+        <a href="categories.html" class="text-muted text-center" style="text-decoration:none;" aria-label="Explore My Rights">
+            <span class="material-symbols-outlined d-block" aria-hidden="true">gavel</span>
+            <span style="font-size: 0.625rem;">Explore</span>
+        </a>
+        <a href="authorities.html" class="text-primary text-center" style="text-decoration:none;" aria-label="Government Help" aria-current="page">
+            <span class="material-symbols-outlined d-block" aria-hidden="true">account_balance</span>
+            <span style="font-size: 0.625rem;">Help</span>
+        </a>
+        <a href="profile.html" class="text-muted text-center" style="text-decoration:none;" aria-label="Profile">
+            <span class="material-symbols-outlined d-block" aria-hidden="true">person</span>
+            <span style="font-size: 0.625rem;">Profile</span>
+        </a>
     </div>
 
     <!-- Toast Container -->
-    <div id="toast-container"></div>
+    <div id="toast-container" role="region" aria-live="assertive" aria-atomic="true"></div>
 
     <style>
+        /* ── Filter Pills ─────────────────────────────── */
+        .portal-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+
+        .filter-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.35rem 0.85rem;
+            border-radius: var(--radius-full);
+            font-family: var(--font-sans);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background-color: var(--surface);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .filter-pill .material-symbols-outlined {
+            font-size: 1rem;
+        }
+
+        .filter-pill:hover {
+            background-color: var(--surface-low);
+            border-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .filter-pill.active {
+            background: var(--primary-gradient);
+            color: var(--text-inverse);
+            border-color: transparent;
+            box-shadow: 0 2px 8px rgba(0, 35, 111, 0.2);
+        }
+
+        .filter-pill:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* ── Portal Card ──────────────────────────────── */
+        .portal-card {
+            transition: transform 0.2s ease, box-shadow var(--transition-base);
+        }
+
+        .portal-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .portal-icon-wrap {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-lg);
+            background: var(--surface-high);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .portal-category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 10px;
+            border-radius: var(--radius-full);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            background-color: rgba(30, 58, 138, 0.08);
+            color: var(--primary-light);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* ── Skeleton Loader ──────────────────────────── */
+        @keyframes shimmer {
+            0% { background-position: -600px 0; }
+            100% { background-position: 600px 0; }
+        }
+
+        .skeleton-box {
+            background: linear-gradient(90deg,
+                var(--surface-high) 25%,
+                var(--surface-low) 50%,
+                var(--surface-high) 75%);
+            background-size: 600px 100%;
+            animation: shimmer 1.5s infinite linear;
+        }
+
+        /* ── Responsive ───────────────────────────────── */
         @media (max-width: 768px) {
             #mobileNav { display: flex !important; position: fixed; }
             .page-content { padding-bottom: 80px; }
             .grid-cols-4 { grid-template-columns: repeat(2, 1fr) !important; }
             .grid-cols-2 { grid-template-columns: 1fr !important; }
+            #skeletonGrid { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 480px) {
             .grid-cols-4 { grid-template-columns: 1fr !important; }
             .card-body { padding: var(--spacing-sm) !important; }
+            .filter-pill { font-size: 0.75rem; padding: 0.3rem 0.65rem; }
         }
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const token = localStorage.getItem('token');
-            if (!token) window.location.href = 'login.html';
+    // ─────────────────────────────────────────────────────────────
+    //  PORTAL DATA  — all 24 verified portals
+    // ─────────────────────────────────────────────────────────────
+    const PORTALS = [
+        // ── Legal & Justice ──────────────────────────────────────
+        {
+            id: 'edaakhil',
+            name: 'e-Daakhil',
+            category: 'Legal & Justice',
+            description: 'File consumer complaints online with the National Consumer Disputes Redressal Commission (NCDRC).',
+            url: 'https://edaakhil.nic.in/',
+            icon: 'gavel',
+            iconType: 'symbol'
+        },
+        {
+            id: 'cybercrime',
+            name: 'National Cyber Crime Reporting',
+            category: 'Legal & Justice',
+            description: 'Report cyber crimes and track your complaints online officially through MHA, Government of India.',
+            url: 'https://cybercrime.gov.in/',
+            icon: 'security',
+            iconType: 'symbol'
+        },
+        {
+            id: 'ecourts',
+            name: 'e-Courts Services',
+            category: 'Legal & Justice',
+            description: 'Track case status, view court orders, and access cause lists across all Indian courts.',
+            url: 'https://ecourts.gov.in/',
+            icon: 'balance',
+            iconType: 'symbol'
+        },
+        {
+            id: 'rtionline',
+            name: 'RTI Online',
+            category: 'Legal & Justice',
+            description: 'File Right to Information applications for central government departments and ministries.',
+            url: 'https://rtionline.gov.in/',
+            icon: 'find_in_page',
+            iconType: 'symbol'
+        },
+        {
+            id: 'nalsa',
+            name: 'NALSA — Legal Services',
+            category: 'Legal & Justice',
+            description: 'Access free legal aid and services through the National Legal Services Authority for eligible citizens.',
+            url: 'https://nalsa.gov.in/',
+            icon: 'support_agent',
+            iconType: 'symbol'
+        },
+        {
+            id: 'indiacode',
+            name: 'India Code',
+            category: 'Legal & Justice',
+            description: 'Official repository of all central and state legislative acts, bills, and ordinances of India.',
+            url: 'https://www.indiacode.nic.in/',
+            icon: 'menu_book',
+            iconType: 'symbol'
+        },
 
-            // Filter cards on search input
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    const query = e.target.value.toLowerCase().trim();
-                    document.querySelectorAll('.resource-card').forEach(card => {
-                        const text = card.innerText.toLowerCase();
-                        if (text.includes(query)) {
-                            card.style.display = 'flex';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
+        // ── Identity & Documents ──────────────────────────────────
+        {
+            id: 'digilocker',
+            name: 'DigiLocker',
+            category: 'Identity & Documents',
+            description: 'Store and share government-issued digital documents like Aadhaar, PAN, licences, and certificates securely.',
+            url: 'https://www.digilocker.gov.in/',
+            icon: 'folder_open',
+            iconType: 'symbol'
+        },
+        {
+            id: 'uidai',
+            name: 'UIDAI — Aadhaar Services',
+            category: 'Identity & Documents',
+            description: 'Update Aadhaar details, download e-Aadhaar, verify your biometrics, and lock/unlock your Aadhaar.',
+            url: 'https://uidai.gov.in/',
+            icon: 'fingerprint',
+            iconType: 'symbol'
+        },
+        {
+            id: 'passportseva',
+            name: 'Passport Seva',
+            category: 'Identity & Documents',
+            description: 'Apply for a new passport, renew, track application status, or schedule an appointment at a Passport Seva Kendra.',
+            url: 'https://www.passportindia.gov.in/',
+            icon: 'travel_explore',
+            iconType: 'symbol'
+        },
+
+        // ── Citizen Services ──────────────────────────────────────
+        {
+            id: 'umang',
+            name: 'UMANG',
+            category: 'Citizen Services',
+            description: 'Unified Mobile Application for New-age Governance — access 1,200+ government services from a single platform.',
+            url: 'https://web.umang.gov.in/',
+            icon: 'apps',
+            iconType: 'symbol'
+        },
+        {
+            id: 'cpgrams',
+            name: 'CPGRAMS — Public Grievances',
+            category: 'Citizen Services',
+            description: 'Centralised Public Grievance Redress and Monitoring System to register and track grievances against government departments.',
+            url: 'https://pgportal.gov.in/',
+            icon: 'feedback',
+            iconType: 'symbol'
+        },
+        {
+            id: 'consumerhelpline',
+            name: 'National Consumer Helpline',
+            category: 'Citizen Services',
+            description: 'Register consumer complaints, seek advice, and track your complaint against businesses and service providers.',
+            url: 'https://consumerhelpline.gov.in/',
+            icon: 'shopping_bag',
+            iconType: 'symbol'
+        },
+        {
+            id: 'voters',
+            name: 'Voter Services — ECI',
+            category: 'Elections & Governance',
+            description: 'Register as a voter, check your name in the electoral roll, find your polling station, and download your Voter ID.',
+            url: 'https://voters.eci.gov.in/',
+            icon: 'how_to_vote',
+            iconType: 'symbol'
+        },
+
+        // ── Finance & Taxation ────────────────────────────────────
+        {
+            id: 'incometax',
+            name: 'Income Tax e-Filing',
+            category: 'Finance & Taxation',
+            description: 'File income tax returns, check refund status, view Form 26AS, and manage your tax profile on the official IT portal.',
+            url: 'https://www.incometax.gov.in/',
+            icon: 'receipt_long',
+            iconType: 'symbol'
+        },
+        {
+            id: 'gst',
+            name: 'GST Portal',
+            category: 'Finance & Taxation',
+            description: 'Register for GST, file GSTR returns, pay taxes, track refunds, and manage your GST compliance online.',
+            url: 'https://www.gst.gov.in/',
+            icon: 'account_balance_wallet',
+            iconType: 'symbol'
+        },
+
+        // ── Employment & Social Security ──────────────────────────
+        {
+            id: 'epfo',
+            name: 'EPFO — Employees\' Provident Fund',
+            category: 'Employment & Social Security',
+            description: 'Manage your EPF account, withdraw PF, transfer funds, and check passbook online through the Employees\' Provident Fund Organisation.',
+            url: 'https://www.epfindia.gov.in/',
+            icon: 'savings',
+            iconType: 'symbol'
+        },
+        {
+            id: 'esic',
+            name: 'ESIC — Employees\' State Insurance',
+            category: 'Employment & Social Security',
+            description: 'Access medical benefits, sickness, maternity, and disability claims through Employees\' State Insurance Corporation.',
+            url: 'https://www.esic.gov.in/',
+            icon: 'medical_services',
+            iconType: 'symbol'
+        },
+
+        // ── Health ────────────────────────────────────────────────
+        {
+            id: 'pmjay',
+            name: 'Ayushman Bharat — PM-JAY',
+            category: 'Health',
+            description: 'Check eligibility, find empanelled hospitals, and access cashless healthcare benefits under the PM Jan Arogya Yojana scheme.',
+            url: 'https://pmjay.gov.in/',
+            icon: 'health_and_safety',
+            iconType: 'symbol'
+        },
+        {
+            id: 'cowin',
+            name: 'CoWIN',
+            category: 'Health',
+            description: 'Register for COVID-19 vaccination, download your vaccination certificate, and find nearby vaccination centres.',
+            url: 'https://www.cowin.gov.in/',
+            icon: 'vaccines',
+            iconType: 'symbol'
+        },
+
+        // ── Education ─────────────────────────────────────────────
+        {
+            id: 'nsp',
+            name: 'National Scholarship Portal',
+            category: 'Education',
+            description: 'Apply for central and state government scholarships for students from pre-matric to post-graduation levels.',
+            url: 'https://scholarships.gov.in/',
+            icon: 'school',
+            iconType: 'symbol'
+        },
+
+        // ── Agriculture ───────────────────────────────────────────
+        {
+            id: 'pmkisan',
+            name: 'PM-KISAN',
+            category: 'Agriculture',
+            description: 'Check beneficiary status, register, and receive direct income support under the PM Kisan Samman Nidhi scheme.',
+            url: 'https://pmkisan.gov.in/',
+            icon: 'agriculture',
+            iconType: 'symbol'
+        },
+        {
+            id: 'enam',
+            name: 'eNAM — e-National Agriculture Market',
+            category: 'Agriculture',
+            description: 'Connect to online mandi trading, check commodity prices, and sell farm produce directly on the national agriculture market platform.',
+            url: 'https://www.enam.gov.in/',
+            icon: 'storefront',
+            iconType: 'symbol'
+        },
+
+        // ── Business & Commerce ───────────────────────────────────
+        {
+            id: 'gem',
+            name: 'GeM — Government e-Marketplace',
+            category: 'Business & Commerce',
+            description: 'Official marketplace for government procurement of goods and services; register as a seller or buyer for government contracts.',
+            url: 'https://gem.gov.in/',
+            icon: 'local_mall',
+            iconType: 'symbol'
+        },
+        {
+            id: 'mca',
+            name: 'MCA — Ministry of Corporate Affairs',
+            category: 'Business & Commerce',
+            description: 'Register companies, file annual returns, search company information, and access MCA21 services for corporate compliance.',
+            url: 'https://www.mca.gov.in/',
+            icon: 'corporate_fare',
+            iconType: 'symbol'
+        }
+    ];
+
+    // ─────────────────────────────────────────────────────────────
+    //  STATE
+    // ─────────────────────────────────────────────────────────────
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    // ─────────────────────────────────────────────────────────────
+    //  RENDER
+    // ─────────────────────────────────────────────────────────────
+    function getFilteredPortals() {
+        return PORTALS.filter(p => {
+            const matchesCat = activeCategory === 'all' || p.category === activeCategory;
+            const q = searchQuery.trim().toLowerCase();
+            const matchesSearch = !q ||
+                p.name.toLowerCase().includes(q) ||
+                p.description.toLowerCase().includes(q) ||
+                p.category.toLowerCase().includes(q);
+            return matchesCat && matchesSearch;
+        });
+    }
+
+    function buildPortalCard(portal) {
+        const card = document.createElement('div');
+        card.className = 'card card-body d-flex gap-lg align-center portal-card resource-card';
+        card.setAttribute('role', 'listitem');
+        card.setAttribute('data-category', portal.category);
+        card.setAttribute('data-name', portal.name.toLowerCase());
+
+        card.innerHTML = `
+            <div class="portal-icon-wrap" aria-hidden="true">
+                <span class="material-symbols-outlined text-primary" style="font-size: 2rem;">${portal.icon}</span>
+            </div>
+            <div class="flex-grow">
+                <div class="portal-category-badge" aria-label="Category: ${portal.category}">
+                    ${portal.category}
+                </div>
+                <h4 class="text-primary m-0 mb-xs">${portal.name}</h4>
+                <p class="text-muted m-0 mb-sm" style="font-size: 0.875rem;">${portal.description}</p>
+                <a href="${portal.url}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   onclick="return openPortal('${portal.url}', event)"
+                   class="btn btn-secondary"
+                   style="padding: 0.25rem 0.75rem; font-size: 0.75rem; width: fit-content;"
+                   aria-label="Visit ${portal.name} portal (opens in a new tab)">
+                    Visit Portal
+                    <span class="material-symbols-outlined" style="font-size: 1rem;" aria-hidden="true">open_in_new</span>
+                </a>
+            </div>
+        `;
+        return card;
+    }
+
+    function renderPortals() {
+        const grid = document.getElementById('portalsGrid');
+        const emptyState = document.getElementById('emptyState');
+        const countBadge = document.getElementById('portalCount');
+        const filtered = getFilteredPortals();
+
+        // Clear
+        grid.innerHTML = '';
+
+        if (filtered.length === 0) {
+            grid.style.display = 'none';
+            emptyState.style.display = 'block';
+            countBadge.textContent = '0 portals';
+        } else {
+            emptyState.style.display = 'none';
+            grid.style.display = 'grid';
+            filtered.forEach(p => grid.appendChild(buildPortalCard(p)));
+            countBadge.textContent = `${filtered.length} portal${filtered.length !== 1 ? 's' : ''}`;
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    //  INIT
+    // ─────────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+        // Auth guard
+        const token = localStorage.getItem('token');
+        if (!token) { window.location.href = 'login.html'; return; }
+
+        // Load cached user avatar
+        try {
+            const u = JSON.parse(localStorage.getItem('user'));
+            if (u && u.avatar) {
+                const API = window.location.protocol === 'file:' ? 'http://localhost:5000' : '';
+                const src = u.avatar.startsWith('http') || u.avatar.startsWith('data:') ? u.avatar : `${API}${u.avatar}`;
+                document.getElementById('headerAvatar').src = src;
+            } else if (u && u.name) {
+                document.getElementById('headerAvatar').src =
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(u.name)}&background=0D8ABC&color=fff`;
             }
+        } catch(e) {}
+
+        // Simulate brief load then reveal grid
+        setTimeout(() => {
+            document.getElementById('skeletonGrid').style.display = 'none';
+            renderPortals();
+        }, 600);
+
+        // ── Search ──────────────────────────────────────────────
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderPortals();
         });
 
-        function showToast(message, type = 'error') {
-            let container = document.getElementById('toast-container');
-            if (!container) {
-                container = document.createElement('div');
-                container.id = 'toast-container';
-                document.body.appendChild(container);
-            }
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            const icon = type === 'success' ? 'check_circle' : 'error';
-            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> ${message}`;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+        // ── Category filter pills ───────────────────────────────
+        document.querySelectorAll('.filter-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-pill').forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
+                activeCategory = btn.dataset.category;
+                renderPortals();
+            });
+
+            // Keyboard: Space/Enter already trigger click on <button>
+        });
+
+        // ── Clear filters button (empty state) ─────────────────
+        document.getElementById('clearFiltersBtn').addEventListener('click', () => {
+            searchQuery = '';
+            activeCategory = 'all';
+            document.getElementById('searchInput').value = '';
+            document.querySelectorAll('.filter-pill').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
+            document.querySelector('.filter-pill[data-category="all"]').classList.add('active');
+            document.querySelector('.filter-pill[data-category="all"]').setAttribute('aria-pressed', 'true');
+            renderPortals();
+        });
+
+        // ── Mobile sidebar toggle ───────────────────────────────
+        const sidebar = document.getElementById('sidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        const menuBtn  = document.getElementById('mobileMenuBtn');
+
+        function openSidebar() {
+            sidebar.classList.add('open');
+            backdrop.classList.add('active');
+            menuBtn.setAttribute('aria-expanded', 'true');
+            backdrop.removeAttribute('aria-hidden');
+        }
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            backdrop.classList.remove('active');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            backdrop.setAttribute('aria-hidden', 'true');
         }
 
-        function openPortal(url, event) {
-            if (event) event.preventDefault();
-            try {
-                if (!url) {
-                    showToast('Unable to open the portal. Please try again later.', 'error');
-                    return false;
-                }
-                const win = window.open(url, '_blank', 'noopener,noreferrer');
-                if (!win || win.closed || typeof win.closed === 'undefined') {
-                    showToast('Unable to open the portal. Please try again later.', 'error');
-                    return false;
-                }
-            } catch (e) {
-                console.error('Error opening portal:', e);
-                showToast('Unable to open the portal. Please try again later.', 'error');
+        if (menuBtn) menuBtn.addEventListener('click', openSidebar);
+        backdrop.addEventListener('click', closeSidebar);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
+        });
+    });
+
+    // ─────────────────────────────────────────────────────────────
+    //  UTILITIES
+    // ─────────────────────────────────────────────────────────────
+    function showToast(message, type = 'error') {
+        let container = document.getElementById('toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toast-container';
+            document.body.appendChild(container);
+        }
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        const icon = type === 'success' ? 'check_circle' : 'error';
+        toast.innerHTML = `<span class="material-symbols-outlined" aria-hidden="true">${icon}</span> ${message}`;
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    function openPortal(url, event) {
+        if (event) event.preventDefault();
+        try {
+            if (!url) { showToast('Unable to open the portal. Please try again later.', 'error'); return false; }
+            const win = window.open(url, '_blank', 'noopener,noreferrer');
+            if (!win || win.closed || typeof win.closed === 'undefined') {
+                showToast('Pop-up blocked. Please allow pop-ups for this site or click the link directly.', 'error');
                 return false;
             }
+        } catch(e) {
+            console.error('Error opening portal:', e);
+            showToast('Unable to open the portal. Please try again later.', 'error');
             return false;
         }
+        return false;
+    }
     </script>
 </body>
 </html>
